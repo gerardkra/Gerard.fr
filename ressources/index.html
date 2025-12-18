@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ressources d'Apprentissage | Gérard Kra</title>
+  <meta name="description" content="Mes meilleures ressources pour apprendre les maths, la programmation, l'anglais et plus" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .resources-hero {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+
+    .resources-hero h1 {
+      color: white;
+      font-size: 2.5rem;
+    }
+
+    .resources-grid-main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .resource-category-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-decoration: none;
+      color: var(--text-color);
+      border-top: 4px solid;
+    }
+
+    .resource-category-card.english { border-top-color: #3b82f6; }
+    .resource-category-card.math { border-top-color: #8b5cf6; }
+    .resource-category-card.programming { border-top-color: #10b981; }
+    .resource-category-card.youtube { border-top-color: #ef4444; }
+
+    .resource-category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+    }
+
+    .resource-icon-big {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .resource-category-card h3 {
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+
+    .resource-count {
+      display: inline-block;
+      background: var(--bg-color);
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .resources-hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../about.html">À propos</a>
+        <a href="../parcours/index.html">Parcours</a>
+        <a href="index.html" class="active">Ressources</a>
+        <a href="../professionnel/index.html">Professionnel</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a class="btn btn-outline" href="../CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <!-- Google Translate Widget -->
+  <div id="google_translate_element"></div>
+
+  <!-- <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="fr">FR</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div> -->
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a> → <strong>Ressources</strong>
+    </div>
+
+    <section class="resources-hero slide-in">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">🌐</div>
+      <h1>Ressources d'Apprentissage</h1>
+      <p style="font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto;">
+        Sites web, chaînes YouTube et plateformes que j'utilise pour progresser en autonomie
+      </p>
+    </section>
+
+    <!-- <section class="card slide-in">
+      <h2>🎯 Pourquoi ces ressources ?</h2>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        Au fil de mon parcours académique, j'ai découvert des ressources exceptionnelles qui m'ont aidé à 
+        comprendre, pratiquer et maîtriser différents domaines. Je les partage ici pour vous faire gagner du temps 
+        et vous orienter vers les meilleures sources d'apprentissage, toutes <strong>gratuites et accessibles</strong>.
+      </p>
+      <p style="margin-top: 1rem; line-height: 1.8;"> Tout ce qu'il vous faut c'est vous même (votre disponibilité), votre connexion internet et un appareil électronique (téléphone portable ou tablette ou ordinateur etc.)</p>
+    </section> -->
+    <section class="card slide-in">
+      <h2>🎯 Pourquoi ces ressources ?</h2>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        Ces ressources m'ont accompagné tout au long de mon parcours académique. Elles m'ont permis de 
+        <strong>comprendre, pratiquer et maîtriser</strong> les concepts clés en mathématiques, programmation et data science.
+      </p>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        Je les partage pour vous faire gagner du temps et vous orienter vers les meilleures sources d'apprentissage.
+      </p>
+
+      <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 1.5rem; border-radius: var(--radius); margin-top: 1.5rem;">
+        <h3 style="color: white; margin-bottom: 1rem;">✅ Toutes Gratuites & Accessibles</h3>
+        <p style="opacity: 0.95; line-height: 1.6;">
+          <strong>Ce dont vous avez besoin :</strong>
+        </p>
+        <ul style="list-style: none; padding: 0; margin-top: 0.8rem; line-height: 1.8; opacity: 0.95;">
+          <li>• Votre motivation et votre disponibilité</li>
+          <li>• Une connexion internet</li>
+          <li>• Un appareil (ordinateur, tablette ou smartphone)</li>
+        </ul>
+      </div>
+    </section>
+    <section>
+      <h2 class="section-title">📚 Catégories de ressources</h2>
+      <div class="resources-grid-main">
+
+        <a href="anglais.html" class="resource-category-card english slide-in">
+          <span class="resource-icon-big">🗣️</span>
+          <h3>Anglais</h3>
+          <p style="color: #888; margin: 1rem 0;">
+            Sites et applications pour améliorer votre anglais académique et professionnel
+          </p>
+          <span class="resource-count">10+ ressources</span>
+          <div style="margin-top: 1.5rem;">
+            <span class="btn">Explorer →</span>
+          </div>
+        </a>
+
+        <a href="mathematiques.html" class="resource-category-card math slide-in">
+          <span class="resource-icon-big">📐</span>
+          <h3>Mathématiques</h3>
+          <p style="color: #888; margin: 1rem 0;">
+            Cours, exercices corrigés et vidéos pour tous les niveaux (Licence, Master)
+          </p>
+          <span class="resource-count">15+ ressources</span>
+          <div style="margin-top: 1.5rem;">
+            <span class="btn">Explorer →</span>
+          </div>
+        </a>
+
+        <a href="programmation.html" class="resource-category-card programming slide-in">
+          <span class="resource-icon-big">💻</span>
+          <h3>Programmation</h3>
+          <p style="color: #888; margin: 1rem 0;">
+            Tutoriels, documentation et plateformes pour apprendre à coder efficacement
+          </p>
+          <span class="resource-count">20+ ressources</span>
+          <div style="margin-top: 1.5rem;">
+            <span class="btn">Explorer →</span>
+          </div>
+        </a>
+
+        <a href="videos-youtube.html" class="resource-category-card youtube slide-in">
+          <span class="resource-icon-big">📺</span>
+          <h3>Vidéos YouTube</h3>
+          <p style="color: #888; margin: 1rem 0;">
+            Chaînes éducatives de qualité pour apprendre en vidéo
+          </p>
+          <span class="resource-count">25+ chaînes</span>
+          <div style="margin-top: 1.5rem;">
+            <span class="btn">Explorer →</span>
+          </div>
+        </a>
+        <a href="conseils-parcours.html" class="resource-category-card" style="border-top-color: #f59e0b;">
+          <span class="resource-icon-big">💡</span>
+          <h3>Mon Parcours & Leçons</h3>
+          <p style="color: #888; margin: 1rem 0;">
+            Mon retour d'expérience brut sur la recherche de stage/alternance et la réussite académique en France
+          </p>
+          <span class="resource-count">Expérience réelle</span>
+          <div style="margin-top: 1.5rem;">
+            <span class="btn">Lire mon histoire →</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <section class="card slide-in">
+      <h2>💡 Comment utiliser ces ressources ?</h2>
+      <div style="margin-top: 1.5rem; line-height: 1.8;">
+        <p><strong>1. Commencez par les essentiels ⭐</strong> : Chaque catégorie a des ressources marquées "Essentielles" qui sont incontournables.</p>
+        <p style="margin-top: 0.8rem;"><strong>2. Pratiquez régulièrement</strong> : 30 minutes par jour valent mieux que 3 heures une fois par semaine.</p>
+        <p style="margin-top: 0.8rem;"><strong>3. Combinez théorie et pratique</strong> : Alternez entre cours théoriques et exercices pratiques.</p>
+        <p style="margin-top: 0.8rem;"><strong>4. Personnalisez votre apprentissage</strong> : Toutes les ressources ne correspondent pas forcément à votre style (on est tous différents). Testez différentes approches et conservez celles qui vous conviennent le mieux.</p>
+      </div>
+    </section>
+
+    <section class="card slide-in" style="background: linear-gradient(135deg, #f093fb, #f5576c); color: white; text-align: center;">
+      <h2 style="color: white;">🚀 Besoin d'aide ?</h2>
+      <p style="opacity: 0.95; margin: 1rem 0;">
+        Si vous cherchez une ressource spécifique ou avez des questions, n'hésitez pas à me contacter !
+      </p>
+      <a href="../contact.html" class="btn" style="background: white; color: #f5576c; margin-top: 1rem;">
+        📧 Me contacter
+      </a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/translation.js"></script>
+</body>

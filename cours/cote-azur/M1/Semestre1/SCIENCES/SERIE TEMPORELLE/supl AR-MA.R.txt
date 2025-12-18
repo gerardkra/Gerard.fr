@@ -1,0 +1,93 @@
+
+
+
+#help("arima.sim")
+set.seed(456)
+## list description for AR(1) model with small coef
+AR.sm <- list(order = c(1, 0, 0), ar = 0.1, sd = 0.1)
+## list description for AR(1) model with large coef
+AR.lg <- list(order = c(1, 0, 0), ar = 0.9, sd = 0.1)
+## simulate AR(1)
+AR1.sm <- arima.sim(n = 50, model = AR.sm)
+AR1.lg <- arima.sim(n = 50, model = AR.lg)
+
+## setup plot region
+par(mfrow = c(1, 2))
+## get y-limits for common plots
+ylm <- c(min(AR1.sm, AR1.lg), max(AR1.sm, AR1.lg))
+## plot the ts
+plot.ts(AR1.sm, ylim = ylm, ylab = expression(italic(x)[italic(t)]), 
+        main = expression(paste(phi, " = 0.1")))
+plot.ts(AR1.lg, ylim = ylm, ylab = expression(italic(x)[italic(t)]), 
+        main = expression(paste(phi, " = 0.9")))
+
+
+# Autocorrelations and order of AR 
+
+set.seed(123)
+## the 4 AR coefficients
+ARp <- c(0.7, 0.2, -0.1, -0.3)
+## empty list for storing models
+AR.mods <- list()
+## loop over orders of p
+for (p in 1:4) {
+  ## assume SD=1, so not specified
+  AR.mods[[p]] <- arima.sim(n = 10000, list(ar = ARp[1:p]))
+}
+
+## set up plot region
+par(mfrow = c(4, 3))
+## loop over orders of p
+for (p in 1:4) {
+  plot.ts(AR.mods[[p]][1:50], ylab = paste("AR(", p, ")", sep = ""))
+  acf(AR.mods[[p]], lag.max = 12)
+  pacf(AR.mods[[p]], lag.max = 12, ylab = "PACF")
+}
+
+#####Same for MA 
+
+set.seed(123)
+## list description for MA(1) model with small coef
+MA.sm <- list(order = c(0, 0, 1), ma = 0.2, sd = 0.1)
+## list description for MA(1) model with large coef
+MA.lg <- list(order = c(0, 0, 1), ma = 0.8, sd = 0.1)
+## list description for MA(1) model with large coef
+MA.neg <- list(order = c(0, 0, 1), ma = -0.5, sd = 0.1)
+## simulate MA(1)
+MA1.sm <- arima.sim(n = 50, model = MA.sm)
+MA1.lg <- arima.sim(n = 50, model = MA.lg)
+MA1.neg <- arima.sim(n = 50, model = MA.neg)
+
+## setup plot region
+par(mfrow = c(1, 3))
+## plot the ts
+plot.ts(MA1.sm, ylab = expression(italic(x)[italic(t)]), main = expression(paste(theta, " = 0.2")))
+                                                                                
+                                                                                
+plot.ts(MA1.lg, ylab = expression(italic(x)[italic(t)]), main = expression(paste(theta, " = 0.8")))
+                                                                                 
+plot.ts(MA1.neg, ylab = expression(italic(x)[italic(t)]), main = expression(paste(theta," = -0.5")))
+
+
+# Autocorrelations and order of MA   
+
+
+#set.seed(123)
+## the 4 MA coefficients
+MAq <- c(0.7, 0.2, -0.1, -0.3)
+## empty list for storing models
+MA.mods <- list()
+## loop over orders of q
+for (q in 1:4) {
+  ## assume SD=1, so not specified
+  MA.mods[[q]] <- arima.sim(n = 1000, list(ma = MAq[1:q]))
+}
+
+## set up plot region
+par(mfrow = c(4, 3))
+## loop over orders of q
+for (q in 1:4) {
+  plot.ts(MA.mods[[q]][1:50], ylab = paste("MA(", q, ")", sep = ""))
+  acf(MA.mods[[q]], lag.max = 12)
+  pacf(MA.mods[[q]], lag.max = 12, ylab = "PACF")
+}

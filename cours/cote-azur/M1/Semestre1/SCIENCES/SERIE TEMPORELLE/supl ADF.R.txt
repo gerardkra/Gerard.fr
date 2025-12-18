@@ -1,0 +1,51 @@
+library(tseries)
+##On a besoin de librarie $tseries$ pour utiliser le command $adf.test()$
+#comme toujours le help a beaucoup d'informations pour le command et les parameters
+
+help("adf.test")
+
+x <- rnorm(1000)  # no unit-root
+adf.test(x)
+
+y <- diffinv(x)   # contains a unit-root
+adf.test(y)
+
+data("CO2")
+plot(co2)
+acf(co2)
+#on observe le acf est decroissant tres tres lentement, donc on suspecte non-stationarite   
+
+
+adf.test(co2)
+#le p-value est tres grand donc on accepte l' hypothese zero de la non-stationnarite 
+#(Il y a un racine de polynome characteristique qui est 1)
+# le puissants du test est assez important pour le detecter correctement  
+
+acf(diff(co2))
+#on voit le graph de premier difference 
+pacf(diff(co2))
+
+adf.test(diff(co2))
+library(TSA)
+oil=data("oil.price")
+plot(oil.price)
+acf(oil.price)
+pacf(oil.price)
+#la serie n'a pas l'air stationnaire 
+# juste le premier lag est important statistiquement (graph PACF) et par Box Jenkins on vas commencer par un modelle AR1
+adf.test(log(oil.price))
+#on peut le verifier par le test ADF
+
+#Je transforme la serie par le logarithm  
+plot(diff(log(oil.price)),ylab='Change in Log(Price)',
+     type='l')
+acf(diff(log(oil.price)))
+pacf(diff(log(oil.price)))
+# La serie resemble un bruit blanc et elle est alors stationnaire 
+
+ts_oil=ts(log(oil.price))
+
+adf.test(diff(ts_oil))
+
+
+

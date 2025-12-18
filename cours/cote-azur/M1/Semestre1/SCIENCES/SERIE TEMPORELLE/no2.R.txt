@@ -1,0 +1,76 @@
+#exercise 2.4.1. 
+v=rnorm(100,mean = 0,sd=1)
+xs1=ts(v)
+#cp=window(xs1,c(1,1),c(1,100))
+plot(xs1)
+
+
+t=1:100
+x2=0.5*t+2*v
+xs2=ts(x2)
+plot(xs2)
+
+t1=1:72
+v1=rnorm(72)
+x3=0.5*t1+v1+3*cos(t1*pi/6)
+
+xs3=ts(x3,start=c(2009, 1), end=c(2014, 12), frequency=12)
+
+
+plot(xs3)
+
+
+xs1lisse=HoltWinters(xs1[1:99],  alpha=0.1,  beta=FALSE, gamma=FALSE)
+plot(xs1lisse)
+xs2lisse=HoltWinters(xs2[1:99],  alpha = 0.5,beta = 0.1,gamma = FALSE)
+xs3lisse=HoltWinters(xs3,  alpha = 0.4,beta = 0.4,gamma = 0.3,seasonal = "additive")
+xs3seslisse=HoltWinters(xs3, seasonal = 'additive')
+
+p1=predict(xs1lisse,n.ahead=10,predict.interval=TRUE)
+p2=predict(xs2lisse,n.ahead=1,predict.interval=TRUE)
+p3=predict(xs3lisse,n.ahead=1,predict.interval=TRUE)
+p3_=predict(xs3seslisse,n.ahead=1,predict.interval=TRUE)
+#Q1
+plot(xs1lisse,p1)
+plot(xs2lisse,p2)
+#Q3
+plot(xs3lisse,p3)
+plot(xs3seslisse,p3_)
+
+#Q2
+sum((fitted.values(xs1lisse)[,1]-xs1)^2)
+sum((fitted.values(xs2lisse)[,1]-xs2)^2)
+sum((fitted.values(xs3lisse)[,1]-xs3)^2)
+sum((fitted.values(xs3seslisse)[,1]-xs3)^2)
+
+
+
+#exercise 2.4.2
+#A
+plot(co2)
+
+#B
+co2_w=window(co2,start=c(1959,1),end=c(1989,12))
+plot(co2_w)
+co2_wlissie=HoltWinters(co2_w)
+p_w=predict(co2_wlissie,84)
+plot(co2_wlissie,p_w )
+lines(window(co2,start=c(1990,1),end=c(1997,12)),col='green')
+
+#C
+co2lissie=HoltWinters(co2, seasonal = 'mul')
+p = predict(co2lissie, 50, prediction.interval = TRUE)
+plot(co2lissie, p)
+
+#exercise 2.4.3
+plot(EuStockMarkets)
+C=split(EuStockMarkets, EuStockMarkets$CAC)
+#CAC40=ts(C, )
+CAC40=EuStockMarkets[,"CAC"]
+CAC40_w=window(CAC40, end = c(1997,1), frequency = 260)
+CAC40_wlissie=HoltWinters(CAC40_w,alpha = 0.5 , prediction.interval= TRUE)
+
+pCAC=predict(CAC40_wlissie,260)
+plot(CAC40_wlissie,pCAC)
+
+

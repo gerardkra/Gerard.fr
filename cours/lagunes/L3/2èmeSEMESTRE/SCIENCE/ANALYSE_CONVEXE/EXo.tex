@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+\section*{Démonstration du théorème pour le cas \( n = 1 \)}
+
+Pour \( n = 1 \), nous considérons une fonction \( f : \mathbb{R} \to \mathbb{R} \) qui est deux fois différentiable. Le théorème se reformule comme suit :
+
+\subsection*{Théorème}
+Les deux propriétés suivantes sont équivalentes :
+\begin{enumerate}
+    \item \( f \) est convexe sur \( \mathbb{R} \).
+    \item Pour tout \( x \in \mathbb{R} \), \( f''(x) \geq 0 \).
+\end{enumerate}
+
+\subsection*{Démonstration}
+
+Nous démontrons cette équivalence en deux étapes.
+
+\subsubsection*{1. Si \( f \) est convexe, alors \( f''(x) \geq 0 \) pour tout \( x \in \mathbb{R} \)}
+
+En supposant \( f \) convexe, cela signifie que pour tous \( x, y \in \mathbb{R} \) et \( \lambda \in [0, 1] \), nous avons :
+\[
+f(\lambda x + (1 - \lambda)y) \leq \lambda f(x) + (1 - \lambda) f(y).
+\]
+
+Fixons \( x \in \mathbb{R} \) et considérons une perturbation \( h \in \mathbb{R} \). En utilisant le développement de Taylor de \( f \) autour de \( x \) avec un petit déplacement \( h \), on a :
+\[
+f(x + h) = f(x) + f'(x)h + \frac{f''(x)}{2} h^2 + o(h^2) \quad \text{quand } h \to 0.
+\]
+
+Comme \( f \) est convexe, l'inégalité
+\[
+f(x + h) \geq f(x) + f'(x) h
+\]
+doit être satisfaite pour des valeurs petites de \( h \). En remplaçant \( f(x + h) \) par son développement, nous obtenons :
+\[
+f(x) + f'(x) h + \frac{f''(x)}{2} h^2 + o(h^2) \geq f(x) + f'(x) h.
+\]
+
+En simplifiant, on trouve que
+\[
+\frac{f''(x)}{2} h^2 + o(h^2) \geq 0.
+\]
+Pour que cette inégalité soit vérifiée quel que soit \( h \), il faut que \( f''(x) \geq 0 \).
+
+\subsubsection*{2. Réciproquement, si \( f''(x) \geq 0 \) pour tout \( x \in \mathbb{R} \), alors \( f \) est convexe}
+
+Supposons que \( f''(x) \geq 0 \) pour tout \( x \in \mathbb{R} \). Pour tout \( x, y \in \mathbb{R} \), en utilisant le théorème de Taylor, on peut écrire \( f(y) \) comme suit :
+\[
+f(y) = f(x) + f'(x)(y - x) + \frac{f''(z)}{2}(y - x)^2,
+\]
+où \( z \) est un point intermédiaire entre \( x \) et \( y \). Puisque \( f''(z) \geq 0 \), il vient que
+\[
+f(y) \geq f(x) + f'(x)(y - x).
+\]
+Cette inégalité est une forme de l'inégalité de Jensen et montre que \( f \) est convexe.
+
+\subsubsection*{Conclusion}
+Nous avons démontré que \( f \) est convexe si et seulement si \( f''(x) \geq 0 \) pour tout \( x \in \mathbb{R} \), ce qui conclut la démonstration pour \( n = 1 \).
+
+\end{document}

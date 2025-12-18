@@ -1,0 +1,121 @@
+e=rnorme(100);
+t=1:100 ;
+x3=0,5*t+e+3*cos(pi*t/6);
+x3=ts(x3,fréquence=12);
+
+x2=0,5*t+2*e
+x2=ts(x2,fréquence=1)
+
+## 1.1
+al=0,1
+al1=1-al**2
+être1=(1-al)/(1+al)
+x3l=HoltWinters(x3,alpha=al1,beta=be1,gamma=FALSE);
+p=prédire(x3l,n.ahead=1)
+tracé(x3l,p)
+
+## 1.2
+euh=c()
+al=0
+alopt=0.1
+pour (k en 1:9)
+{
+	al=al+0,1
+	pour (je dans 30:99)
+	{
+		jm=i %% 12 #reste de la division euclidienne de i par 12
+		ja=i %/% 12 #division euclidienne de i par 12
+		x3w=fenêtre(x3,c(1,1),c(ja+1,jm));
+		al1=1-al**2
+		être1=(1-al)/(1+al)
+		x3l=HoltWinters(x3w,alpha=al1,beta=be1,gamma=FALSE);
+		p3=predict(x3l,n.ahead=1);
+		euh=c(euh,(p3[1]-x3[i+1])^2)
+	}
+	ss=somme(eu)
+	si (k==1)
+	{
+		erreur=ss	
+	}
+	chat(ss,erreur,"\n")
+	si (ss<erreur)
+	{
+		erreur=ss
+		alopt=al	
+	}
+}
+cat("meilleur paramètre trouvé : ",alopt)
+cat("meilleure erreur trouvée : ",erreur)
+
+
+#---------------------------------------------------------------- ----------------
+
+pour (je dans 9:9)
+pour (j en 1:3)
+{
+	x3w=fenêtre(x3,c(1,1),c(i,j));
+	x3l=HoltWinters(x3w,alpha=0.4,beta=0.4,gamma=FALSE);
+	p3=predict(x3l,n.ahead=1);
+	euh=c(euh,(p3[1]-x3[12*(i-1)+j+1])^2)
+}
+print(somme(er));
+
+## 1.3
+euh=c()
+v=c()
+al=0
+pour (k en 1:9)
+{
+	al=al+0,1
+	pour (je dans 3:8)
+	pour (j en 1:12)
+	{
+		x3w=fenêtre(x3,c(1,1),c(i,j));
+		x3l=HoltWinters(x3w,alpha=al,beta=al,gamma=al,seasonal='ad');
+		p3=predict(x3l,n.ahead=1);
+		euh=c(euh,(p3[1]-x3[12*(i-1)+j+1])^2)
+		v=c(v,p3[1])
+	}
+	ss=somme(eu)
+	si (k==1)
+	{
+		erreur=ss	
+	}
+	si (ss<erreur)
+	{
+		erreur=ss
+		alopt=al	
+	}
+}
+cat("meilleur paramètre trouvé : ",alopt)
+cat("meilleure erreur trouvée : ",erreur)
+# la méthode de Holt-Winters avec saisonnalité additive est bien meilleure que la méthode double-expo
+
+pour (je dans 9:9)
+pour (j en 1:3)
+{
+	x3w=fenêtre(x3,c(1,1),c(i,j));
+	x3l=HoltWinters(x3w,alpha=0.4,beta=0.4,gamma=0.3,seasonal='ad');
+	p3=predict(x3l,n.ahead=1);
+	euh=c(euh,(p3[1]-x3[12*(i-1)+j+1])^2)
+}
+print(somme(er));
+
+##2
+co2w=fenêtre(co2,c(1959,1),c(1989,12))
+co2wl=HoltWinters(co2w,alpha=0.2,beta=0.2,gamma=0.3,seasonal='ad')
+p=prédire(co2wl,n.ahead=12*8+120)
+tracé(co2wl,p)
+lignes (co2)
+
+##3
+x = Marchés EUStock
+imprimer (fréquence (x))
+imprimer (début (x))
+imprimer (fin (x))
+xcac=x[,3]
+xw=fenêtre(xcac,c(1991,130),c(1997,260))
+xwl=HoltWinters(xw,alpha=0.15,beta=0.15,gamma=0.6,seasonal='ajouter')
+p=prédire(xwl,n.ahead=260)
+tracé(xwl,p)
+lignes (xcac)

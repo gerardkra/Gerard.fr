@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ressources Anglais | Gérard Kra</title>
+  <meta name="description" content="Mes meilleures ressources pour apprendre l'anglais académique et professionnel" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .resource-hero {
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+
+    .resource-hero h1 {
+      color: white;
+      font-size: 2.5rem;
+    }
+
+    .resource-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-left: 4px solid;
+    }
+
+    .resource-card.essential { border-left-color: #10b981; }
+    .resource-card.recommended { border-left-color: #3b82f6; }
+
+    .resource-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .resource-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .resource-icon {
+      font-size: 2.5rem;
+    }
+
+    .resource-category {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background: var(--bg-color);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    .resource-category.essential { color: #10b981; }
+    .resource-category.recommended { color: #3b82f6; }
+
+    .resource-features ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .resource-features li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .resource-features li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: bold;
+    }
+
+    .resource-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    
+    .filter-tabs {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .filter-tab {
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+    }
+
+    .filter-tab:hover {
+      border-color: var(--accent-color);
+    }
+
+    .filter-tab.active {
+      background: var(--accent-color);
+      color: white;
+      border-color: var(--accent-color);
+    }
+
+    .personal-pick {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .resource-hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../about.html">À propos</a>
+        <a href="../parcours/index.html">Parcours</a>
+        <a href="index.html" class="active">Ressources</a>
+        <a href="../professionnel/index.html">Professionnel</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a href="../CV_KRA_Gerard.pdf" target="_blank" class="btn btn-outline">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <div id="google_translate_element"></div>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a> → 
+      <a href="index.html">Ressources</a> → 
+      <strong>Anglais</strong>
+    </div>
+
+    <section class="resource-hero slide-in">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">🗣️</div>
+      <h1>Ressources Anglais</h1>
+      <p style="font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.95;">
+        Sites et applications pour améliorer votre anglais académique et professionnel
+      </p>
+    </section>
+
+    <section class="card slide-in">
+      <h2>🎯 Pourquoi l'anglais est essentiel</h2>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        Dans les domaines de la data science, l'IA et l'informatique, <strong>l'anglais est indispensable</strong>. 
+        La majorité de la documentation, des articles scientifiques et des discussions techniques se font en anglais. 
+        Voici mes ressources préférées pour progresser efficacement.
+      </p>
+    </section>
+
+    <!-- Disclaimer -->
+    <!-- <section class="card slide-in" style="background: rgba(59, 130, 246, 0.1); border: 2px solid #3b82f6;">
+      <p style="line-height: 1.8; margin: 0;">
+        <strong>💡 Mon point de vue personnel :</strong> Les ressources ci-dessous sont celles qui <strong>m'ont personnellement aidé</strong>. 
+        Ce n'est pas une vérité universelle (chacun apprend différemment). Testez, adaptez, et gardez ce qui fonctionne pour vous !
+      </p>
+    </section> -->
+
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">Toutes</button>
+      <button class="filter-tab" data-filter="essential">Essentielles ⭐</button>
+      <button class="filter-tab" data-filter="recommended">Recommandées 👍</button>
+      <button class="filter-tab" data-filter="bonus">Bonus 🎁</button>
+    </div>
+
+    <div id="resources-container">
+      
+      <!-- A.J. Hoge - Mon préféré -->
+      <article class="resource-card essential slide-in" data-category="essential">
+        <div class="resource-header">
+          <div class="resource-icon">🎧</div>
+          <div class="resource-title">
+            <h3>A.J. Hoge — Effortless English <span class="personal-pick">⭐ Mon préféré</span></h3>
+            <span class="resource-category essential">Essentiel ⭐</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>A.J. Hoge</strong> est mon mentor en anglais. Sa méthode "Effortless English" privilégie 
+            <strong>l'écoute intensive quotidienne</strong> plutôt que la grammaire traditionnelle. 
+            Je crois fermement en cette approche : <strong>la discipline dans l'écoute est plus efficace que des heures de grammaire</strong>.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Pourquoi cette méthode marche :</strong>
+          <ul>
+            <li>Écoute répétée de courtes histoires (30-60 min/jour)</li>
+            <li>Pas de traduction mentale — immersion totale</li>
+            <li>Apprentissage naturel comme un enfant</li>
+            <li>Résultats visibles après quelques semaines</li>
+          </ul>
+        </div>
+
+        <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; border-radius: 0 8px 8px 0;">
+          <strong style="color: #10b981;">💡 Ma routine personnelle :</strong> J'écoute 30-60 minutes d'anglais par jour 
+          (podcasts A.J. Hoge, vidéos YouTube, audiobooks). La grammaire vient naturellement après. 
+          Cette méthode m'a permis de progresser rapidement sans effort conscient.
+        </div>
+
+        <p style="margin-top: 1rem; color: #888;">
+          <strong>Mon avis :</strong> A.J. Hoge a transformé ma façon d'apprendre l'anglais. 
+          La formule traditionnelle (grammaire + exercices) est bonne mais <strong>lente</strong>. 
+          L'écoute intensive est bien plus naturelle et efficace.
+        </p>
+
+        <div class="resource-actions">
+          <a href="https://www.youtube.com/@AJHogeEffortlessEnglish" target="_blank" class="btn">
+            📺 Chaîne YouTube A.J. Hoge
+          </a>
+          <a href="https://effortlessenglishclub.com/" target="_blank" class="btn btn-outline">
+            🌐 Site Officiel
+          </a>
+        </div>
+      </article>
+
+      <!-- Duolingo -->
+      <article class="resource-card recommended slide-in" data-category="recommended">
+        <div class="resource-header">
+          <div class="resource-icon">🦉</div>
+          <div class="resource-title">
+            <h3>Duolingo</h3>
+            <span class="resource-category recommended">Recommandé 👍</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>Duolingo</strong> est parfait pour débuter ou maintenir un niveau d'anglais quotidien. 
+            L'apprentissage est gamifié (comme un jeu) ce qui rend l'apprentissage addictif et régulier.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Gratuit et accessible sur mobile/web</li>
+            <li>Apprentissage progressif par niveaux</li>
+            <li>Système de streaks pour rester motivé</li>
+            <li>Exercices variés (écoute, lecture, écriture)</li>
+          </ul>
+        </div>
+
+        <p style="margin-top: 1rem; color: #888;">
+          <strong>Mon conseil :</strong> 10-15 minutes par jour valent mieux qu'une heure une fois par semaine. La régularité est la clé !
+        </p>
+
+        <div class="resource-actions">
+          <a href="https://www.duolingo.com/" target="_blank" class="btn">
+            🌐 Essayer Duolingo
+          </a>
+        </div>
+      </article>
+
+      <!-- BBC Learning English -->
+      <article class="resource-card essential slide-in" data-category="essential">
+        <div class="resource-header">
+          <div class="resource-icon">📻</div>
+          <div class="resource-title">
+            <h3>BBC Learning English</h3>
+            <span class="resource-category essential">Essentiel ⭐</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>BBC Learning English</strong> propose des cours audio/vidéo gratuits de qualité BBC. 
+            Accent britannique authentique, contenus variés (actualité, grammaire, vocabulaire).
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Contenus gratuits de qualité professionnelle</li>
+            <li>Podcasts pour apprendre en déplacement</li>
+            <li>Niveau débutant à avancé</li>
+            <li>Transcriptions disponibles</li>
+          </ul>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://www.bbc.co.uk/learningenglish" target="_blank" class="btn">
+            🌐 Visiter BBC Learning English
+          </a>
+        </div>
+      </article>
+
+      <!-- Cambridge Dictionary -->
+      <article class="resource-card recommended slide-in" data-category="recommended">
+        <div class="resource-header">
+          <div class="resource-icon">📖</div>
+          <div class="resource-title">
+            <h3>Cambridge Dictionary</h3>
+            <span class="resource-category recommended">Recommandé 👍</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            Le <strong>dictionnaire Cambridge</strong> est ma référence pour vérifier le sens, 
+            la prononciation et l'usage des mots en anglais académique.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Définitions claires avec exemples</li>
+            <li>Audio pour la prononciation (UK & US)</li>
+            <li>Traductions multilingues</li>
+            <li>Gratuit et sans publicité intrusive</li>
+          </ul>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://dictionary.cambridge.org/" target="_blank" class="btn">
+            🌐 Visiter Cambridge Dictionary
+          </a>
+        </div>
+      </article>
+
+      <!-- YouTube English Channels -->
+      <article class="resource-card recommended slide-in" data-category="recommended">
+        <div class="resource-header">
+          <div class="resource-icon">📺</div>
+          <div class="resource-title">
+            <h3>Chaînes YouTube en anglais</h3>
+            <span class="resource-category recommended">Recommandé 👍</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            Regarder des vidéos YouTube en anglais (avec sous-titres au début) est un excellent moyen 
+            d'améliorer sa compréhension orale tout en apprenant sur des sujets qui vous intéressent.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Chaînes recommandées :</strong>
+          <ul>
+            <li><strong>A.J. Hoge (Effortless English)</strong> - Ma méthode préférée</li>
+            <li><strong>English with Lucy</strong> - Cours d'anglais britannique</li>
+            <li><strong>TED-Ed</strong> - Vidéos éducatives courtes</li>
+            <li><strong>Crash Course</strong> - Sciences, histoire, etc.</li>
+            <li><strong>Chaînes tech</strong> - Selon vos intérêts (coding, IA, etc.)</li>
+          </ul>
+        </div>
+
+        <p style="margin-top: 1rem; color: #888;">
+          <strong>Astuce :</strong> Commencez avec sous-titres anglais, puis retirez-les progressivement. Écoutez activement 30-60 min/jour.
+        </p>
+
+        <div class="resource-actions">
+          <a href="https://www.youtube.com/@AJHogeEffortlessEnglish" target="_blank" class="btn">
+            📺 A.J. Hoge
+          </a>
+          <a href="https://www.youtube.com/@EnglishwithLucy" target="_blank" class="btn btn-outline">
+            📺 English with Lucy
+          </a>
+          <a href="../ressources/videos-youtube.html" class="btn btn-outline">
+            Voir plus de chaînes
+          </a>
+        </div>
+      </article>
+
+      <!-- English Central -->
+      <article class="resource-card recommended slide-in" data-category="recommended">
+        <div class="resource-header">
+          <div class="resource-icon">🎬</div>
+          <div class="resource-title">
+            <h3>EnglishCentral</h3>
+            <span class="resource-category recommended">Recommandé 👍</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>EnglishCentral</strong> propose d'apprendre l'anglais via des vidéos authentiques 
+            avec exercices interactifs de prononciation et compréhension.
+          </p>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://www.englishcentral.com/" target="_blank" class="btn">
+            🌐 Visiter EnglishCentral
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <section class="card slide-in">
+      <h2>💡 Ce que je vous propose</h2>
+      <div style="margin-top: 1.5rem; line-height: 1.8;">
+        <p><strong>1. Immersion quotidienne par l'écoute</strong> : C'est ma méthode n°1. Écoutez 30-60 minutes d'anglais par jour (A.J. Hoge, podcasts, YouTube). La grammaire viendra naturellement après.</p>
+        <p style="margin-top: 0.8rem;"><strong>2. Variez les supports</strong> : Alternez écoute, lecture, écriture. Mais privilégiez l'écoute si vous devez choisir.</p>
+        <p style="margin-top: 0.8rem;"><strong>3. Contexte technique</strong> : Lisez de la documentation technique en anglais (Python, TensorFlow, scikit-learn). C'est un excellent entraînement.</p>
+        <p style="margin-top: 0.8rem;"><strong>4. Pas de traduction mentale</strong> : Essayez de penser directement en anglais. C'est difficile au début mais essentiel.</p>
+        <p style="margin-top: 0.8rem;"><strong>5. La discipline > La perfection</strong> : 20 minutes par jour > 3 heures une fois par semaine. La régularité est tout.</p>
+      </div>
+      
+      <div style="margin-top: 2rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-left: 4px solid #f59e0b; border-radius: 0 8px 8px 0;">
+        <strong style="color: #f59e0b;">⚠️ Rappel :</strong> Ce sont les méthodes qui ont marché <strong>pour moi</strong>. 
+        Certains préfèrent d'autres approches. L'important est de trouver ce qui vous convient au mieux !
+      </div>
+    </section>
+
+    <section class="card slide-in" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; text-align: center; margin-top: 3rem;">
+      <h2 style="color: white;">🚀 Continuez votre exploration</h2>
+      <p style="margin: 1rem 0; opacity: 0.95;">
+        Découvrez aussi les autres ressources pour progresser.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+        <a href="mathematiques.html" class="btn" style="background: white; color: #3b82f6;">📐 Mathématiques</a>
+        <a href="programmation.html" class="btn btn-outline" style="border-color: white; color: white;">💻 Programmation</a>
+        <a href="videos-youtube.html" class="btn btn-outline" style="border-color: white; color: white;">📺 YouTube</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/translation.js"></script>
+
+  <script>
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const resourceCards = document.querySelectorAll('.resource-card');
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        filterTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+
+        const filter = this.getAttribute('data-filter');
+
+        resourceCards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = 'block';
+          } else {
+            if (card.getAttribute('data-category') === filter) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

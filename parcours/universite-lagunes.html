@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Université des Lagunes — Licence Mathématiques | Gérard Kra</title>
+  <meta name="description" content="Cours, TD, TP et examens de ma Licence Mathématiques à l'Université des Lagunes (2021-2023)" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css">
+  <style>
+    :root {
+      --univ-color: #0066cc;
+      --univ-gradient: linear-gradient(135deg, #0066cc, #00a550);
+    }
+    .univ-hero {
+      background: var(--univ-gradient);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+    .univ-hero h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .year-tabs {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+    .year-tab {
+      padding: 0.8rem 2rem;
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+      color: var(--text-color);
+    }
+    .year-tab:hover {
+      border-color: var(--univ-color);
+      color: var(--univ-color);
+    }
+    .year-tab.active {
+      background: var(--univ-color);
+      color: white;
+      border-color: var(--univ-color);
+    }
+    .year-content {
+      display: none;
+    }
+    .year-content.active {
+      display: block;
+    }
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .subject-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-top: 3px solid var(--univ-color);
+    }
+    .subject-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .subject-card h3 {
+      color: var(--univ-color);
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
+    .document-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    .document-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .document-list li:last-child {
+      border-bottom: none;
+    }
+    .doc-link {
+      color: var(--text-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+    .doc-link:hover {
+      color: var(--univ-color);
+      padding-left: 0.5rem;
+    }
+    .doc-icon {
+      font-size: 1.1rem;
+    }
+    
+    /* Styles pour Afficher Plus / Afficher Moins */
+    .extra-doc {
+      display: none;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.3s ease, max-height 0.3s ease;
+    }
+    .extra-doc.visible {
+      display: block;
+      opacity: 1;
+      max-height: 500px;
+    }
+    .show-more-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: var(--univ-color);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .show-more-btn:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
+    .show-more-btn:focus {
+      outline: 2px solid var(--univ-color);
+      outline-offset: 2px;
+    }
+    
+    @media (max-width: 768px) {
+      .univ-hero h1 {
+        font-size: 1.8rem;
+      }
+      .subjects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../../index.html">Accueil</a>
+        <a href="../../about.html">À propos</a>
+        <a href="../index.html" class="active">Parcours</a>
+        <a href="../../ressources/index.html">Ressources</a>
+        <a href="../../professionnel/index.html">Professionnel</a>
+        <a href="../../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a class="btn btn-outline" href="../../CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle">☰</button>
+    </div>
+  </header>
+
+  <div id="google_translate_element"></div>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../../index.html">Accueil</a> → 
+      <a href="../index.html">Parcours</a> → 
+      <strong>Université des Lagunes</strong>
+    </div>
+
+    <section class="univ-hero slide-in">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">🎓</div>
+      <h1>Université des Lagunes</h1>
+      <p class="subtitle"><strong>Licence Mathématiques & Applications</strong></p>
+      <p style="margin-top: 0.5rem; font-size: 1rem; opacity: 0.9;">
+        📍 Abidjan, Côte d'Ivoire • 🗓️ 2021 - 2023
+      </p>
+    </section>
+
+    <div class="stats-banner slide-in" style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; padding: 2rem; background: var(--bg-color); border-radius: var(--radius); margin: 2rem 0;">
+      <div style="text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 700; color: var(--univ-color);">3</div>
+        <div style="font-size: 0.9rem; color: var(--text-color); opacity: 0.8;">Années</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 700; color: var(--univ-color);">170+</div>
+        <div style="font-size: 0.9rem; color: var(--text-color); opacity: 0.8;">Fichiers</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 700; color: var(--univ-color);">22</div>
+        <div style="font-size: 0.9rem; color: var(--text-color); opacity: 0.8;">Dossiers</div>
+      </div>
+    </div>
+
+    <section class="card slide-in">
+      <h2>📚 À propos de cette formation</h2>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        La Licence Mathématiques & Applications à l'Université des Lagunes m'a fourni une base solide en mathématiques fondamentales. 
+        Tous les cours, TD, TP, examens et corrections sont disponibles ci-dessous, organisés par année (L1, L2, L3).
+      </p>
+    </section>
+
+    <div class="year-tabs">
+      <button class="year-tab active" data-year="L1">Licence 1 (L1)</button>
+      <button class="year-tab" data-year="L2">Licence 2 (L2)</button>
+      <button class="year-tab" data-year="L3">Licence 3 (L3)</button>
+    </div>
+
+    <!-- ========== L1 CONTENT ========== -->
+    <div class="year-content active" id="L1">
+      <h2 class="section-title">📖 Licence 1 (2020-2021)</h2>
+      
+      <div class="subjects-grid">
+        <!-- ANALYSE -->
+        <div class="subject-card slide-in">
+          <h3>📊 Analyse & Algèbre </h3>
+          <p>Intégrales, calcul intégral, subdivisions, équation différentielles & algèbre linéaire</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L1/Exercices/ANALYSE 2/Complement_Calcul_Intégral.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément Calcul Intégral</span></a></li>
+            <li><a href="../../cours/lagunes/L1/Exercices/ANALYSE 2/TD_L1_Calcul_integrl_Riemann_2.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Calcul Intégral Riemann</span></a></li>
+            <li><a href="../../cours/lagunes/L1/Exercices/ANALYSE 2/TD_L1_Subdivision_integral_UL.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Subdivision Intégrale</span></a></li>
+            <li><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/Cours_Analyse2_UL_OKOU.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Analyse 2</span></a></li>
+            <li><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/SUPER LIVRE  Maths Sup.pdf" class="doc-link" target="_blank"><span class="doc-icon">⭐</span><span>Document important</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/COURS_Chap_EquaDiff.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Équations Différentielles</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/TD_L1_Calcul_integ_Equa_Diff (1).pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Calcul Intégral & ÉquaDiff</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/fic00165.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément de TD (fiche de TD Exo7) : Équations Différentielles</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/Cours_L1_Algebre_Lineaire_Prof_OKOU_UL.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Algèbre Linéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/12_morphismes_groupes.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément de cours d'algèbre : Résumé de cours (morphismes de groupes) par Paul Milan</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/page 5 et 6 Td algèbre.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément de TD : Algèbre Linéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/fic00162.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément de TD (fiche de TD Exo7) : Application Linéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/applications_lineaires_TD23.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément de TD (fiche de TD Lycée Déodat de Séverac) : Application Linéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/calcul_matriciel_TD13.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément de TD (fiche de TD Lycée Déodat de Séverac) : Calcul Matricielle</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/reduct. mat. carrée devoir L2 eco .pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Devoir : Application Linéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/Comment déterminer une base d'un sous-espace vectoriel.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Déterminer une base d'un sous-espace vectoriel de ℝ<sup>n</sup></span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/Espaces vectoriels base et dimension d'un espace vectoriel (Ex1 Série I de TD d'algèbre I SMPC).mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Espaces vectoriels : base et dimension d'un espace vectoriel de ℝ<sup>n</sup></span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/Exercice sur le noyau et l'image d'une application linéaire.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Noyau et image d'une application linéaire de ℝ<sup>n</sup></span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/L1 Applications linéaires _ Exemple de changement de base pour la matrice d'une app. linéaire.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Applications linéaires : Exemple de changement de base pour la matrice d'une application linéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/Matrices - partie 4 _ inverse d'une matrice _ calcul.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Matrices : Calcul de l'inverse d'une matrice</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/Matrices et applications linéaires - partie 3 _ matrice d'une applicationa linéaire.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Matrices et applications linéaires : Déterminer la matrice d'une applicationa linéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/Méthode de Cramer. Comment résoudre un système linéaire par la méthode de Cramer.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Méthode de Cramer : Résoudre un système linéaire par la méthode de Cramer</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/Méthode06 - Montrer qu'un ensemble est un sev.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Application linéaire : Montrer qu'un ensemble est un sous-espace vectoriel de ℝ<sup>n</sup></span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/Analyse 2/ARITMETIQUE/Arithmétique dans Z Classes d'équivalence.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Arithmétique dans Z :Classes d'équivalence</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div> 
+
+        <!-- PROBABILITES & STATISTIQUES -->
+        <div class="subject-card slide-in">
+          <h3>🎲 Probabilités & Statistiques</h3>
+          <p>Analyse combinatoire, variables aléatoires, lois & statistiques descriptives</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L1/SCIENCES/PROBAS STAT/ANALYSE COMBINATOIRE.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Analyse Combinatoire par Michel Semon</span></a></li>
+            <li><a href="../../cours/lagunes/L1/SCIENCES/PROBAS STAT/PROBA-J.M.OWO.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Probabilités</span></a></li>
+            <li><a href="../../cours/lagunes/L1/SCIENCES/PROBAS STAT/Slide3-Cardinalite.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Support de cours : Cardinalité (Université de Toulouse)</span></a></li>
+            <li><a href="../../cours/lagunes/L1/SCIENCES/PROBAS STAT/TD3 Proba L1 MI (20-21 udl)(18-6-21).pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Fiche de TD de probabilité</span></a></li>
+            <li><a href="../../cours/lagunes/L1/SCIENCES/PROBAS STAT/STATISTIQUE/Statistique-descriptive-Univ-lagune.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours : Statistique Descriptive</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/PROBAS STAT/STATISTIQUE/TD1.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD1 Statistiques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/PROBAS STAT/STATISTIQUE/Exos_stat_descriptive.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD2 Statistiques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/PROBAS STAT/STATISTIQUE/TD-statistique-descriptive.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD3 Statistiques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/PROBAS STAT/g_bIe8lYiUniEg7v7r6pijTgo0E.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Exercices Corrigés : Statistique Descriptive</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/PROBAS STAT/correction exo lois.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Exercices Corrigés : Calcul de lois</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/SCIENCES/PROBAS STAT/Polygone des fréquences cumulées croissantes - Lecture graphique de Me, Q1 et Q3.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Polygone des fréquences cumulées croissantes : Lecture graphique de Me, Q1 et Q3</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- ALGORITHMIQUE -->
+        <div class="subject-card slide-in">
+          <h3>💻 Algorithmique</h3>
+          <p>Introduction à l'algorithmique et la programmation</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L1/INFORMATIQUE/ALGORITHME/Support de coursProgrammationCHI.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Support Programmation Ch.I</span></a></li>
+            <li><a href="../../cours/lagunes/L1/INFORMATIQUE/ALGORITHME/Support de coursALOGCHII.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Support Programmation Ch.II</span></a></li>
+            <li><a href="../../cours/lagunes/L1/INFORMATIQUE/ALGORITHME/Support de coursProgrammationCHIII_ACTU 2.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Support Programmation Ch.III</span></a></li>
+            <li><a href="../../cours/lagunes/L1/INFORMATIQUE/ALGORITHME/TD CHII.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Ch.II</span></a></li>
+            <li><a href="../../cours/lagunes/L1/INFORMATIQUE/ALGORITHME/Evaluation_1.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Exercices Corrigés</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/INFORMATIQUE/ALGORITHME/Exercices - 04 _ L'équation ax2 bx c 0.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Exercices : Résolution d'équation ax² + bx + c = 0</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/INFORMATIQUE/ALGORITHME/Exercice corrigé 16 _ Algorithme qui calcule les solutions d’une équation du second degré (Darija).mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Résolution d'équation du second degré ax² + bx + c = 0</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/INFORMATIQUE/ALGORITHME/Algorithmique (13 14) - La récursivité (fonctions récursives).mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Algorithmique : La récursivité (fonctions récursives)</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- LOGICIEL R -->
+        <div class="subject-card slide-in">
+          <h3>🔤 Logiciel R</h3>
+          <p>Introduction au langage R pour statistiques</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L1/INFORMATIQUE/LOGICIEL R/tp_stat-desc.pdf" class="doc-link" target="_blank"><span class="doc-icon">💾</span><span>TP R : Statistique Descriptive sous R</span></a></li>
+            <li><a href="../../cours/lagunes/L1/INFORMATIQUE/LOGICIEL R/DEVOIRS TP R.R" class="doc-link" target="_blank"><span class="doc-icon">💾</span><span>Devoirs TP R</span></a></li>
+            <!-- <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Introduction à R</span></span></li>
+            <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>TP1 - Manipulation Données</span></span></li>
+            <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>TP2 - Graphiques avec R</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>TP3 - Fonctions Statistiques</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📚</span><span>Aide-Mémoire R</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">💾</span><span>Datasets Exemples</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📝</span><span>Projet Final R</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✅</span><span>Solutions TP R</span></span></li> -->
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+
+        <!-- OUTILS BUREAUTIQUE -->
+        <div class="subject-card slide-in">
+          <h3>🖥️ Outils Bureautique</h3>
+          <p>Système d'exploitation, mémoire, cours bureautique</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L1/INFORMATIQUE/ALGORITHME/Support de cours IntroductionOrdinateur ASSOHOUN.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours : Introduction à l'ordinateur</span></a></li>
+            <li><a href="../../cours/lagunes/L1/INFORMATIQUE/Outils_Bureautique/CoursBureau.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Bureautique</span></a></li>
+            <li><a href="../../cours/lagunes/L1/INFORMATIQUE/Outils_Bureautique/Cours Système Exploitation 2.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément de cours : Système d'exploitation</span></a></li>
+            <!-- <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>TP Word</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>TP Excel</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>TP PowerPoint</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📝</span><span>Examen Bureautique</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📚</span><span>Raccourcis Clavier</span></span></li> -->
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+
+        <!-- ANGLAIS -->
+        <div class="subject-card slide-in">
+          <h3>🗣️ Anglais</h3>
+          <p>Présentations, graphs, charts, expressions</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L1/LITERATURE/ANGLAIS/1-Outline of a Successful Presentation.docx" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Successful Presentation</span></a></li>
+            <li><a href="../../cours/lagunes/L1/LITERATURE/ANGLAIS/2-Expressions for a successful presentation.docx" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Expressions</span></a></li>
+            <li><a href="../../cours/lagunes/L1/LITERATURE/ANGLAIS/3-Graphs, charts and diagrams.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Graphs & Charts</span></a></li>
+            <!-- <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Scientific Vocabulary</span></span></li>
+            <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>Grammar Exercises</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>Reading Comprehension</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📝</span><span>Writing Tasks</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">🎧</span><span>Listening Exercises</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">💬</span><span>Speaking Practice</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📝</span><span>Final Exam</span></span></li> -->
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+
+        <!-- PHILOSOPHIE -->
+        <div class="subject-card slide-in">
+          <h3>💭 Philosophie</h3>
+          <p>Notions d'anthropologie philosophique</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L1/LITERATURE/PHILOSOPHIE/Notions d'anthropologie philosophique L1 Droit.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Anthropologie Philosophique</span></a></li>
+            <li><a href="../../cours/lagunes/L1/LITERATURE/PHILOSOPHIE/Programme sommaire de la Matière de Philosophie de la Science.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Programme Philosophie</span></a></li>
+            <li><a href="../../cours/lagunes/L1/LITERATURE/PHILOSOPHIE/CHAPITRE II pour les étudiants.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours : Philosophie des Sciences</span></a></li>
+            <!-- <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Introduction à la Philosophie</span></span></li>
+            <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Philosophie des Sciences</span></span></li>
+            <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>TD Philosophie</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Épistémologie</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Éthique et Morale</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>Dissertations Types</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📝</span><span>Examen Philosophie</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✅</span><span>Corrigés Dissertations</span></span></li> -->
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+
+        <!-- DROIT -->
+        <div class="subject-card slide-in">
+          <h3>⚖️ Droit</h3>
+          <p>Introduction au droit, sources du droit</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L1/LITERATURE/DROIT/Document PDF  D R O I T .pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours de Droit</span></a></li>
+            <li><a href="../../cours/lagunes/L1/LITERATURE/DROIT/Leçon 1- Qu'est ce que le droit[273].pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Qu'est-ce que le droit ?</span></a></li>
+            <!-- <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Sources du Droit</span></span></li>
+            <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Droit Civil</span></span></li>
+            <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Droit Commercial</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>TD Droit</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Jurisprudence</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📚</span><span>Code Civil</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📝</span><span>Cas Pratiques</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✅</span><span>Solutions Cas Pratiques</span></span></li> -->
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+
+        <!-- TECHNIQUE D'EXPRESSION -->
+        <div class="subject-card slide-in">
+          <h3>✍️ Technique d'Expression</h3>
+          <p>Ponctuation, registres de langue, liens logiques</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/COURS DE TEEO UL LA PONCTUATION.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>La Ponctuation</span></a></li>
+            <li><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/COURS DE TEEEO UL VOCABULAIRE.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Vocabulaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/COURS DE TEEO  UL PARTICIPE PASSES.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Le Participe Passé</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/EVALUATION DE TEEO UL.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Évaluation</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/TRAVAUX DIRIGES UL L1 PONCTUATION.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Traveaux Dirigés</span></a></li>
+            <!-- <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Registres de Langue</span></span></li>
+            <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Liens Logiques</span></span></li>
+            <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>Exercices Rédaction</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>Résumé de Texte</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>Dissertation</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📝</span><span>Synthèse de Documents</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📚</span><span>Méthodologie</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✅</span><span>Corrigés Type</span></span></li> -->
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/Les registres de langue.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Les registres de langue</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/Les registres de langue (familier - courant - soutenu).mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Les registres de langue (familier - courant - soutenu)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/Cours de français _ le registre soutenu.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Cours de français : Le registre soutenu</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/La relation logique dans une phrase.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>La relation logique dans une phrase</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/les liens logiques- Avec exemple.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Les liens logiques- Avec exemple</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/COD COI - 3 Astuces pour ne plus se tromper.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>COD COI - 3 Astuces pour ne plus se tromper</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/Le Passé Composé - Cours Complet en Français.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Le Passé Composé - Cours Complet en Français</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L1/LITERATURE/Technique_Expression/Tout Tous Toutes Toute - Règle et exemples.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Tout Tous Toutes Toute - Règle et exemples</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== L2 CONTENT ========== -->
+    <div class="year-content" id="L2">
+      <h2 class="section-title">📖 Licence 2 (2021-2022)</h2>
+      <h3 style="color: var(--univ-color); margin: 2rem 0 1rem 0; font-size: 1.5rem;">📅 Premier Semestre</h3>
+      
+      <div class="subjects-grid">
+        <!-- ALGEBRE LINEAIRE 2 -->
+        <div class="subject-card slide-in">
+          <h3>📐 Algèbre Linéaire 2</h3>
+          <p>Dualité, produit scalaire, orthogonalité, diagonalisation</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/Cours.AlgèbreLinéaire.2..Maths. Univ. Lagune.Akeke.22.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours d'Algèbre Linéaire 2</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/Cours.AlgebreBilinéaire..L.2.Maths.Aked.2022.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours d'Algèbre Bilinéaire</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/DUALITE.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Corrigé d'examen algèbre 2</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/ENDOMORPHISME.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément TD : Endomorphismes (par exo7)</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/Exercices corrigés d’algèbre linéaire _ Tome 2, résumé de cours et exercices corrigés Broché – 12 avril 2006 ( PDFDrive.com ).pdf" class="doc-link" target="_blank"><span class="doc-icon">⭐</span><span>Document important</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/DUALITE-2.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Devoir corrigé d'algèbre 2</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/DUALITE-3.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Fiche de TD d'algèbre 2 avec corrigé</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/DUALITE-4.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Fiche de TD d'algèbre 2 avec corrigé</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/DUALITE-5.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Fiche de TD d'algèbre 2</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/TRIGONALISATION.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Résumé de cours (Diagonalisation et trigonalisation de matrices)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/DUALITE-6.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Rappel de cours (Formes linéaires & dualité)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/Scanned Documents-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Devoir de maison : Algèbre 2</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/SUJET SUR ALGEBRE LINEAIRE.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Diagonalisation et trigonalisation de matrices</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/TRGO-MATRIX.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Fiche de TD d'algèbre 2 (Matrice diagonalisable)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/ORTHOGO-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Fiche d'exercices d'algèbre bilinéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/PRODUIT SCALAIRE-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Support de cours; espaces vectoriels euclidiens</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/ORTHOGO-2.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Résumé de cours; espaces vectoriels euclidiens</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/ORTHOGO-3.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Exercices corrigés; espaces vectoriels euclidiens </span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/PRODUIT SCALAIRE-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Puissance n-ième d’une matrice & limite dans ℝ<sup>n</sup></span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/ORTHOGONA-2.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Fiche d'exercies; orthogonalité</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/ExosAlgebre3_18_19.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Fiche de révision</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/VIDEOS/The Gram Schmidt Orthogonalisation Process_ A Mathematical Explanation..mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>The Gram Schmidt Orthogonalisation Process</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/VIDEOS/Diagonalisation_ Calcul de polynôme caractéristique des valeurs et des vecteurs propres..mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Diagonalisation; Calcul de polynôme caractéristique des valeurs et des vecteurs propres</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/VIDEOS/Exercice corrigé 4 espaces euclidiens _ Projection orthogonale et symétrie orthogonale.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Exercice corrigé 4 espaces euclidiens : Projection orthogonale et symétrie orthogonale</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/VIDEOS/Exercice corrigé sur les formes bilinéaires symétriques et les formes quadratiques.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Exercice corrigé sur les formes bilinéaires symétriques et les formes quadratiques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/VIDEOS/Gram Schmidt Orthonormalization Process Audio.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Gram Schmidt Orthonormalization Process Audio.mp4</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/VIDEOS/Gram-schmidt orthogonalization process.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Gram-schmidt orthogonalization process</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/VIDEOS/Procédé d'orthonormalisation de Gram-Schmidt - exemple en dimension 3.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Procédé d'orthonormalisation de Gram-Schmidt : exemple en dimension 3</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ALGEBRE/VIDEOS/Sommes _ première partie..mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Sommes de Matrices</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- ANALYSE 3 -->
+        <div class="subject-card slide-in">
+          <h3>📊 Analyse 3</h3>
+          <p>Séries, intégrales généralisées, séries de Fourier</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/Cours_Series_Integrales_Generalise_2021-2022.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours d'Analyse</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/Cours_Integrales_Generalisees.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Intégrales Généralisées</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/Cours_Series_2021-2022.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Séries Numériques</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/SERIE DE FOURIER.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Série de Fourier</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/td séries numériques.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Séries Numériques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/td séries entières et séries de fourier.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Séries Entières & Série de Fourier</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/td intégrales généralisées.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Intégrales Généralisées</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/td no2 suites et séries de fonctions.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Suites et Séries de fonctions</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/TD6 - Intégrales généralisées_corrigé.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Solutions TD : Intégrales généralisées</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/TD-Series-Entieres.tex.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Solutions TD : Séries entières</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/Ana 3 MI Ecue1-session 1-2021.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Examen : Ana 3 MI Ecue1-session 1-2021</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/Ana 3 MI-PC Ecue1-session 2-2021.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Examen : Ana 3 MI-PC Ecue1-session 2-2021</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/Ana 3 MI-PC Ecue2-session 2-2021.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Examen : Ana 3 MI-PC Ecue2-session 2-2021</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/Cor-Ana 3 MI-PC Ecue1-session 1-2021.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Examen : Cor-Ana 3 MI-PC Ecue1-session 1-2021</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/Cor-Ana 3 MI -PC Ecue2-session 1-2021.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Examen : Cor-Ana 3 MI -PC Ecue2-session 1-2021</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/corrigé controle continu integrale généralisée.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Devoir : corrigé controle continu integrale généralisée</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/CamScanner 05-04-2021 23.38.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Corrigé de TD</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/08_-_suites_et_series_de_fonctions_cours_complet.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Résumé de cours; série de fonctions</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/EXO-SERIE ENTIERE.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD Séries entières</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/INTEGRALE-2.pdf" class="doc-link" target="_blank"><span class="doc-icon">⭐</span><span>Document important</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/INTEGRALE.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD1 Intégration</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/INTEGRALE-01.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD2 Intégration</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/SERIE-01.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD Suite de fonctions</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/SERIE-ALTERNEE-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD1 Séries numériques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/SERIE-ALTERNEE-2.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD2 Séries numériques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/SERIE-NUMERIQUE.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD3 Séries numériques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/SERIE-NUMERIQUE-2.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD4 Séries numériques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/SERIE-FOURIER.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD Séries de Fourier</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/SUITE ET SERIE-0.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD1 Suites et Séries de fonctions</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/SUITE ET SERIE-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD2 Suites et Séries de fonctions</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/SUITE ET SERIE3.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD3 Suites et Séries de fonctions</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/ANALYSE/SUITE ET SERIE-3.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Fiche de TD4 Suites et Séries de fonctions</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- ANALYSE NUMERIQUE -->
+        <div class="subject-card slide-in">
+          <h3>💻 Analyse Numérique</h3>
+          <p>Interpolation polynomiale, méthodes numériques</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/ANALYSE NUMERIQUE/série 1 AN-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Série 1</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/ANALYSE NUMERIQUE/série 2 Interpolation polynomiale.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Interpolation Polynomiale</span></a></li>
+            <!-- <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📄</span><span>Méthodes Numériques</span></span></li>
+            <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>TD Analyse Numérique</span></span></li>
+            <li><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">💻</span><span>TP1 - MATLAB</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">💻</span><span>TP2 - Interpolation</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✏️</span><span>Exercices Lagrange</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📝</span><span>Projet Numérique</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">✅</span><span>Corrigés TP</span></span></li>
+            <li class="extra-doc"><span class="doc-link" style="opacity: 0.5;"><span class="doc-icon">📚</span><span>Formulaire Méthodes</span></span></li> -->
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+
+        <!-- LOGICIELS SCIENTIFIQUES -->
+        <div class="subject-card slide-in">
+          <h3>🔬 Logiciels Scientifiques</h3>
+          <p>R, SCILAB, LaTeX</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/LOGICIEL SCIENTIFIC/AIDE-MEMOIRE-R.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Aide-Mémoire R</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/LOGICIEL SCIENTIFIC/LATEX AIDE-MEMOIRE.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Aide-Mémoire LaTeX</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/LOGICIEL SCIENTIFIC/EXO-SCILAB.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Exercices SCILAB</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/LOGICIEL SCIENTIFIC/LatexPourLeProfDeMaths.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>LaTeX pour prof de Maths</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/LOGICIEL SCIENTIFIC/TPR/EXO_TPR.R" class="doc-link" target="_blank"><span class="doc-icon">💾</span><span>TP R (fichier .R)</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- PROGRAMMATION C -->
+        <div class="subject-card slide-in">
+          <h3>💾 Programmation C</h3>
+          <p>Structures de données, langage C</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/PROGRAMATION/Support de coursLangage C_CHI.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Langage C Ch.I</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/PROGRAMATION/Support de cours Langage C CHII.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Langage C Ch.II</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/PROGRAMATION/Support de cours Langage C CHIII.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Langage C Ch.III</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/PROGRAMATION/TDCHI langage C UL.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD1 Langage C</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/PROGRAMATION/TD2 Langage C.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD2 Langage C</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- STRUCTURE DE DONNEES -->
+        <div class="subject-card slide-in">
+          <h3>🗄️ Structure de Données</h3>
+          <p>Une Introduction aux Structures de données</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/PROGRAMATION/ANALYSE DES DONNEES/CoursstructuresDonneesUL.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours de Structure de Données</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/INFORMATIQUE/PROGRAMATION/ANALYSE DES DONNEES/tdL2StructuresDonnees.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD de Structure de Données</span></a></li>
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+      </div>
+
+      <h3 style="color: var(--univ-color); margin: 3rem 0 1rem 0; font-size: 1.5rem;">📅 Deuxième Semestre</h3>
+      
+      <div class="subjects-grid">
+        <!-- PYTHON -->
+        <div class="subject-card slide-in">
+          <h3>🐍 Python</h3>
+          <p>Introduction à Python, programmation orientée objet</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation/support de cours Python  CHI.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Python Ch.I</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation/support de cours Python CHII.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Python Ch.II</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation/support de cours Python CHIII.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Python Ch.III</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation/TD1-TP1.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD1-TP1</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation/TD2-TP2.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD2-TP2</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation/TD3-TP3.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD3-TP3</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation/TD4-TP4.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD4-TP4</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation/Contrôle continu N2.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Devoir sur table</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- PROGRAMMATION LINEAIRE -->
+        <div class="subject-card slide-in">
+          <h3>📈 Programmation Linéaire</h3>
+          <p>Optimisation linéaire, algorithmes</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/Chapitre 1.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Chapitre 1 : Notions de Convexité</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/Chapitre 1-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Chapitre 1 : Dualité en Programation Linéaire</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/TD1_PL_Lagunes.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD1 Prog Linéaire</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/TD2_PL_lagunes.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD2 Prog Linéaire</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/TD3_PL_lagunes.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD3 Prog Linéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/005322878.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Fiche de TD1 Prog Linéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/MNM1_corr_doc1.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Fiche de TD2 Prog Linéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/TD 1 Prog Lin UNISAT 2020.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Fiche de TD Prog Linéaire UNISAT</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/exercices-de-programmation-lineaire_compress.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Exercices corrigés Modélisation</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/TD_7__Exercice_corrigs.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Exercices corrigés Algorithme du simplexe </span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/EXAMEN-PL.jpg" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Sujet d'Examen (Licence 3, UFHB) </span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/Examen-pl-2.jpg" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Sujet d'Examen </span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/INFORMATIQUE/Programation Lineaire/EXAMEN-pl-3.jpg" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Sujet d'Examen </span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- ANALYSE 4 -->
+        <div class="subject-card slide-in">
+          <h3>📊 Analyse 4</h3>
+          <p>Topologie, calcul différentiel, différentiabilité</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Documents scannés.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Support de cours : Différentiabilité</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/td-topologie.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD1 : Topologie et calcul différentiel dans ℝ<sup>n</sup></sup></span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/TD-TOPO2.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD2 : Topologie et calcul différentiel dans ℝ<sup>n</sup></sup></span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/TD-TOPO-3.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD3 : Intégrales Multiples</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/CALCUL DIFFERENTIEL.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : <strong>50+</strong> Exercices de calcul différentiel </span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/TOPO-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Cours & Exercices corrigés de Topologie</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/TOPO-2.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Fiche d'exercies de Topologie Générale (Exo7)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/EXAM-TOPO-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Examen Topologie (L3, Université Claude Bernard Lyon I)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Calculer la DÉRIVÉE PARTIELLE en UN POINT - Formule .mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Calculer de dérivée partielle en un point : Formule</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Calculer la DÉRIVÉE PARTIELLE sur un INTERVALLE - Explications .mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Calculer de dérivée partielle sur un intervalles : Explications</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Calculer une DIFFÉRENTIELLE - Méthode .mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Calculer une différentielles : Méthode</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Différentiabilité et existence de dérivées partielles.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Différentiabilité et existence de dérivées partielles</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Exercice 1 TD 2 étude l'existence de la limite en (0.0).mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Exercice : Étude de l'existence de la limite en (0,0)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Exercices corrigés Espaces Métriques.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Exercices corrigés Espaces Métriques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Montrer qu'une Fonction a PLUSIEURS VAR est C1 - Explications .mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Montrer qu'une fonction à plusieurs variables est C<sup>1</sup></span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Fonctions de 2 variables partie2 - fonctions de classe C1, C2 et intégrales doubles.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Fonctions à 2 variables partie2 : Fonctions de classe C<sup>1</sup>, C<sup>2</sup> et intégrales doubles</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Montrer qu'une fonction EST _ N'est PAS DIFFÉRENTIABLE en un POINT - Méthode .mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Étude de la différentiabilité d'une fonction en un point : Méthode</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Inégalité de Hölder  - démonstration.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Inégalité de Hölder : Démonstration</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE-4/Topologie  -  Exercice corrigé 1  - Espace .mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span> Exercice corrigé de Topologie</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- PROBABILITES -->
+        <div class="subject-card slide-in">
+          <h3>🎲 Probabilités</h3>
+          <p>Couples de variables aléatoires, lois de probabilité</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/PROBA/PROBA-J.M.OWO.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Probabilités</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/PROBA/TD PROBA L2.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Fiche de TD Probabilités</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/PROBA/Devoir.jpg" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Devoir de Probabilités</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/PROBA/Exercice de probabilité.jpg" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span> Exercice : Calcul de Lois</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/PROBA/Vecteurs gaussiens  - exercice.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span> Exercice corrigé : Vecteurs gaussiens</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/PROBA/COUPLE DE VARIABLE ALEATOIRE.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Fiche de TD couple de variables aléatoires</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/PROBA/PROBA-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : TD1 Corrigé</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/PROBA/PROBA-4.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : TD2 Corrigé</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/PROBA/PROBA-3.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : TD3 Corrigé</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/PROBA/PROBA-3.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Fiche d'exercices corrigés</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- STATISTIQUES -->
+        <div class="subject-card slide-in">
+          <h3>📉 Statistiques</h3>
+          <p>Statistique inférentielle, tests, estimation</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/Statistique_Licence_2.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Statistique</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/IC ASSYMPTOTIQUE.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément de cours : Intervalles de Confiance</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/Tests.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément de cours : Tests Statistique</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/TD Stat2 UL.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD1 Statistique</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/TD Stat2 UL (1).pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD2 Statistique</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/TD5-Estimation.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : TD Estimation</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/TD5-Estimation-Correction.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : TD Estimation - Corrigé</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/TD_6_Tests_Statistiques.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : TD Tests Statistique</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/examen de stats.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément : Sujet d'Examen</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/Tables statistiques.pdf" class="doc-link" target="_blank"><span class="doc-icon">📋</span><span>Tables Statistiques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/Échantillonnage et estimation _ TD n°1(suite) la loi de student.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span> Échantillonnage et estimation : La loi de student</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/STATISTIQUE/Loi de Student Lecture de table.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Lecture de table : Loi de Student</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- COMPTABILITE GENERALE -->
+        <div class="subject-card slide-in">
+          <h3>💼 Comptabilité Générale</h3>
+          <p>Principes comptables, écritures</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/COMPTABILITE/COURS DE COMPTA GENE II.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Comptabilité Générale 2</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/COMPTABILITE/cours-comptabilite-nationale1.DR FRanklin Kouassi.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours de Comptabilité Nationale</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 1/SCIENCES/COMPTABILITE/Cours Compta Nat_UniversitÃ© des Lagunes.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours de Macroéconomie</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/COMPTABILITE/TD_compta_2_Licence 2_UL_2022.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Comptabilité 2</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/COMPTABILITE/Ohada-Acte-Uniforme-2000-plan-des-comptes.pdf" class="doc-link" target="_blank"><span class="doc-icon">📋</span><span>Plan Comptable OHADA</span></a></li>
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+
+        <!-- ANALYSE FINANCIERE -->
+        <div class="subject-card slide-in">
+          <h3>💰 Analyse Financière</h3>
+          <p>Diagnostic financier, ratios, analyse de bilans</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE FINANCIERE/Support_Diagnostic_financier_2020 (1).pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Diagnostic Financier</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE FINANCIERE/TD analyse financière.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD1 Analyse Financière</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE FINANCIERE/TD2_Ana_fin_2022.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD2 Analyse Financière</span></a></li>
+            <li><a href="../../cours/lagunes/L2/SEMESTRE 2/SCIENCE/ANALYSE FINANCIERE/TD-ANALYSE-FINANCIERE.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD3 Analyse Financière</span></a></li>
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== L3 CONTENT ========== -->
+    <div class="year-content" id="L3">
+      <h2 class="section-title">📖 Licence 3 (2022-2023)</h2>
+      
+      <h3 style="color: var(--univ-color); margin: 2rem 0 1rem 0; font-size: 1.5rem;">📅 Premier Semestre</h3>
+      
+      <div class="subjects-grid">
+        <!-- ANALYSE NUMERIQUE MATRICIELLE -->
+        <div class="subject-card slide-in">
+          <h3>🔢 Analyse Numérique Matricielle</h3>
+          <p>Méthodes itératives, résolution de systèmes linéaires</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/ANA_NUM_MAT/Cours_Ana_Num_OKOU_UL.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Analyse Numérique</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/ANA_NUM_MAT/TD ANA NUM L3.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Analyse Numérique</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/ANA_NUM_MAT/SUJET.png" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Exercice complémentaire</span></a></li>
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+
+        <!-- PROBABILITES AVANCEES -->
+        <div class="subject-card slide-in">
+          <h3>🎲 Probabilités Avancées</h3>
+          <p>Couples de variables aléatoires, vecteurs gaussiens</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/Cours_Probabilité_L3_2022_2023.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours de Probabilités Avancées</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/Univ_Lagunes_L3_Proba_Avancées_22_23.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Probabilités Avancées</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/FROM_PHONE/Cours de probabilités pour la licence - avec exercices corrigés (Piotr Graczyk, Tomasz Jakubowski etc.) (z-lib.org).pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément de cours de probabilités : Exercices & Corrigés</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/EXO_COUPLE.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : TD Corrigé 1</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/exos_probas_agreg14_U([0,1]).pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : TD Corrigé 2</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/probasL2_va_continues_doubles(COUPLE).pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Exercice Corrigé (Calcul de Densité)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/COUPLE_(U,V).pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Couple de Variables Aléatoires (Exercices & Corrigés)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/Mise_Niveau_ISE2__Théorie_Proba.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Mise à Niveau ISE2 (ENSEA, Abidjan) : Théorie de Probabilités</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/td-08.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD8 : Couple de Variables Aléatoires (Université de Caen)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/td-proba-correction.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>TD Probabilités ( ENSAI) : Corrigé</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/TD-2008-09_IMPORTANT.pdf" class="doc-link" target="_blank"><span class="doc-icon">⭐</span><span>Document Important</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/PROBA_AVA_L3/VAR_GAUSSIEN.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Exercices Corrigés : Variables Gaussiennes</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- THEORIE DE LA MESURE -->
+        <div class="subject-card slide-in">
+          <h3>📏 Théorie de la Mesure & Intégration</h3>
+          <p>Tribus, mesures, intégrale de Lebesgue</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/Cours Mesure et integration.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Mesure et Intégration</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/Cours &EXO_Tri_Mes_Int.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours & Exercices</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/INT_MES.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Intégration et Mesure</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/DEVOIR_MES.jpg" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Devoir 1 : Mesure</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/DEVOIR_INT.jpg" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Devoir 1 : Intégration</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/Examen.jpg" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complément d'exercice : Examen</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/DOC_IMPORTANT_1.pdf" class="doc-link" target="_blank"><span class="doc-icon">⭐</span><span>Document Important 1</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/DOC_IMPORTANT_2.pdf" class="doc-link" target="_blank"><span class="doc-icon">⭐</span><span>Document Important 2</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/SUJETS LICENCE3 MATH 2018-2019.pdf" class="doc-link" target="_blank"><span class="doc-icon">⭐</span><span>Document Important 3</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/Mesure-exercices-corrigés-EL-HAJ-LAAMRI-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">⭐</span><span>Document Important 4</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/TD_1_UL.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD1 Université Lagunes</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/EXO7_Tri&Mes.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Exercices Tribus & Mesures</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/CorrigeTD5.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Corrigé TD5</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/exercices-corriges-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Exercices Corrigés</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/THEORIE_MESURE_INT/exam_corrige.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Examen Corrigé</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- TOPOLOGIE -->
+        <div class="subject-card slide-in">
+          <h3>🔄 Topologie</h3>
+          <p>Espaces topologiques, continuité, compacité</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/El Hage Hassan Nawfal-Topologie g_n_rale et espaces norm_s-Dunod (2012).pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Cours de Topologie</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/ANAH4.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément :  Vocabulaire de Topologie</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/TOPO-RESUME.pdf" class="doc-link" target="_blank"><span class="doc-icon">📋</span><span> Complément : Résumé de cours Topologie</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/Examens topo + corrigés (1).pdf" class="doc-link" target="_blank"><span class="doc-icon">⭐</span><span>Document Important</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/TD-Topologie-L3-Fiche1-Lagunes.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Fiches de TD : Fiche 1</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/topologie-Fiche2-Lalunes-L3.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Fiches de TD : Fiche 2</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/Topologie-Fiche3-Lagunes-L3.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Fiches de TD : Fiche 3</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/DEVOIR_MAISON.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Devoir Maison Topologie</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/DEVOIR.jpg" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Devoir sur table</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/EXAMEN.jpg" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Examen sur table</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/TOPO2.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Bibliothèque d’exercices : Compacité</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/SCIENCES/TOPOLOGIE/TOPO3.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Bibliothèque d’exercices : Connexité</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- BASE DE DONNEES -->
+        <div class="subject-card slide-in">
+          <h3>🗄️ Base de Données</h3>
+          <p>SQL, MySQL, modélisation de données</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_DE_DONNEES/Support de coursBD CHI.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Base de Données - Chap 1</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_DE_DONNEES/Support de coursBDCHII.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Base de Données - Chap 2</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_DE_DONNEES/Support de coursBDCHIII (1).pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Base de Données - Chap 3</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_DE_DONNEES/MySQL.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours MySQL</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_DE_DONNEES/TD1_BIS_BDR_Modélisation.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Fiche de TD1 : Modélisation</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_DE_DONNEES/TD2_BIS_BDR_AG.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Fiche de TD2 : Algèbre relationnelle</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_DE_DONNEES/TD3_BIS_BDR_SQL.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Fiche de TD3 : Langage SQL</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_DE_DONNEES/TD4_BIS_BDR_TP_Donnees.pdf" class="doc-link" target="_blank"><span class="doc-icon">💻</span><span>Fiche de TD4-TP4 : Langage SQL</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_DE_DONNEES/BASE_DE_DONNEES_EXO.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Exercices Base de Données</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_DE_DONNEES/Apprendre SQL avec MySQL - Christian Soutou - Eyrolles 2006.pdf" class="doc-link" target="_blank"><span class="doc-icon">⭐</span><span>Document Important : Apprendre SQL avec MySQL</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_DE_DONNEES/Requête MYSQL sur console (select,insert,drop,delete,la jouinture).mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Requête MYSQL sur console (select,insert,drop,delete,la jouinture)</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- LINUX -->
+        <div class="subject-card slide-in">
+          <h3>🐧 Linux</h3>
+          <p>Système d'exploitation, commandes, administration</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_LINUX/Bases de Linux L2 L3.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Bases de Linux L2-L3</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_LINUX/Linux-memo2015.pdf" class="doc-link" target="_blank"><span class="doc-icon">📋</span><span>Mémo Linux 2015</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_LINUX/Memo-Linux-A-Z-final_1.pdf" class="doc-link" target="_blank"><span class="doc-icon">📋</span><span>Mémo Linux A-Z</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_LINUX/memento_linux.pdf" class="doc-link" target="_blank"><span class="doc-icon">📋</span><span>Mémento Linux</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_LINUX/TRAVAUX PRATIQUE DE LINUX - 1.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TP Linux - 1</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_LINUX/TRAVAUX PRATIQUE DE LINUX - 4 5.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TP Linux - 4 & 5</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_LINUX/contrôle continu.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Contrôle Continu</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_LINUX/TUTO _  installer Ubuntu à côté de Windows 10.mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>TUTO : installer Ubuntu à côté de Windows 10</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/BASE_LINUX/Formation Linux [Complète].mp4" class="doc-link" target="_blank"><span class="doc-icon">🎬</span><span>Formation Linux</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- PROGRAMMATION WEB HTML -->
+        <div class="subject-card slide-in">
+          <h3>🌐 Programmation Web (HTML)</h3>
+          <p>HTML, CSS, développement web</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/HTML_COURS/Cours Programmation webUL.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Programmation Web</span></a></li>
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+
+        <!-- MACHINE LEARNING -->
+        <div class="subject-card slide-in">
+          <h3>🤖 Machine Learning</h3>
+          <p>Apprentissage automatique, algorithmes ML</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/Machine_Learning/Support de cours ML final.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Machine Learning</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/Machine_Learning/Lab0_prise_en_main.html" class="doc-link" target="_blank"><span class="doc-icon">💻</span><span>Lab 0 - Prise en main</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/Machine_Learning/Lab2_prise_en_main_stat.html" class="doc-link" target="_blank"><span class="doc-icon">💻</span><span>Lab 2 - Statistiques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/Machine_Learning/Lab 3 new - Datapreprocessing.html" class="doc-link" target="_blank"><span class="doc-icon">💻</span><span>Lab 3 - Preprocessing</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/Machine_Learning/TP1new.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TP1 Machine Learning</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/Machine_Learning/TP2 new.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TP2 Machine Learning</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/Machine_Learning/TP3new.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TP3 Machine Learning</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- MERISE -->
+        <div class="subject-card slide-in">
+          <h3>📊 Méthode MERISE</h3>
+          <p>Modélisation de systèmes d'information</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/MERISE/5 Merise.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Merise</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/MERISE/MERISEC_02 - Démarche de MERISE.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Démarche MERISE</span></a></li>
+            <li><a href="../../cours/lagunes/L3/1erSEMESTRE/INFORMATIQUE/MERISE/MERISEC_03 - Modèle Conceptuel.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Modèle Conceptuel</span></a></li>
+          </ul>
+          <!-- <button class="show-more-btn">▼ Afficher Plus</button> -->
+        </div>
+      </div>
+
+      <h3 style="color: var(--univ-color); margin: 3rem 0 1rem 0; font-size: 1.5rem;">📅 Deuxième Semestre</h3>
+      
+      <div class="subjects-grid">
+        <!-- ANALYSE CONVEXE & OPTIMISATION -->
+        <div class="subject-card slide-in">
+          <h3>📐 Analyse Convexe & Optimisation</h3>
+          <p>Convexité, optimisation différentiable, extrema</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/Convexité U Lagunes.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Convexité</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/Cours_Optimisation.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Optimisation</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/Optimisation différentiable UL 23.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Optimisation Différentiable</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/Doc_IMPORTANT_NEW.pdf" class="doc-link" target="_blank"><span class="doc-icon">⭐</span><span>Document Important</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/TD Analyse Convexe.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD1 Analyse Convexe</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/Fiche TD2pdf.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD2 Analyse Convexe</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/TD_OPTIMISATION.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Optimisation</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/TD1_Rappels.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : TD1 Rappels</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/EXO_CONVEXITE.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Exercices Convexité</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/M1_exercices_corriges.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Exercices Corrigés M1</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/Examen_Final_2019_2020.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complémént : Examen Final 2019-2020</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_CONVEXE/exercices_degead.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Complémént : Exercices & corrigés</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- EQUATIONS DIFFERENTIELLES & EDO -->
+        <div class="subject-card slide-in">
+          <h3>🔢 Équations Différentielles & EDO</h3>
+          <p>Équations différentielles ordinaires, méthodes numériques</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_EDO/Analyse numÃ©rique pour ingÃ©nieurs ( PDFDrive ).pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément de cours : Analyse numérique pour ingénieurs</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_EDO/EDO&EquationStochastique.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément de cours : EDO & Équations Stochastiques</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_EDO/EDO&ProgramPython.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément de cours : EDO & Programmation Python</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_EDO/TD ana num EDO.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD Analyse Numérique EDO</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_EDO/TP_EDO.html" class="doc-link" target="_blank"><span class="doc-icon">💻</span><span>TP EDO</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/ANALYSE_EDO/SUJET_EDO1.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Sujet EDO 1</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- CALCUL DIFFERENTIEL -->
+        <div class="subject-card slide-in">
+          <h3>📊 Calcul Différentiel</h3>
+          <p>Étude de différentiabilité & Calcul de dérivées partielles</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/CALCUL_DIFF/DM_Calcul_iDiff_L3.pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Devoir de Maison</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/CALCUL_DIFF/JPC_CAL_0_6_0.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément de cours : Calcul différentiel</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/CALCUL_DIFF/fic00047.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Fiches d'exercices (Exo7)</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/CALCUL_DIFF/RecueilExercicesCalculDifferentiel.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Recueil d'Exercices de Calcul Différentiel</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/CALCUL_DIFF/TD7-LM360.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : TD7-LM360</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/CALCUL_DIFF/TD7-LM360-corrigé.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : TD7-LM360-corrigé</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/CALCUL_DIFF/TD8-LM360.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : TD8-LM360.pdf</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/CALCUL_DIFF/TD8-LM360-corrigé.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : TD8-LM360-corrigé.pdf</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- STATISTIQUES -->
+        <div class="subject-card slide-in">
+          <h3>📉 Statistiques Appliquée</h3>
+          <p>Statistique inférentielle, ANOVA & RLM</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/cours_regression_lineaire2016.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours Régression Linéaire</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/TD_TP_ANOVA.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD/TP : ANOVA</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/TD_TP_ANOVA (1).pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD/TP : ANOVA (suite)</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/TD_TP_regression.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD/TP : Régression</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/PROJET DE REGRESSION LINEAIRE (1).pdf" class="doc-link" target="_blank"><span class="doc-icon">📝</span><span>Projet de Régression Linéaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/Régression avec R - 2e édition (Pierre-André Cornillon, Nicolas  Hengartner etc.) (z-lib.org).pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Le modèle de Régression sous R </span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/IMPORTANT2.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément de cours : Le modèle de Régression Linéaire </span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/RStatistiqueDataSciences (1).pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : R pour la statistique et la science des données</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/polyANOVA.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Analyse de la Variance</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/Important1.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : STA201 (TD5- Régression linéaire multiple)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/M1-TPreg4.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : TP no 4 (Régression linéaire multiple, Université de Caen)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/TD3c_02_ANOVA.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Analyse de la variance à un facteur</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/TD4c_ANOVA.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Validatation des hypothèses d’une ANOVA à un facteur</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/TD10_Estimation_Correction.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Correction de TD10 de Régression linéaire multiple</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/TP_6_Mag_Correction.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Correction de TD6 de Régression linéaire multiple</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/STAT_APP/TP5_Mag.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : Régression linéaire simple avec R</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+         <!-- ANALYSE FINANCIERE -->
+        <div class="subject-card slide-in">
+          <h3>💰 Finance des Entreprises</h3>
+          <p>Diagnostic financier, ratios, analyse de bilans pour les entreprises</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/FINANCE/Diagnostic Financier des Entreprises.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Cours Diagnostic Financier des Entreprises</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/FINANCE/DSCG 2 Finance.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Cours DSCG 2 Finance</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/FINANCE/DSCG 2 Finance.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span> Complément : Cours DSCG 2 Finance</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/FINANCE/Emergence des risques.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Émergence des risques</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/FINANCE/Economie et marchés financiers.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : Économie et marchés financiers</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/FINANCE/TD Finance.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>TD de Finance</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/FINANCE/DSCG 2 Finance.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Dscg : Corrigé</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/SCIENCE/FINANCE/FINANCES_2ED_SYNTHESE_DE_COURS_ET_EXERCICES_CORRIGES.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Complément : Synthèse d'Exercices & Corrigés</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+        <!-- UML & GENIE LOGICIEL -->
+        <div class="subject-card slide-in">
+          <h3>🎨 UML & Génie Logiciel</h3>
+          <p>Modélisation UML, diagrammes, conception</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/UML_COURS/UML2 UL.pdf" class="doc-link" target="_blank"><span class="doc-icon">📊</span><span>Présentation UML2</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/UML_COURS/LES_DIAGRAMMES_UML2.0.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Les Diagrammes UML 2.0</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/UML_COURS/DIAGRAMME_CLASSES.pdf" class="doc-link" target="_blank"><span class="doc-icon">📊</span><span>Diagramme de Classes</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/UML_COURS/Lecon 1 diagramme d'activites UL.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Diagramme d'Activités</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/UML_COURS/lecon 2 diagramme de séquences ok.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Diagramme de Séquences</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/UML_COURS/Diagramme de composants UML UL.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Diagramme de Composants</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/UML_COURS/EXERCICE UML.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Exercices UML</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/UML_COURS/TD1UseCaseDiagramCORRIGE.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>TD1 Use Case - Corrigé</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/UML_COURS/TD_GL2_N5.pdf" class="doc-link" target="_blank"><span class="doc-icon">✏️</span><span>Complément : TD Génie Logiciel 2</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/UML_COURS/UML_Correction_Devoir.pdf" class="doc-link" target="_blank"><span class="doc-icon">✅</span><span>Correction Devoir UML</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- CLASSIFICATIONS & ML -->
+        <div class="subject-card slide-in">
+          <h3>🔬 Classifications, ML & MLG</h3>
+          <p>Méthodes de classification, ML & MLG</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/CLASSIFICATIONS/SML_CTE.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours d'Apprentissage Supervisé (AS)</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/MLG/MLG_CTE.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Cours de Modèle Linéaire Généralisée (MLG)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/MLG/TD_ Régression Logistique.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>TD : Régression Logistique</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/MLG/TD_regression_lineaire.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>TD : Régression Lineaire</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/MLG/TD_maximum de vraisemblance.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>TD : Maximum de Vraisemblance</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/MLG/La régression logistique.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément de cours : La régression logistique</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+        <!-- CLASSIFICATIONS NON SUPERVISE -->
+        <div class="subject-card slide-in">
+          <h3>🔬 Classifications non supervisé (CNS)</h3>
+          <p>Algorithmes de classification non supervisé</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/CNS/CH-II - ACP.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Chap 2 : ACP</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/CNS/CH-III- CAH final.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Chap 3 : CAH</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/CNS/CH-IV- K-means.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Chap 3 : K-means</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/CNS/Balaji Venkateswaran_ Francesco Ciabuschi - Neural networks with R _ smart models using CNN, RNN, deep learning, and artificial intelligence principles (2017).pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Complément : cours Réseaux de Neurones sous R</span></a></li>
+          </ul>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+
+         <!-- Big Data -->
+        <div class="subject-card slide-in">
+          <h3>🗄️ Big Data</h3>
+          <p>Introduction aux Big Data</p>
+          <ul class="document-list">
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/BIG_DATA/LSML_CTE.pdf" class="doc-link" target="_blank"><span class="doc-icon">📊</span><span>Support de cours : Introduction aux Big Data</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/BIG_DATA/tp_big_data.pdf" class="doc-link" target="_blank"><span class="doc-icon">💻</span><span>TP Big Data</span></a></li>
+            <li><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/BIG_DATA/TP-Spark-1.pdf" class="doc-link" target="_blank"><span class="doc-icon">💻</span><span>TP1 Spark</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/BIG_DATA/TP Spark.ipynb" class="doc-link" target="_blank"><span class="doc-icon">💻</span><span>TP1 Spark (Fichier .ipynb)</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/BIG_DATA/TP-Spark- 2.pdf" class="doc-link" target="_blank"><span class="doc-icon">💻</span><span>TP2 Spark</span></a></li>
+            <li class="extra-doc"><a href="../../cours/lagunes/L3/2èmeSEMESTRE/INFORMATIQUE/BIG_DATA/SparkDecisionTree.ipynb" class="doc-link" target="_blank"><span class="doc-icon">💻</span><span>TP2 Spark (Fichier .ipynb)</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <section class="card slide-in" style="text-align: center; background: var(--univ-gradient); color: white; margin-top: 3rem;">
+      <h2 style="color: white;">📥 Documents manquants ?</h2>
+      <p style="margin: 1rem 0; opacity: 0.95;">
+        Je mets régulièrement à jour cette page avec de nouveaux documents. 
+        Si vous recherchez un cours spécifique, n'hésitez pas à me contacter !
+      </p>
+      <a href="../../contact.html" class="btn" style="background: white; color: #0066cc; margin-top: 1rem;">
+        Me contacter
+      </a>
+    </section>
+
+    <!-- Navigation vers autres universités -->
+    <section style="margin-top: 3rem;">
+      <h2 class="section-title">🎓 Explorer d'autres formations</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <a href="universite-cote-azur.html" class="card" style="text-decoration: none; text-align: center; border-top: 3px solid #e4032e;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🏛️</div>
+          <h3 style="color: #e4032e;">Université Côte d'Azur</h3>
+          <p>Master Ingénierie Mathématique</p>
+        </a>
+        <a href="epitech.html" class="card" style="text-decoration: none; text-align: center; border-top: 3px solid #00a8ff;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">💻</div>
+          <h3 style="color: #00a8ff;">Epitech</h3>
+          <p>MSc Big Data & IA</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../main.js"></script>
+  <script src="../../js/translation.js"></script>
+  <script>
+    // Year tabs functionality
+    document.querySelectorAll('.year-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.year-content').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        const yearId = this.getAttribute('data-year');
+        document.getElementById(yearId).classList.add('active');
+      });
+    });
+
+    // ===== SHOW MORE / SHOW LESS pour toutes les listes de documents =====
+    document.querySelectorAll('.show-more-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.subject-card');
+        const extraDocs = card.querySelectorAll('.extra-doc');
+        
+        extraDocs.forEach(doc => {
+          doc.classList.toggle('visible');
+        });
+        
+        const isVisible = extraDocs[0] && extraDocs[0].classList.contains('visible');
+        this.textContent = isVisible ? '▲ Afficher Moins' : '▼ Afficher Plus';
+      });
+    });
+
+    // Add animation on scroll for cards
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.slide-in').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

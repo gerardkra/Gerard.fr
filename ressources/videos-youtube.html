@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chaînes YouTube Éducatives | Gérard Kra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .resource-hero {
+      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+    .resource-hero h1 { color: white; font-size: 2.5rem; }
+    .channel-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-left: 4px solid #ef4444;
+    }
+    .channel-card.essential { border-left-color: #10b981; }
+    .channel-card.recommended { border-left-color: #3b82f6; }
+    .channel-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .channel-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .channel-icon {
+      font-size: 2.5rem;
+    }
+    .personal-pick {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+  </style>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../about.html">À propos</a>
+        <a href="../parcours/index.html">Parcours</a>
+        <a href="index.html" class="active">Ressources</a>
+        <a href="../professionnel/index.html">Professionnel</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a class="btn btn-outline" href="../CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <div id="google_translate_element"></div>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a> → 
+      <a href="index.html">Ressources</a> → 
+      <strong>Vidéos YouTube</strong>
+    </div>
+
+    <section class="resource-hero slide-in">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">📺</div>
+      <h1>Chaînes YouTube Éducatives</h1>
+      <p style="font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.95;">
+        Mes chaînes préférées pour apprendre les maths, la programmation, l'anglais et le développement personnel
+      </p>
+    </section>
+
+    <section class="card slide-in">
+      <h2>🎯 Apprendre en vidéo</h2>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        YouTube est une mine d'or éducative gratuite. Voici mes chaînes préférées classées par domaine, 
+        incluant celles qui m'ont personnellement aidé dans mon parcours.
+      </p>
+    </section>
+
+    <!-- Développement Personnel -->
+    <section>
+      <h2 class="section-title">💡 Développement Personnel & Mindset</h2>
+      <!-- <p style="margin-bottom: 1.5rem; color: #888;">
+        <strong>Mon avis :</strong> Ces chaînes m'ont transformé. Je les écoute régulièrement (livres audio, conférences, interviews). 
+        Elles m'ont aidé à développer le bon état d'esprit pour réussir académiquement et professionnellement.
+      </p> -->
+      
+      <div class="channel-card essential slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🎤</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">Jim Rohn <span class="personal-pick">⭐ Mon préféré</span></h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Le mentor des mentors - Philosophie de vie et réussite</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">
+          <strong>Jim Rohn</strong> est ma plus grande influence en développement personnel. Ses conférences sur la discipline, 
+          les habitudes et la philosophie de vie m'ont profondément marqué. "Vous êtes la moyenne des 5 personnes que vous fréquentez le plus."
+        </p>
+        <a href="https://youtu.be/Mres4xDThPg" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+
+      <div class="channel-card essential slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">💰</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">MJ DeMarco <span class="personal-pick">⭐ Business Mindset</span></h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Entrepreneur - Auteur de <em>« L'autoroute du millionnaire »</em></p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">
+          MJ DeMarco démolit les mythes sur la richesse et explique comment créer vraiment de la valeur. 
+          Son livre <em>« The Millionaire Fastlane »</em> a changé ma vision de l'entrepreneuriat et de la création de richesse.
+        </p>
+        <a href="http://www.youtube.com/@FastlaneMJ" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+
+      <div class="channel-card recommended slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">📚</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">Napoleon Hill (Audio Books)</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Auteur de <em>« Réfléchissez et devenez riche »</em></p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">
+          Les principes intemporels de Napoleon Hill sur la réussite, la persévérance et le pouvoir de la pensée. 
+          J'écoute régulièrement ses livres audio pendant mes trajets.
+        </p>
+        <a href="https://www.youtube.com/results?search_query=napoleon+hill" target="_blank" class="btn">Rechercher Napoleon Hill →</a>
+      </div>
+
+      <div class="channel-card recommended slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🎯</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">Brian Tracy</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Expert en productivité et gestion du temps</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">
+          Brian Tracy m'a appris à structurer mes journées, à prioriser et à atteindre mes objectifs. 
+          Ses techniques de productivité sont applicables immédiatement.
+        </p>
+        <a href="http://www.youtube.com/@BrianTracyOfficial" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+
+      <div class="channel-card recommended slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🔥</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">Zig Ziglar</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Motivation et développement personnel</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">
+          Zig Ziglar est un maître de la motivation. Ses discours sont énergiques et inspirants. 
+          Parfait pour se remotiver quand on traverse des moments difficiles.
+        </p>
+        <a href="http://www.youtube.com/@ZiglarLife" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+
+      <div class="channel-card recommended slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🏛️</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">George S. Clason (Audio)</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Auteur de <em>« L'homme le plus riche de Babylone »</em></p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">
+          Les principes intemporels de la gestion de l'argent racontés sous forme de paraboles babyloniennes. 
+          Simple, efficace et applicable immédiatement.
+        </p>
+        <a href="https://www.youtube.com/results?search_query=richest+man+in+babylon" target="_blank" class="btn">Rechercher The Richest Man in Babylon →</a>
+      </div>
+
+      <div class="channel-card recommended slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🌍</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">Ricardo Kaniama</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Inspiration africaine - Mentorat et entrepreneuriat</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">
+          Ricardo Kaniama est une figure de référence du développement personnel et de l’entrepreneuriat en Afrique francophone. 
+          Son ouvrage <em>« La chèvre de ma mère »</em> résonne profondément avec les réalités africaines. C'est un livre qui m'a beaucoup inspiré. Je le recommande vivement.
+        </p>
+
+        <a href="https://www.youtube.com/@RicardoKaniama" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+    </section>
+
+    <!-- Anglais -->
+    <section>
+      <h2 class="section-title">🗣️ Anglais</h2>
+      
+      <div class="channel-card essential slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🎧</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">A.J. Hoge (Effortless English) <span class="personal-pick">⭐ Mon préféré</span></h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Apprendre l'anglais par l'écoute intensive</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">
+          <strong>A.J. Hoge</strong> est mon mentor en anglais. Sa méthode <em>« Effortless English »</em> privilégie l'écoute intensive 
+          plutôt que la grammaire traditionnelle. Je crois fermement en cette approche : <strong>la discipline dans l'écoute 
+          quotidienne est plus efficace que des heures de grammaire</strong>. Cette méthode m'a permis de progresser rapidement.
+        </p>
+        <div style="margin: 1rem 0; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; border-radius: 0 8px 8px 0;">
+          <strong style="color: #10b981;">💡 Ma méthode :</strong> J'écoute 30-60 minutes d'anglais par jour (podcasts, vidéos YouTube, audiobooks). 
+          Les résultats sont visibles après quelques semaines de discipline quotidienne.
+        </div>
+        <a href="https://www.youtube.com/@AJHogeEffortlessEnglish" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+
+      <div class="channel-card recommended slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🌹</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">English with Lucy</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Cours d'anglais britannique</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">Cours d'anglais clairs avec accent britannique. Grammaire, vocabulaire, prononciation.</p>
+        <a href="https://www.youtube.com/@EnglishwithLucy" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+    </section>
+
+    <!-- Mathématiques -->
+    <section>
+      <h2 class="section-title">📐 Mathématiques</h2>
+      
+      <div class="channel-card essential slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🎨</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">3Blue1Brown</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Visualisations mathématiques magnifiques</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">Chaîne exceptionnelle avec des animations qui rendent les maths intuitives. Série "Essence of Linear Algebra" incontournable !</p>
+        <a href="https://www.youtube.com/@3blue1brown" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+
+      <div class="channel-card essential slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🎓</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">Exo7Math <span class="personal-pick">⭐ Ma référence</span></h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Cours de maths niveau universitaire en français</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">
+          <strong>Exo7</strong> m'a beaucoup aidé pendant toute ma Licence. Cours complets, exercices corrigés détaillés, 
+          vidéos explicatives. Je recommande fortement pour tous les étudiants en mathématiques !
+        </p>
+        <a href="http://www.youtube.com/@Exo7Math" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+    </section>
+
+    <!-- Programmation -->
+    <section>
+      <h2 class="section-title">💻 Programmation & Informatique</h2>
+      
+      <div class="channel-card essential slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🐍</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">Corey Schafer</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Tutoriels Python de qualité</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">Tutoriels Python clairs et complets. Flask, Django, data science, bonnes pratiques.</p>
+        <a href="https://www.youtube.com/@coreyms" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+
+      <div class="channel-card essential slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🔥</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">freeCodeCamp</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Cours complets gratuits</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">Cours longs et complets sur tous les langages. De débutant à avancé.</p>
+        <a href="https://www.youtube.com/@freecodecamp" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+    </section>
+
+    <!-- Data Science & IA -->
+    <section>
+      <h2 class="section-title">🤖 Data Science & IA</h2>
+      
+      <div class="channel-card essential slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">📊</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">StatQuest with Josh Starmer</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Statistiques et ML expliqués simplement</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">Explications claires des concepts statistiques et ML. Parfait pour comprendre les fondamentaux.</p>
+        <a href="https://www.youtube.com/@statquest" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+
+      <div class="channel-card essential slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🧠</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">Sentdex</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Python, ML, Deep Learning, Finance</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">Tutoriels pratiques en Python pour ML, trading, bots, computer vision.</p>
+        <a href="https://www.youtube.com/@sentdex" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+    </section>
+
+    <!-- Sciences générales -->
+    <section>
+      <h2 class="section-title">🔬 Sciences & Culture générale</h2>
+      
+      <div class="channel-card recommended slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">📚</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">Crash Course</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Cours complets sur plein de sujets</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">Séries éducatives sur la science, l'histoire, l'économie, etc. Format court et dynamique.</p>
+        <a href="https://www.youtube.com/@crashcourse" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+
+      <div class="channel-card recommended slide-in">
+        <div class="channel-header">
+          <div class="channel-icon">🎬</div>
+          <div>
+            <h3 style="color: #ef4444; margin: 0;">TED-Ed</h3>
+            <p style="color: #888; margin: 0.3rem 0 0 0;">Leçons animées courtes</p>
+          </div>
+        </div>
+        <p style="margin: 1rem 0;">Vidéos éducatives animées sur des sujets variés. Idéal pour améliorer l'anglais aussi !</p>
+        <a href="https://www.youtube.com/@TEDEd" target="_blank" class="btn">Voir la chaîne →</a>
+      </div>
+    </section>
+
+    <section class="card slide-in" style="background: linear-gradient(135deg, #ef4444, #dc2626); color: white; text-align: center; margin-top: 3rem;">
+      <h2 style="color: white;">🚀 Continuez votre exploration</h2>
+      <p style="margin: 1rem 0; opacity: 0.95;">
+        Découvrez aussi les autres ressources pour progresser.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+        <a href="conseils-parcours.html" class="btn" style="background: white; color: #ef4444;">💡 Mon Parcours & Leçons Apprises</a>
+        <a href="programmation.html" class="btn btn-outline" style="border-color: white; color: white;">💻 Programmation</a>
+        <a href="anglais.html" class="btn btn-outline" style="border-color: white; color: white;">🗣️ Anglais</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/translation.js"></script>
+</body>
+</html>

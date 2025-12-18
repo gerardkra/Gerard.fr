@@ -1,0 +1,10 @@
+\babel@toc {french}{}\relax 
+\contentsline {section}{\numberline {1}INTRODUCTION}{2}{}%
+\contentsline {section}{\numberline {2}DEFINITIONS DES MOTS-CLES}{2}{}%
+\contentsline {section}{\numberline {3}ORIGINE DE PAGERANK}{3}{}%
+\contentsline {subsection}{\numberline {3.1}Approche récursive}{3}{}%
+\contentsline {subsection}{\numberline {3.2}Promenade aléatoire}{3}{}%
+\contentsline {subsection}{\numberline {3.3}Loi de transition}{5}{}%
+\contentsline {section}{\numberline {4}PageRank}{5}{}%
+\contentsline {subsection}{\numberline {4.1}Fonctionnement de PageRank}{5}{}%
+\contentsline {section}{\numberline {5}MISE EN ŒUVRE}{6}{}%

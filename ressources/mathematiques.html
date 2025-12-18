@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ressources Mathématiques — Sites & Tutoriels | Gérard Kra</title>
+  <meta name="description" content="Mes sites préférés pour apprendre les mathématiques : Exo7, BibMaths, Khan Academy et plus" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .resource-hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+
+    .resource-hero h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .resource-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-left: 4px solid;
+    }
+
+    .resource-card.essential { border-left-color: #10b981; }
+    .resource-card.recommended { border-left-color: #3b82f6; }
+    .resource-card.bonus { border-left-color: #f59e0b; }
+
+    .resource-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .resource-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .resource-icon {
+      font-size: 2.5rem;
+    }
+
+    .resource-title h3 {
+      color: var(--accent-color);
+      margin: 0;
+    }
+
+    .resource-category {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background: var(--bg-color);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    .resource-category.essential { color: #10b981; }
+    .resource-category.recommended { color: #3b82f6; }
+    .resource-category.bonus { color: #f59e0b; }
+
+    .resource-description {
+      margin: 1rem 0;
+      line-height: 1.8;
+    }
+
+    .resource-features {
+      margin: 1rem 0;
+    }
+
+    .resource-features ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .resource-features li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .resource-features li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: bold;
+    }
+
+    .resource-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .filter-tab {
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+    }
+
+    .filter-tab:hover {
+      border-color: var(--accent-color);
+    }
+
+    .filter-tab.active {
+      background: var(--accent-color);
+      color: white;
+      border-color: var(--accent-color);
+    }
+
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .topic-tag {
+      background: var(--card-bg);
+      padding: 1rem;
+      text-align: center;
+      border-radius: var(--radius);
+      transition: var(--transition);
+      border: 1px solid var(--border-color);
+    }
+
+    .topic-tag:hover {
+      border-color: var(--accent-color);
+      transform: scale(1.05);
+    }
+
+    .personal-pick {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .resource-hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .resource-actions {
+        flex-direction: column;
+      }
+
+      .resource-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../about.html">À propos</a>
+        <a href="../parcours/index.html">Parcours</a>
+        <a href="index.html" class="active">Ressources</a>
+        <a href="../professionnel/index.html">Professionnel</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a class="btn btn-outline" href="../CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <div id="google_translate_element"></div>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a> → 
+      <a href="index.html">Ressources</a> → 
+      <strong>Mathématiques</strong>
+    </div>
+
+    <section class="resource-hero slide-in">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">📐</div>
+      <h1>Ressources Mathématiques</h1>
+      <p style="font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.95;">
+        Sites, vidéos et plateformes pour apprendre et progresser en mathématiques
+      </p>
+    </section>
+
+    <section class="card slide-in">
+      <h2>🎯 Pourquoi ces ressources ?</h2>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        Voici une sélection des meilleurs sites et ressources que j'ai utilisés tout au long de mon parcours en mathématiques. 
+        Ces plateformes m'ont aidé à comprendre des concepts complexes, à pratiquer avec des exercices corrigés, 
+        et à préparer efficacement mes examens de la Licence au Master.
+      </p>
+    </section>
+
+    <!-- Disclaimer -->
+    <!-- <section class="card slide-in" style="background: rgba(59, 130, 246, 0.1); border: 2px solid #3b82f6;">
+      <p style="line-height: 1.8; margin: 0;">
+        <strong>💡 Mon point de vue personnel :</strong> Les ressources ci-dessous sont celles qui <strong>m'ont personnellement aidé</strong>. 
+        Ce n'est pas une vérité universelle (chacun apprend différemment). Testez, adaptez, et gardez ce qui fonctionne pour vous !
+      </p>
+    </section> -->
+
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">Toutes</button>
+      <button class="filter-tab" data-filter="essential">Essentielles ⭐</button>
+      <button class="filter-tab" data-filter="recommended">Recommandées 👍</button>
+      <button class="filter-tab" data-filter="bonus">Bonus 🎁</button>
+    </div>
+
+    <section class="card slide-in">
+      <h3>📚 Domaines couverts</h3>
+      <div class="topics-grid">
+        <div class="topic-tag">📊 Analyse</div>
+        <div class="topic-tag">📐 Algèbre</div>
+        <div class="topic-tag">🎲 Probabilités</div>
+        <div class="topic-tag">📈 Statistiques</div>
+        <div class="topic-tag">🧮 Analyse numérique</div>
+        <div class="topic-tag">🎯 Optimisation</div>
+        <div class="topic-tag">🤖 Machine Learning</div>
+        <div class="topic-tag">📉 Équations différentielles</div>
+      </div>
+    </section>
+
+    <div id="resources-container">
+      <!-- BibMaths -->
+      <article class="resource-card essential slide-in" data-category="essential">
+        <div class="resource-header">
+          <div class="resource-icon">📚</div>
+          <div class="resource-title">
+            <h3>BibMaths <span class="personal-pick">⭐ Ma préférence</span></h3>
+            <span class="resource-category essential">Essentiel ⭐</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>BibMaths</strong> est mon site préféré pour les révisions rapides. 
+            Une bibliothèque mathématique en ligne qui rassemble des fiches synthétiques, 
+            des formulaires et des cours bien structurés. <strong>Je le recommande fortement</strong> pour réviser avant un examen.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Fiches de synthèse claires et concises</li>
+            <li>Formulaires mathématiques essentiels</li>
+            <li>Cours organisés par thème</li>
+            <li>Interface simple et efficace</li>
+          </ul>
+        </div>
+
+        <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; border-radius: 0 8px 8px 0;">
+          <strong style="color: #10b981;">💡 Comment je l'utilise :</strong> Avant chaque examen, je révise les fiches de BibMaths pour avoir un aperçu rapide des concepts clés. 
+          Les formulaires sont parfaits pour les révisions de dernière minute.
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://www.bibmath.net/" target="_blank" class="btn">
+            🌐 Visiter BibMaths
+          </a>
+        </div>
+      </article>
+
+      <!-- Exo7 -->
+      <article class="resource-card essential slide-in" data-category="essential">
+        <div class="resource-header">
+          <div class="resource-icon">🎓</div>
+          <div class="resource-title">
+            <h3>Exo7 Math <span class="personal-pick">⭐ Ma référence</span></h3>
+            <span class="resource-category essential">Essentiel ⭐</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>Exo7</strong> est LA référence pour les étudiants en mathématiques. 
+            Le site propose des cours complets, des exercices corrigés et des vidéos explicatives 
+            de qualité exceptionnelle. Il couvre tous les niveaux de la Licence au Master. 
+            <strong>Je recommande fortement.</strong>
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Cours PDF téléchargeables gratuitement</li>
+            <li>Des exercices corrigés et bien détaillés</li>
+            <li>Vidéos YouTube claires et pédagogiques</li>
+            <li>Contenu structuré par chapitres et niveaux</li>
+          </ul>
+        </div>
+
+        <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; border-radius: 0 8px 8px 0;">
+          <strong style="color: #10b981;">💡 Comment je l'utilise :</strong> J'ai téléchargé les PDFs de cours pour chaque chapitre. 
+          Quand je bloquais sur un exercice, je cherchais des exercices similaires dans les corrections d'Exo7. 
+          Les vidéos YouTube sont parfaites pour réviser avant les examens.
+        </div>
+
+        <div class="resource-actions">
+          <a href="http://exo7.emath.fr/" target="_blank" class="btn">
+            🌐 Visiter Exo7
+          </a>
+          <a href="https://www.youtube.com/channel/UC8K_KGjfUjVhpJcpqNL4dGA" target="_blank" class="btn btn-outline">
+            📺 Chaîne YouTube
+          </a>
+        </div>
+      </article>
+
+      <!-- Khan Academy -->
+      <article class="resource-card recommended slide-in" data-category="recommended">
+        <div class="resource-header">
+          <div class="resource-icon">🌍</div>
+          <div class="resource-title">
+            <h3>Khan Academy</h3>
+            <span class="resource-category recommended">Recommandé 👍</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>Khan Academy</strong> propose des cours de mathématiques interactifs avec des exercices pratiques. 
+            Excellent pour renforcer les bases et progresser à son rythme. Disponible en français et en anglais.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Plateforme interactive avec suivi de progression</li>
+            <li>Vidéos explicatives courtes et efficaces</li>
+            <li>Exercices avec feedback immédiat</li>
+            <li>Gratuit et accessible à tous</li>
+          </ul>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://fr.khanacademy.org/math" target="_blank" class="btn">
+            🌐 Khan Academy Maths
+          </a>
+        </div>
+      </article>
+
+      <!-- Les Bons Profs -->
+      <article class="resource-card recommended slide-in" data-category="recommended">
+        <div class="resource-header">
+          <div class="resource-icon">📹</div>
+          <div class="resource-title">
+            <h3>Les Bons Profs</h3>
+            <span class="resource-category recommended">Recommandé 👍</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            Chaîne YouTube française proposant des cours de mathématiques niveau lycée et début de Licence. 
+            Idéal pour réviser les bases ou combler des lacunes.
+          </p>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://www.youtube.com/@lesbonsprofs" target="_blank" class="btn btn-outline">
+            📺 Chaîne YouTube
+          </a>
+        </div>
+      </article>
+
+      <!-- MIT OpenCourseWare -->
+      <article class="resource-card bonus slide-in" data-category="bonus">
+        <div class="resource-header">
+          <div class="resource-icon">🎓</div>
+          <div class="resource-title">
+            <h3>MIT OpenCourseWare</h3>
+            <span class="resource-category bonus">Bonus 🎁</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            Cours du MIT (Massachusetts Institute of Technology) en libre accès. 
+            Niveau avancé, idéal pour approfondir et découvrir des applications concrètes. En anglais.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Cours de niveau universitaire d'excellence</li>
+            <li>Notes de cours, exercices et examens</li>
+            <li>Vidéos de cours complets</li>
+            <li>Gratuit et accessible</li>
+          </ul>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://ocw.mit.edu/search/?t=Mathematics" target="_blank" class="btn">
+            🌐 MIT OCW Mathematics
+          </a>
+        </div>
+      </article>
+
+      <!-- 3Blue1Brown -->
+      <article class="resource-card bonus slide-in" data-category="bonus">
+        <div class="resource-header">
+          <div class="resource-icon">🎨</div>
+          <div class="resource-title">
+            <h3>3Blue1Brown</h3>
+            <span class="resource-category bonus">Bonus 🎁</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            Chaîne YouTube exceptionnelle proposant des visualisations animées de concepts mathématiques. 
+            Parfait pour comprendre intuitivement l'algèbre linéaire, le calcul et plus. En anglais avec sous-titres.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Animations visuelles de haute qualité</li>
+            <li>Explications intuitives de concepts complexes</li>
+            <li>Série "Essence of Linear Algebra" incontournable</li>
+            <li>Approche pédagogique innovante</li>
+          </ul>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://www.youtube.com/@3blue1brown" target="_blank" class="btn btn-outline">
+            📺 Chaîne YouTube
+          </a>
+        </div>
+      </article>
+    </div>
+
+    <section class="card slide-in">
+      <h2>💡 Ce que je vous propose</h2>
+      <div style="margin-top: 1.5rem; line-height: 1.8;">
+        <p><strong>1. BibMaths + Exo7 = Combinaison parfaite</strong> : BibMaths pour les révisions rapides, Exo7 pour les exercices détaillés.</p>
+        <p style="margin-top: 0.8rem;"><strong>2. Refaire les exercices corrigés</strong> : Ne les lisez pas passivement. Cachez la correction et essayez de les refaire vous-même.</p>
+        <p style="margin-top: 0.8rem;"><strong>3. Visualisez avec 3Blue1Brown</strong> : Quand un concept vous semble abstrait, cherchez s'il y a une vidéo dessus.</p>
+        <p style="margin-top: 0.8rem;"><strong>4. Créez vos fiches de synthèse</strong> : Résumez chaque chapitre en 1-2 pages avec les formules clés et les théorèmes importants.</p>
+        <p style="margin-top: 0.8rem;"><strong>5. Pratiquez, pratiquez, pratiquez</strong> : Les maths s'apprennent par la pratique. Faites des exercices jusqu'à ce que ça devienne automatique.</p>
+      </div>
+      
+      <div style="margin-top: 2rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-left: 4px solid #f59e0b; border-radius: 0 8px 8px 0;">
+        <strong style="color: #f59e0b;">⚠️ Rappel :</strong> Ce sont les méthodes qui ont marché <strong>pour moi</strong>. 
+        Certains préfèrent d'autres approches. L'important est de trouver ce qui vous convient au mieux !
+      </div>
+    </section>
+
+    <section class="card slide-in" style="text-align: center; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; margin-top: 3rem;">
+      <h2 style="color: white;">🚀 Continuez votre exploration</h2>
+      <p style="margin: 1rem 0; opacity: 0.95;">
+        Découvrez aussi les autres ressources pour progresser.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+        <a href="programmation.html" class="btn" style="background: white; color: #667eea;">💻 Programmation</a>
+        <a href="anglais.html" class="btn btn-outline" style="border-color: white; color: white;">🗣️ Anglais</a>
+        <a href="videos-youtube.html" class="btn btn-outline" style="border-color: white; color: white;">📺 YouTube</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/translation.js"></script>
+  <script>
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const resourceCards = document.querySelectorAll('.resource-card');
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        filterTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+
+        const filter = this.getAttribute('data-filter');
+
+        resourceCards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = 'block';
+          } else {
+            if (card.getAttribute('data-category') === filter) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

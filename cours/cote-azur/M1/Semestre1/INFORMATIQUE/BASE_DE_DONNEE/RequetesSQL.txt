@@ -1,0 +1,620 @@
+
+
+                         TP5
+--1. Afficher le nom et l’année des boîtes créées en 1975 (39 lignes)
+SELECT nom,annee
+FROM boite
+WHERE annee="1975";
+
+--2. Afficher le nom des couleurs transparentes, triées par ordre alphabétique (28 lignes).
+
+SELECT nomc
+FROM couleur
+WHERE est_transp="t"
+ORDER BY nomc;
+
+--3. Afficher le nom des thèmes sans répétition des boîtes créées entre 1958 et 1960 (5 lignes).
+
+SELECT DISTINCT theme.nomt
+FROM theme JOIN boite
+ON theme.idt = boite.idt
+WHERE boite.annee BETWEEN 1958 AND 1960;
+
+--4. Afficher le nom des boîtes parues avant 1990 (strictement) et 
+--dont le nom du thème commence par « Pirate » (8 lignes)
+
+SELECT DISTINCT boite.nom
+FROM boite JOIN theme 
+ON boite.idt = theme.idt
+WHERE boite.annee < 1990 AND theme.nomt LIKE "Pirate%";
+
+--5. Afficher les noms des thèmes qui contiennent « Prince » (5 lignes).
+
+SELECT nomt
+FROM theme
+WHERE nomt LIKE "%Prince%";
+
+--6. Afficher le nom du thème parent du thème de nom « Ferrari » (1 ligne).
+
+SELECT parent.nomt AS nom_theme_parent
+FROM theme t JOIN theme parent 
+ON t.idt_parent = parent.idt
+WHERE t.nomt = 'Ferrari';
+
+--7. Afficher le nom des thèmes qui ont le même thème parent que « Ferrari »,
+--trier par l’inverse de l’ordre alphabétique (12 lignes).
+
+SELECT t.nomt
+FROM theme t JOIN theme parent 
+ON t.idt_parent = parent.idt_parent
+WHERE parent.nomt = 'Ferrari'
+ORDER BY t.nomt DESC;
+
+--8. Afficher les numéros de briques sans répétition 
+--qui possèdent une variante transparente (1778 lignes)
+
+SELECT DISTINCT b.numb
+FROM brique b
+JOIN inventaire_brique ib ON b.numb = ib.numb
+JOIN couleur c ON ib.idc = c.idc
+WHERE c.est_transp = 't';
+
+--9. Afficher les noms des boîtes qui possèdent le même nom que leur thème.
+--Éviter les répétitions (17 lignes).
+
+SELECT DISTINCT b.nom
+FROM boite b JOIN theme t ON b.idt = t.idt
+WHERE b.nom = t.nomt;
+
+--10. Afficher le nombre de lignes de la table inventaire_brique (784642).
+
+SELECT COUNT(*) AS nombre_de_lignes
+FROM inventaire_brique;
+
+--11. Afficher le nombre de boîtes créées en 2018 (1 ligne : 759).
+
+SELECT COUNT(*) AS nombre_de_boites
+FROM boite
+WHERE annee = 2018;
+
+--12. Afficher l’année la plus ancienne où une boîte a été créée.
+
+SELECT MIN(annee) AS annee_plus_ancienne
+FROM boite;
+
+--13. Afficher l’année de la première boîte dont le nom contient Star Wars.
+
+SELECT MIN(annee) AS annee_premiere_star_wars
+FROM boite
+WHERE nom LIKE '%Star Wars%';
+
+--14. Afficher le nom et l’année des boîtes les plus anciennes dont le nom contient
+-- « Pirate » (3 lignes).
+
+SELECT nom, annee
+FROM boite
+WHERE nom LIKE '%Pirate%'
+AND annee = (SELECT MIN(annee) FROM boite WHERE nom LIKE '%Pirate%');
+
+--15. Afficher le nombre de briques de l’inventaire de la boîte de numéro 620-1 (32 briques).
+
+SELECT SUM(ib.quantite) AS nombre_de_briques
+FROM inventaire_brique ib
+JOIN inventaire i ON ib.idi = i.idi
+JOIN boite b ON i.numboite = b.numboite
+WHERE b.numboite = '620-1';
+
+--16. Afficher l’année et le nombre de boîtes par année.
+--Trier par nombre de boîtes décroissant (70 lignes, dont la première est (2018, 759)).
+
+SELECT annee, COUNT(*) AS nombre_de_boites
+FROM boite
+GROUP BY annee
+ORDER BY nombre_de_boites DESC;
+
+--17. Afficher le numéro identifiant, le nom de thème et le nombre de boîtes par thème.
+--Trier par ordre décroissant de nombre de boîtes
+--(573 lignes commençant par (158, Star Wars, 737)).
+
+SELECT t.idt, t.nomt AS nom_du_theme, COUNT(*) AS nombre_de_boites
+FROM boite b
+JOIN theme t ON b.idt = t.idt
+GROUP BY t.idt, t.nomt
+ORDER BY nombre_de_boites DESC;
+
+--18. Afficher les versions d’inventaires et le nombre de boîtes de chaque version (5 lignes).
+
+SELECT i.version AS version_inventaire, COUNT(*) AS nombre_de_boites
+FROM inventaire i
+JOIN boite b ON i.numboite = b.numboite
+GROUP BY i.version
+ORDER BY i.version;
+
+--19. Afficher l’année moyenne des boîtes de chaque thème;
+--afficher le numéro, le nom du thème, trier par
+--année moyenne croissante (573 lignes commençant par 370, Mosaic, 1955)
+
+SELECT t.idt, t.nomt AS nom_du_theme, AVG(b.annee) AS annee_moyenne
+FROM boite b
+JOIN theme t ON b.idt = t.idt
+GROUP BY t.idt, t.nomt
+ORDER BY annee_moyenne;
+
+--20. Afficher l’identifiant couleur, le nom de la couleur et
+--le nombre d’inventaires utilisant une brique de cette couleur.
+--Trier par nombre décroissant (166 lignes commençant par (0, Black, 146137)).
+
+SELECT c.idc AS identifiant_couleur, c.nomc AS nom_de_la_couleur, COUNT(i.idi) AS nombre_d_inventaires
+FROM couleur c
+JOIN inventaire_brique ib ON c.idc = ib.idc
+JOIN inventaire i ON ib.idi = i.idi
+GROUP BY c.idc, c.nomc
+ORDER BY nombre_d_inventaires DESC;
+--21. Afficher les numéros d’inventaires comptant plus de 2000 briques,
+--afficher aussi le nombre de briques (108 lignes).
+
+SELECT i.idi AS numero_inventaire, SUM(ib.quantite) AS nombre_de_briques
+FROM inventaire i
+JOIN inventaire_brique ib ON i.idi = ib.idi
+GROUP BY i.idi
+HAVING SUM(ib.quantite) > 2000;
+
+--22. Compléter la requête précédente pour afficher aussi le nom de la boîte (108 lignes).
+
+SELECT i.idi AS numero_inventaire, b.numboite, SUM(ib.quantite) AS nombre_de_briques
+FROM inventaire i
+JOIN inventaire_brique ib ON i.idi = ib.idi
+JOIN boite b ON i.numboite = b.numboite
+GROUP BY i.idi, b.numboite
+HAVING SUM(ib.quantite) > 2000;
+
+--23.Afficher les numéros d’inventaires comportant strictement plus de 50 briques différentes
+--transparentes.Afficher aussi le nombre de briques différentes transparentes (5 lignes).
+
+SELECT i.idi AS numero_inventaire, COUNT(*) AS nombre_de_briques
+FROM inventaire i
+JOIN inventaire_brique ib ON i.idi = ib.idi
+JOIN couleur c ON c.idc = ib.idc AND c.est_transp='t'
+GROUP BY i.idi
+HAVING COUNT(*)>50;
+
+--24. Compléter la requête précédente pour afficher aussi le nom de la boîte (5 lignes)
+
+SELECT i.idi AS numero_inventaire,b.nom, COUNT(*) AS nombre_de_briques
+FROM inventaire i
+JOIN inventaire_brique ib ON i.idi = ib.idi
+JOIN couleur c ON c.idc = ib.idc AND c.est_transp='t'
+JOIN boite b ON b.numboite=i.numboite
+GROUP BY i.idi, b.nom
+HAVING COUNT(*)>50;
+
+--25. Afficher l’identifiant et le nom des thèmes dont les boîtes vérifient la condition suivante
+--:la quantité moyenne des briques de son inventaire est strictement supérieure à 20 (2 lignes).
+
+SELECT t.idt, t.nomt AS nom_du_theme, AVG(ib.quantite)
+FROM boite b
+JOIN theme t ON b.idt = t.idt
+JOIN inventaire_brique ib ON ib.idi = i.idi
+JOIN inventaire i ON i.numboite = b.numboite
+GROUP BY t.idt, t.nomt
+HAVING AVG(ib.quantite)>20;
+
+                 TP4
+
+--
+-- Structure de la table dept
+--
+CREATE TABLE IF NOT EXISTS dept (
+  numd smallint(6) NOT NULL,
+  nomd varchar(20) NOT NULL,
+  lieu varchar(10) DEFAULT NULL,
+  PRIMARY KEY (numd));
+ --CONTENU DE dpt--
+INSERT INTO dept (numd,nomd,lieu) VALUES
+('10','finance','Paris'),
+('20','recherche','Nice'),
+('30','vente','Lyon'),
+('40','fabrication','Marseille');
+---------------------------------------------------------------
+--
+-- Structure de la table emp
+--
+CREATE TABLE IF NOT EXISTS emp (
+  matr int(11) NOT NULL,
+  nome varchar(20) NOT NULL,
+  poste varchar(10) DEFAULT NULL,
+  sup int(11) DEFAULT NULL,
+  dateemb date DEFAULT NULL,
+  salaire decimal(10,2) DEFAULT NULL,
+  prime decimal(10,2) DEFAULT NULL,
+  numd smallint(6) NOT NULL,
+  PRIMARY KEY (matr),
+  FOREIGN KEY (numd) REFERENCES dept(numd),
+  FOREIGN KEY (sup) REFERENCES emp(matr));
+--
+-- Contenu de la table emp
+--
+INSERT INTO emp (matr, nome, poste, sup, dateemb, salaire, prime, numd) VALUES
+(1090, 'Leroy', 'president', NULL, '2017-01-01', 5000.00, NULL, 10),
+(1040, 'Mercier', 'directeur', 1090, '2017-03-01', 4000.00, NULL, 20),
+(1060, 'Noiret', 'directeur', 1090, '2017-01-20', 3500.00, NULL, 30),
+(1070, 'Lesage', 'directeur', 1090, '2017-06-10', 3400.00, NULL, 10),
+(1080, 'Dubois', 'ingénieur', 1040, '2017-07-20', 4000.00, NULL, 20),
+(2030, 'Chatel', 'ingénieur', 1040, '2017-08-20', 3000.00, NULL, 20),
+(2020, 'Fremont', 'secrétaire', 1060, '2018-01-20', 1100.00, NULL, 30),
+(1020, 'Biraud', 'commercial', 1060, '2017-02-10', 2000.00, 400.00, 30),
+(1030, 'Berger', 'commercial', 1060, '2017-02-01', 1200.00, 700.00, 30),
+(1050, 'Martin', 'commercial', 1060, '2017-03-10', 1300.00, 1600.00, 30),
+(2000, 'Benain', 'commercial', 1060, '2017-02-20', 2000.00, 2100.00, 30),
+(2040, 'Villard', 'secrétaire', 1070, '2017-08-01', 1400.00, NULL, 10),
+(1010, 'Leclerc', 'secrétaire', 2030, '2017-01-01', 1000.00, NULL, 20),
+(2010, 'Clement', 'secrétaire', 1080, '2018-01-10', 1200.00, NULL, 20);
+
+-- --------------------------------------------------------
+--
+-- Structure de la table participe
+--
+CREATE TABLE IF NOT EXISTS participe (
+  matr int(11) NOT NULL,
+  codep int(11) NOT NULL,
+  fonction varchar(20) NOT NULL,
+  PRIMARY KEY (matr,codep),
+  FOREIGN KEY (codep) REFERENCES projet(codep),
+  FOREIGN KEY(matr) REFERENCES emp(matr));
+--
+-- Contenu de la table participe
+--
+INSERT INTO participe (matr, codep, fonction) VALUES
+(1010, 101, 'coordination'),
+(1020, 101, 'suivi'),
+(1040, 101, 'gestion'),
+(2010, 102, 'coordination'),
+(1080, 102, 'gestion'),
+(1010, 103, 'coordination'),
+(2000, 103, 'suivi'),
+(1080, 103, 'gestion');
+
+-- --------------------------------------------------------
+  
+--
+-- Structure de la table projet
+--
+CREATE TABLE IF NOT EXISTS projet (
+  codep int(11) NOT NULL,
+  nomp varchar(50) NOT NULL,
+  PRIMARY KEY (codep)
+);
+--
+-- Contenu de la table projet
+--
+INSERT INTO projet (codep, nomp) VALUES
+(101, 'Projet stade'),
+(102, 'Projet centre commercial'),
+(103, 'Projet tramway');
+
+--QUESTIONS--
+--6. Sélectionnez tous les champs (colonnes) et tous les n-uplets (lignes) de la table emp. 
+--Votre requête doitcomporter des clauses SELECT et FROM seulement (14 lignes).
+SELECT *
+FROM emp;
+
+--7. Affichez la liste des matricules et noms des employés (14 lignes).
+SELECT matr, nome
+FROM emp;
+
+--8. Liste des matricules et noms des employés du département 20.
+--Une clause WHERE doit permettre de
+--sélectionner seulement les employés du département numéro 20 (5 lignes).
+SELECT matr, nome
+FROM emp
+WHERE numd=20;
+
+--9. Liste des postes des employés dont le salaire est supérieur à 1500 C (8 lignes).
+SELECT *
+FROM emp 
+WHERE salaire>1500;
+
+--10. Matricules et noms des employés dont le salaire est 
+--compris entre 1000 et 2000 C (8 lignes).
+SELECT matr, nome
+FROM emp
+WHERE salaire BETWEEN 1000 AND 2000;
+
+--11. Matricules et noms des employés embauchés entre le 1er janvier 
+--2017 exclus et le 1er Juillet 2017 inclus.Les dates sont au format 'AAAA-MM-JJ' (7 lignes).
+SELECT matr, nome
+FROM emp
+WHERE dateemb>'2017-01-01' AND dateemb<='2017-07-01';
+
+--12.Affichez les matricules et noms des employés dont le 
+--poste est 'ingénieur' ou bien 'commercial' (6lignes).
+SELECT matr, nome
+FROM emp
+WHERE poste='ingénieur' OR poste='commercial';
+
+--13. Affichez les matricules et noms des employés des départements 20 et 30 (11 lignes).
+SELECT matr,nome
+FROM emp
+WHERE numd=30 OR numd=20;
+
+--14. Affichez les matricules et noms des employés 
+--qui sont des commerciaux ou bien qui travaillent dans le département numéro 30 (6 lignes).
+SELECT matr,nome
+FROM emp
+WHERE numd=30 OR poste='commercial';
+
+--15.Affichez les employés de poste 'ingénieur' du département 
+--numéro 20 ('recherche') et ceux deposte 'secrétaire'
+--dans le département numéro 30 ('vente') (3 lignes).
+SELECT matr,nome
+FROM emp
+WHERE  numd=20 AND poste='ingénieur' OR numd=30 AND poste='secrétaire';
+
+--16. Affichez pour tous les employés qui sont des commerciaux, 
+--leur matricule, nom et la rémunération totale perçue (salaire + prime) (4 lignes).
+SELECT matr,nome, (salaire+prime) AS 'renumeration'
+FROM emp
+WHERE poste='commercial';
+
+--17. Matricules et noms des employés qui ne touchent pas de prime.
+--Un employé ne touche aucune prime si le champ prime prend la valeur NULL (10 lignes).
+SELECT matr,nome
+FROM emp
+WHERE prime IS NULL;
+
+--18.Liste des employés qui touchent une prime et dont la rémunération (salaire + prime) 
+--est supérieure ou égale à 2000 C (3 lignes).
+SELECT *
+FROM emp
+WHERE prime IS NOT NULL AND (salaire+prime)>=2000;
+
+--19. Matricules et noms des employés dont le salaire est inférieur à la prime. 
+--Vérifiez bien le résultat en faisant attention aux employés qui ne touchent
+-- pas de prime (2 lignes).
+SELECT matr,nome
+FROM emp
+WHERE prime IS NOT NULL AND salaire<prime;
+
+--20. Matricules et noms des employés dont le salaire est supérieur à la prime.
+--Vérifiez bien le résultat pour les employés qui ne touchent pas de prime (12 lignes).
+SELECT matr,nome
+FROM emp
+WHERE prime IS NOT NULL AND salaire>prime OR prime IS NULL;
+
+--21. Matricules et noms des employés dont le nom commence par un 'B' (3 lignes).
+SELECT matr,nome
+FROM emp
+WHERE nome LIKE"B%";
+
+--22. Matricules et noms des employés dont la 2e
+--lettre du nom est un 'e' (6 lignes)
+SELECT matr,nome
+FROM emp
+WHERE nome LIKE "_e%";
+
+--23. Matricule et nom des employés qui ont un supérieur.
+--Un employé qui n’a pas de supérieur a la valeur
+--NULL pour le champ sup (matricule de l’employé qui est le supérieur) (13 lignes).
+SELECT matr,nome
+FROM emp
+WHERE sup IS NOT NULL;
+
+--24. Matricule et nom des employés qui n’ont pas de supérieur (1 lignes).
+SELECT matr,nome
+FROM emp
+WHERE sup IS NULL;
+
+--25. Liste des divers postes existants, en n’affichant chaque poste qu’une seule fois.
+--Utilisez le mot-clé DISTINCT (5 lignes).
+SELECT DISTINCT poste
+FROM emp;
+
+--26. Matricule, nom et numéro de département de tous les employés.
+--Renommez les colonnes afin de faciliter la lecture du résultat (14 lignes)
+SELECT matr AS MATRICULE,nome AS NOM_DE_EMPLOYER, numd AS NUMERO_DEPARTEMENT
+FROM emp;
+
+--27. Liste de tous les employés par ordres décroissants des salaires et des primes :
+--la prime sera utilisée en cas d’égalité sur le salaire.
+--Utilisez une clause ORDER BY (14 lignes commençant 
+--par (1090, Leroy, president, NULL, 2017-01-01, 5000, NULL, 10)).
+SELECT *
+FROM emp
+ORDER BY salaire DESC, prime DESC;
+
+--28. Numéros des départements dont au moins un employé touche une prime.
+--Chaque numéro de département doit n’apparaître qu’une seule fois (30).
+SELECT DISTINCT numd
+FROM emp
+WHERE prime IS NOT NULL;
+
+
+            TP3
+			
+--1. Liste des prénoms de la table. (1110019 lignes)--
+
+SELECT *
+FROM prenoms;
+
+--2. Liste des années de la table. (1110019 lignes)--
+
+SELECT annais
+FROM prenoms;
+
+--3. Département et année de naissance des personnes s’appelant Laetitia. (581 lignes)--
+
+SELECT dpt, annais
+FROM prenoms
+WHERE preusuel="LAETITIA";
+
+--4. Département et année de naissance des garçons prénommés Camille. (1438 lignes)--
+
+SELECT dpt, annais
+FROM prenoms
+WHERE preusuel="CAMILLE" AND sexe="1";
+
+--5. Liste des prénoms de garçons donnés en Corse en l’an 2000. (122 lignes)--
+
+SELECT preusuel
+FROM prenoms
+WHERE annais="2000" AND sexe="1" AND dpt="20";
+
+--6. Liste des prénoms donnés plus de 400 fois dans un département une année donnée, on affichera prénom,département, année. (4876 lignes)
+
+SELECT preusuel, dpt, annais
+FROM prenoms
+WHERE nombre>400 AND preusuel<>"_PRENOMS_RARES";
+
+--7. Liste des prénoms donnés strictement moins de 5 fois une année, avec l’année correspondante, dans les Alpes-Maritimes. (6650 lignes)
+
+SELECT preusuel, annais
+FROM prenoms
+WHERE nombre<5 AND preusuel<>"_PRENOMS_RARES" AND dpt="06";
+
+--8. Liste des prénoms de filles donnés strictement plus de 10 fois entre 2000 et 2004 dans les Alpes-de- Haute-Provence. Proposez deux requêtes. (16 lignes)
+
+SELECT preusuel
+FROM prenoms
+WHERE nombre>10 AND preusuel<>"_PRENOMS_RARES" AND dpt=04 AND sexe=2 AND annais>=2000 AND annais<=2004;
+
+--Méthode 2
+SELECT preusuel
+FROM prenoms
+WHERE nombre>10 AND annais BETWEEN 2000 AND 2004  AND preusuel<>"_PRENOMS_RARES" AND dpt=04 AND sexe=2;
+
+--9. Liste des prénoms donnés exactement 80 fois dans un département dont le numéro est strictement supérieur à 80 en 2005. (3 lignes)
+
+SELECT preusuel
+FROM prenoms
+WHERE nombre=80 AND preusuel<>"_PRENOMS_RARES" AND dpt>80 AND annais=2005;
+
+--10. Liste des prénoms de garçons commençant par Y donnés en 2000 dans les Alpes-Maritimes. Afficher prénom et nombre. (18 lignes)
+
+SELECT preusuel, nombre
+FROM prenoms
+WHERE sexe=1  AND preusuel LIKE "Y%" AND annais=2000 AND dpt=06;
+
+--11. Liste des prénoms commençant par « KHL ». Afficher les prénoms, départements et années. (28 lignes)
+
+SELECT preusuel, dpt, annais
+FROM prenoms
+WHERE preusuel LIKE "KHL%";
+
+--12. Liste des prénoms composés communs entre 2000 et 2003. Afficher les prénoms, départements, années et effectifs. (1932 lignes)
+
+SELECT preusuel, dpt, annais, nombre
+FROM prenoms
+WHERE  preusuel LIKE "%-%" AND annais BETWEEN 2000 AND 2003;
+
+
+--OPTION D'AFFICHAGE
+
+--13. Liste des prénoms avec toutes les informations en renommant les colonnes : prénom, année, département,sexe, effectif. (1105864 lignes)
+
+SELECT preusuel AS prénom, annais AS année, dpt AS département, sexe, nombre AS effectif
+FROM prenoms;
+
+--14. Afficher la liste des prénoms donnés en 2001 en Corse en triant par effectif croissant. (236 lignes)
+
+SELECT preusuel
+FROM prenoms
+WHERE annais=2001 AND dpt=20
+ORDER BY nombre;
+
+--15. Afficher la liste des prénoms donnés en 2001 en Corse en triant par effectif décroissant. (236 lignes)
+
+SELECT preusuel
+FROM prenoms
+WHERE annais=2001 AND dpt=20
+ORDER BY nombre DESC;
+
+-- 16. Afficher la liste des prénoms distincts de filles qui apparaissent dans la table. (20207 lignes)
+
+SELECT DISTINCT preusuel
+FROM prenoms
+WHERE sexe=2 AND preusuel<>"_PRENOMS_RARES";
+
+--17. Afficher la liste des prénoms distincts commençant par « Al » et terminant par « ce » apparaissant dans la table. (6 lignes)
+
+SELECT DISTINCT preusuel
+FROM prenoms
+WHERE preusuel LIKE "Al%ce";
+
+
+--18. Liste des prénoms de filles commençant par « C » donnés en 2000 en Corse. Afficher les prénoms et le nombre, trier par ordre croissant de nombre. (17 lignes)
+
+SELECT preusuel
+FROM prenoms
+WHERE sexe=2  AND preusuel LIKE "C%" AND annais=2000 AND dpt=20;
+
+--19. Liste des prénoms (distincts) communs donnés entre 2000 et 2020 qui ont deux caractères quelconques, puis terminent par « ice ». (3 lignes)
+
+
+SELECT DISTINCT preusuel
+FROM prenoms
+WHERE preusuel LIKE "__ice" AND annais BETWEEN 2000 AND 2020;
+
+
+--20. Liste des prénoms (distincts) communs entre 2000 et 2020 et qui comportement exactement 6 lettres. Afficher le prénom uniquement. (2746 lignes)
+
+SELECT DISTINCT preusuel
+FROM prenoms
+WHERE preusuel LIKE "______" AND annais BETWEEN 2000 AND 2020;
+
+--21. Liste des prénoms (distincts) communs entre 2000 et 2020 et qui comportement exactement 7 lettres, dont un Z. Afficher le prénom uniquement.
+
+SELECT DISTINCT preusuel
+FROM prenoms
+WHERE preusuel LIKE "_______" AND preusuel LIKE "%Z%" AND annais BETWEEN 2000 AND 2020;
+
+--22. Liste des prénoms (distincts) non composés communs entre 2000 et 2020 qui commencent par « Ab » et
+--contiennent au moins deux fois la lettre A. Afficher le prénom, le département, l’année et l’effectif. Trié
+--par année décroissante, par effectif croissant, puis par prénom dans l’ordre alphabétique.
+
+SELECT DISTINCT preusuel, dpt, annais, nombre
+FROM prenoms
+WHERE preusuel LIKE "Ab%" AND preusuel LIKE "_%A%" AND annais BETWEEN 2000 AND 2020 
+ORDER BY annais DESC,nombre,preusuel;
+
+--23. Afficher la liste des prénoms distincts communs (pas rares) donnés entre 2000 et 2020
+
+SELECT DISTINCT preusuel
+FROM prenoms
+WHERE annais BETWEEN 2000 AND 2020 AND preusuel<>"_PRENOMS_RARES";
+
+--24. Afficher les prénoms communs (non rares) donnés à des garçons en région Provence-Alpes-Côte-d’Azur
+--entre 2002 et 2006. On affichera prénom et nombre, on triera par ordre décroissant de nombre.
+
+SELECT DISTINCT preusuel
+FROM prenoms
+WHERE annais BETWEEN 2002 AND 2006 AND preusuel<>"_PRENOMS_RARES" AND sexe=1 AND dpt=93;
+
+																																																																																																																																																																																											
+		--USAGE DE TABLE MULTIPLE		
+--25. Afficher le prénom, le département, le nombre de naissances en 2017, le nombre de naissances en 2018
+--pour les prénoms qui ont eu des naissances dans le même département en 2017 et en 2018		
+SELECT p1.preusuel, p1.dpt, p1.nombre, p2.nombre
+FROM prenoms p1, prenoms p2
+WHERE p1.annais =2017 AND p2.annais=2018 AND p1.preusuel=p2.preusuel AND p1.dpt=p2.dpt AND p1.preusuel<>"_PRENOMS_RARES";	
+
+--26. Afficher les départements et les prénoms correspondants pour lesquels le nombre de naissances en 2018
+--est strictement supérieur à celui en 2017.																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																
+SELECT p1.dpt, p1.preusuel
+FROM prenoms p1, prenoms p2
+WHERE p1.annais =2017 AND p2.annais=2018 AND p1.preusuel=p2.preusuel AND
+ p1.dpt=p2.dpt AND p1.preusuel<>"_PRENOMS_RARES" AND p2.nombre>p1.nombre;																																																																																																																																																																																											
+																																																																																																																																																																																											
+--27. Afficher les départements pour lesquels il existe un prénom commençant par « K » tel que le nombre de
+--naissances en 2018 dans le département est strictement supérieur à ce nombre en 2017.	
+
+SELECT p1.dpt
+FROM prenoms p1, prenoms p2
+WHERE p1.annais =2017 AND p2.annais=2018 AND p1.preusuel=p2.preusuel AND
+ p1.dpt=p2.dpt AND p1.preusuel<>"_PRENOMS_RARES" AND p2.nombre>p1.nombre AND p1.preusuel LIKE "K%";																																																																																																																																																																																																																																																																																																																																																																														
+
+ 
+--	Afficher (sans répétition) les prénoms épicènes (l'un ou l'autre sex) donnés dans les Alpes-Maritimes en 2018.
+SELECT p1.preusuel
+FROM prenoms p1, prenoms p2
+WHERE p1.sexe =1 OR p2.sexe=2 AND p2.annais=2018 AND p1.preusuel=p2.preusuel AND
+ p1.dpt=p2.dpt AND p1.preusuel<>"_PRENOMS_RARES" AND p1.dpt="06";

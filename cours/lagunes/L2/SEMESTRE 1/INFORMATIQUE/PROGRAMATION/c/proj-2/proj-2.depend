@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1634026603 source:c:\cours_de kra_ul\licence 2\informatique\programation\c\proj-2\main.c
+	<stdio.h>
+	<stdlib.h>
+

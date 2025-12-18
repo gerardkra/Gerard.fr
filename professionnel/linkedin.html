@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mon LinkedIn | Gérard Kra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .linkedin-hero {
+      background: linear-gradient(135deg, #0077b5 0%, #005582 100%);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+    .linkedin-hero h1 { color: white; font-size: 2.5rem; }
+    .linkedin-embed {
+      width: 100%;
+      min-height: 600px;
+      border: none;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+  </style>
+</head>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../about.html">À propos</a>
+        <a href="../parcours/index.html">Parcours</a>
+        <a href="../ressources/index.html">Ressources</a>
+        <a href="index.html" class="active">Professionnel</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a class="btn btn-outline" href="../CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <!-- Google Translate Widget -->
+  <div id="google_translate_element"></div>
+
+  <!-- <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="fr">FR</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div> -->
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a> → 
+      <a href="index.html">Professionnel</a> → 
+      <strong>LinkedIn</strong>
+    </div>
+
+    <section class="linkedin-hero slide-in">
+      <div style="font-size: 5rem; margin-bottom: 1rem;">💼</div>
+      <h1>Mon Profil LinkedIn</h1>
+      <p style="font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.95;">
+        Suivez mon actualité professionnelle et mes réflexions sur la data science et l'IA
+      </p>
+      <a href="https://www.linkedin.com/in/g%C3%A9rardkra-data-engineer-devops-nlp-data-science-telecom" target="_blank" class="btn" style="margin-top: 1.5rem; background: white; color: #0077b5;">
+        Voir mon profil complet sur LinkedIn →
+      </a>
+    </section>
+
+    <section class="card slide-in">
+      <h2>💡 Ce que je partage sur LinkedIn</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <div>
+          <h4 style="color: #0077b5; margin-bottom: 0.5rem;">📰 Actualités tech</h4>
+          <p style="color: #888;">Veille technologique sur la data science, l'IA et le Big Data</p>
+        </div>
+        <div>
+          <h4 style="color: #0077b5; margin-bottom: 0.5rem;">💼 Projets professionnels</h4>
+          <p style="color: #888;">Retours d'expérience sur mes missions en alternance</p>
+        </div>
+        <div>
+          <h4 style="color: #0077b5; margin-bottom: 0.5rem;">🎓 Conseils étudiants</h4>
+          <p style="color: #888;">Tips pour réussir ses études et trouver une alternance ou un stage</p>
+        </div>
+        <div>
+          <h4 style="color: #0077b5; margin-bottom: 0.5rem;">🔗 Networking</h4>
+          <p style="color: #888;">Connexion avec d'autres professionnels du secteur</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Widget LinkedIn Profile Badge -->
+    <section class="card slide-in" style="text-align: center;">
+      <h2>Mon profil LinkedIn</h2>
+      <p style="margin: 1rem 0; color: #888;">Connectez-vous avec moi sur LinkedIn pour rester à jour !</p>
+      
+      <div style="margin: 2rem auto; max-width: 600px;">
+        <!-- Badge LinkedIn -->
+        <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+        <div class="badge-base LI-profile-badge" data-locale="fr_FR" data-size="large" data-theme="light" data-type="VERTICAL" data-vanity="gérardkra-data-engineer-devops-nlp-data-science-telecom" data-version="v1">
+          <a class="badge-base__link LI-simple-link" href="https://fr.linkedin.com/in/g%C3%A9rardkra-data-engineer-devops-nlp-data-science-telecom?trk=profile-badge">Gérard KRA</a>
+        </div>
+      </div>
+
+      <a href="https://www.linkedin.com/in/g%C3%A9rardkra-data-engineer-devops-nlp-data-science-telecom" target="_blank" class="btn" style="margin-top: 2rem;">
+        Me suivre sur LinkedIn →
+      </a>
+    </section>
+
+    <section class="card slide-in" style="background: linear-gradient(135deg, #0077b5, #005582); color: white; text-align: center;">
+      <h2 style="color: white;">🤝 Connectons-nous !</h2>
+      <p style="margin: 1rem 0; opacity: 0.95;">
+        N'hésitez pas à me contacter pour échanger sur la data science, l'IA ou toute opportunité de collaboration
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+        <a href="github.html" class="btn" style="background: white; color: #0077b5;">Voir mes projets GitHub</a>
+        <a href="../contact.html" class="btn btn-outline" style="border-color: white; color: white;">Me contacter</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/translation.js"></script>
+</body>

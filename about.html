@@ -1,237 +1,438 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>About — Gérard Kra</title>
-  <meta name="description" content="About Gérard Kra — background, skills, education, professional goals." />
+  <title>À propos — Gérard Kra</title>
+  <meta name="description" content="Parcours académique de Gérard Kra - De l'Université des Lagunes à Epitech en passant par l'Université Côte d'Azur" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Make about.html match the global style.css design system */
-
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      font-family: var(--font-family);
-      margin: 0;
-      line-height: 1.6;
+    /* Timeline styles */
+    .timeline {
+      position: relative;
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 2rem 0;
     }
 
-    .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: auto;
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, #0066cc, #e4032e, #00a8ff);
     }
 
-    .site-header {
-      background-color: var(--card-bg);
-      border-bottom: 1px solid var(--border-color);
-      box-shadow: var(--shadow);
-      position: sticky;
+    .timeline-item {
+      position: relative;
+      margin-bottom: 4rem;
+      width: 45%;
+    }
+
+    .timeline-item.left {
+      left: 0;
+      text-align: right;
+      padding-right: 3rem;
+    }
+
+    .timeline-item.right {
+      left: 55%;
+      text-align: left;
+      padding-left: 3rem;
+    }
+
+    .timeline-dot {
+      position: absolute;
       top: 0;
-      z-index: 100;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 4px solid var(--card-bg);
+      box-shadow: 0 0 0 4px var(--accent-color);
+      z-index: 2;
     }
 
-    .brand {
+    .timeline-item.left .timeline-dot {
+      right: -18px;
+    }
+
+    .timeline-item.right .timeline-dot {
+      left: -18px;
+    }
+
+    .timeline-dot.ulagunes { background: #0066cc; }
+    .timeline-dot.uca { background: #e4032e; }
+    .timeline-dot.epitech { background: #00a8ff; }
+
+    .timeline-content {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .timeline-year {
+      font-size: 1.2rem;
       font-weight: 700;
       color: var(--accent-color);
-      text-decoration: none;
-      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
     }
 
-    .main-nav a {
-      text-decoration: none;
-      color: var(--text-color);
-      padding: 8px 16px;
-      border-radius: var(--radius);
-      transition: var(--transition);
+    .timeline-location {
+      font-size: 0.9rem;
+      color: #888;
+      margin-bottom: 1rem;
     }
 
-    .main-nav a:hover,
-    .main-nav a.active {
+    /* Hero about */
+    .about-hero {
+      text-align: center;
+      padding: 3rem 0;
+      background: linear-gradient(135deg, var(--bg-color), var(--card-bg));
+    }
+
+    .about-hero img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid var(--accent-color);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .about-hero h1 {
       color: var(--accent-color);
+      margin-bottom: 1rem;
     }
 
-    .btn {
-      background-color: var(--accent-color);
-      color: #fff;
-      padding: 8px 14px;
-      border: none;
-      border-radius: var(--radius);
-      cursor: pointer;
-      transition: var(--transition);
-      text-decoration: none;
+    .about-intro {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      line-height: 1.8;
     }
 
-    .btn:hover {
-      background-color: var(--accent-hover);
-    }
-
-    .btn-outline {
-      background-color: transparent;
-      color: var(--accent-color);
-      border: 2px solid var(--accent-color);
-    }
-
-    .btn-outline:hover {
-      background-color: var(--accent-color);
-      color: #fff;
-    }
-
-    .card {
+    /* Journey map */
+    .journey-map {
       background: var(--card-bg);
       border-radius: var(--radius);
       padding: 2rem;
       margin: 2rem 0;
-      box-shadow: var(--shadow);
-      transition: var(--transition);
+      text-align: center;
     }
 
-    .profile-grid {
+    .journey-path {
       display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
+      justify-content: space-between;
       align-items: center;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
-    .profile-pic-lg {
-      width: 200px;
-      border-radius: 50%;
-      border: 3px solid var(--accent-color);
+    .journey-step {
+      flex: 1;
+      min-width: 200px;
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      background: var(--bg-color);
     }
 
-    h1, h2, h3, h4 {
+    .journey-arrow {
+      font-size: 2rem;
       color: var(--accent-color);
     }
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-    }
-
-    @media (min-width: 600px) {
-      .skills-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    .site-footer {
-      background-color: var(--card-bg);
-      border-top: 1px solid var(--border-color);
-      padding: 1rem 0;
+    /* Motivations */
+    .motivation-card {
+      background: linear-gradient(135deg, var(--accent-color), var(--accent-hover));
+      color: white;
+      padding: 3rem;
+      border-radius: var(--radius);
+      margin: 3rem 0;
       text-align: center;
-      color: var(--text-color);
+    }
+
+    .motivation-card h2 {
+      color: white;
+      margin-bottom: 1rem;
     }
 
     @media (max-width: 768px) {
-      .profile-grid {
+      .timeline::before {
+        left: 30px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        text-align: left;
+        padding-left: 4rem !important;
+        padding-right: 0 !important;
+      }
+
+      .timeline-item .timeline-dot {
+        left: 15px !important;
+        right: auto !important;
+      }
+
+      .journey-path {
         flex-direction: column;
-        text-align: center;
+      }
+
+      .journey-arrow {
+        transform: rotate(90deg);
       }
     }
   </style>
-
-
 </head>
-
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <body>
   <header class="site-header">
     <div class="nav-inner container">
       <a class="brand" href="index.html">Gérard Kra</a>
       <nav class="main-nav">
-        <a href="index.html">Home</a>
-        <a href="about.html" class="active">About</a>
-        <a href="projects.html">Projects</a>
+        <a href="index.html">Accueil</a>
+        <a href="about.html" class="active">À propos</a>
+        <a href="parcours/index.html">Parcours</a>
+        <a href="ressources/index.html">Ressources</a>
+        <a href="professionnel/index.html">Professionnel</a>
         <a href="contact.html">Contact</a>
       </nav>
       <div class="header-actions">
         <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
-        <a class="btn btn-outline" href="CV_KRA_Gerard.pdf" target="_blank" rel="noopener">Download CV</a>
+        <a class="btn btn-outline" href="CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
       </div>
-      <button id="nav-toggle" class="nav-toggle btn-outline" aria-label="Open navigation">☰</button>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
     </div>
   </header>
 
+  <!-- Google Translate Widget -->
+  <div id="google_translate_element"></div>
+
+  <!-- Language Switcher -->
+  <!-- <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="fr">FR</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div> -->
+
+  <!-- Hero -->
+  <section class="about-hero">
+    <div class="container">
+      <img src="assets/photo.jpg" alt="Gérard Kra" class="slide-in">
+      <h1 class="slide-in">Gérard Kra</h1>
+      <p class="about-intro slide-in">
+        Passionné par les mathématiques, la data science et l'intelligence artificielle, j'ai suivi un parcours académique enrichissant entre la Côte d'Ivoire et la France. Mon objectif : partager mes connaissances et aider les futurs étudiants à réussir leur parcours.
+      </p>
+    </div>
+  </section>
+
   <main class="container">
-    <section class="profile card slide-in">
-      <div class="profile-grid">
-        <img src="assets/photo.jpg" alt="Portrait of Gérard Kra" class="profile-pic-lg" style="display: block; margin-left: auto; margin-right: auto;">
+    <!-- Journey Map -->
+    <section class="journey-map slide-in">
+      <h2>🗺️ Mon parcours en bref</h2>
+      <div class="journey-path">
+        <div class="journey-step">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🇨🇮</div>
+          <h3>Abidjan</h3>
+          <p><strong>2020-2023</strong></p>
+          <p>Licence Maths<br/>Université des Lagunes</p>
+        </div>
 
-        <div>
-          <h1>About me</h1>
-          <p>I am a data-focused engineer combining a strong mathematical foundation (Master 2 — <em>Ingénierie Mathématique</em>) with practical AI & Big Data training (Epitech Nice). I design reproducible, production-ready solutions: data pipelines, machine-learning models, web interfaces and CI/CD workflows.</p>
+        <div class="journey-arrow">→</div>
 
-          <h3>Core strengths</h3>
-          <ul>
-            <li><strong>End-to-end ML systems</strong> — data ingestion → modeling → monitoring; deployed pipelines with Docker and CI automation.</li>
-            <li><strong>Applied machine learning</strong> — recommender systems, NLP preprocessing, model selection & validation with measurable metrics.</li>
-            <li><strong>Data engineering</strong> — SQL design, ETL patterns, Spark for scalable processing.</li>
-            <li><strong>Software & DevOps</strong> — Node.js backends, REST APIs, Docker containerization and deployment pipelines.</li>
-            <li><strong>Mathematical modeling</strong> — optimization, parameter estimation, and reproducible experiments in Julia/Python.</li>
-          </ul>
+        <div class="journey-step">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🇫🇷</div>
+          <h3>Nice</h3>
+          <p><strong>2023-2025</strong></p>
+          <p>Master 1 & Master 2<br/>Université Côte d'Azur</p>
+        </div>
+
+        <div class="journey-arrow">→</div>
+
+        <div class="journey-step">
+          <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💻</div>
+          <h3>Nice → Bordeaux</h3>
+          <p><strong>2025-2028</strong></p>
+          <p>MSc Big Data & IA<br/>Epitech</p>
         </div>
       </div>
     </section>
 
-    <section class="philosophy card slide-in">
-      <h2>Professional philosophy</h2>
-      <p>I build simple, auditable systems that scale. I value clear abstractions, testable code, and measurable outcomes. When choosing a solution I prioritize reproducibility, maintainability and the ability to explain model behaviour to non-technical stakeholders.</p>
-    </section>
+    <!-- Timeline détaillée -->
+    <section>
+      <h2 style="text-align: center; margin: 3rem 0 2rem; font-size: 2rem;">📖 Mon parcours détaillé</h2>
+      
+      <div class="timeline">
+        <!-- 2021-2023 : Université des Lagunes -->
+        <div class="timeline-item left slide-in">
+          <div class="timeline-dot ulagunes"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2020 - 2023</div>
+            <div class="timeline-location">📍 Abidjan, Côte d'Ivoire</div>
+            <h3>🎓 Université des Lagunes</h3>
+            <h4>Licence Mathématiques & Applications</h4>
+            <p style="margin-top: 1rem;">
+              Mes trois premières années universitaires se sont déroulées à l'Université des Lagunes d'Abidjan. J'y ai acquis une formation solide en mathématiques fondamentales : algèbre linéaire, analyse réelle et complexe, probabilités, statistiques et introduction à la modélisation.
+            </p>
+            <p style="margin-top: 0.5rem;">
+              <strong>Matières clés :</strong> Algèbre, Analyse, Probabilités, Statistiques, Informatique fondamentale
+            </p>
+          </div>
+        </div>
 
-    <section class="education card slide-in">
-      <h2>Education</h2>
-      <ul>
-        <li><strong>Epitech</strong> — MSc (2025–2028) — Systems Architecture, AI & Big Data</li>
-        <li><strong>Université Côte d'Azur</strong> — MSc, Ingénierie Mathématique (2025)</li>
-        <li><strong>Université des Lagunes</strong> — BSc Mathematics & Applications (2023)</li>
-      </ul>
-    </section>
+        <!-- 2023 : Partenariat -->
+        <div class="timeline-item right slide-in">
+          <div class="timeline-dot" style="background: linear-gradient(135deg, #0066cc, #e4032e);"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2023</div>
+            <div class="timeline-location">🤝 Partenariat académique</div>
+            <h3>🌍 Opportunité France</h3>
+            <h4>Partenariat Université des Lagunes ↔ Université Côte d'Azur</h4>
+            <p style="margin-top: 1rem;">
+              Grâce à un partenariat entre l'Université des Lagunes et l'Université Côte d'Azur, j'ai eu l'opportunité de poursuivre mes études en France. Cette mobilité internationale a été un tournant décisif dans mon parcours académique.
+            </p>
+            <p style="margin-top: 0.5rem;">
+              <strong>Impact :</strong> Ouverture internationale, découverte de nouvelles méthodologies d'enseignement
+            </p>
+          </div>
+        </div>
 
-    <!-- Fixed Skills Section -->
-    <section class="skills card slide-in">
-      <h2>Skills — evidence & achievements</h2>
+        <!-- 2023-2025 : Université Côte d'Azur -->
+        <div class="timeline-item left slide-in">
+          <div class="timeline-dot uca"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">2023 - 2025</div>
+            <div class="timeline-location">📍 Nice, France</div>
+            <h3>🏛️ Université Côte d'Azur</h3>
+            <h4>Master 1 & Master 2 en Ingénierie Mathématique</h4>
+            <p style="margin-top: 1rem;">
+              À Nice, j'ai approfondi mes compétences en modélisation mathématique, optimisation et machine learning. Le Master m'a permis de travailler sur des projets concrets alliant théorie mathématique et applications en data science.
+            </p>
+            <p style="margin-top: 0.5rem;">
+              <strong>Spécialisations :</strong> Machine Learning, Optimisation, Modélisation, Data Science, Statistiques avancées
+            </p>
+            <p style="margin-top: 0.5rem;">
+              <strong>Projet de fin d'études :</strong> Modélisation de sélection d'espèces microbiennes avec Julia
+            </p>
+          </div>
+        </div>
 
-      <div class="skills-grid">
-        <article class="skill" style="text-align: left;">
-          <h4>Python / Machine Learning</h4>
-          <p><strong>Concrete work:</strong> NLP preprocessing pipeline (terminology suppression) that improved downstream F1 on small-domain datasets by a measurable margin; TensorFlow models for classification and prototyping.</p>
-          <p><strong>Why it matters:</strong> Robust preprocessing reduces data leakage and increases model reliability on domain-specific text.</p>
-        </article>
+        <!-- 2025 : Epitech Nice -->
+        <div class="timeline-item right slide-in">
+          <div class="timeline-dot epitech"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">Sept 2025 - Déc 2025</div>
+            <div class="timeline-location">📍 Nice, France</div>
+            <h3>💻 Epitech Nice</h3>
+            <h4>Début MSc Architecture Systèmes, IA & Big Data</h4>
+            <p style="margin-top: 1rem;">
+              Période intensive de 4 mois dédiée à la "Piscine" Epitech : immersion totale dans le développement web, 
+              DevOps et administration système. La pédagogie par projets (0% cours magistraux, 100% pratique) m'a permis 
+              de maîtriser rapidement plusieurs technologies à travers des projets concrets réalisés en équipe & en individuel lors de 
+              semaines intensives de développement.
+            </p>
+            <!-- <p style="margin-top: 0.5rem;">
+              <strong>Pédagogie :</strong> Apprentissage par projets, peer-learning, sprints hebdomadaires
+            </p> -->
+            <p style="margin-top: 0.5rem;">
+              <strong>Compétences consolidées/acquises :</strong>
+              <br> HTML, CSS, JavaScript, PHP, Java, Node.js, Python, Docker, Bash
+            </p>
+            <!-- <p style="margin-top: 0.5rem;">
+              <strong>Domaines :</strong> Développement web full-stack, DevOps, réseaux, administration système
+            </p> -->
+          </div>
+        </div>
 
-        <article class="skill" style="text-align: left;">
-          <h4>Data Engineering & SQL</h4>
-          <p><strong>Concrete work:</strong> Automated reporting pipelines at BNI using SQL and Power BI; normalized data model for product recommendation inputs.</p>
-          <p><strong>Why it matters:</strong> Reliable ETL and well-designed schemas enable consistent analytics and reproducible experiments.</p>
-        </article>
-
-        <article class="skill" style="text-align: left;">
-          <h4>DevOps & Deployment</h4>
-          <p><strong>Concrete work:</strong> Containerized projects with Docker; CI-friendly project structure and reproducible dev environment for the Job Board project.</p>
-          <p><strong>Why it matters:</strong> Containerization reduces friction between development and production and supports maintainable deployments.</p>
-        </article>
-
-        <article class="skill" style="text-align: left;">
-          <h4>Modeling & Numerical Methods (Julia)</h4>
-          <p><strong>Concrete work:</strong> PFE — microbial species modelling with parameter estimation and cross-validation strategies implemented in Julia.</p>
-          <p><strong>Why it matters:</strong> Strong numerical skills support interpretable models and sound experimental design.</p>
-        </article>
+        <!-- 2025-2028 : Epitech Bordeaux + Alternance -->
+        <div class="timeline-item left slide-in">
+          <div class="timeline-dot epitech"></div>
+          <div class="timeline-content">
+            <div class="timeline-year">Jan 2026 - Sept 2028</div>
+            <div class="timeline-location">📍 Bordeaux, France</div>
+            <h3>🚀 Epitech Bordeaux + Alternance</h3>
+            <h4>MSc Big Data & IA (suite) en alternance</h4>
+            <p style="margin-top: 1rem;">
+              Après avoir décroché un contrat d'alternance à Bordeaux, j'ai effectué un transfert de campus pour rejoindre Epitech Bordeaux. 
+              Cette phase approfondit les compétences en Big Data, IA et architecture de systèmes distribués, tout en combinant 
+              la pédagogie innovante d'Epitech avec une expérience professionnelle concrète en entreprise.
+            </p>
+            <p style="margin-top: 0.5rem;">
+              <strong>Format :</strong> Alternance (4 semaines entreprise / 2 semaines école)
+            </p>
+            <p style="margin-top: 0.5rem;">
+              <strong>Spécialisation :</strong> Big Data (Spark, Hadoop), ETL, Deep Learning, architecture cloud
+            </p>
+            <!-- <p style="margin-top: 0.5rem;">
+              <strong>Approche :</strong> Projets collaboratifs, autonomie, innovation et veille technologique
+            </p>
+            <p style="margin-top: 0.5rem;">
+              <strong>Objectif :</strong> Devenir un expert en architecture de systèmes Big Data et IA, capable de concevoir et déployer 
+              des solutions scalables en production.
+            </p> -->
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="reflection card slide-in">
-      <h2>Reflections & next goals</h2>
-      <p>I focus on improving reproducibility and observability: next steps include model monitoring, feature-store experiments, and deployment patterns for continuous retraining. I document design decisions, run ablation studies and keep short case studies for each major project to show impact.</p>
+    <!-- Motivations -->
+    <section class="motivation-card slide-in">
+      <h2>💡 Pourquoi ce site ?</h2>
+      <p style="font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 1.5rem auto;">
+        Durant mon parcours, j'ai souvent cherché des ressources, des cours bien structurés, des corrections d'examens... 
+        Aujourd'hui, je souhaite faciliter la vie des étudiants qui suivent un chemin similaire au mien. 
+        Ce site regroupe donc <strong>tous mes cours, TD, TP, sujets d'examens et corrections</strong> depuis la L1 jusqu'à aujourd'hui, 
+        ainsi que des recommandations de sites et ressources qui m'ont aidé à progresser.
+      </p>
+      <p style="font-size: 1.1rem; margin-top: 1rem;">
+        <strong>Mon souhait :</strong> que ce site devienne une ressource précieuse pour mes filleuls et tous les étudiants qui en ont besoin. 🎓
+      </p>
+    </section>
+
+    <!-- CTA -->
+    <section class="card slide-in" style="text-align: center; background: linear-gradient(135deg, var(--card-bg), var(--bg-color));">
+      <h2>🚀 Explorez mon parcours</h2>
+      <p style="margin: 1rem 0 2rem;">Découvrez mes cours, projets et ressources d'apprentissage</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="parcours/index.html" class="btn">Voir mes cours par université</a>
+        <a href="ressources/index.html" class="btn btn-outline">Découvrir les ressources</a>
+        <a href="contact.html" class="btn btn-outline">Me contacter</a>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2025 Gérard Kra</p>
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
     </div>
   </footer>
 
   <script src="main.js"></script>
+  <script src="js/translation.js"></script>
 </body>
-</html>

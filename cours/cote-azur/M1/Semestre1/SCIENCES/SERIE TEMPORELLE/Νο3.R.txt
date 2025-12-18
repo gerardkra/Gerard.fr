@@ -1,0 +1,25 @@
+#Exercise 3.8.1
+#1
+plot(AirPassengers)
+x=as.numeric(AirPassengers)
+t=1:144
+c=lm(x~t) 
+x1=x-fitted.values(c) 
+x1_t=ts(x1,start = c(1949,1), end = c(1960,12), frequency = 12)
+plot(x1_t)
+
+#c
+plot(lm(AirPassengers~time(AirPassengers)))
+m_x1=sum(x1)/144
+print(m_x1)s
+#d
+a_x1=acf(x1_t)
+
+#B 
+x_d1=diff(AirPassengers,lag=12 )
+x_d2=diff(AirPassengers,lag=12, differences = 2 )
+x_d3=diff(AirPassengers,lag=12, differences = 3 )
+
+#C
+x_dec=decompose(AirPassengers,type = 'mult')
+plot(x_dec)

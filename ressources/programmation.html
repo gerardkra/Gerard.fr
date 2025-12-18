@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Ressources Programmation | Gérard Kra</title>
+  <meta name="description" content="Mes meilleures ressources pour apprendre la programmation : GeeksforGeeks, TutorialsPoint, documentation et plus" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  <style>
+    .resource-hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+
+    .resource-hero h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .resource-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-left: 4px solid;
+    }
+
+    .resource-card.essential { border-left-color: #10b981; }
+    .resource-card.recommended { border-left-color: #3b82f6; }
+    .resource-card.bonus { border-left-color: #f59e0b; }
+
+    .resource-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .resource-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .resource-icon {
+      font-size: 2.5rem;
+    }
+
+    .resource-title h3 {
+      color: var(--accent-color);
+      margin: 0;
+    }
+
+    .resource-category {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background: var(--bg-color);
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    .resource-category.essential { color: #10b981; }
+    .resource-category.recommended { color: #3b82f6; }
+    .resource-category.bonus { color: #f59e0b; }
+
+    .resource-features ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .resource-features li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .resource-features li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #10b981;
+      font-weight: bold;
+    }
+
+    .resource-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .filter-tab {
+      padding: 0.8rem 1.5rem;
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+    }
+
+    .filter-tab:hover {
+      border-color: var(--accent-color);
+    }
+
+    .filter-tab.active {
+      background: var(--accent-color);
+      color: white;
+      border-color: var(--accent-color);
+    }
+
+    .personal-pick {
+      display: inline-block;
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+
+    .tools-section {
+      background: var(--bg-color);
+      padding: 2rem;
+      border-radius: var(--radius);
+      margin: 2rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .resource-hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../about.html">À propos</a>
+        <a href="../parcours/index.html">Parcours</a>
+        <a href="index.html" class="active">Ressources</a>
+        <a href="../professionnel/index.html">Professionnel</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a class="btn btn-outline" href="../CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <div id="google_translate_element"></div>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a> → 
+      <a href="index.html">Ressources</a> → 
+      <strong>Programmation</strong>
+    </div>
+
+    <section class="resource-hero slide-in">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">💻</div>
+      <h1>Ressources Programmation</h1>
+      <p style="font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.95;">
+        Sites, tutoriels et documentation pour apprendre et maîtriser la programmation
+      </p>
+    </section>
+
+    <section class="card slide-in">
+      <h2>🎯 Apprendre à coder efficacement</h2>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        Voici ma sélection des meilleures ressources pour apprendre la programmation, que vous soyez 
+        débutant ou développeur expérimenté. Ces sites m'ont accompagné tout au long de mon parcours 
+        et continuent d'être mes références quotidiennes.
+      </p>
+    </section>
+
+    <!-- Disclaimer -->
+    <!-- <section class="card slide-in" style="background: rgba(59, 130, 246, 0.1); border: 2px solid #3b82f6;">
+      <p style="line-height: 1.8; margin: 0;">
+        <strong>💡 Mon point de vue personnel :</strong> Les ressources ci-dessous sont celles qui <strong>m'ont personnellement aidé</strong>. 
+        Ce n'est pas une vérité universelle (chacun apprend différemment). Testez, adaptez, et gardez ce qui fonctionne pour vous !
+      </p>
+    </section> -->
+
+    <div class="filter-tabs">
+      <button class="filter-tab active" data-filter="all">Toutes</button>
+      <button class="filter-tab" data-filter="essential">Essentielles ⭐</button>
+      <button class="filter-tab" data-filter="recommended">Recommandées 👍</button>
+      <button class="filter-tab" data-filter="bonus">Bonus 🎁</button>
+    </div>
+
+    <div id="resources-container">
+      
+      <!-- GeeksforGeeks -->
+      <article class="resource-card essential slide-in" data-category="essential">
+        <div class="resource-header">
+          <div class="resource-icon"><i class="devicon-python-plain colored"></i></div>
+          <div class="resource-title">
+            <h3>GeeksforGeeks (GFG) <span class="personal-pick">⭐ Ma référence</span></h3>
+            <span class="resource-category essential">Essentiel ⭐</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>GeeksforGeeks</strong> est MA référence pour l'apprentissage des algorithmes, 
+            structures de données et concepts de programmation. Excellent pour la préparation aux 
+            entretiens techniques et pour comprendre en profondeur les fondamentaux. Je recommande fortement!
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Tutoriels détaillés avec exemples de code</li>
+            <li>Exercices de programmation avec solutions</li>
+            <li>Couverture de nombreux langages (Python, Java, C++, etc.)</li>
+            <li>Préparation aux entretiens techniques</li>
+          </ul>
+        </div>
+
+        <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; border-radius: 0 8px 8px 0;">
+          <strong style="color: #10b981;">💡 Comment je l'utilise :</strong> Dès que je bloque sur un concept d'algo ou de structure de données, 
+          je vais sur GFG. Les explications sont claires et les exemples concrets. Je l'utilise aussi pour préparer mes entretiens techniques.
+        </div>
+
+        <!-- <p style="margin-top: 1rem; color: #888;">
+          <strong>Mon avis :</strong> GFG est mon site de référence pour tout ce qui touche aux algorithmes. 
+          Les explications sont toujours claires et accompagnées d'implémentations dans plusieurs langages.
+        </p> -->
+
+        <div class="resource-actions">
+          <a href="https://www.geeksforgeeks.org/" target="_blank" class="btn">
+            🌐 Visiter GeeksforGeeks
+          </a>
+        </div>
+      </article>
+
+      <!-- TutorialsPoint -->
+      <article class="resource-card essential slide-in" data-category="essential">
+        <div class="resource-header">
+          <div class="resource-icon">📚</div>
+          <div class="resource-title">
+            <h3>TutorialsPoint <span class="personal-pick">⭐ Ma référence</span></h3>
+            <span class="resource-category essential">Essentiel ⭐</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>TutorialsPoint</strong> propose des tutoriels complets sur pratiquement tous les 
+            langages de programmation et technologies. Format très didactique avec exemples exécutables 
+            en ligne. <strong>Je recommande fortement</strong> pour apprendre un nouveau langage rapidement.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Tutoriels structurés étape par étape</li>
+            <li>Éditeur de code en ligne pour tester</li>
+            <li>Couvre 10+ langages et technologies</li>
+            <li>Parfait pour les débutants</li>
+          </ul>
+        </div>
+
+        <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; border-radius: 0 8px 8px 0;">
+          <strong style="color: #10b981;">💡 Comment je l'utilise :</strong> Quand je dois apprendre un nouveau langage ou une nouvelle technologie rapidement, 
+          je commence par TutorialsPoint. Les tutoriels sont bien structurés et progressifs.
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://www.tutorialspoint.com/" target="_blank" class="btn">
+            🌐 Visiter TutorialsPoint
+          </a>
+        </div>
+      </article>
+
+      <!-- Scikit-learn Documentation -->
+      <article class="resource-card essential slide-in" data-category="essential">
+        <div class="resource-header">
+          <div class="resource-icon">🤖</div>
+          <div class="resource-title">
+            <h3>Scikit-learn Documentation <span class="personal-pick">⭐ Ma référence ML</span></h3>
+            <span class="resource-category essential">Essentiel ⭐</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            La <strong>documentation officielle de scikit-learn</strong> est ma bible pour le Machine Learning. 
+            <strong>Je privilégie fortement cette documentation</strong> : elle est claire, complète, et contient des exemples pratiques pour chaque algorithme.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Documentation officielle et à jour</li>
+            <li>Exemples de code pour chaque algorithme</li>
+            <li>Tutoriels pratiques et didactiques</li>
+            <li>User Guide très complet</li>
+          </ul>
+        </div>
+
+        <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; border-radius: 0 8px 8px 0;">
+          <strong style="color: #10b981;">💡 Comment je l'utilise :</strong> Avant d'implémenter un algorithme de ML, je lis toujours la doc scikit-learn. 
+          Les exemples sont parfaits pour comprendre les paramètres et les cas d'usage.
+        </div>
+
+        <!-- <p style="margin-top: 1rem; color: #888;">
+          <strong>Mon avis :</strong> La meilleure documentation ML que j'ai jamais vue. Claire, précise, avec des exemples concrets. 
+          C'est ma première source pour tout ce qui touche au Machine Learning classique.
+        </p> -->
+
+        <div class="resource-actions">
+          <a href="https://scikit-learn.org/stable/" target="_blank" class="btn">
+            🌐 Documentation Scikit-learn
+          </a>
+        </div>
+      </article>
+
+      <!-- Hugging Face -->
+      <article class="resource-card essential slide-in" data-category="essential">
+        <div class="resource-header">
+          <div class="resource-icon">🤗</div>
+          <div class="resource-title">
+            <h3>Hugging Face <span class="personal-pick">⭐ Pour NLP & Transformers</span></h3>
+            <span class="resource-category essential">Essentiel ⭐</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>Hugging Face</strong> est LA plateforme pour le NLP (traitement du langage naturel) et les modèles Transformers. 
+            Modèles pré-entraînés, datasets, et documentation exceptionnelle. <strong>Je recommande</strong> pour tout ce qui touche au NLP et aux LLMs.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Bibliothèque Transformers (BERT, GPT, etc.)</li>
+            <li>Modèles pré-entraînés prêts à l'emploi</li>
+            <li>Documentation claire avec exemples</li>
+            <li>Hub de modèles et datasets</li>
+          </ul>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://huggingface.co/" target="_blank" class="btn">
+            🌐 Visiter Hugging Face
+          </a>
+        </div>
+      </article>
+
+      <!-- W3Schools -->
+      <article class="resource-card recommended slide-in" data-category="recommended">
+        <div class="resource-header">
+          <div class="resource-icon"><i class="devicon-html5-plain colored"></i></div>
+          <div class="resource-title">
+            <h3>W3Schools</h3>
+            <span class="resource-category recommended">Recommandé 👍</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>W3Schools</strong> est parfait pour le développement web (HTML, CSS, JavaScript). 
+            Interface simple, exemples interactifs et référence rapide des syntaxes.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Éditeur en ligne "Try it Yourself"</li>
+            <li>Référence complète HTML/CSS/JS</li>
+            <li>Tutoriels SQL, PHP, Python</li>
+            <li>Certificats en ligne (payants)</li>
+          </ul>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://www.w3schools.com/" target="_blank" class="btn">
+            🌐 Visiter W3Schools
+          </a>
+        </div>
+      </article>
+
+      <!-- Stack Overflow -->
+      <article class="resource-card essential slide-in" data-category="essential">
+        <div class="resource-header">
+          <div class="resource-icon">❓</div>
+          <div class="resource-title">
+            <h3>Stack Overflow</h3>
+            <span class="resource-category essential">Essentiel ⭐</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>Stack Overflow</strong> est une plateforme Q&A pour développeurs. 
+            99% des problèmes que vous rencontrerez ont déjà une solution ici.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Points forts :</strong>
+          <ul>
+            <li>Réponses validées par la communauté</li>
+            <li>Solutions à presque tous les problèmes</li>
+            <li>Apprentissage par les erreurs des autres</li>
+            <li>Communauté active et réactive</li>
+          </ul>
+        </div>
+
+        <p style="margin-top: 1rem; color: #888;">
+          <strong>Astuce :</strong> Avant de poser une question, cherchez bien. Elle existe probablement déjà !
+        </p>
+
+        <div class="resource-actions">
+          <a href="https://stackoverflow.com/" target="_blank" class="btn">
+            🌐 Visiter Stack Overflow
+          </a>
+        </div>
+      </article>
+
+      <!-- GitHub -->
+      <article class="resource-card essential slide-in" data-category="essential">
+        <div class="resource-header">
+          <div class="resource-icon"><i class="devicon-github-original"></i></div>
+          <div class="resource-title">
+            <h3>GitHub</h3>
+            <span class="resource-category essential">Essentiel ⭐</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>GitHub</strong> n'est pas qu'un hébergeur de code. C'est une mine d'or pour 
+            apprendre en lisant du code open-source de qualité.
+          </p>
+        </div>
+
+        <div class="resource-features">
+          <strong>Comment l'utiliser :</strong>
+          <ul>
+            <li>Lire le code de projets populaires</li>
+            <li>Contribuer à l'open-source</li>
+            <li>Suivre des développeurs inspirants</li>
+            <li>Explorer les "Awesome Lists"</li>
+          </ul>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://github.com/" target="_blank" class="btn">
+            🌐 Visiter GitHub
+          </a>
+        </div>
+      </article>
+
+      <!-- LeetCode -->
+      <article class="resource-card bonus slide-in" data-category="bonus">
+        <div class="resource-header">
+          <div class="resource-icon">🧩</div>
+          <div class="resource-title">
+            <h3>LeetCode</h3>
+            <span class="resource-category bonus">Bonus 🎁</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>LeetCode</strong> est parfait pour s'entraîner aux algorithmes et préparer les 
+            entretiens techniques des GAFAM. Problèmes classés par difficulté.
+          </p>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://leetcode.com/" target="_blank" class="btn">
+            🌐 Visiter LeetCode
+          </a>
+        </div>
+      </article>
+
+      <!-- Real Python -->
+      <article class="resource-card bonus slide-in" data-category="bonus">
+        <div class="resource-header">
+          <div class="resource-icon"><i class="devicon-python-plain colored"></i></div>
+          <div class="resource-title">
+            <h3>Real Python</h3>
+            <span class="resource-category bonus">Bonus 🎁</span>
+          </div>
+        </div>
+
+        <div class="resource-description">
+          <p>
+            <strong>Real Python</strong> propose des tutoriels Python de très haute qualité. 
+            Du niveau débutant à expert. Articles longs et très détaillés.
+          </p>
+        </div>
+
+        <div class="resource-actions">
+          <a href="https://realpython.com/" target="_blank" class="btn">
+            🌐 Visiter Real Python
+          </a>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Mes outils de rédaction -->
+    <section class="card slide-in">
+      <h2>✍️ Mes outils de rédaction & développement (que je privilégie)</h2>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        Voici les outils que <strong>j'utilise personnellement</strong> pour mes projets académiques et professionnels. 
+        Ce n'est pas une liste exhaustive, mais ce sont mes outils de prédilection.
+      </p>
+
+      <div class="tools-section">
+        <h3 style="color: var(--accent-color);">📝 Rédaction & Documentation</h3>
+        <ul style="line-height: 2;">
+          <li><strong>LaTeX (Overleaf / TeXMaker Desktop)</strong> : Pour tous mes rapports académiques et professionnels</li>
+          <li><strong>Beamer (LaTeX)</strong> : Pour mes présentations professionnelles</li>
+          <li><strong>Jupyter Lab / Jupyter Notebook</strong> : Pour l'analyse de données et la documentation de code</li>
+          <li><strong>Google Colab</strong> : Pour l'entraînement de réseaux de neurones (GPU gratuit, indispensable car l'entraînement local peut être très lent parfois)</li>
+          <li><strong>RMarkdown (RStudio)</strong> : Pour les rapports statistiques et analyses avec R</li>
+        </ul>
+      </div>
+
+      <div class="tools-section" style="margin-top: 2rem;">
+        <h3 style="color: var(--accent-color);">🔧 Développement & Data Science</h3>
+        <ul style="line-height: 2;">
+          <li><strong>VS Code</strong> : Mon éditeur principal pour mes codes sur le Web</li>
+          <li><strong>Git & GitHub</strong> : Versioning et collaboration</li>
+          <li><strong>Docker</strong> : Containerisation et reproductibilité</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Conseils -->
+    <section class="card slide-in">
+      <h2>💡 Ce que je vous propose</h2>
+      <div style="margin-top: 1.5rem; line-height: 1.8;">
+        <p><strong>1. Lisez la documentation officielle</strong> : Scikit-learn, Hugging Face, TensorFlow... Les docs officielles sont souvent meilleures que les tutoriels.</p>
+        <p style="margin-top: 0.8rem;"><strong>2. GeeksforGeeks + TutorialsPoint = Combinaison parfaite</strong> : GFG pour les algos, TutorialsPoint pour apprendre un nouveau langage.</p>
+        <p style="margin-top: 0.8rem;"><strong>3. Pratiquez avec des projets concrets</strong> : Ne vous contentez pas de suivre des tutoriels. Créez vos propres projets.</p>
+        <p style="margin-top: 0.8rem;"><strong>4. Utilisez Google Colab pour le Deep Learning</strong> : Les GPUs gratuits font une énorme différence. L'entraînement local est trop lent.</p>
+        <p style="margin-top: 0.8rem;"><strong>5. Apprenez LaTeX</strong> : Indispensable pour rédiger des rapports académiques de qualité. Overleaf est parfait pour débuter.</p>
+        <p style="margin-top: 0.8rem;"><strong>6. Stack Overflow est votre ami</strong> : Ne restez jamais bloqué. Cherchez, la solution existe déjà.</p>
+      </div>
+      
+      <div style="margin-top: 2rem; padding: 1rem; background: rgba(245, 158, 11, 0.1); border-left: 4px solid #f59e0b; border-radius: 0 8px 8px 0;">
+        <strong style="color: #f59e0b;">⚠️ Rappel :</strong> Ce sont les méthodes qui ont marché <strong>pour moi</strong>. 
+        Certains préfèrent d'autres approches. L'important est de trouver ce qui vous convient au mieux !
+      </div>
+    </section>
+
+    <section class="card slide-in" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-align: center; margin-top: 3rem;">
+      <h2 style="color: white;">🚀 Continuez votre exploration</h2>
+      <p style="margin: 1rem 0; opacity: 0.95;">
+        Découvrez aussi les autres ressources pour progresser.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+        <a href="videos-youtube.html" class="btn" style="background: white; color: #667eea;">📺 YouTube</a>
+        <a href="anglais.html" class="btn btn-outline" style="border-color: white; color: white;">🗣️ Anglais</a>
+        <a href="mathematiques.html" class="btn btn-outline" style="border-color: white; color: white;">📐 Mathématiques</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/translation.js"></script>
+  <script>
+    const filterTabs = document.querySelectorAll('.filter-tab');
+    const resourceCards = document.querySelectorAll('.resource-card');
+
+    filterTabs.forEach(tab => {
+      tab.addEventListener('click', function() {
+        filterTabs.forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+
+        const filter = this.getAttribute('data-filter');
+
+        resourceCards.forEach(card => {
+          if (filter === 'all') {
+            card.style.display = 'block';
+          } else {
+            if (card.getAttribute('data-category') === filter) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

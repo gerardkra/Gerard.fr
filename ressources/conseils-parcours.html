@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mon Parcours & Leçons Apprises | Gérard Kra</title>
+  <meta name="description" content="Mon retour d'expérience brut sur la recherche de stage, d'alternance et la réussite académique en France" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .resource-hero {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+
+    .resource-hero h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .story-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-left: 4px solid;
+    }
+
+    .story-card.warning { border-left-color: #ef4444; }
+    .story-card.success { border-left-color: #10b981; }
+    .story-card.info { border-left-color: #3b82f6; }
+    .story-card.lesson { border-left-color: #f59e0b; }
+
+    .story-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .story-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .story-icon {
+      font-size: 3rem;
+    }
+
+    .story-title h3 {
+      color: var(--accent-color);
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .story-tag {
+      display: inline-block;
+      padding: 0.3rem 0.8rem;
+      background: var(--bg-color);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .story-tag.experience { color: #f59e0b; }
+    .story-tag.lesson { color: #ef4444; }
+    .story-tag.success { color: #10b981; }
+
+    .quote-box {
+      background: var(--bg-color);
+      border-left: 4px solid var(--accent-color);
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      border-radius: 0 var(--radius) var(--radius) 0;
+    }
+
+    .stats-box {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      padding: 2rem;
+      border-radius: var(--radius);
+      margin: 2rem 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin: 2rem 0;
+    }
+
+    .timeline:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent-color);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+    }
+
+    .timeline-item:before {
+      content: '';
+      position: absolute;
+      left: -2.5rem;
+      top: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background: var(--accent-color);
+      border: 3px solid var(--card-bg);
+    }
+
+    .timeline-date {
+      font-weight: 700;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .do-dont {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .do-box, .dont-box {
+      padding: 1.5rem;
+      border-radius: var(--radius);
+    }
+
+    .do-box {
+      background: rgba(16, 185, 129, 0.1);
+      border: 2px solid #10b981;
+    }
+
+    .dont-box {
+      background: rgba(239, 68, 68, 0.1);
+      border: 2px solid #ef4444;
+    }
+
+    .do-box h4, .dont-box h4 {
+      margin-top: 0;
+    }
+
+    .do-box ul, .dont-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .do-box li {
+      padding: 0.5rem 0;
+    }
+
+    .dont-box li {
+      padding: 0.5rem 0;
+    }
+
+    .do-box li:before {
+      content: "✓ ";
+      color: #10b981;
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    .dont-box li:before {
+      content: "✗ ";
+      color: #ef4444;
+      font-weight: bold;
+      margin-right: 0.5rem;
+    }
+
+    .highlight-box {
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      margin: 2rem 0;
+    }
+
+    .highlight-box.success {
+      background: rgba(16, 185, 129, 0.1);
+      border-left: 4px solid #10b981;
+    }
+
+    .highlight-box.warning {
+      background: rgba(239, 68, 68, 0.1);
+      border-left: 4px solid #ef4444;
+    }
+
+    @media (max-width: 768px) {
+      .resource-hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .do-dont {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../about.html">À propos</a>
+        <a href="../parcours/index.html">Parcours</a>
+        <a href="index.html" class="active">Ressources</a>
+        <a href="../professionnel/index.html">Professionnel</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a class="btn btn-outline" href="../CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <div id="google_translate_element"></div>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a> → 
+      <a href="index.html">Ressources</a> → 
+      <strong>Mon Parcours & Leçons</strong>
+    </div>
+
+    <section class="resource-hero slide-in">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">💡</div>
+      <h1>Mon Parcours & Leçons Apprises</h1>
+      <p style="font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.95; max-width: 700px; margin-left: auto; margin-right: auto;">
+        Mon retour d'expérience brut et authentique sur la recherche de stage, d'alternance et la réussite académique en France
+      </p>
+    </section>
+
+    <!-- Disclaimer -->
+    <!-- <section class="card slide-in" style="background: rgba(239, 68, 68, 0.1); border: 2px solid #ef4444;">
+      <h3 style="color: #ef4444; margin-top: 0;">⚠️ Disclaimer important</h3>
+      <p style="line-height: 1.8; margin-bottom: 0;">
+        <strong>Ce qui suit est uniquement mon point de vue personnel</strong>, basé sur mon expérience et mes erreurs. 
+        Ce n'est en aucun cas une vérité universelle. Chacun a ses propres réalités, opportunités et contexte. 
+        Prenez ce qui résonne avec vous, adaptez à votre situation, et construisez votre propre chemin. 
+        <strong>Mais surtout : évaluez vos résultats actuels et demandez-vous si vous êtes satisfait.</strong>
+      </p>
+    </section> -->
+
+    <!-- Mon arrivée en France -->
+    <section class="story-card info slide-in">
+      <div class="story-header">
+        <div class="story-icon">✈️</div>
+        <div class="story-title">
+          <h3>L'arrivée en France (pas préparée du tout)</h3>
+          <span class="story-tag experience">Expérience 📍</span>
+        </div>
+      </div>
+
+      <p style="line-height: 1.8;">
+        Ma venue en France n'a <strong>jamais été préparée</strong>. Je n'avais jamais imaginé me retrouver en France un jour. 
+        Tout s'est fait de manière soudaine : j'ai reçu l'info en <strong>Juillet 2023</strong> alors que le M1 devait démarrer 
+        en <strong>septembre 2023</strong> à l'Université Côte d'Azur.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">18 Octobre 2023 (Mercredi)</div>
+          <p>Arrivée à l'aéroport de Nice avec <strong>plus d'un mois de retard</strong></p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">23 Octobre 2023 (Lundi)</div>
+          <p>Premier jour de cours — déjà largement en retard sur le programme</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Une semaine après</div>
+          <p>Pause pédagogique — puis <strong>examens du semestre 1 immédiatement après</strong></p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Fin Semestre 1</div>
+          <p>Résultat : <strong>Moyenne juste</strong> (alors que j'étais major de promo en L3)</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">Fin M1</div>
+          <p>Mention <strong>"Passable"</strong></p>
+        </div>
+      </div>
+
+      <div class="highlight-box warning">
+        <strong style="color: #ef4444;">❌ L'erreur :</strong> Ne rien préparer à l’avance. Nouveau système : le système comporte des matières éliminatoires. Pour le M1, les matières fondamentales ont un coefficient 6 et, si la moyenne obtenue (dans l'une de ces matières) est inférieure à 6/20, l’étudiant est contraint de redoubler l’année, sauf décision contraire du jury.
+      </div>
+
+
+      <div class="quote-box">
+        <strong>Leçon n°1 :</strong> Rien ne doit être laissé au hasard, surtout lorsque l’on arrive dans une nouvelle ville, un nouveau pays ou même un nouveau continent. 
+        <strong>Tout doit être préparé et anticipé.</strong>
+      </div>
+    </section>
+
+    <!-- Recherche de travail M1 -->
+    <section class="story-card warning slide-in">
+      <div class="story-header">
+        <div class="story-icon">💼</div>
+        <div class="story-title">
+          <h3>M1 : Recherche de cours à domicile (échec initial)</h3>
+          <span class="story-tag lesson">Leçon apprise ⚠️</span>
+        </div>
+      </div>
+
+      <p style="line-height: 1.8;">
+        En parallèle de mes études, je devais me trouver des cours à domicile à donner pour avoir de l'argent 
+        (car en vrai, <strong>j'étais fauché</strong>). J'ai décroché un premier entretien avec une agence d'intérim.
+      </p>
+
+      <div class="highlight-box warning">
+        <strong style="color: #ef4444;">❌ Ce que j'ai fait de mal :</strong>
+        <ul style="margin-top: 1rem; line-height: 1.8;">
+          <li>✗ <strong>Zéro préparation</strong> avant l'entretien technique</li>
+          <li>✗ Je me suis juste pointé sans réviser</li>
+          <li>✗ <strong>Résultat : 0 contrat, retour à la case départ</strong></li>
+        </ul>
+      </div>
+
+      <p style="margin-top: 1.5rem; line-height: 1.8;">
+        J'ai donc <strong>galéré encore pendant 5 mois</strong> avant de finalement trouver une autre agence avec laquelle 
+        j'ai pu travailler jusqu'à la fin de mon Master.
+      </p>
+
+      <div class="quote-box">
+        <strong>Leçon n°2 :</strong> Les entretiens techniques se préparent. Toujours. Même si vous pensez maîtriser le sujet, 
+        préparez-vous comme si votre vie en dépendait.
+      </div>
+    </section>
+
+    <!-- Recherche de stage M2 -->
+    <section class="story-card warning slide-in">
+      <div class="story-header">
+        <div class="story-icon">🎯</div>
+        <div class="story-title">
+          <h3>M2 : 7 mois de recherche de stage (500 candidatures, 2 entretiens)</h3>
+          <span class="story-tag lesson">Échec massif ⚠️</span>
+        </div>
+      </div>
+
+      <p style="line-height: 1.8;">
+        En M2, il fallait faire un <strong>stage obligatoire d'au moins 4 mois (en entreprise)</strong> au semestre 2 (sinon reprendre l'année). 
+        J'ai passé <strong>plus de 7 mois (août 2024 - mars 2025)</strong> à envoyer des CV partout via les jobboards (sites de recherche d'emplois).
+      </p>
+
+      <div class="stats-box">
+        <h4 style="color: white; margin-top: 0;">📊 Mes statistiques de recherche de stage M2 :</h4>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">~500</div>
+            <div class="stat-label">Candidatures envoyées</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Entretiens obtenus</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">0</div>
+            <div class="stat-label">Stage trouvé</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box warning">
+        <strong style="color: #ef4444;">❌ Ce que j'ai fait de mal :</strong>
+        <ul style="margin-top: 1rem; line-height: 1.8;">
+          <li>✗ <strong>0 compte LinkedIn</strong> (alors que j'étais en M2)</li>
+          <li>✗ <strong>0 réseau, 0 connexions</strong></li>
+          <li>✗ Je postulais <strong>uniquement en ligne</strong> et j'attendais passivement</li>
+          <li>✗ Aucun démarchage physique ou spontané</li>
+          <li>✗ Aucune présence aux événements carrières meetings</li>
+        </ul>
+      </div>
+
+      <p style="margin-top: 1.5rem; line-height: 1.8;">
+        <strong>Résultat :</strong> Je me suis retrouvé à <strong>Abidjan (Côte d'Ivoire)</strong> pour faire mon stage 
+        et revenir pour la soutenance. Pourquoi? Je ne voulais pas reprendre mon M2 simplement parce que je n'avais pas de stage 
+        (alors que j'avais plus de 13/20 au semestre 1).
+      </p>
+
+      <div class="highlight-box warning">
+        <strong style="color: #ef4444;">💸 Le prix à payer :</strong> M2 obtenu, mais avec un coût financier énorme 
+        (billets d'avion Abidjan ↔ Nice, logement, etc.; tout à ma charge).
+      </div>
+
+      <div class="stats-box">
+        <h4 style="color: white; margin-top: 0;">📊 Ma conclusion sur les jobboards :</h4>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">~90%</div>
+            <div class="stat-label">Refus automatisés</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">~5%</div>
+            <div class="stat-label">Entretiens (souvent échec)</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">~5%</div>
+            <div class="stat-label">Ghosting / Phishing</div>
+          </div>
+        </div>
+        <p style="margin-top: 1.5rem; opacity: 0.9; font-size: 0.9rem;">
+          ⚠️ <strong>Ces chiffres sont basés uniquement sur mon expérience personnelle.</strong> 
+          Chacun a ses chances et ses réalités. Mais évaluez vous-même vos résultats et demandez-vous si vous êtes satisfait.
+        </p>
+      </div>
+
+      <div class="quote-box">
+        <strong>Leçon n°3 :</strong> Postuler uniquement sur des jobboards et attendre passivement ne marche pas. 
+        Il faut être <strong>proactif, visible, et créer du réseau</strong>.
+      </div>
+    </section>
+
+    <!-- Changement de stratégie MSc -->
+    <section class="story-card success slide-in">
+      <div class="story-header">
+        <div class="story-icon">✅</div>
+        <div class="story-title">
+          <h3>MSc Big Data & IA : Changement radical de stratégie</h3>
+          <span class="story-tag success">Ça a marché ! ✅</span>
+        </div>
+      </div>
+
+      <p style="line-height: 1.8;">
+        À la fin de mon M2, <strong>changement total de stratégie</strong>. J'ai voulu me spécialiser en IA & Big Data 
+        (goût suscité lors de mon stage à la banque BNI où j'étais stagiaire Data Engineer). 
+        Ainsi, j'ai commencé une période de <strong>Piscine à Epitech Nice</strong> (formation intensive en programmation web, réseau & mobile) 
+        tout en cherchant une alternance.
+      </p>
+
+      <div class="highlight-box success">
+        <strong style="color: #10b981;">✅ Ce que j'ai changé (et qui a MARCHÉ) :</strong>
+        <!-- <ol style="margin-top: 1rem; line-height: 2;">
+          <li><strong>Création d'un bon compte LinkedIn</strong> + publication régulière de contenu orienté Data & IA</li>
+          <li><strong>Amélioration de mon GitHub</strong> pour mettre en valeur mes projets académiques et professionnels</li>
+          <li><strong>Création d'un CV digital</strong> (site web retraçant mon parcours et ce que je cherchais)</li>
+          <li><strong>Candidatures spontanées</strong> : je ne postulais presque plus sur les jobboards (ça représentait seulement 1% de mes candidatures)</li>
+          <li><strong>Messages directs sur LinkedIn</strong> : j'écrivais directement aux RH et chefs d'entreprise après leur avoir envoyé une invitation</li>
+          <li><strong>Présence physique</strong> : j'assistais à TOUS les événements carrières, meetings et job datings à Nice et alentours (partout où je pouvais me rendre en bus)</li>
+          <li><strong>Dépôt de CV en main propre</strong> : je me déplaçais physiquement aux sièges d'entreprises</li>
+        </ol> -->
+
+        
+        <p><strong>1. Création d'un bon compte LinkedIn</strong> + publication régulière de contenu orienté Data & IA</p>
+        <p style="margin-top: 0.8rem;"><strong>2. Amélioration de mon GitHub</strong> pour mettre en valeur mes projets académiques et professionnels</p>
+        <p style="margin-top: 0.8rem;"><strong>3. Création d'un CV digital</strong> (site web retraçant mon parcours et ce que je cherchais)</p>
+        <p style="margin-top: 0.8rem;"><strong>4. Candidatures spontanées</strong> : je ne postulais presque plus sur les jobboards (ça représentait seulement 1% de mes candidatures)</p>
+        <p style="margin-top: 0.8rem;"><strong>5. Messages directs sur LinkedIn</strong> : j'écrivais directement aux RH et chefs d'entreprise après leur avoir envoyé une invitation</p>
+        <p style="margin-top: 0.8rem;"><strong>6. Présence physique</strong> : j'assistais à TOUS les événements carrières, meetings et job datings à Nice et alentours (partout où je pouvais me rendre en bus)</p>
+        <p style="margin-top: 0.8rem;"><strong>7. Dépôt de CV en main propre</strong> : je me déplaçais physiquement aux sièges d'entreprises</p>
+      </div>
+
+      <div style="margin: 1.5rem 0; padding: 1rem; background: rgba(16, 185, 129, 0.1); border-left: 4px solid #10b981; border-radius: 0 8px 8px 0;">
+        <strong style="color: #10b981;">💡 Constat important :</strong> J'ai constaté que la probabilité que mon message soit lu sur LinkedIn 
+        était <strong>largement supérieure aux emails classiques</strong>. À chaque événement, je repartais avec au moins un contact, 
+        même si ce n'était pas un contrat immédiat.
+      </div>
+
+      <div class="highlight-box success">
+        <strong style="color: #10b981;">🎯 Résultat :</strong> Je faisais partie des <strong>premiers de ma promo à trouver un contrat d'alternance</strong>.
+      </div>
+
+      <div class="quote-box">
+        <strong>Leçon n°4 :</strong> La visibilité + le réseau + le démarchage direct = succès. 
+        Ne restez pas assis à attendre qu'on vous contacte. <strong>Allez chercher les opportunités vous-même.</strong>
+      </div>
+    </section>
+
+    <!-- Le test technique qui a tout changé -->
+    <section class="story-card lesson slide-in">
+      <div class="story-header">
+        <div class="story-icon">🔥</div>
+        <div class="story-title">
+          <h3>Le test technique qui m'a valu mon contrat (4 jours de travail intensif)</h3>
+          <span class="story-tag lesson">Travail acharné 💪</span>
+        </div>
+      </div>
+
+      <p style="line-height: 1.8;">
+        Pour le test qui m'a finalement valu mon contrat d'alternance, j'ai travaillé <strong>intensément du jeudi midi au lundi 4h du matin</strong>.
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">Jeudi vers midi</div>
+          <p>Réception des consignes du test : analyse de données sous <strong>R, Python et SAS</strong>, avec un <strong>rapport PDF à rendre lundi matin</strong>.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Jeudi – Samedi</div>
+          <p>Apprentissage intensif de <strong>SAS</strong> (langage que je ne connaissais pas du tout) via YouTube, tutoriels et documentation.</p>
+          <p>J’ai d’abord réalisé une analyse complète et propre en <strong>Python</strong>, puis je l’ai adaptée aux autres langages, Python étant celui avec lequel j’étais le plus à l’aise.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Dimanche 22h</div>
+          <p><strong>Aucune ligne écrite pour le rapport PDF</strong> 😱</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Dimanche minuit</div>
+          <p>Début de la rédaction du rapport sous LaTeX (Overleaf). Après plusieurs compilations : <strong>« Vous avez atteint votre quota. Payez pour continuer. »</strong></p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Dimanche minuit – Lundi 4h</div>
+          <p>Heureusement pour moi, j’avais la version desktop de LaTeX (TextMaker) déjà installée. Problème? Tout configurer à la main, installer les packages nécessaires et connaître les commandes par cœur pour pouvoir avoir un fichier complet présentable.</p>
+          <p><strong>Résultat :</strong> Je me suis couché lundi à 4h du matin, après avoir tout fini et programmé mon mail du rendu pour la DRH.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Lundi 6h</div>
+          <p>Réveil (grâce à mon alarme) et relecture finale du rapport avant la soumission.</p>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">Lundi vers 8h30</div>
+          <p><strong>Envoi du rapport</strong>, puis direction l’école comme si de rien n’était.</p>
+        </div>
+
+      </div>
+
+      <div class="highlight-box warning">
+        <strong style="color: #f59e0b;">🔥 La vérité :</strong> Mon rapport n'était pas le plus parfait. 
+        Mais j'ai <strong>tout donné</strong>, j'ai montré ma détermination, et ça a payé.
+      </div>
+
+      <div class="quote-box">
+        <strong>Leçon n°5 (LA PLUS IMPORTANTE) :</strong> Peu importe le chemin choisi pour avoir votre stage/alternance/CDI, 
+        <strong>la partie apprentissage et travail personnel ne peut pas être corrompue</strong>. C'est indispensable. 
+        Pas de raccourci. Le travail acharné, la discipline et les nuits blanches sont nécessaires.
+      </div>
+    </section>
+
+    <!-- DO's and DON'Ts -->
+    <section class="card slide-in">
+      <h2>✅ À FAIRE vs ❌ À ÉVITER (basé sur mon expérience)</h2>
+      <div class="do-dont">
+        <div class="do-box">
+          <h4 style="color: #10b981;">✅ CE QUI MARCHE</h4>
+          <ul>
+            <li>Créer un LinkedIn professionnel et poster régulièrement</li>
+            <li>Faire du démarchage direct (LinkedIn + emails ciblés)</li>
+            <li>Se déplacer physiquement aux sièges d'entreprises</li>
+            <li>Assister aux job datings et événements carrières meetings</li>
+            <li>Créer un site web / portfolio pour se démarquer</li>
+            <li>Mettre à jour son GitHub avec des projets concrets</li>
+            <li>Contacter directement les RH et chefs d'entreprise</li>
+            <li>Préparer intensément les tests techniques</li>
+            <li>Toujours garder contact même après un refus</li>
+            <li>Bosser comme un acharné quand l'opportunité se présente</li>
+          </ul>
+        </div>
+
+        <div class="dont-box">
+          <h4 style="color: #ef4444;">❌ CE QUI NE MARCHE PAS</h4>
+          <ul>
+            <li>Postuler uniquement sur les jobboards et attendre</li>
+            <li>Ne pas avoir de présence en ligne (LinkedIn, GitHub)</li>
+            <li>Envoyer des CV génériques sans personnalisation</li>
+            <li>Ne pas se déplacer / rester passif chez soi</li>
+            <li>Ignorer les événements et réseautage</li>
+            <li>Ne pas préparer les entretiens techniques</li>
+            <li>Abandonner après quelques refus</li>
+            <li>Ne pas suivre après un entretien</li>
+            <li>Sous-estimer le travail nécessaire</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mes recommandations finales -->
+    <section class="story-card lesson slide-in">
+      <div class="story-header">
+        <div class="story-icon">🎯</div>
+        <div class="story-title">
+          <h3>En résumé</h3>
+          <span class="story-tag success">Action 🚀</span>
+        </div>
+      </div>
+      <div style="margin-top: 1.5rem; line-height: 1.8;">
+        <p><strong>1. Préparez tout à l'avance</strong> : Surtout si vous changez d'environnement. Rien ne se fait au hasard.</p>
+        <p style="margin-top: 0.8rem;"><strong>2. Soyez proactif, pas réactif</strong> : Ne restez pas assis à attendre qu'on vous contacte. Allez chercher les opportunités.</p>
+        <p style="margin-top: 0.8rem;"><strong>3. Construisez votre présence en ligne</strong> : LinkedIn, GitHub, site web personnel. C'est indispensable aujourd'hui.</p>
+        <p style="margin-top: 0.8rem;"><strong>4. Faites du démarchage direct</strong> : Contactez directement les gens, déplacez-vous physiquement. Les messages LinkedIn marchent mieux que les emails classiques.</p>
+        <p style="margin-top: 0.8rem;"><strong>5. Assistez aux événements</strong> : Job datings, career fairs, meetups tech. Même sans contrat, vous repartirez avec des contacts.</p>
+        <p style="margin-top: 0.8rem;"><strong>6. Donnez tout sur les tests techniques</strong> : Même si ça prend des nuits blanches. C'est là que vous faites la différence.</p>
+        <p style="margin-top: 0.8rem;"><strong>7. Ne lâchez jamais</strong> : Les refus font partie du processus. Chaque "non" vous rapproche du "oui".</p>
+        <p style="margin-top: 0.8rem;"><strong>8. Évaluez vos résultats régulièrement</strong> : Si votre stratégie ne marche pas après 100 candidatures, changez-la. N'attendez pas 500 refus.</p>
+      </div>
+
+      <div style="margin-top: 2rem; padding: 1.5rem; background: rgba(245, 158, 11, 0.1); border-left: 4px solid #f59e0b; border-radius: 0 8px 8px 0;">
+        <p>
+          <strong style="color: #f59e0b;">⚠️ Rappel important :</strong> Ce sont les méthodes qui ont marché <strong>pour moi</strong>. 
+          Chacun a ses propres réalités, opportunités et contexte. Testez, adaptez, et construisez votre propre stratégie.
+        </p>
+        <p>
+          Je ne prétends pas être plus malin et plus avisé que mes prédécesseurs. La marche vers le succès continue et je n'ai pas encore tout appris, j'en suis conscient. Je continue malgré ces expériences amères, à faire d'autres erreurs. Mais une chose est sûre : je ne referai plus les mêmes erreurs.  Et pour cela, je continue à apprendre régulièrement de nouveaux trucs et à explorer de nouveaux domaines pour agir différemment.
+          Comme le disait Albert Einstein : <em>"La folie, c'est de faire toujours la même chose et de s'attendre à un résultat différent."</em> Je crois que je ne suis pas aussi fou à ce point, et vous non plus.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="card slide-in" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; text-align: center; margin-top: 3rem;">
+      <h2 style="color: white;">💬 Une question ? Un retour d'expérience à partager ?</h2>
+      <p style="margin: 1rem 0; opacity: 0.95;">
+        N'hésitez pas à me contacter. J'adore échanger avec d'autres étudiants et partager nos stratégies.
+      </p>
+      <a href="../contact.html" class="btn" style="background: white; color: #f59e0b; margin-top: 1rem;">
+        📧 Me contacter
+      </a>
+    </section>
+
+    <!-- Navigation -->
+    <section style="margin-top: 3rem;">
+      <h2 class="section-title">🔗 Explorer d'autres ressources</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <a href="mathematiques.html" class="card" style="text-decoration: none; text-align: center; border-top: 3px solid #8b5cf6;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">📐</div>
+          <h3 style="color: #8b5cf6;">Mathématiques</h3>
+          <p>Sites et tutoriels maths</p>
+        </a>
+        <a href="programmation.html" class="card" style="text-decoration: none; text-align: center; border-top: 3px solid #10b981;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">💻</div>
+          <h3 style="color: #10b981;">Programmation</h3>
+          <p>Ressources code & data</p>
+        </a>
+        <a href="anglais.html" class="card" style="text-decoration: none; text-align: center; border-top: 3px solid #3b82f6;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🗣️</div>
+          <h3 style="color: #3b82f6;">Anglais</h3>
+          <p>Améliorer son anglais</p>
+        </a>
+        <a href="videos-youtube.html" class="card" style="text-decoration: none; text-align: center; border-top: 3px solid #ef4444;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">📺</div>
+          <h3 style="color: #ef4444;">YouTube</h3>
+          <p>Chaînes éducatives</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/translation.js"></script>
+</body>
+</html>

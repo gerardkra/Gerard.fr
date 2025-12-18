@@ -1,0 +1,148 @@
+clear ;
+
+
+function y=ProjK(x)
+    
+    y = x ;
+    //Avec find (le plus rapide)
+    pos = find(y<0) ;
+    y(pos) = zeros(y(pos)) ;
+    
+    //avec une boucle
+    //for i=1:length(x)
+    //    if( x(i)<0 ) then
+    //      y(i) = 0 ;
+    //    end 
+    //end
+    
+endfunction
+
+//----------------
+//-- Exercice 1
+//----------------
+
+function [u,nit]=gradient_projete(A,b,u0,pas,eps,nitmax)
+   //initialisation
+   u = u0 ;
+   v = u+ones(u); // juste suffisament different de u
+   gu = A*u - b ;
+   nit = 0 ;
+   //boucle while
+   while( norm(u-v)>eps & nit<nitmax )
+       v = u ;
+       u = ProjK( u - pas * gu ) ;
+       gu = A*u-b ;
+       nit = nit + 1 ; 
+   end
+endfunction
+
+
+M = [1 2 ; -1 3]
+f = [-3 ; 4 ]
+
+A = 2* M' * M ;
+b = 2 * M' * f ;
+
+u0 = [ 1 ; 0 ]
+nitmax = 500 ;
+eps = 1e-8 ;
+pas = 0.005 ;
+[u,nit]=gradient_projete(A,b,u0,pas,eps,nitmax)
+
+//Verfication pour differentes tolerances
+veps = [ 1e-3 1e-4 1e-5 1e-6 1e-7 1e-8 ]
+for i=1:length(veps)
+    eps = veps(i) ;
+    [u,nit]=gradient_projete(A,b,u0,pas,eps,nitmax)
+    printf( 'eps = %e --> (u1,u2)=(%7.5f,%7.5f), |u-uex|=%5.2e, nit=%d\n', eps, u(1), u(2), norm( u - [0 ; 6/13]), nit )
+end
+
+
+// Illustration graphique
+
+scf(1) ; clf
+x = linspace(-4,2) ;
+y = linspace(-4,2) ;
+[xx,yy] = meshgrid(x,y) ;
+
+vJ = (xx+2*yy+3*ones(xx)).^2 + (-xx+3*yy-4*ones(xx)).^2 ; 
+contour(x,y,vJ',30)
+xset("fpf"," ")
+
+plot( x,zeros(x),'b')
+plot( zeros(y),y,'b')
+plot( 0,6/13, '+r')
+
+   u = u0 ;
+   plot(u(1),u(2),'k+')
+   v = u+ones(u); // juste suffisament different de u
+   gu = A*u - b ;
+   nit = 0 ;
+   //boucle while
+   while( norm(u-v)>eps & nit<nitmax )
+       v = u ;
+       u = ProjK( u - pas * gu ) ;
+       plot(u(1),u(2),'k+')
+       gu = A*u-b ;
+       nit = nit + 1 ; 
+   end
+
+//----------------
+//-- Exercice 2
+//----------------
+
+n = 2 ;
+N = 2 ;
+
+//Fonctionnelle J
+M = [1 2 ; -1 3]
+f = [-3 ; 4 ]
+
+A = 2* M' * M ;
+b = 2 * M' * f ;
+
+//Contraintes
+AC = zeros(n,n,N) ;
+bC = eye(n,N);
+
+
+//Parametre de l'algorithme
+u0 = [ 1 ; 0 ] //initialisation
+p0 = [ 0 ; 0 ] //initialisation
+eps = 1e-8 //tolerance
+nitmax = 500 // nombre d'iteration maximum
+mu = 3 //parametre de l'algo : convergence dans cet exemple pour mu < 3.8
+
+
+u = u0 ;
+v = u0 + ones(u0) ;
+p = p0 ;
+nit = 0 ;
+Fu = zeros(p);
+
+while( norm(u-v)>eps & nit<nitmax  )
+    
+    v = u ;
+    
+    //etape (1)
+    mat = A ;
+    rhs = b ;
+    for ic=1:size(AC,3)
+        mat = mat + p(ic) * AC(:,:,ic) ;
+        rhs = rhs + p(ic) * bC(:,ic) ;
+    end
+    u = mat \ rhs ; // ou methode du gradient conjugué
+    
+    //etape 2 
+    for ic=1:size(AC,3)
+        Fu(ic) = 0.5 * u'*( AC(:,:,ic) * u ) - u' * bC(:,ic) ; 
+    end    
+    p = ProjK( p + mu * Fu ) ;
+    
+    nit = nit + 1 ;
+    
+    plot(u(1),u(2),'m+')
+
+end
+
+printf( 'UZAWA : (u1,u2)=(%7.5f,%7.5f), |u-uex|=%5.2e, nit=%d\n', u(1), u(2), norm( u - [0 ; 6/13]), nit )

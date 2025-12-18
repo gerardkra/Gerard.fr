@@ -69,39 +69,19 @@
     }
   });
 
-  // ===== SHOW MORE / SHOW LESS SKILLS =====
+  // ===== ✅ CORRECTION : SHOW MORE / SHOW LESS SKILLS avec classes =====
   const showMoreBtn = document.getElementById('show-more-skills');
   if (showMoreBtn) {
     const extraSkills = document.querySelectorAll('.extra-skill');
 
-    // Initialize: hide extra skills
-    extraSkills.forEach(skill => {
-      skill.style.display = 'none';
-      skill.style.opacity = 0;
-      skill.style.transform = 'translateY(10px)';
-      skill.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
-    });
-
     showMoreBtn.addEventListener('click', () => {
-      const isHidden = extraSkills[0].style.display === 'none';
-
       extraSkills.forEach(skill => {
-        if (isHidden) {
-          skill.style.display = 'block';
-          setTimeout(() => {
-            skill.style.opacity = 1;
-            skill.style.transform = 'translateY(0)';
-          }, 50); // slight delay to trigger transition
-        } else {
-          skill.style.opacity = 0;
-          skill.style.transform = 'translateY(10px)';
-          setTimeout(() => {
-            skill.style.display = 'none';
-          }, 400); // match transition duration
-        }
+        skill.classList.toggle('visible'); // ✅ Utilise une classe au lieu de styles inline
       });
 
-      showMoreBtn.textContent = isHidden ? 'Show Less' : 'Show More';
+      // Vérifie si les compétences sont visibles
+      const isVisible = extraSkills[0].classList.contains('visible');
+      showMoreBtn.textContent = isVisible ? 'Afficher Moins' : 'Afficher Plus';
     });
   }
 

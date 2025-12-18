@@ -1,0 +1,72 @@
+---
+title: 'Classification'
+author: 'Jeu de données res.pca'
+output:
+  html_document: default
+---
+.
+
+- - -
+
+```{r, echo = FALSE}
+library(FactoMineR)
+load('D:/COURS_DE_KRA/3EME_ANNEE/Semestre2/INFORMATIQUE/CNS/Workspace.RData')
+```
+
+```{r, echo = FALSE, fig.align = 'center', fig.height = 5.5, fig.width = 5.5}
+drawn <-
+c("16", "132", "61", "118", "42", "34", "94", "110", "33", "15"
+)
+par(mar = c(4.1, 4.1, 1.1, 2.1))
+plot.HCPC(res, choice = 'tree', title = '')
+```
+
+**Figure 1.1 - Arbre hiérarchique.**
+
+La classification réalisée sur les individus fait apparaître 6 classes.
+
+
+```{r, echo = FALSE, fig.align = 'center', fig.height = 5.5, fig.width = 5.5}
+par(mar = c(4.1, 4.1, 1.1, 2.1))
+plot.HCPC(res, choice = 'map', draw.tree = FALSE, title = '')
+```
+
+**Figure 1.2 - Classification Ascendante Hiérachique des individus.**
+
+La **classe 1** est composée d'individus tels que *15*, *16*, *33* et *34*. Ce groupe est caractérisé par :
+
+- de fortes valeurs pour la variable *Sepal.Width*.
+- de faibles valeurs pour les variables *Petal.Length*, *Petal.Width* et *Sepal.Length* (de la plus extrême à la moins extrême).
+
+La **classe 2** est composé d'individus partageant :
+
+- de fortes valeurs pour la variable *Sepal.Width*.
+- de faibles valeurs pour les variables *Petal.Length*, *Petal.Width* et *Sepal.Length* (de la plus extrême à la moins extrême).
+
+La **classe 3** est composée d'individus tels que *42*, *61* et *94*. Ce groupe est caractérisé par :
+
+- de faibles valeurs pour les variables *Sepal.Width* et *Sepal.Length* (de la plus extrême à la moins extrême).
+
+La **classe 4** est composé d'individus partageant :
+
+- de fortes valeurs pour les variables *Petal.Length*, *Sepal.Length* et *Petal.Width* (de la plus extrême à la moins extrême).
+
+La **classe 5** est composé d'individus partageant :
+
+- de fortes valeurs pour les variables *Petal.Width* et *Petal.Length* (de la plus extrême à la moins extrême).
+- de faibles valeurs pour la variable *Sepal.Width*.
+
+La **classe 6** est composée d'individus tels que *110*, *118* et *132*. Ce groupe est caractérisé par :
+
+- de fortes valeurs pour les variables *Sepal.Length*, *Petal.Width* et *Petal.Length* (de la plus extrême à la moins extrême).
+
+```{r, echo = FALSE, fig.align = 'center', fig.height = 5.5, fig.width = 5.5}
+par(mar = c(4.1, 4.1, 1.1, 2.1))
+plot.HCPC(res, choice = '3D.map', ind.names=FALSE, title = '')
+```
+
+**Figure 1.3 - Arbre hiérarchique sur le plan factoriel.**
+
+The hierarchical tree can be drawn on the factorial map with the individuals colored according to their clusters.
+
+

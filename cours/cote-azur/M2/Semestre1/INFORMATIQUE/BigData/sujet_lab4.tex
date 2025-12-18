@@ -1,0 +1,92 @@
+\documentclass{article}
+\usepackage{amsmath}
+
+\title{Exercice : Manipulation de données avec Scala et Spark}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+L'objectif de cet exercice est d'apprendre à manipuler des fichiers, des chaînes de caractères, des tableaux, et des RDDs (Resilient Distributed Datasets) en Scala, tout en se familiarisant avec des opérations de jointures sur les RDDs dans Apache Spark.
+
+\section*{Étape 1 : Lecture des fichiers texte avec Spark}
+
+\textbf{Commande :}
+\begin{verbatim}
+val files = sc.wholeTextFiles("/tmp/*.txt").collect.toList
+\end{verbatim}
+
+\textbf{Questions :}
+\begin{itemize}
+    \item Que fait cette commande ?
+    \item Quel est le type de la variable \texttt{files} ?
+    \item Imaginez qu'il y ait trois fichiers dans le répertoire \texttt{/tmp/} : \texttt{file1.txt}, \texttt{file2.txt} et \texttt{file3.txt}. Donnez un exemple du contenu possible de la variable \texttt{files}.
+\end{itemize}
+
+\section*{Étape 2 : Manipulation de chaînes de caractères}
+
+\textbf{Commande :}
+\begin{verbatim}
+var ch = "hello a b  c   bye"
+ch.split("\\s+")
+ch.split(" ")
+\end{verbatim}
+
+\textbf{Questions :}
+\begin{itemize}
+    \item Quelle est la différence entre ces deux opérations de découpage (\texttt{split("\\s+")} et \texttt{split(" ")}) ?
+    \item Si \texttt{ch} contient \texttt{"hello  scala world"}, quelles seront les sorties respectives des deux commandes ?
+\end{itemize}
+
+\section*{Étape 3 : Accès aux éléments dans un tableau de tuples}
+
+\textbf{Commande :}
+\begin{verbatim}
+var fruit = Array(("apple", "2"), ("orange", "3"), ("pear", "1"))
+fruit(2)._2
+\end{verbatim}
+
+\textbf{Questions :}
+\begin{itemize}
+    \item Que renvoie cette commande et pourquoi ?
+    \item Ajoutez le tuple \texttt{("banana", "4")} au tableau \texttt{fruit} et accédez à la valeur associée à la banane.
+\end{itemize}
+
+\section*{Étape 4 : Opérations sur les RDDs avec Spark}
+
+\textbf{Commandes :}
+\begin{verbatim}
+val a = Array((1, 2), (3, 4), (3, 6))
+val b = Array((3, 9))
+val A = sc.parallelize(a)
+val B = sc.parallelize(b)
+val J = A.join(B).collect
+val L = A.leftOuterJoin(B).collect
+\end{verbatim}
+
+\textbf{Questions :}
+\begin{itemize}
+    \item Expliquez ce que font les opérations \texttt{join} et \texttt{leftOuterJoin} dans ce contexte.
+    \item Quelle est la différence entre les résultats de \texttt{join} et \texttt{leftOuterJoin} ? Donnez les résultats obtenus pour les collections \texttt{A} et \texttt{B}.
+\end{itemize}
+
+\section*{Étape 5 : Défi supplémentaire}
+
+\begin{enumerate}
+    \item Modifiez les RDDs \texttt{A} et \texttt{B} pour inclure d'autres paires (comme \texttt{(5, 7)} pour \texttt{A} et \texttt{(1, 10)} pour \texttt{B}), et réexécutez les opérations \texttt{join} et \texttt{leftOuterJoin}. Quelles sont les nouvelles sorties ?
+    \item Écrivez une commande Scala qui calcule la somme des deuxièmes éléments de tous les tuples dans le RDD \texttt{A}.
+\end{enumerate}
+
+\section*{Livrable attendu}
+
+Pour chaque étape, vous devez :
+\begin{itemize}
+    \item Exécuter les commandes Scala et afficher les résultats obtenus.
+    \item Fournir une explication claire de chaque commande et de ses résultats.
+\end{itemize}
+
+Bonne chance dans la réalisation de cet exercice !
+
+\end{document}

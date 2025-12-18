@@ -1,0 +1,473 @@
+---
+title: 'PROJET: REGRESSION LINEAIRE'
+author: "Traoré Abou Dramane, Kra Kouamé Gérard, Togbé Joseph Marie"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+$\underline{EXERCICE}$ $1$
+
+*L'entreprise INFORMATEX se specialise dans l'analyse de systemes et la programmation sur ordinateur de problemes techniques et de gestion. Elle veut utiliser la regression dans une etude sur le temps requis, par ses analystes-programmeurs, pour programmer des projets complexes. Cette etude pourrait permettre a la firme d'etablir des normes quant au temps requis pour programmer certains projets et d'assurer eventuellement une meilleure planification des ressources humaines.*
+
+# 1)Si nous voulons expliquer les fluctuations dans le temps requis pour programmer les projets quelle variable devons-nous identifier comme variable dependante ? Comme variable explicative ?
+
+*Pour expliquer les fluctuations dans le temps pour programmer les projets nous allons choisir :*
+
+-   *comme variable dépendante **Temps total en heure** , car c'est la variable que nous cherchons à prédire.*
+
+-   *comme variables explicatives ou indépendantes **Nombres d'intructions,** car il peut avoir une relation entre le nombre d'instructions dans un projet et le temps total nécessaire pour le programmer.*
+
+# 2) Qu'est-ce qui peut renseigner l'entreprise sur la forme de liaison statistique?
+
+*Pour répondre à cette question, nous allons examiner le nuage de point et le coefficient de corrélation linéaire*
+
+```{r}
+# creation de vecteurs X (nombres d'instructions)
+x=c(60,82,100,142,190,220,285,354,400,425,440,500,530,640)
+
+#creation du vecteur Y (temps total en heures)
+y=c(40,55,62,58,82,94,120,134,128,140,152,174,167,218)
+# Affichage des vecteurs
+x
+y
+```
+
+*Le modèle de régression linéaire simple de* $Y$ *sur* $X$ *s'écrit:* $Y_i=\beta_{0}+\beta_{1}x_i+\varepsilon_i$, $\forall_i=1,…,14$.
+
+```{r}
+#Nuage des points
+plot(x,y)
+# coefficient de corrélation lineaire
+cor(x,y)
+```
+
+*D'après le nuage des points nous observons une tendance linéaire, cela indique une liaison linéaire entre les variables.*
+
+*D'autre part, le coéfficient de corrélation linéaire* $(r=0.9886826)$ *étant très proche de* $1$ *, nous permet de conlure également qu'il y a une liaison linéaire entre ces deux variables.*
+
+# 3) Méthode d'ajustement linéaire à utiliser.
+
+*Pour obtenir les estimateurs des coefficients de la droite de regression, nous allons utiliser la méthode des moindres carrées ordinaires.*
+
+# 4) Estimons $\hat{\beta_{0}}$ et $\hat{\beta_{1}}$ par la méthode des moindres carrés
+
+```{r}
+# Mise en place du modèle de regression linéaire simple
+mls=lm(y~x)
+# estimation des coefficients de le droite de regression
+coef(mls)
+```
+
+*On en déduit que* $\hat{\beta_{0}}=27.93545$ et $\hat{\beta_{1}}=0.28226$ .
+
+# 5) Equation de la droite des moindres carrés .
+
+*D'après la question n°4) on en déduit que la droite des moindres carrés s'écrit:* $(D):y=\hat{\beta_{0}}+\hat{\beta_{1}}x$ où $\hat{\beta_{0}}=27.93545$ et $\hat{\beta_{1}}=0.28226$ .
+
+*Donc* $(D):y=27.93545+0.28226x$.
+
+# 6) Estimation à prendre dans le cas où la variable X n'est pas prise en compte.
+
+*Si nous ne tenons pas compte du nombre d'instruction, c'est-à-dire si nous ne tenons pas compte de la variable X, alors, on a:*
+
+```{r}
+# Calcul de la moyenne de la variable Y
+y_moyenne=mean(y)
+y_moyenne
+```
+
+*Ainsi, le temps moyen de programmation des projets serait estimé à* *environ* $116heurs$.
+
+# 7) Correction à apporter à l'estimation obtenue en 6.
+
+```{r}
+b0=27.93545
+b1=0.28226
+corige=b0+b1*x
+mean(corige)
+```
+
+*Par conséquent, une correction de la moyenne obtenue en 6 donne une moyenne de* $116.006$.
+
+# 8)D'apres la droite des moindres carres, a quelle augmentation du temps deprogrammation pouvons-nous nous attendre lorsque le nombre d'instructions augmente de 50 ?
+
+```{r}
+# Nombre d'instruction augmenté de 50
+new_x=x+50
+# Prédiction du temps de programmation
+pred_y=predict(mls,newdata=data.frame(x=new_x))
+# Affichons la valeur augmentée
+aug=pred_y[2]-pred_y[1]
+aug
+```
+
+*Ainsi, nous pouvons nous attendre à une augmentation d'environ* $6heure$ *de temps.*
+
+# 9)Estimation du temps de programmation a l'aide de la droite des moindres carrées pour chaque donnée.
+
+```{r}
+x=c(100,220,440)
+newdata=data.frame(x)
+ypred=predict.lm(mls,newdata)
+ypred
+```
+
+*Ainsi,*
+
+-   *Pour* $X=100$*, le temps de programation estimé est* $Ypred=56.16127$*.*
+
+-   *Pour* $X=220$*, le temps de programation estimé est* $Ypred=90.03225$*.*
+
+-   *Pour* $X=440$*, le temps de programation estimé est* $Ypred=152.12905$*.*
+
+# 10) Les ecarts de prevision de l'equation des moindres carres pour le nombre d'instruction en 9, selon les résultats observés.
+
+*Pour obtenir les écarts de prévision de l'équation des moindres carrées pour le nombre d'instruction en 9), nous allons d'abord définir le vecteur des instructions que nous appellons x, puis nous allons ajuster l'équation des moindres carrée et calculer en fin les écarts de prévision pour les données de la question 9).*
+
+*On obtient donc:*
+
+```{r}
+x=c(100,220,440)
+# Ajustement de l'equation des moindres carrées
+rg=lm(ypred~x)
+# Calcul des résidus(écarts de prévision)
+residuals(rg)
+```
+
+-   *Pour* $X=100$*, on a* $\hat{\varepsilon_1}=-1,480388.10^{-14}$*.*
+
+-   *Pour* $X=220$*, on a* $\hat{\varepsilon_2}=2,287872.10^{-14}$*.*
+
+-   *Pour* $X=440$*, on a* $\hat{\varepsilon_3}=-8,074842.10^{-15}$*.*
+
+# 11) Calcul des écarts en prenant la valeur estimée obtenue en 6).
+
+```{r}
+# Temps estimé en 6)
+varrpred=116
+# Nouvelle prédiction avec cette valeur
+Res_new=varrpred-ypred
+# Ajustement de l'equation des moindres carrées
+rgg=lm(Res_new~x)
+# Calcul des résidus(écarts de prévision)
+residuals(rgg)
+```
+
+*Ainsi on aurait:*
+
+-   *Pour* $X=100$*, on a* $\hat{\varepsilon_1}=1,480388.10^{-14}$*.*
+
+-   *Pour* $X=220$*, on a* $\hat{\varepsilon_2}=-2,287872.10^{-14}$*.*
+
+-   *Pour* $X=440$*, on a* $\hat{\varepsilon_3}=8,074842.10^{-15}$*.*
+
+*Remarque:*
+
+*les valeurs obtenues représentent exactement l'opposées de celles obtenues en 10).*
+
+# 12)Vérifions l'égalité suivantes $y_i-\overline{y}=(\hat{y}-\overline{y})+(y_i-\hat{y})$ pour tout $x_i$ spécifié dans 9).
+
+```{r}
+#Estimation des coefficients de la droite de regression
+b0=27.93545
+b1=0.28226
+
+#Donnée de 9)
+N=c(100,220,440)
+#Moyenne de la variable Y
+moy_y=mean(y)
+#Y prédit
+N_y=predict(mls,newdata = data.frame(x=N))
+for (i in 1:length(N)){
+  yi=b0+b1*N[i]
+  yi_chapo=N_y[i]
+  
+  R1 = yi - moy_y
+  R2 = (yi_chapo - moy_y) + (yi - yi_chapo)
+  # Affichage du résultat pour chaque valeur xi
+  cat("Pour x =", N[i], ":\n")
+  cat("Gauche :", R1, "\n")
+  cat("Droite :", R2, "\n")
+  cat("\n")
+}
+
+
+```
+
+*Nous remarquons effectivement qu'il y a une égalité entre ces deux quantités.*
+
+# 13)Calcul de SCT, SCE et SCR.
+
+```{r}
+# Calcul de la moyenne de Y
+moy_Y=mean(y)
+# Prédiction des valeurs de Y
+pred_Y=predict(mls)
+
+# Variation totale (SCT)
+SCT=sum((y - moy_Y)^2)
+
+# Variation expliquée (SCE)
+SCE=sum((pred_Y - moy_Y)^2)
+
+# Variation résiduelle (SCR)
+SCR=sum(mls$residuals^2)
+
+# Affichage des résultats
+SCT
+SCE
+SCR
+
+```
+
+*On en déduit que la Variation total est:* $SCT=36142$*, la Variation expliquée est* $SCE=35328.56$ *et la Variation résiduelle est* $SCR=813.438$*.*
+
+# 14)Determinons la proportion expliquée par la droite des moindres carrées.
+
+```{r}
+#Proportion de variation expliquée
+R_carr=SCE/SCT
+R_carr
+```
+
+*Ainsi,* $R^{2}=0.9775$*, cela voudrait dire que la droite des moindres carrées explique* $97,75\%$ *de la variation totale du temps de programmation.*
+
+*Cependant,* $2,25\%$ *de la variation totale du temps de programmation demeure inexpliquée par la droite des moindres carrées.*
+
+# 15)
+
+*Si nous avions fixé la valeur de* $R^{2}$ *à* $0,90$*, compte tenu du resultat précédent (N°14), nous allions utiliser la droite des moindres carrées comme outil de prediction, car le* $R^{2}$ *était d'environ* $0,9775$ *ce qui est supérieur à* $0,90$*.*
+
+*Par conséquent, la droite des moindres carrées demeure un bon outil de prédiction pour ce modèle.*
+
+$\underline{EXERCICE}$ $2$
+
+## 1) Régressons $Y$ sur $X_1$.
+
+*Avant de faire la régression linéaire pour cet exercice, supposons que les hypothèses suivantes sont vérifiées:*
+
+-   $H_0$ : *les variables* $X_i$ sont non aléatoires.
+
+-   $H_1$ : $E(\varepsilon_i)=0$ , $\forall_i=1,…,22$.
+
+-   $H_3$ : $\varepsilon_1,…,\varepsilon_i$ *sont indépendantes et* $\varepsilon_i\hookrightarrow N(0,\sigma^{2})$, $\forall_i=1,…,22$.
+
+*En effet, sous les hypothèses ci-dessus, nous pourrions répondre facilement aux questions de tests statistiques* *et d'intervalles de confiances un peu plus loin dans cet exercice.*
+
+## Création des vecteurs
+
+```{r}
+#Creation du vecteur x1(telephone par millier d'habitants).
+x1=c(124,49,181,4,22,152,75,54,43,41,17,22,16,10,63,170,125,12,221,171,97,254)
+
+#Creation du vecteur x2(calories grasses en pourcentage ddu total des calories).
+x2=c(33,31,38,17,20,39,30,29,35,31,23,21,8,23,37,40,38,25,39,33,38,39)
+
+#Creation du vecteur x3(calories provenant des proteines animales en pourcentage du total des calories).
+x3=c(8,6,8,2,4,6,7,7,6,5,4,3,3,3,6,8,6,4,7,7,6,8)
+
+#Creation du vecteur y.
+y=c(81,55,80,24,71,52,88,45,50,69,66,45,24,43,38,72,41,38,52,52,66,89)
+
+#Affichage des vecteurs.
+x1
+x2
+x3
+y
+```
+
+## mise en place du modèle linéaire simple de $Y$ sur $X_1$.
+
+*Le modèle de régression linéaire simple de* $Y$ *sur* $X_1$ *s'écrit:* $Y_i=\beta_{0}+\beta_{1}x_i+\varepsilon_i$, $\forall_i=1,…,22$.
+
+```{r}
+# Modèle linéaire simple de Y sur x1.
+mls=lm(y~x1)
+# Test de significativité.
+summary(mls)
+```
+
+*Ainsi, nous avons:* $p-value=0.01985$.
+
+*Et comme la* \$p-value\< \$ seuil de signification $\alpha= 0,05$,*alors la relation entre x1 et Y est **statistiquement significative.***
+
+## 2)Equation de la regression linéaire multiple de $Y$ sur $X_1$ et $X_2$.
+
+*Le modèle de régression linéaire multiple de* $Y$ *sur* $X_1$ *et* $X_2$ *s'écrit:* $Y_i=\beta_{0}+\beta_{1}x_{i1}+\beta_{2}x_{i2}+\varepsilon_i$, $\forall_i=1,…,22$.
+
+```{r}
+#Mise en place du modèle linéaire multiple entre x1, x2 et Y.
+mlm_1=lm(y~x1+x2)
+
+#Estimation des coefficients de la droite de régression.
+coefficients=coef(mlm_1)
+coefficients
+```
+
+*On en déduit que* ${\hat{\beta_{0}}}=33.81276$ , ${\hat{\beta_{1}}}=0.07858$ et ${\hat{\beta_{2}}}=0.51876$.
+
+*Donc l'équation de la regression linéaire multiple s'écrit :*
+
+$(D):y=\hat{\beta_{0}}+\hat{\beta_{1}}x1+\hat{\beta_{2}}x2$
+
+*où* $\hat{\beta_{0}}=33.81276$ , ${\hat{\beta_{1}}}=0.07858$ *et* ${\hat{\beta_{2}}}=0.51876$.
+
+*Donc* $(D):y=33.81276+0.07858x1+0.51876x2$
+
+## 3) Effectuons un test conjoint d'hypothese nulle $H_0: \beta_1=\beta_2=0$.
+
+*Il s'agira de verifier si toutes les variables explicatives incluses dans le modèle (x1 et x2) sont conjointement significatives. Et nous allons utiliser la fonction **anova()***
+
+```{r}
+Test=anova(mlm_1)
+#la statistique de test
+f_value=Test$F[2]
+#la valeur de p associée au test
+p_value=Test$'Pr(>F)'[2]
+#affichage des resultats
+f_value
+p_value
+```
+
+*On remarque que la* $p-value=0.4414 >$ *seuil de signification* $(\alpha= 0,05)$
+
+*Par conséquent, nous acceptons l'hypothèse nulle* $H_0:\beta_0=\beta_1=0$.
+
+## 4) Tester si l'adjonction de la variable $X_2$ à l'équation trouvée à la question 2 a significativement ameliorer l'estimation.
+
+```{r}
+# Régression de Y sur X1.
+mls=lm(y~x1)
+
+# Régression de Y sur X1 et X2.
+mlm_1=lm(y~x1+x2)
+
+# Calcul du R-carré ajusté.
+R_carr_x1=summary(mls)$adj.r.squared
+R_carr_x1_x2=summary(mlm_1)$adj.r.squared
+#Affichage.
+R_carr_x1
+R_carr_x1_x2
+
+
+
+# Comparaison des modèles.
+if (R_carr_x1_x2 > R_carr_x1) {
+  Evolution=R_carr_x1_x2 - R_carr_x1
+  message("L'ajout de la variable X2 a significativement amélioré l'estimation du modèle de régression (R-carré ajusté a augmenté de ", Evolution, ").")
+} else {
+  message("L'ajout de la variable X2 n'a pas significativement amélioré l'estimation du modèle de régression.")
+}
+```
+
+# 5) Régression linéaire multiple de Y sur x1, x2 et x3
+
+*Le modèle de régression linéaire multiple de Y sur x1, x2 et x3 s'écrit:* $Y_i=\beta_{0}+\beta_{1}x_{i1}+\beta_{2}x_{i2}+\beta_{3}x_{i3}+\varepsilon_i$, $\forall_i=1,…,22$.
+
+```{r}
+# Mise en place du modèle de régression linéaire multiple.
+mlm=lm(y~x1+x2+x3 )
+
+#Estimation des coefficients de la droite de régression.
+coefficients=coef(mlm)
+coefficients
+```
+
+*On en déduit que* ${\hat{\beta_{0}}}=22.35316$ , ${\hat{\beta_{1}}}=-0.00584$, ${\hat{\beta_{2}}}=-0.42398$ *et* ${\hat{\beta_{3}}}=8.41344$.
+
+*Donc l'équation de la regression linéaire multiple s'écrit :*
+
+$(D):y=\hat{\beta_{0}}+\hat{\beta_{1}}x_1+\hat{\beta_{2}}x_2+\hat{\beta_{3}}x_3$
+
+*où* ${\hat{\beta_{0}}}=22.35316$ , ${\hat{\beta_{1}}}=-0.00584$ , ${\hat{\beta_{2}}}=-0.42398$ *et* ${\hat{\beta_{3}}}=8.41344$.
+
+*Donc* $(D):y=22.35316-0.00584x_1-0.42398x_2+8.41344x_3$
+
+## 6) les limites de l'intervalle de confiance à $95\%$ pour $\beta_3$ dans cette equation.
+
+```{r}
+# Calcul des intervalles de confiance à 95%.
+IC=confint(mlm)["x3", ]
+# Affichage des limites des intervalles de confiance.
+IC
+```
+
+*On en déduit que pour* $\beta_3$, *l'intervalle de confiance à* $95\%$ *est* $IC=[0.6618697;16.1650034]$ .
+
+*Ainsi, la borne inférieur de cet intervalle de confiance est* $0.6618697$ *et sa borne supérieur est* $16.1650034$ .
+
+## 7)Les limites de l'intervalle de confiance à $95\%$ pour $\hat{Y}$ aux points $X1=221$ et $X2=39$ et $X3=7$.
+
+```{r}
+# Prédiction de Y avec intervalle de confiance à 95%.
+Y_pred=predict(mlm,data.frame(x1=221,x2=39,x3=7), interval = "confidence")
+# Affichage des limites de l'intervalle de confiance.
+IC=Y_pred[, c("lwr", "upr")]
+IC
+```
+
+*On en déduit que pour* $\hat{Y}$, *l'intervalle de confiance à* $95\%$ *est* $IC=[46.88115;79.95982]$ .
+
+*Ainsi, la borne inférieur de cet intervalle de confiance est* $46.88115$ *et sa borne supérieur est* $79.95982$ .
+
+# 8) Testons si $X_1$ et $X_2$ ensemble apportent quelque chose à la régression linéaire simple de Y sur $X_1$.
+
+```{r}
+# Calcul du coefficient de détermination ajusté.
+R_carr_aj_mls= summary(mls)$adj.r.squared
+R_carr_aj_mlm= summary(mlm)$adj.r.squared
+
+# Comparaison des coefficients de détermination ajustés.
+if (R_carr_aj_mlm > R_carr_aj_mls) {
+  Evolution=R_carr_aj_mlm - R_carr_aj_mls
+  message("L'ajout des variables x2 et x3 ensemble a significativement amélioré le modèle de régression (coefficient de détermination ajusté a augmenté de ", Evolution, ").")
+} else {
+  message("L'ajout des variables x2 et x3 ensemble n'a pas significativement amélioré le modèle de régression.")
+}
+```
+
+# 9) Régressons $X_1$ sur $X_2$ et $X_3$ .
+
+## mise en place du modèle de régression linéaire de $X_1$ sur $X_2$ et $X_3$.
+
+*Le modèle de régression linéaire multiple de* $X_1$ *sur* $X_2$ *et* $X_3$ *s'écrit:* $X_{1i}=\beta_{0}+\beta_{1}x_{2i}+\beta_{2}x_{3i}+\varepsilon_i$, $\forall_i=1,…,22$.
+
+```{r}
+# Régression de x1 sur x2 et x3.
+mlm_new=lm(x1~x2+x3)
+#Estimation des coefficients de la droite de régression.
+coefficients=coef(mlm_new)
+coefficients
+```
+
+*On en déduit que* ${\hat{\beta_{0}}}=-117.910264$ , ${\hat{\beta_{1}}}=2.596946$ et ${\hat{\beta_{2}}}=22.458574$.
+
+*Donc l'équation de la regression linéaire multiple s'écrit :*
+
+$(D):y=\hat{\beta_{0}}+\hat{\beta_{1}}x_2+\hat{\beta_{2}}x_3$
+
+*où* $\hat{\beta_{0}}=-117.910264$ , ${\hat{\beta_{1}}}=2.596946$ *et* ${\hat{\beta_{2}}}=22.458574$.
+
+*Donc* $(D):y=-117.910264+2.596946x_2+22.458574x_3$.
+
+# 10)Les limites de l'intervalle de confiance à $95\%$ pour les coefficients de la régression de $X_1$ sur $X_3$.
+
+*Le modèle de régression linéaire simple de* $X_1$ *sur* $X_3$ *s'écrit:* $X_{1i}=\beta_{0}+\beta_{1}x_{3i}+\varepsilon_i$, $\forall_i=1,…,22$.
+
+```{r}
+# Régression linéaire de x1 sur x3
+mls_new=lm(x1~x3)
+
+# Calcul des intervalles de confiance à 95% pour les coefficients
+IC=confint(mls_new)
+
+# Affichage des limites des intervalles de confiance
+IC
+
+```
+
+*Ains,*
+
+-   *Pour* $\hat{\beta_0}$, $IC=[-162.54946;-28.96795]$ *et donc la borne inférieur de cet intervalle de confiance est* $-162.54946$ *et sa borne supérieur est* $-28.96795$ .
+
+-   *Pour* $\hat{\beta_1}$, $IC=[21.22245;43.77258]$ *et donc la borne inférieur de cet intervalle de confiance est* $21.22245$ *et sa borne supérieur est* $43.77258$ .

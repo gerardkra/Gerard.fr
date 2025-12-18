@@ -1,0 +1,254 @@
+{
+  "mathematics": {
+    "essential": [
+      {
+        "name": "Exo7 Math",
+        "url": "http://exo7.emath.fr/",
+        "youtube": "https://www.youtube.com/channel/UC8K_KGjfUjVhpJcpqNL4dGA",
+        "description": "LA référence française pour les cours de mathématiques universitaires. Cours complets, exercices corrigés et vidéos explicatives.",
+        "topics": ["Algèbre", "Analyse", "Probabilités", "Statistiques"],
+        "level": "Licence - Master",
+        "language": "Français"
+      },
+      {
+        "name": "BibMaths",
+        "url": "https://www.bibmath.net/",
+        "description": "Bibliothèque mathématique en ligne avec fiches synthétiques, formulaires et cours structurés.",
+        "topics": ["Toutes les matières"],
+        "level": "Lycée - Licence",
+        "language": "Français"
+      },
+      {
+        "name": "Khan Academy Math",
+        "url": "https://fr.khanacademy.org/math",
+        "description": "Plateforme interactive avec cours et exercices. Parfait pour renforcer les bases et progresser à son rythme.",
+        "topics": ["Arithmétique", "Algèbre", "Géométrie", "Calcul"],
+        "level": "Collège - Licence",
+        "language": "Français et Anglais"
+      }
+    ],
+    "recommended": [
+      {
+        "name": "Les Bons Profs",
+        "url": "https://www.youtube.com/@lesbonsprofs",
+        "description": "Chaîne YouTube française avec cours niveau lycée et début de Licence. Idéal pour réviser les bases.",
+        "topics": ["Mathématiques niveau lycée"],
+        "level": "Lycée - L1",
+        "language": "Français"
+      }
+    ],
+    "bonus": [
+      {
+        "name": "MIT OpenCourseWare - Mathematics",
+        "url": "https://ocw.mit.edu/search/?t=Mathematics",
+        "description": "Cours du MIT en libre accès. Niveau avancé, excellent pour approfondir.",
+        "topics": ["Mathématiques avancées", "Applications"],
+        "level": "Master - Doctorat",
+        "language": "Anglais"
+      },
+      {
+        "name": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown",
+        "description": "Visualisations animées exceptionnelles de concepts mathématiques. La série 'Essence of Linear Algebra' est incontournable.",
+        "topics": ["Algèbre linéaire", "Calcul", "Visualisations"],
+        "level": "Licence - Master",
+        "language": "Anglais (sous-titres FR)"
+      }
+    ]
+  },
+  
+  "programming": {
+    "essential": [
+      {
+        "name": "GeeksforGeeks",
+        "url": "https://www.geeksforgeeks.org/",
+        "description": "Référence pour algorithmes, structures de données et préparation aux entretiens techniques.",
+        "topics": ["Algorithmes", "Structures de données", "Python", "Java", "C++"],
+        "level": "Débutant - Avancé",
+        "language": "Anglais"
+      },
+      {
+        "name": "TutorialsPoint",
+        "url": "https://www.tutorialspoint.com/",
+        "description": "Tutoriels complets sur 100+ langages et technologies. Format didactique avec éditeur en ligne.",
+        "topics": ["Tous les langages", "Web", "Bases de données"],
+        "level": "Débutant - Intermédiaire",
+        "language": "Anglais"
+      },
+      {
+        "name": "Stack Overflow",
+        "url": "https://stackoverflow.com/",
+        "description": "Plateforme Q&A indispensable. 99% des problèmes ont déjà une solution ici.",
+        "topics": ["Tous les langages", "Debugging", "Bonnes pratiques"],
+        "level": "Tous niveaux",
+        "language": "Anglais (principalement)"
+      },
+      {
+        "name": "GitHub",
+        "url": "https://github.com/",
+        "description": "Hébergeur de code et mine d'or pour apprendre en lisant du code open-source de qualité.",
+        "topics": ["Version control", "Open source", "Collaboration"],
+        "level": "Tous niveaux",
+        "language": "Multilingue"
+      }
+    ],
+    "recommended": [
+      {
+        "name": "W3Schools",
+        "url": "https://www.w3schools.com/",
+        "description": "Parfait pour le développement web. Éditeur 'Try it Yourself' très pratique.",
+        "topics": ["HTML", "CSS", "JavaScript", "SQL", "Python"],
+        "level": "Débutant - Intermédiaire",
+        "language": "Anglais"
+      },
+      {
+        "name": "MDN Web Docs",
+        "url": "https://developer.mozilla.org/",
+        "description": "Documentation officielle Mozilla. Référence ultime pour HTML, CSS, JavaScript et APIs web.",
+        "topics": ["Web development", "JavaScript", "APIs"],
+        "level": "Débutant - Expert",
+        "language": "Anglais et Français"
+      }
+    ],
+    "bonus": [
+      {
+        "name": "LeetCode",
+        "url": "https://leetcode.com/",
+        "description": "Entraînement aux algorithmes et préparation aux entretiens techniques des GAFAM.",
+        "topics": ["Algorithmes", "Entretiens techniques"],
+        "level": "Intermédiaire - Avancé",
+        "language": "Anglais"
+      },
+      {
+        "name": "Real Python",
+        "url": "https://realpython.com/",
+        "description": "Tutoriels Python de très haute qualité, du débutant à l'expert.",
+        "topics": ["Python", "Data Science", "Web"],
+        "level": "Débutant - Expert",
+        "language": "Anglais"
+      }
+    ]
+  },
+  
+  "english": {
+    "essential": [
+      {
+        "name": "Duolingo",
+        "url": "https://www.duolingo.com/",
+        "description": "Apprentissage gamifié et addictif. 10-15 minutes par jour suffisent.",
+        "topics": ["Vocabulaire", "Grammaire", "Compréhension"],
+        "level": "Débutant - Intermédiaire",
+        "type": "App mobile & Web"
+      },
+      {
+        "name": "BBC Learning English",
+        "url": "https://www.bbc.co.uk/learningenglish",
+        "description": "Contenus audio/vidéo gratuits de qualité BBC. Accent britannique authentique.",
+        "topics": ["Actualité", "Grammaire", "Vocabulaire", "Prononciation"],
+        "level": "Débutant - Avancé",
+        "type": "Web & Podcasts"
+      }
+    ],
+    "recommended": [
+      {
+        "name": "Cambridge Dictionary",
+        "url": "https://dictionary.cambridge.org/",
+        "description": "Dictionnaire de référence avec audio pour la prononciation (UK & US).",
+        "topics": ["Définitions", "Prononciation", "Exemples"],
+        "level": "Tous niveaux",
+        "type": "Web"
+      },
+      {
+        "name": "Grammarly",
+        "url": "https://www.grammarly.com/",
+        "description": "Correcteur grammatical intelligent en temps réel. Indispensable pour écrire sans fautes.",
+        "topics": ["Grammaire", "Style", "Orthographe"],
+        "level": "Intermédiaire - Avancé",
+        "type": "Extension navigateur"
+      },
+      {
+        "name": "Anki Flashcards",
+        "url": "https://apps.ankiweb.net/",
+        "description": "Système de flashcards avec répétition espacée pour mémoriser du vocabulaire.",
+        "topics": ["Vocabulaire", "Mémorisation"],
+        "level": "Tous niveaux",
+        "type": "App desktop & mobile"
+      },
+      {
+        "name": "EnglishCentral",
+        "url": "https://www.englishcentral.com/",
+        "description": "Apprentissage via vidéos authentiques avec exercices interactifs.",
+        "topics": ["Compréhension orale", "Prononciation"],
+        "level": "Intermédiaire - Avancé",
+        "type": "Web"
+      }
+    ]
+  },
+  
+  "youtube": {
+    "mathematics": [
+      {
+        "name": "3Blue1Brown",
+        "url": "https://www.youtube.com/@3blue1brown",
+        "description": "Visualisations mathématiques exceptionnelles. 'Essence of Linear Algebra' incontournable.",
+        "language": "Anglais (sous-titres)"
+      },
+      {
+        "name": "Exo7Math",
+        "url": "https://www.youtube.com/channel/UC8K_KGjfUjVhpJcpqNL4dGA",
+        "description": "Cours de maths universitaires en français.",
+        "language": "Français"
+      }
+    ],
+    "programming": [
+      {
+        "name": "Corey Schafer",
+        "url": "https://www.youtube.com/@coreyms",
+        "description": "Tutoriels Python clairs et complets. Flask, Django, data science.",
+        "language": "Anglais"
+      },
+      {
+        "name": "freeCodeCamp",
+        "url": "https://www.youtube.com/@freecodecamp",
+        "description": "Cours complets gratuits sur tous les langages.",
+        "language": "Anglais"
+      }
+    ],
+    "datascience": [
+      {
+        "name": "StatQuest with Josh Starmer",
+        "url": "https://www.youtube.com/@statquest",
+        "description": "Statistiques et ML expliqués simplement et clairement.",
+        "language": "Anglais"
+      },
+      {
+        "name": "Sentdex",
+        "url": "https://www.youtube.com/@sentdex",
+        "description": "Python, ML, Deep Learning, trading, computer vision.",
+        "language": "Anglais"
+      }
+    ],
+    "general": [
+      {
+        "name": "Crash Course",
+        "url": "https://www.youtube.com/@crashcourse",
+        "description": "Séries éducatives sur la science, l'histoire, l'économie. Format court.",
+        "language": "Anglais (sous-titres)"
+      },
+      {
+        "name": "TED-Ed",
+        "url": "https://www.youtube.com/@TEDEd",
+        "description": "Leçons animées courtes sur des sujets variés.",
+        "language": "Anglais (sous-titres)"
+      }
+    ],
+    "english": [
+      {
+        "name": "English with Lucy",
+        "url": "https://www.youtube.com/@EnglishwithLucy",
+        "description": "Cours d'anglais britannique clair et structuré.",
+        "language": "Anglais"
+      }
+    ]
+  }
+}

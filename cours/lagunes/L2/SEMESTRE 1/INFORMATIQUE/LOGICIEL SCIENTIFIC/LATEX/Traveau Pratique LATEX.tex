@@ -1,0 +1,112 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\author{Kra Kouamé Gérard}
+\title{TP: LOGICIEL LATEX}
+\begin{document}
+\maketitle
+\emph{Exercice} 3. 
+La fonction $\Gamma$: $\mathbb{R^*_+}$ $\longrightarrow$ $\mathbb{R}$, définie par $$\Gamma(x)=\int_{0}^{+\infty}t^{x-\alpha}e^{-t}dt$$ 
+ et appelée ``la fonction Gamma (d'Euler)", généralise la factorielle.
+En effet, $\forall{n}$ $\in$ $\mathbb{N^*}$,$\Gamma(n+1)$=n!. On peut aussi montrer que:
+$$\Gamma\biggl(\frac{1}{2}\biggr)=\sqrt{\pi},$$
+en se ramenant à l’intégrale de Gauss $ I=\int_{0}^{+\infty}e^{-t^2}dt$ (par changement de variables), cette dernière valant $\frac{\sqrt{\pi}}{2}$ (par exemple en considérant le carré de $I$
+et un passage en coordonnées polaires).\\
+
+$\upsilon$
+\emph{Exercice} 4. 
+Pour  $\mathbb{M}\in \mathcal{M}_n(\mathbb{Z})$,\\
+$$\mathbb{M} \in GL_n(\mathbb{Z})\Longleftrightarrow det \mathbb{M}=\pm{1}$$\\
+
+
+\emph{Exercice} 6.
+Écrivons le moment magnétique.
+$$\overrightarrow{\mathcal{M}}=\frac{1}{2}\iiint_\mathcal{V}\overrightarrow{OP}\Lambda\overrightarrow{j}(P)d\tau           \text{($\mathcal{V}$ étant un volume).}$$ \\
+ 
+
+
+\emph{Exercice} 9.
+Soit $\displaystyle{a_1},\ldots,\displaystyle{a_k}$ $\in\mathbb{N^*}.$
+Supposons les $\displaystyle{a_i}$ premiers entre eux dans leur ensemble (pour i $\in \lbrace1,\ldots,k\rbrace$) et notons,pour n $\geq{1}$, un le nombre de k-uplets ($\displaystyle{a_1},\ldots,\displaystyle{a_k}$)$\in$ $\mathbb{N}^k$ tels que $\displaystyle{\sum_{i=1}^{k}a_ix_i=n}.$
+Aors $$U_{n}\underset{+\infty}{\sim}\frac{1}{a_{1}a_{2}\ldots}\frac{n^{k-1}}{(k-1)!}.$$\\
+
+\emph{Exercice} 10.
+Pour avoir la valeur d’une intégrale, deux moyens existent :
+\begin{enumerate}
+\item Calculer sa valeur exacte. Différents outils peuvent être utilisés, en particulier :
+\begin{itemize}
+\item  la règle des invariants de Bioche :
+\itemize
+\item si $ -x\leftarrow {x}$ est un invariant, on utilise u=$\cos{x}$,
+\item si c'est $\pi{-x}\leftarrow{x}$, on utilise u=$\sin{x}$,
+\item si c'est  $\pi{-x}\leftarrow{x}$, on utilise u=$\tan{x}$;
+\end{itemize}
+\begin{itemize}
+\item le théorème des résidus ;
+\item l'égalité de Plancherel-Parseval.
+\end{itemize}
+\item Calculer une valeur approchée. On distingue deux types de méthodes :
+\begin{description}
+\item (a) des méthodes déterministes, contenant:
+\description
+\item i. les méthodes de Newton-Cotes,
+\item ii. les méthodes de Gauss ;
+\end{description}
+\begin{description}
+\item (b) une méthode probabiliste : la méthode de Monte-Carlo.
+\end{description}
+\end{enumerate}.\\
+
+
+\emph{Exercice} 11.  À savoir sur les méthodes de quadrature :
+$$\begin{tabular}{|c|c|}
+\hline
+Méthode & ordre\\
+\hline
+\hline
+Rectangles à gauche & 0\\
+Rectangles à droite & 0\\
+Point milieu & 1\\
+\hline
+Trapèzes & 1\\
+\hline
+Simpson & 3\\
+\hline
+\end{tabular}$$.\\
+
+\emph{Exercice} 16.
+%(avec \vdots). Pour tout (a1, . . . , an) ∈ Kn
+Pour tout $(a_{1},\ldots, a_{n})\in\mathbb{K}^{n}$, le déterminant de\\
+Vandermonde est:\\
+$$V(a_1,\ldots,a_n)=
+\begin{vmatrix}
+1 & a_1 &\cdots  & {a_1}^{n-1} \\ 
+1 & a_2 & \cdots & {a_2}^{n-1}\\ 
+\vdots & \vdots & \ddots & \vdots \\ 
+1 & a_n &\dots  & {a_n}^{n-1}
+\end{vmatrix}=\prod_{{1}\leq{i}\leq{j}\leq{n}}(a_j-a_i).$$
+$
+$\\
+\emph{Exercice} 17.
+Soit $(u_{n})_{n\in\mathbb{N}}$ définie par $u_{0}\in\left]0,\frac{\pi}{2}\right]$ et\\
+ $\forall{n}\in\mathbb{N},u_{n+1}=\sin(u_{n}).$ Alors on peut montrer successivement que:
+ $$\lim_{n \to +\infty} u_{n}=0,$$
+ $$u_{n}\underset{+\infty}{\sim}\sqrt{\frac{3}{n}} ,$$
+ $$u_{n}\underset{+\infty}{=}\sqrt{\frac{3}{n}}-\underset{=\circ\left(\frac{\ln{n}}{n\sqrt{n}}\right)}{\underbrace{\frac{3\sqrt{3}}{10}\frac{\ln{n}}{n\sqrt{n}}+\circ\left(\frac{\ln{n}}{n\sqrt{n}}\right)}.}$$\\
+ 
+ \emph{Exercice} 18\ Soit $\begin{array}{clcl}
+  \\f : &  \mathbb{R}\backslash\lbrace{0}\rbrace & \to & \mathbb{R}\\
+      &  \; \;x & \mapsto & \frac{\sin{x}}{x}\\
+\end{array}$. On peut prolonger $f$ par\\continuité en $\sin_c(x)=\begin{cases} f({x}) \;\;\; si\ x\in \left]-\infty,0 \right[\cup\left]0,+\infty\right[& \\ 1\; \;\;\;\;\;\;\; sinon \end{cases}$.\\
+
+
+ Si on note $\Delta_{t}=\frac{(t_f-t_0)}{(N-1)}$ la longeur d'un pas de temps alors   $\forall n\geq 0,\ y_{n+1}=y_{n}+\Delta_{t}(-ky_{n} + r)$
+ On reconnait une suite arithmético-géométrique, et on en déduit que
+$y_{n}=(1-k\Delta_{t})^{n}\left(y_{0}-\frac{r}{k}\right)+\frac{r}{k}$
+
+$\overline{X}=\frac{1}{n}\sum_{i=1}^{n}X_i$
+\end{document} 

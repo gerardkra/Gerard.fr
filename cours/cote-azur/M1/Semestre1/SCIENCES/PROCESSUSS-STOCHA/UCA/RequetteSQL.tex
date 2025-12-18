@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+
+Soit $P(n)$ la proposition que l'équation
+\[a^n - b^n = (a - b) \sum_{k=0}^{n-1} a^k b^{n-1-k}\]
+est vraie pour tout $n \in \mathbb{N}^*$.
+
+\textbf{Base de l'induction (n = 1):}
+
+Vérifions d'abord si $P(1)$ est vraie :
+\[a^1 - b^1 = a - b\]
+L'équation est vérifiée lorsque $n = 1$.
+
+\textbf{Hypothèse d'induction:}
+
+Supposons maintenant que $P(k)$ est vraie pour un certain $k \in \mathbb{N}^*$, c'est-à-dire que
+\[a^k - b^k = (a - b) \sum_{i=0}^{k-1} a^i b^{k-1-i}\].
+
+\textbf{Étape de l'induction:}
+
+Nous devons montrer que $P(k+1)$ est également vraie. Considérons l'expression $a^{k+1} - b^{k+1}$ :
+\[a^{k+1} - b^{k+1} = a \cdot a^k - b \cdot b^k\]
+
+Factorisons $a$ dans le premier terme et $b$ dans le deuxième terme :
+\[= a \cdot a^k - b \cdot b^k = a^k(a - b) - b^k(a - b)\]
+
+Factorisons $a - b$ :
+\[= (a - b) \cdot a^k - b^k(a - b)\]
+
+Regroupons les termes avec $(a - b)$ :
+\[= (a - b) \cdot (a^k - b^k)\]
+
+Maintenant, nous pouvons utiliser l'hypothèse d'induction :
+\[= (a - b) \cdot [(a - b) \sum_{i=0}^{k-1} a^i b^{k-1-i}]\]
+
+Distribuons la somme et simplifions :
+\[= (a - b) \sum_{i=0}^{k-1} a^{i+1} b^{k-1-i} - (a - b) \sum_{i=0}^{k-1} a^i b^{k-i}\]
+
+Regroupons les termes de la somme :
+\[= (a - b) \sum_{i=1}^{k} a^i b^{k-i} - (a - b) \sum_{i=0}^{k-1} a^i b^{k-i}\]
+
+Les termes se simplifient :
+\[= (a - b) [a^k b^0 - a^0 b^k]\]
+\[= (a - b) [a^k - b^k]\]
+
+En utilisant l'hypothèse d'induction, nous obtenons :
+\[= (a - b) \sum_{i=0}^{k} a^{i} b^{k-i}\]
+
+Cela montre que $P(k+1)$ est également vraie.
+
+Par conséquent, par le principe de l'induction, l'équation est démontrée pour tout $n \in \mathbb{N}^*$.
+
+\end{document}

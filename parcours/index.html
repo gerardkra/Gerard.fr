@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mon Parcours Académique | Gérard Kra</title>
+  <meta name="description" content="Découvrez mon parcours académique complet - De l'Université des Lagunes à Epitech" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <style>
+    .parcours-hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+
+    .parcours-hero h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .journey-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .journey-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-top: 5px solid;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--text-color);
+    }
+
+    .journey-card.lagunes { border-top-color: #0066cc; }
+    .journey-card.uca { border-top-color: #e4032e; }
+    .journey-card.epitech { border-top-color: #00a8ff; }
+
+    .journey-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+
+    .journey-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .journey-card h3 {
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+      font-size: 1.5rem;
+    }
+
+    .journey-period {
+      color: #888;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .journey-degree {
+      font-weight: 600;
+      margin: 1rem 0;
+      font-size: 1.1rem;
+    }
+
+    .journey-stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .journey-stat {
+      text-align: center;
+    }
+
+    .journey-stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-color);
+    }
+
+    .journey-stat-label {
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .timeline-visual {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 3rem;
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .timeline-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      margin: 2rem 0;
+    }
+
+    .timeline-line::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, #0066cc, #e4032e, #00a8ff);
+      z-index: 0;
+    }
+
+    .timeline-point {
+      background: var(--card-bg);
+      border: 4px solid;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      position: relative;
+      z-index: 1;
+      box-shadow: var(--shadow);
+    }
+
+    .timeline-point.lagunes { border-color: #0066cc; }
+    .timeline-point.uca { border-color: #e4032e; }
+    .timeline-point.epitech { border-color: #00a8ff; }
+
+    @media (max-width: 768px) {
+      .parcours-hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .timeline-line {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .timeline-line::before {
+        width: 4px;
+        height: 100%;
+        left: 50%;
+        top: 0;
+        background: linear-gradient(to bottom, #0066cc, #e4032e, #00a8ff);
+      }
+
+      .timeline-point {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../about.html">À propos</a>
+        <a href="index.html" class="active">Parcours</a>
+        <a href="../ressources/index.html">Ressources</a>
+        <a href="../professionnel/index.html">Professionnel</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a class="btn btn-outline" href="../CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <!-- Google Translate Widget -->
+  <div id="google_translate_element"></div>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a> → <strong>Parcours Académique</strong>
+    </div>
+
+    <section class="parcours-hero slide-in">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">🎓</div>
+      <h1>Mon Parcours Académique</h1>
+      <p style="font-size: 1.1rem; opacity: 0.95; max-width: 700px; margin: 0 auto;">
+        De l'Université des Lagunes en Côte d'Ivoire à Epitech en France, 
+        découvrez mon parcours universitaire complet avec tous mes cours et documents.
+      </p>
+    </section>
+
+    <!-- Timeline visuelle -->
+    <section class="timeline-visual slide-in">
+      <h2 style="text-align: center; margin-bottom: 2rem;">🗺️ Ma trajectoire</h2>
+      <div class="timeline-line">
+        <div class="timeline-point lagunes" title="Université des Lagunes">🎓</div>
+        <div class="timeline-point uca" title="Université Côte d'Azur">🎓</div>
+        <div class="timeline-point epitech" title="Epitech">💻</div>
+      </div>
+      <div style="display: flex; justify-content: space-between; text-align: center; margin-top: 1.5rem;">
+        <div style="flex: 1;">
+          <strong>2020-2023</strong><br/>
+          <span style="color: #888;">Abidjan, CI</span>
+        </div>
+        <div style="flex: 1;">
+          <strong>2023-2025</strong><br/>
+          <span style="color: #888;">Nice, FR</span>
+        </div>
+        <div style="flex: 1;">
+          <strong>2025-2028</strong><br/>
+          <span style="color: #888;">Nice → Bordeaux</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats globales -->
+    <section class="card slide-in">
+      <h2 style="text-align: center; margin-bottom: 2rem;">📊 En chiffres</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; text-align: center;">
+        <div>
+          <div style="font-size: 3rem; font-weight: 700; color: var(--accent-color);">3</div>
+          <div style="color: #888;">Universités</div>
+        </div>
+        <div>
+          <div style="font-size: 3rem; font-weight: 700; color: var(--accent-color);">5+</div>
+          <div style="color: #888;">Années d'études</div>
+        </div>
+        <div>
+          <div style="font-size: 3rem; font-weight: 700; color: var(--accent-color);">60+</div>
+          <div style="color: #888;">Matières étudiées</div>
+        </div>
+        <div>
+          <div style="font-size: 3rem; font-weight: 700; color: var(--accent-color);">200+</div>
+          <div style="color: #888;">Documents partagés</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Les 3 universités -->
+    <section>
+      <h2 class="section-title">🏫 Mes formations</h2>
+      <div class="journey-cards">
+        
+        <a href="universite-lagunes.html" class="journey-card lagunes slide-in">
+          <div class="journey-icon">🎓</div>
+          <h3>Université des Lagunes</h3>
+          <p class="journey-period">📍 Abidjan, Côte d'Ivoire | 2021-2023</p>
+          <p class="journey-degree">Licence Mathématiques & Applications</p>
+          <p style="margin: 1rem 0; color: #888; line-height: 1.6;">
+            Formation fondamentale en mathématiques pures et appliquées. Algèbre, analyse, probabilités et statistiques.
+          </p>
+          <div class="journey-stats">
+            <div class="journey-stat">
+              <div class="journey-stat-number">3</div>
+              <div class="journey-stat-label">Années</div>
+            </div>
+            <div class="journey-stat">
+              <div class="journey-stat-number">40+</div>
+              <div class="journey-stat-label">Cours</div>
+            </div>
+            <div class="journey-stat">
+              <div class="journey-stat-number">100+</div>
+              <div class="journey-stat-label">Documents</div>
+            </div>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <span class="btn">Voir les cours →</span>
+          </div>
+        </a>
+
+        <a href="universite-cote-azur.html" class="journey-card uca slide-in">
+          <div class="journey-icon">🎓</div>
+          <h3>Université Côte d'Azur</h3>
+          <p class="journey-period">📍 Nice, France | 2023-2025</p>
+          <p class="journey-degree">Master 2 Ingénierie Mathématique</p>
+          <p style="margin: 1rem 0; color: #888; line-height: 1.6;">
+            Spécialisation en modélisation mathématique, optimisation, machine learning et data science.
+          </p>
+          <div class="journey-stats">
+            <div class="journey-stat">
+              <div class="journey-stat-number">2</div>
+              <div class="journey-stat-label">Années</div>
+            </div>
+            <div class="journey-stat">
+              <div class="journey-stat-number">30+</div>
+              <div class="journey-stat-label">Cours</div>
+            </div>
+            <div class="journey-stat">
+              <div class="journey-stat-number">80+</div>
+              <div class="journey-stat-label">Documents</div>
+            </div>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <span class="btn">Voir les cours →</span>
+          </div>
+        </a>
+
+        <a href="epitech.html" class="journey-card epitech slide-in">
+          <div class="journey-icon">💻</div>
+          <h3>Epitech</h3>
+          <p class="journey-period">📍 Nice puis Bordeaux | 2025-2028</p>
+          <p class="journey-degree">MSc Architecture Systèmes, IA & Big Data</p>
+          <p style="margin: 1rem 0; color: #888; line-height: 1.6;">
+            Formation spécialisée en Big Data, Intelligence Artificielle et Architecture de Systèmes distribués.
+          </p>
+          <div class="journey-stats">
+            <div class="journey-stat">
+              <div class="journey-stat-number">3</div>
+              <div class="journey-stat-label">Années</div>
+            </div>
+            <div class="journey-stat">
+              <div class="journey-stat-number">20+</div>
+              <div class="journey-stat-label">Modules</div>
+            </div>
+            <div class="journey-stat">
+              <div class="journey-stat-number">30+</div>
+              <div class="journey-stat-label">Projets</div>
+            </div>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <span class="btn">Voir les cours →</span>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="card slide-in" style="text-align: center; background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+      <h2 style="color: white;">💡 Tous les documents sont gratuits</h2>
+      <p style="opacity: 0.95; margin: 1rem 0;">
+        Cours, TD, TP, examens et corrections téléchargeables. 
+        Je les mets à jour régulièrement avec de nouveaux contenus.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+        <a href="../ressources/index.html" class="btn" style="background: white; color: #667eea;">📚 Ressources externes</a>
+        <a href="../contact.html" class="btn btn-outline" style="border-color: white; color: white;">📧 Me contacter</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/translation.js"></script>
+</body>
+</html>

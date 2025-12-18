@@ -1,0 +1,5781 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass amsbook
+\begin_preamble
+
+
+%commandes S. Rubenthaler
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Comp}{\mathbb{C}}
+\usepackage{bbm}
+\newcommand{\var}{\mathbb{V}}
+\newcommand{\1}{\mathbbm{1}}
+\newcommand{\heta}{\hat{\eta}}
+\newcommand{\hgamma}{\hat{\gamma}}
+\newcommand{\Bor}{\mathcal{B}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Xtn}{\tilde{X}^n}
+\newcommand{\clawn}{\underset{n\rightarrow
++\infty}{\Longrightarrow}} 
+\newcommand{\convn}{\underset{n\rightarrow
++\infty}{\longrightarrow}} 
+ \newcommand{\p}{\mathbb{P}}
+\newcommand{\pperp}{\perp \! \! \! \perp}
+\newcommand{\lam}{\lambda}
+\newcommand{\convps}{\underset{n\rightarrow +\infty}{\overset{\text{p.s.}}{\longrightarrow}}}
+\newcommand{\convpsm}{\underset{m\rightarrow +\infty}{\overset{\text{p.s.}}{\longrightarrow}}}
+\newcommand{\convproba}{\underset{n\rightarrow +\infty}{\overset{\text{proba.}}{\longrightarrow}}}
+\newcommand{\convloi}{\underset{n\rightarrow +\infty}{\overset{\text{loi}}{\longrightarrow}}}
+\newcommand{\convlp}{\underset{n\rightarrow +\infty}{\overset{L^p}{\longrightarrow}}}
+\newcommand{\convldeux}{\underset{n\rightarrow +\infty}{\overset{L^2}{\longrightarrow}}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\simU}{\sim \mathcal{U}([0;1])}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\Id}{Id}
+\DeclareMathOperator*{\Var}{Var}
+\DeclareMathOperator*{\cov}{Cov}
+
+\date{}
+
+\usepackage{a4wide}
+\usepackage{algorithm}
+
+\usepackage{appendix}
+\usepackage{hyperref}
+\usepackage{url}
+
+
+%\usepackage{enumitem}
+\allowdisplaybreaks
+
+%\usepackage{geometry}
+%\geometry{bindingoffset=2cm}
+
+\numberwithin{equation}{chapter}
+\numberwithin{algorithm}{chapter}
+
+
+
+%Pour numéroter les exercices indépendamment :
+\let\xca\@undefined
+\theoremstyle{definition}
+\newtheorem{xca}{\protect\exercisename}
+\numberwithin{xca}{chapter}
+
+%Pour changer le nom de l'environnement "algorithm"
+\floatname{algorithm}{Programme}
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+eqs-within-sections
+figs-within-sections
+\end_modules
+\maintain_unincluded_children false
+\language french
+\language_package default
+\inputencoding utf8
+\fontencoding T1
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 2
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style french
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 2
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Chapter
+Modélisation des séries stationnaires
+\end_layout
+
+\begin_layout Section
+Auto-corrélation partielle
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Auto-corrélation partielle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Pour un processus stationnaire 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+, le coefficient de corrélation partielle (on dit aussi corrélation partielle)
+ entre 
+\begin_inset Formula $X_{n}$
+\end_inset
+
+ et 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ est 
+\begin_inset Formula 
+\[
+r_{X_{2},\dots,X_{n}}(X_{1},X_{n})=\frac{1}{\sigma(0)}\cov(X_{1}-\E(X_{1}|X_{2},\dots,X_{n-1}),X_{n}-\E(X_{n}|X_{2},\dots,X_{n}))\,,
+\]
+
+\end_inset
+
+le coefficient d'auto-corrélation partielle en 
+\begin_inset Formula $h$
+\end_inset
+
+ est défini par 
+\begin_inset Formula 
+\[
+\begin{cases}
+r(h)=r_{X_{2},\dots,X_{h-1}}(X_{1},X_{h}) & \mbox{ pour }h\geq2\mbox{,}\\
+r(1)=\rho(1)\mbox{,}\\
+r(0)=1\mbox{,}\\
+r(-h)=r(h) & \mbox{ pour }h\leq-1\mbox{.}
+\end{cases}
+\]
+
+\end_inset
+
+Pour un processus stationnaire, 
+\begin_inset Formula 
+\[
+r(h)=r_{X_{n+1},\dots,X_{n+h-1}}(X_{n},X_{n+h})\mbox{ pour tout }n\mbox{.}
+\]
+
+\end_inset
+
+Donc on va pouvoir estimer ces coefficients en faisant des moyennes empiriques
+ (c'est ce que fait la fonction 
+\family typewriter
+pacf 
+\family default
+de 
+\family typewriter
+R
+\family default
+) 
+\end_layout
+
+\begin_layout Section
+Les processus linéaires générales
+\end_layout
+
+\begin_layout Standard
+Soit 
+\begin_inset Formula $\{Y_{t}\}$
+\end_inset
+
+ une série que est observée et une série de bruit 
+\begin_inset Formula $\{e_{t}\}$
+\end_inset
+
+ qui n’est pas observée.
+ Le bruit satisfait les hypothèses classiques.
+\end_layout
+
+\begin_layout Standard
+Nous voudrions écrire 
+\begin_inset Formula $\{Y_{t}\}$
+\end_inset
+
+ comme une combinaison linéaire, c’est-à-dire que 
+\shape italic
+ nous expliquons la série observée par les perturbations aléatoires passées
+\shape default
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=e_{t}+\psi_{1}e_{t-1}+\psi_{2}e_{t-2}+\cdots\label{eq: gen lin}
+\end{equation}
+
+\end_inset
+
+Si c’est une somme infinie, conditions spécifiques doivent être placés sur
+ les coefficients pour que la somme soit convergeant.
+\end_layout
+
+\begin_layout Example
+Soit le cas que 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: gen lin"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ soit sur la forme
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=e_{t}+\psi e_{t-1}+\psi^{2}e_{t-2}+\cdots=\sum_{i=0}^{\infty}\psi^{i}e_{t-i}\quad\psi^{0}=1\label{eq: q-lin}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Ici, la condition pour 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: q-lin"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ soit convergeant est 
+\begin_inset Formula $|\psi|<1$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula $\E(Y_{t})=0$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula $Var(Y_{t})=\frac{\sigma_{e}^{2}}{1-\psi^{2}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula $Cov(Y_{t},Y_{t-1})=\frac{\psi\sigma_{e}^{2}}{1-\psi^{2}}$
+\end_inset
+
+ et 
+\begin_inset Formula $Cov(Y_{t},Y_{t-k})=\frac{\psi^{k}\sigma_{e}^{2}}{1-\psi^{2}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula $Corr(Y_{t},Y_{t-1})=\psi$
+\end_inset
+
+ et 
+\begin_inset Formula $Corr(Y_{t},Y_{t-k})=\psi^{k}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Example
+La processus est stationnaire, l’autocovariance ne dépend pas au temps 
+\begin_inset Formula $t$
+\end_inset
+
+, seulement à décalage du temps (lag) k
+\end_layout
+
+\begin_layout Standard
+Avant de nous lancer dans le reste de la section, nous avons besoin de définir
+ quelques notions.
+ On définit l'opérateur de décalage sur les suites stationnaires:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+L\,:\,(Y_{t})_{t\geq0}\mapsto\left(L(Y)_{t}=\begin{cases}
+Y_{t-1} & \mbox{ si }t\geq1\\
+0 & \mbox{ si }t=0
+\end{cases}\right)_{t\geq0}
+\]
+
+\end_inset
+
+(ici, 
+\begin_inset Formula $(Y_{t})$
+\end_inset
+
+ est une suite stationnaire).
+ Pour un polynôme 
+\begin_inset Formula $P\in\mathbb{C}[X]$
+\end_inset
+
+ (
+\begin_inset Formula $P(X)=\alpha_{0}+\alpha_{1}X+\dots+\alpha_{n}X$
+\end_inset
+
+, 
+\begin_inset Formula $n$
+\end_inset
+
+ étant le degré de 
+\begin_inset Formula $P$
+\end_inset
+
+), nous définissons l'opérateur 
+\begin_inset Formula $P(L)$
+\end_inset
+
+ par
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+P(L)\,:\,(Y_{t})_{t\geq0}\mapsto(P(L)(Y)_{t})\text{ avec }P(L)(Y)_{t}=\begin{cases}
+\alpha Y_{t}+\alpha_{1}Y_{t-1}+\dots+\alpha_{n}Y_{t-n} & \text{ si }t\geq n\,,\\
+0 & \text{ sinon.}
+\end{cases}
+\]
+
+\end_inset
+
+Nous remarquons que pour deux polynômes 
+\begin_inset Formula $P$
+\end_inset
+
+ et Q
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+P(L)Q(L)=(PQ)(L)\,,
+\]
+
+\end_inset
+
+où le produit de gauche est la composition.
+\end_layout
+
+\begin_layout Lemma
+Pour 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ un nombre complexe de module 
+\begin_inset Formula $<1$
+\end_inset
+
+, l’opérateur 
+\begin_inset Formula $1-\lambda L$
+\end_inset
+
+ admet pour inverse 
+\begin_inset Formula 
+\[
+(1-\lambda L)^{-1}=\sum_{k=0}^{+\infty}(\lambda L)^{k}\,.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Pour toute suite stationnaire 
+\begin_inset Formula $(Y_{t})_{t\geq0}$
+\end_inset
+
+, nous regardons à 
+\begin_inset Formula $t$
+\end_inset
+
+ fixé
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+\sum_{k=0}^{+\infty}\left((\lambda L)^{k}Y\right)_{t}=\sum_{k=0}^{t}\lambda^{k}Y_{t-k}\,,
+\]
+
+\end_inset
+
+qui est une somme finie.
+ Donc la suite 
+\begin_inset Formula 
+\[
+\left(\sum_{k=0}^{+\infty}(\lambda L)^{k}Y\right)_{t\geq0}
+\]
+
+\end_inset
+
+est bien définie.
+ Nous avons 
+\begin_inset Formula 
+\begin{multline*}
+Y=(Y_{0},Y_{1},\dots)\overset{\sum_{k=0}^{+\infty}(\lambda L)^{k}}{\longmapsto}(Y_{0},Y_{1}+\lambda Y_{0},Y_{2}+\lambda Y_{1}+\lambda^{2}Y_{2},\dots)\\
+\overset{1-\lambda L}{\longmapsto}(Y_{0},(Y_{1}+\lambda Y_{0})-\lambda Y_{0},(Y_{2}+\lambda Y_{1}+\lambda^{2}Y_{2})-\lambda(Y_{1}+\lambda Y_{0})-\lambda^{2}Y_{0},\dots)\\
+=(Y_{0},Y_{1},Y_{2},\dots)\,.
+\end{multline*}
+
+\end_inset
+
+Donc 
+\begin_inset Formula $(1-\lambda L)\sum_{k=0}^{+\infty}(\lambda L)^{k}=\Id$
+\end_inset
+
+.
+ On montre facilement de même que 
+\begin_inset Formula $\sum_{k=0}^{+\infty}(\lambda L)^{k}(1-\lambda L)=\Id$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Section
+Les processus auto-régressifs 
+\end_layout
+
+\begin_layout Definition
+Un processus 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+ est dit auto-régressif
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Processus auto-régressif
+\end_layout
+
+\end_inset
+
+ d'ordre 
+\begin_inset Formula $p$
+\end_inset
+
+ centré s'il vérifie 
+\begin_inset Formula 
+\begin{equation}
+X_{t}=\epsilon_{t}+\sum_{j=1}^{p}a_{j}X_{t-j}\,,\,\mbox{pour tout }t\geq0\label{eq:ARp}
+\end{equation}
+
+\end_inset
+
+(avec 
+\begin_inset Formula $p\in\N^{*}$
+\end_inset
+
+, 
+\begin_inset Formula $a_{p}\neq0$
+\end_inset
+
+) avec des 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ qui forment un bruit blanc centré de variance 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+ (
+\begin_inset Formula $p\in\N^{*}$
+\end_inset
+
+, 
+\begin_inset Formula $a_{1},\dots,a_{p}\in\R$
+\end_inset
+
+), tels que 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ est indépendant de 
+\begin_inset Formula $X_{t-1}$
+\end_inset
+
+, 
+\begin_inset Formula $X_{t-2}$
+\end_inset
+
+, … pour tout 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Par convention
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula $X_{-k}=0$
+\end_inset
+
+ pour tout 
+\begin_inset Formula $k$
+\end_inset
+
+ dans 
+\begin_inset Formula $\N^{*}$
+\end_inset
+
+.
+ On dira aussi que 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+ est un processus 
+\begin_inset Formula $AR(p)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition
+On dit que le 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ "s'explique " par les 
+\begin_inset Formula $p$
+\end_inset
+
+ observations précédentes (
+\begin_inset Formula $X_{t-1},X_{t-2},\cdots,X_{t-p}$
+\end_inset
+
+).
+ Dans cette définition, le processus 
+\begin_inset Formula $(\epsilon_{t})$
+\end_inset
+
+ s'appelle processus des innovations
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Innovations
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Example
+
+\series bold
+AR(1)
+\series default
+
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=aY_{t-1}+e_{t}\label{eq: AR1}
+\end{equation}
+
+\end_inset
+
+
+\series bold
+Nous supposons que la série est stationnaire, et de moyenne zéro
+\series default
+ 
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula $Var(Y_{t})=\frac{\sigma_{e}^{2}}{1-a^{2}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula $Cov(Y_{t},Y_{t-1})=\frac{a\sigma_{e}^{2}}{1-a^{2}}$
+\end_inset
+
+ et 
+\begin_inset Formula $Cov(Y_{t},Y_{t-k})=a^{k}\frac{\sigma_{e}^{2}}{1-a^{2}}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula $Corr(Y_{t},Y_{t-1})=a$
+\end_inset
+
+ et 
+\begin_inset Formula $Corr(Y_{t},Y_{t-k})=a^{k}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Example
+De la variance on pourrais suspecter la condition 
+\begin_inset Formula $|a|<1$
+\end_inset
+
+ mais pour le justifier rigoureusement on doit d’aller plus loin sur les
+ propriétés d’un modèle AR.
+\end_layout
+
+\begin_layout Example
+
+\series bold
+L’inversion d’un modèle AR(1) et la condition pour la stationnarité 
+\end_layout
+
+\begin_layout Example
+Nous rendrons le modèle AR(1) sous la forme récursif (c’est à dire, nous
+ chercherons à faire la recursion sur les valeurs précédents de la série)
+ 
+\begin_inset Formula 
+\begin{align*}
+Y_{t}= & aY_{t-1}+e_{t}=e_{t}+a\underbrace{(aY_{t-2}+e_{t-1})}_{Y_{t-1}}
+\end{align*}
+
+\end_inset
+
+Si nous répétons la substitution 
+\begin_inset Formula $k-1$
+\end_inset
+
+ fois, nous arrivons à 
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=e_{t}+ae_{t-1}+a^{2}e_{t-2}+\cdots+a^{k-1}e_{t-k+1}+a^{k}e_{t-k}\label{eq: rec AR}
+\end{equation}
+
+\end_inset
+
+Ce qui resemble à le modèle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: q-lin"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, et en plus, si nous laisserions 
+\begin_inset Formula $k\to\infty$
+\end_inset
+
+, alors nous récupérons modèle 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: q-lin"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ et la condition pour la stationnarité.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+
+\series bold
+AR(2)
+\series default
+ 
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=a_{1}Y_{t-1}+a_{2}Y_{t-2}+e_{t}\label{eq: AR2}
+\end{equation}
+
+\end_inset
+
+en utilisant l' opérateur de décalage 
+\begin_inset Formula $L$
+\end_inset
+
+, avec 
+\begin_inset Formula $L(Y_{t})=Y_{t-1}$
+\end_inset
+
+ et en general 
+\begin_inset Formula $L^{k}(Y_{t})=Y_{t-k}$
+\end_inset
+
+ alors 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: AR2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ pourrait être écrit: 
+\begin_inset Formula 
+\begin{equation}
+(1-a_{1}L-a_{2}L^{2})Y_{t}=e_{t}\label{eq: LAR2}
+\end{equation}
+
+\end_inset
+
+par 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: LAR2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ on appelle polynôme caractéristique: 
+\begin_inset Formula 
+\begin{equation}
+1-a_{1}z-a_{2}z^{2}=0\label{eq: pol char}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Pour que 
+\begin_inset Formula $(1-\phi_{1}L-\phi_{2}L^{2})$
+\end_inset
+
+ soit invertible, il faut placer les conditions sur les racines de 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: pol char"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+ Après, changer le côté de 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: LAR2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{align}
+ & \psi(L)=\frac{1}{1-a_{1}L-a_{2}L^{2}}\label{psiL}\\
+ & Y_{t}=\psi(L)e_{t}\label{AR noise}
+\end{align}
+
+\end_inset
+
+Alors pour inverser le modèle AR à MA on a besoin de developer 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "psiL"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ aux puissants de 
+\begin_inset Formula $L$
+\end_inset
+
+ par la série géométrique,
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\[
+\frac{1}{1-a_{1}L-a_{2}L^{2}}=1+a_{1}L+a_{2}L^{2}+\cdots
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Ainsi de 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "AR noise"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=e_{t}+a_{1}e_{t-1}+a_{2}e_{t-2}+\cdots\label{eq: AR2 inv}
+\end{equation}
+
+\end_inset
+
+Nous arrivons à la forme inversée infini.
+ Pour preciser la forme des coefficients 
+\begin_inset Formula $\psi_{i}$
+\end_inset
+
+ à 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: AR2 inv"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ , soit 
+\begin_inset Formula $r_{1},r_{2}$
+\end_inset
+
+ les racines du polynôme caractéristique et 
+\begin_inset Formula $R_{1,2}=\frac{1}{r_{1,2}}$
+\end_inset
+
+ , on a la factorisation
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\[
+\frac{1}{1-a_{1}z-a_{2}z^{2}}=\frac{1}{(1-R_{1}z)(1-R_{2}z)}=\frac{A}{1-R_{1}z}+\frac{B}{1-R_{2}z}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\[
+A=\frac{r_{2}}{r_{2}-r_{2}}\quad B=\frac{-r_{1}}{r_{2}-r_{1}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+\begin_inset Formula 
+\begin{equation}
+\frac{1}{1-a_{1}z-a_{2}z^{2}}=\sum_{i=0}^{\infty}(AR_{1}^{i}+BR_{2}^{i})z^{i}\label{eq: inversion pol}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+C’est facile de verifier par 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: inversion pol"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ que 
+\begin_inset Formula $\psi_{0}=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Par cette derivation, il est clair que on a besoin d’ étudier les racines
+ du polynôme caractéristique.
+\end_layout
+
+\begin_layout Example
+
+\series bold
+Etude des racines du polynôme caractéristique
+\end_layout
+
+\begin_layout Example
+Pour AR(2) d’être invertible et alors stationnaire il faut que ses racines
+ sont hors du circle unitaire.
+ Nous montrerons quelques conditions pour les coefficients de 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: AR2"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ Nous savons que.
+ 
+\begin_inset Formula 
+\[
+r_{1,2}=\frac{a_{2}\sqrt{a_{1}+4a_{2}}}{-2a_{2}}
+\]
+
+\end_inset
+
+Et 
+\begin_inset Formula 
+\[
+R_{1}=\frac{1}{r_{2}}=\frac{a_{1}-\sqrt{a_{1}+4a_{2}}}{2}\quad R_{2}=\frac{a_{1}+\sqrt{a_{1}+4a_{2}}}{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Par 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: inversion pol"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ est claire qu’il faut 
+\begin_inset Formula $|R_{i}|<1$
+\end_inset
+
+ for 
+\begin_inset Formula $i=1,2$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Example
+Racines 
+\series bold
+réelles
+\series default
+ Pour avoir deux solutions reels il faut 
+\begin_inset Formula $a_{1}^{2}+4a_{2}\geq0$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+-1<\frac{a_{1}-\sqrt{a_{1}+4a_{2}}}{2}<\frac{a_{1}+\sqrt{a_{1}+4a_{2}}}{2}<1
+\]
+
+\end_inset
+
+en faisant les calcules nécessaires on arrive à les conditions 
+\begin_inset Formula 
+\[
+a_{2}-a_{1}<1\quad et\quad a_{2}+a_{1}<1
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Racines complexes
+\series bold
+ 
+\series default
+Pour avoir deux solutions complexes il faut 
+\begin_inset Formula $a_{1}^{2}+4a_{2}<0$
+\end_inset
+
+ Ici, les 
+\begin_inset Formula $R_{1,2}$
+\end_inset
+
+ sont complex conjugates et 
+\begin_inset Formula 
+\[
+|R_{1}|=|R_{2}|<1\Leftrightarrow|R_{1}|^{2}<1
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+|R_{1}|^{2}=\frac{a_{1}^{2}+(-a_{1}^{2}-4a_{2})}{4}=-a_{2}
+\]
+
+\end_inset
+
+Et alors 
+\begin_inset Formula $|a_{2}|<1$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Proposition
+\begin_inset CommandInset label
+LatexCommand label
+name "prop:existence-AR-stationnaire"
+
+\end_inset
+
+On associe le polynôme de 
+\begin_inset Formula $\R[X]$
+\end_inset
+
+ suivant à l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ARp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) 
+\begin_inset Formula 
+\[
+A(X)=1-a_{1}X-\dots-a_{p}X^{p}\,.
+\]
+
+\end_inset
+
+Si les racines (dans 
+\begin_inset Formula $\mathbb{C}$
+\end_inset
+
+) de ce polynôme sont toutes de module strictement supérieur à 
+\begin_inset Formula $1$
+\end_inset
+
+ alors il existe un processus stationnaire 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+ vérifiant (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ARp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) et tel que 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ est le bruit d'innovation 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Bruit d'innovation
+\end_layout
+
+\end_inset
+
+ pour ce processus (c'est à dire que, pour tout 
+\begin_inset Formula $t$
+\end_inset
+
+, 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ est indépendant de 
+\begin_inset Formula $X_{t-1},X_{t-2},\dots$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Remark
+La condition " racines de 
+\begin_inset Formula $A$
+\end_inset
+
+ de module 
+\begin_inset Formula $>$
+\end_inset
+
+ 1 " n'est pas nécessaire à l'existence d'une suite stationnaire vérifiant
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ARp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Voir le chapitre 5 de l'édition en anglais de 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gourieroux-montfort-1997"
+literal "true"
+
+\end_inset
+
+ pour plus de détails.
+ 
+\end_layout
+
+\begin_layout Proof
+On peut toujours développer la fraction rationnelle 
+\begin_inset Formula $1/A(z)$
+\end_inset
+
+ (
+\begin_inset Formula $z\in\mathbb{C}$
+\end_inset
+
+) dans un voisinage de 
+\begin_inset Formula $0$
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{multline*}
+\frac{1}{A(z)}=\frac{1}{1-a_{1}z-\dots-a_{p}z^{p}}=1-(a_{1}z+\dots+a_{p}z^{p})-(a_{1}z+\dots+a_{p}z^{p})^{2}-\dots\\
+=1+\alpha_{1}z+\alpha_{2}z^{2}+\dots
+\end{multline*}
+
+\end_inset
+
+pour certains coefficients 
+\begin_inset Formula $\alpha_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $\alpha_{2}$
+\end_inset
+
+, … (on remarque que ces coefficients sont dans 
+\begin_inset Formula $\R$
+\end_inset
+
+).
+ Plus précisément, nous avons pour tout 
+\begin_inset Formula $z$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+\frac{1}{A(z)}=\prod_{i=1}^{p}\left(\frac{1}{1-u_{i}z}\right),
+\]
+
+\end_inset
+
+où l'ensemble des racines de 
+\begin_inset Formula $A$
+\end_inset
+
+ est 
+\begin_inset Formula $\{1/u_{1},\dots,1/u_{p}\}$
+\end_inset
+
+ (les racines apparaissent avec leur multiplicité).
+ Donc, pour 
+\begin_inset Formula $z$
+\end_inset
+
+ tel que 
+\begin_inset Formula $|z|<\inf_{i}(1/|u_{i}|)$
+\end_inset
+
+, nous pouvons développer en produit de séries entières 
+\begin_inset Formula 
+\[
+\frac{1}{A(z)}=\prod_{i=1}^{p}\left(\sum_{k=0}^{+\infty}u_{i}^{k}z^{k}\right)\,.
+\]
+
+\end_inset
+
+Quand on développe le produit ci-dessus, le coefficient de 
+\begin_inset Formula $z^{n}$
+\end_inset
+
+ est 
+\begin_inset Formula 
+\[
+\alpha_{n}=\sum_{\begin{array}{c}
+j_{1},\dots,j_{p}\geq0\\
+j_{1}+\dots+j_{p}=n
+\end{array}}u_{1}^{j_{1}}\dots u_{p}^{j_{p}}\,.
+\]
+
+\end_inset
+
+Donc 
+\begin_inset Formula 
+\begin{equation}
+|\alpha_{n}|\leq(\sup_{i}|u_{i}|)^{n}\frac{(n+1)^{p}}{p!}\label{eq:maj-alpha}
+\end{equation}
+
+\end_inset
+
+(nous utilisons
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula $\#\{(j_{1},\dots,j_{p})\in(\N)^{p}\,:\,j_{1}+\dots+j_{p}=n\}=\frac{(n+1)^{p}}{p!}$
+\end_inset
+
+ , qui nécessite un petit calcul).
+\end_layout
+
+\begin_layout Proof
+On suppose que l'on dispose d'un bruit blanc 
+\begin_inset Formula $(\epsilon_{k})_{k\in\Z}$
+\end_inset
+
+.
+ On fixe 
+\begin_inset Formula $t$
+\end_inset
+
+ dans 
+\begin_inset Formula $\N$
+\end_inset
+
+ et on s'intéresse à la suite 
+\begin_inset Formula $(Y_{k}=\epsilon_{t}+\alpha_{1}\epsilon_{t-1}+\dots+\alpha_{k}\epsilon_{t-k})_{k\geq1}$
+\end_inset
+
+.
+ La série 
+\begin_inset Formula $\sum_{n\geq1}|\alpha_{n}|$
+\end_inset
+
+ est convergente (petit exercice sur la convergence des séries, c'est ici
+ que l'on utilise que 
+\begin_inset Formula $\sup_{i}|u_{i}|<1$
+\end_inset
+
+) donc la série 
+\begin_inset Formula $\sum_{n\geq1}\alpha_{n}^{2}$
+\end_inset
+
+ aussi.
+ En particulier, pour tout 
+\begin_inset Formula $\delta>0$
+\end_inset
+
+, il existe 
+\begin_inset Formula $N$
+\end_inset
+
+ dans 
+\begin_inset Formula $\N$
+\end_inset
+
+ tel que 
+\begin_inset Formula 
+\[
+n\geq N\Rightarrow\forall k\geq0\,,\,\alpha_{n}^{2}+\alpha_{n+1}^{2}+\dots+\alpha_{n+k}^{2}<\delta\,.
+\]
+
+\end_inset
+
+Pour tout 
+\begin_inset Formula $n>N$
+\end_inset
+
+ et 
+\begin_inset Formula $k\geq0$
+\end_inset
+
+, nous avons alors 
+\begin_inset Formula 
+\begin{eqnarray*}
+\E((Y_{n}-Y_{n+k})^{2}) & = & \E((\alpha_{n+1}\epsilon_{t-n-1}+\dots+\alpha_{n+k}\epsilon_{t-n-k})^{2})\\
+ & = & (\alpha_{n+1}^{2}+\dots+\alpha_{n+k}^{2})\sigma^{2}\\
+ & < & \delta
+\end{eqnarray*}
+
+\end_inset
+
+Donc la suite 
+\begin_inset Formula $(Y_{n})_{n\geq1}$
+\end_inset
+
+ est une suite de Cauchy dans 
+\begin_inset Formula $L^{2}(\p)$
+\end_inset
+
+ (l'espace des variables aléatoire réelles de carré intégrable, muni de
+ la norme 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+).
+ Comme cette espace est complet, la suite 
+\begin_inset Formula $(Y_{n})_{n\geq1}$
+\end_inset
+
+ converge dans 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ vers une limite que nous noterons 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+.
+ Nous pouvons écrire 
+\begin_inset Formula 
+\begin{equation}
+X_{t}=\epsilon_{t}+\alpha_{1}\epsilon_{t-1}+\alpha_{2}\epsilon_{t-2}+\dots\label{eq:AM-ordre-infini}
+\end{equation}
+
+\end_inset
+
+(en considérant le terme de droite comme une limite dans 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Proof
+Nous aimerions montrer que cette limite a aussi lieu p.s.
+ Soit 
+\begin_inset Formula $\delta>0$
+\end_inset
+
+.
+ For all 
+\begin_inset Formula $n\geq1$
+\end_inset
+
+, 
+\begin_inset Formula 
+\begin{eqnarray*}
+\p(|Y_{n}-X_{t}|\geq\delta) & = & \p((\alpha_{n+1}\epsilon_{t-n-1}+\alpha_{n+2}\epsilon_{t-n-1}+\dots)^{2}\geq\delta^{2})\\
+\mbox{(inégalité de Markov)} & \leq & \frac{\E((\alpha_{n+1}\epsilon_{t-n-1}+\alpha_{n+2}\epsilon_{t-n-2}+\dots)^{2})}{\delta^{2}}\\
+ & = & \frac{\sigma^{2}(\alpha_{n+1}^{2}+\alpha_{n+2}^{2}+\dots)}{\delta^{2}}\,.
+\end{eqnarray*}
+
+\end_inset
+
+Et donc 
+\begin_inset Formula 
+\begin{eqnarray*}
+\sum_{n\geq1}\p(|Y_{n}-X_{t}|\geq\delta) & \leq & \sum_{n\geq1}\frac{\sigma^{2}(\alpha_{n+1}^{2}+\alpha_{n+2}^{2}+\dots)}{\delta^{2}}\\
+ & = & \frac{\sigma^{2}}{\delta^{2}}\sum_{n\geq2}(n-1)\alpha_{n}^{2}\\
+ & < & \infty
+\end{eqnarray*}
+
+\end_inset
+
+(petit exercices sur les séries à partir de l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:maj-alpha"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+)).
+ Le lemme de Borel-Cantelli nous dit que, p.s., il existe un 
+\begin_inset Formula $N$
+\end_inset
+
+ tel que, pour 
+\begin_inset Formula $n>N$
+\end_inset
+
+, 
+\begin_inset Formula $|Y_{n}-X_{t}|<\delta$
+\end_inset
+
+.
+ Ceci est valable pour tout 
+\begin_inset Formula $\delta>0$
+\end_inset
+
+, donc (attention, nous sautons une étape de la démonstration) 
+\begin_inset Formula $Y_{n}\convps X_{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Proof
+Montrons que les 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ que nous venons de définir vérifient la relation de récurrence (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ARp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Nous avons, pour tout 
+\begin_inset Formula $t$
+\end_inset
+
+, 
+\begin_inset Formula 
+\begin{eqnarray*}
+X_{t}-a_{1}X_{t-1}-\dots-a_{p}X_{t-p} & = & \epsilon_{t}+\alpha_{1}\epsilon_{t-1}+\alpha_{2}\epsilon_{t-2}+\dots\\
+ &  & -a_{1}(\epsilon_{t-1}+\alpha_{1}\epsilon_{t-2}+\alpha_{2}\epsilon_{t-3}+\dots)\\
+ &  & -\dots\\
+ &  & -a_{p}(\epsilon_{t-p}+\alpha_{1}\epsilon_{t-p-1}+\alpha_{2}\epsilon_{t-p-2}+\dots)\\
+\mbox{(convention }\alpha_{0}=1\mbox{)} & = & \epsilon_{t}+\epsilon_{t-1}(\alpha_{1}-a_{1})+\epsilon_{t-2}(\alpha_{2}-a_{1}\alpha_{1}-a_{3})\\
+ &  & +\dots\\
+ &  & +\epsilon_{t-k}(\alpha_{k}-\sum_{1\leq i\leq k\wedge p}\alpha_{k-i}a_{i})\\
+ &  & +\dots
+\end{eqnarray*}
+
+\end_inset
+
+Nous avons, pour tout 
+\begin_inset Formula $z$
+\end_inset
+
+ dans un voisinage adéquat de 
+\begin_inset Formula $0$
+\end_inset
+
+, 
+\begin_inset Formula 
+\begin{eqnarray*}
+1 & = & A(z)\times\frac{1}{A(z)}\\
+ & = & (1-a_{1}z-\dots-a_{p}z^{p})\times(1+\alpha_{1}z+\alpha_{2}z^{2}+\dots)\,.
+\end{eqnarray*}
+
+\end_inset
+
+Si nous développons ce dernier produit, nous trouvons une série entière
+ dans laquelle le coefficient de 
+\begin_inset Formula $z^{n}$
+\end_inset
+
+ (
+\begin_inset Formula $n\geq1$
+\end_inset
+
+) est 
+\begin_inset Formula 
+\[
+\alpha_{n}-\sum_{1\leq i\leq n\wedge p}\alpha_{k-i}a_{i},
+\]
+
+\end_inset
+
+qui doit être nul puisque la série vaut 
+\begin_inset Formula $1$
+\end_inset
+
+.
+ Donc 
+\begin_inset Formula 
+\[
+X_{t}-a_{1}X_{t-1}-\dots-a_{p}X_{t-p}=\epsilon_{t}\,.
+\]
+
+\end_inset
+
+On montre facilement que la suite 
+\begin_inset Formula $(X_{t})_{t\geq1}$
+\end_inset
+
+ est sationnaire (exercice) (voir la définition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "def:processus-stationnaire"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Proposition
+S'il existe un processus stationnaire 
+\begin_inset Formula $(X_{t})_{t\geq0}$
+\end_inset
+
+ satisfaisant la relation de récurrence de l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ARp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) alors sa fonction d'auto-covariance vérifie
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+\text{pour \ensuremath{h>0}, }\sigma(h)=a_{1}\sigma(h-1)+a_{2}\sigma(h-2)+\dots+a_{p}\sigma(h-p)\,,\label{eq:rec-cov-AR}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\text{et }\sigma(0)=\sigma^{2}+a_{1}\sigma(1)+a_{2}\sigma(2)+\dots+a_{p}\sigma(p)\,,
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proposition
+et sa fonction d'auto-corrélation vérifie 
+\begin_inset Formula 
+\[
+\text{pour }h>1\text{, }\rho(h)=a_{1}\rho(h-1)+a_{2}\rho(h-2)+\dots+a_{p}\rho(h-p)\,.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Nous avons pour tout 
+\begin_inset Formula $t$
+\end_inset
+
+ et tout 
+\begin_inset Formula $h\geq1$
+\end_inset
+
+, 
+\begin_inset Formula 
+\begin{eqnarray*}
+\cov(X_{t}X_{t+h}) & = & \E(X_{t}X_{t+h})\\
+\sigma(h) & = & \E(X_{t}(\epsilon_{t+h}+\sum_{i=1}^{p}a_{i}X_{t+h-i}))\\
+\sigma(h) & = & 0+\sum_{i=1}^{p}a_{i}\sigma(h-i)
+\end{eqnarray*}
+
+\end_inset
+
+et 
+\begin_inset Formula 
+\begin{eqnarray*}
+\sigma(0)=\var(X_{t}) & = & \E(X_{t}(\epsilon_{t}+\sum_{i=1}^{p}a_{i}X_{t-i}))\\
+ & = & \E(X_{t}\epsilon_{t})+\sum_{i=1}^{p}a_{i}\sigma(i)\\
+ & = & \E((\epsilon_{t}+\sum_{i=1}^{p}a_{i}X_{t-i})\epsilon_{t})+\sum_{i=1}^{p}a_{i}\sigma(i)\\
+\text{(car }\epsilon_{t}\text{ ind. de }X_{j}\text{ pour }j<t\text{)} & = & \sigma^{2}+\sum_{i=1}^{p}a_{i}\sigma(i)\,.
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Le polynôme caractéristique de la relation de récurrence de l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rec-cov-AR"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) est 
+\begin_inset Formula 
+\begin{eqnarray*}
+B(X)=X^{p}-a_{1}X^{p-1}-\dots-a_{p} & = & X^{p}\left(1-\frac{a_{1}}{X}-\dots-\frac{a_{p}}{X^{p}}\right)\\
+ & = & X^{p}A\left(\frac{1}{X}\right)\,.
+\end{eqnarray*}
+
+\end_inset
+
+Donc, si les racines de 
+\begin_inset Formula $A$
+\end_inset
+
+ sont de modules 
+\begin_inset Formula $>1$
+\end_inset
+
+, alors celle de 
+\begin_inset Formula $B$
+\end_inset
+
+ sont de module 
+\begin_inset Formula $<1$
+\end_inset
+
+.
+ Si les racines de 
+\begin_inset Formula $B$
+\end_inset
+
+ sont distinctes égales à 
+\begin_inset Formula $\lambda_{1},\lambda_{2},\dots,\lambda_{p}$
+\end_inset
+
+, les solutions de (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rec-cov-AR"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) sont de la forme 
+\begin_inset Formula 
+\[
+\sigma(h)=\sum_{i=1}^{p}c_{i}\lambda_{i}^{h}
+\]
+
+\end_inset
+
+(voir 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gourdon-2008"
+literal "true"
+
+\end_inset
+
+, p.
+ 196 pour plus de détails).
+ On en déduit le résultat suivant.
+\end_layout
+
+\begin_layout Lemma
+S'il existe un processus stationnaire 
+\begin_inset Formula $(X_{t})_{t\geq0}$
+\end_inset
+
+ satisfaisant la relation de récurrence de l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ARp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) et si le polynôme de la relation de récurrence a des racines qui sont
+ toutes de module 
+\begin_inset Formula $>1$
+\end_inset
+
+, alors la fonction d'auto-covariance du processus décroît exponentiellement
+ quand 
+\begin_inset Formula $h\rightarrow+\infty$
+\end_inset
+
+ (et donc sa fonction d'auto-corrélation a le même comportement).
+ 
+\end_layout
+
+\begin_layout Proposition
+S'il existe un processus stationnaire 
+\begin_inset Formula $(X_{t})_{t\geq0}$
+\end_inset
+
+ satisfaisant la relation de récurrence de l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ARp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) alors sa fonction d'auto-corrélation partielle vérifie
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+r(h)=0\text{ si }h\geq p+1\,.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Soit 
+\begin_inset Formula $h\geq p+1$
+\end_inset
+
+.
+ Nous calculons pour 
+\begin_inset Formula $t$
+\end_inset
+
+ quelconque
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{eqnarray*}
+\E(X_{t+h}|X_{t+1},\dots,X_{t+h-1}) & = & \E(\epsilon_{t+h}+a_{1}X_{t+h-1}+\dots+a_{p}X_{t+h-p}|X_{t+1},\dots,X_{t+h-1})\\
+ & = & a_{1}X_{t+h-1}+\dots+a_{p}X_{t+h-p}\,,
+\end{eqnarray*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+X_{t+h}-\E(X_{t+h}|X_{t+1},\dots,X_{t+h-1})=\epsilon_{t+h}\,,
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{multline*}
+\E(X_{t}|X_{t+1},\dots,X_{t+h-1})=\\
+\E\left(-\frac{1}{a_{p}}(X_{t+p}-\epsilon_{t+p}-a_{1}X_{t+p-1}-\dots-a_{p-1}X_{t+1})|X_{t+1},\dots,X_{t+h-1}\right)=\\
+-\frac{1}{a_{p}}(X_{t+p}-a_{1}X_{t+p-1}-\dots-a_{p-1}X_{t+1})\,,
+\end{multline*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+X_{t}-\E(X_{t}|X_{t+1},\dots,X_{t+h-1})=\frac{\epsilon_{t+p}}{a_{p}}\,.
+\]
+
+\end_inset
+
+Donc 
+\begin_inset Formula 
+\[
+\cov(X_{t+h}-\E(X_{t+h}|X_{t+1},\dots,X_{t+h-1}),X_{t}-\E(X_{t}|X_{t+1},\dots,X_{t+h-1}))=0\,.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Les processus en moyenne mobile
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Processus en moyenne mobile
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Definition
+Un processus en moyenne mobile d'ordre 
+\begin_inset Formula $q$
+\end_inset
+
+ est un processus de la forme 
+\begin_inset Formula 
+\begin{equation}
+X_{t}=\epsilon_{t}+b_{1}\epsilon_{t-1}+\dots+b_{q}\epsilon_{t-q}\,,\,\mbox{pour tout }t\geq0\label{eq:MA(q)}
+\end{equation}
+
+\end_inset
+
+(avec 
+\begin_inset Formula $q\in\N^{*}$
+\end_inset
+
+, 
+\begin_inset Formula $b_{q}\neq0$
+\end_inset
+
+) avec des 
+\begin_inset Formula $(\epsilon_{t})$
+\end_inset
+
+ qui forment un bruit blanc centré de variance 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+.
+ Par convention
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula $\epsilon_{-k}=0$
+\end_inset
+
+ pour tout 
+\begin_inset Formula $k$
+\end_inset
+
+ dans 
+\begin_inset Formula $\N^{*}$
+\end_inset
+
+.
+ On dira aussi que 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+ est un processus 
+\begin_inset Formula $MA(q)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Pour un bruit blanc centré 
+\begin_inset Formula $(\epsilon_{t})$
+\end_inset
+
+, un tel processus existe toujours et est toujours stationnaire.
+\end_layout
+
+\begin_layout Proposition
+L'auto-covariance d'un processus 
+\begin_inset Formula $MA(q)$
+\end_inset
+
+ vérifiant l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MA(q)"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) vérifie, pour 
+\begin_inset Formula $h\geq0$
+\end_inset
+
+, 
+\begin_inset Formula 
+\[
+\sigma(h)=\begin{cases}
+\sigma^{2}\sum_{k=0}^{q-h}b_{k}b_{k+h} & \mbox{ si }h\leq q\,,\\
+0 & \mbox{ si }h>q\,,
+\end{cases}
+\]
+
+\end_inset
+
+sous la convention 
+\begin_inset Formula $b_{0}=1$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Proof
+Nous calculons 
+\begin_inset Formula 
+\begin{eqnarray*}
+\E(X_{t}X_{t+h}) & = & \E\left(\left(\sum_{k=0}^{q}\epsilon_{t-k}b_{k}\right)\times\left(\sum_{k=0}^{q}\epsilon_{t+h-k}b_{k}\right)\right)\\
+ & = & \begin{cases}
+0 & \mbox{ si }h>q\,,\\
+\sum_{k=q}^{q-h}\E(\epsilon_{t-k}b_{k}\epsilon_{t-k}b_{k+h}) & \mbox{ sinon .}
+\end{cases}
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De la proposition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "prop:existence-AR-stationnaire"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ et de l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AM-ordre-infini"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), nous déduisons le corollaire suivant.
+\end_layout
+
+\begin_layout Corollary
+Sous les hypothèses de la proposition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "prop:existence-AR-stationnaire"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, le processus 
+\begin_inset Formula $AR(p)$
+\end_inset
+
+ stationnaire vérifiant l'équation de récurrence (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ARp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) peut s'écrire comme un processus 
+\begin_inset Formula $AM$
+\end_inset
+
+ d'ordre infini (au sens de l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:AM-ordre-infini"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) (dans laquelle la limite a lieu p.s.
+ et dans 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+La démonstration du résultat suivant étant similaire à la démonstration
+ de la proposition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "prop:existence-AR-stationnaire"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+, nous le citons comme un simple corollaire.
+\end_layout
+
+\begin_layout Corollary
+Si 
+\begin_inset Formula $(X_{t})_{t\geq0}$
+\end_inset
+
+ est un processus 
+\begin_inset Formula $AM(q)$
+\end_inset
+
+ satisfaisant l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MA(q)"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) et si le polynôme 
+\begin_inset Formula $B(X)=1+b_{1}X+\dots+b_{q}X^{q}$
+\end_inset
+
+ n'admet que des racines de module 
+\begin_inset Formula $>1$
+\end_inset
+
+ , alors 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+ peut s'écrire comme un processus 
+\begin_inset Formula $AR$
+\end_inset
+
+ d'ordre infini et tel que 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ est le bruit d'innovation pour ce processus.
+\begin_inset Newline newline
+\end_inset
+
+ En particulier, sa fonction d'auto-corrélation partielle vérifie
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+r(h)\underset{h\rightarrow+\infty}{\longrightarrow}0\,.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En effet, en partant de l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:MA(q)"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), on peut exprimer 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ en fonction de 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+, 
+\begin_inset Formula $X_{t-1}$
+\end_inset
+
+, … pour tout 
+\begin_inset Formula $t$
+\end_inset
+
+ (de même qu'en partant de l'équation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:ARp"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+), on peut exprimer 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ en fonction de 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+, 
+\begin_inset Formula $\epsilon_{t-1}$
+\end_inset
+
+, … pour tout 
+\begin_inset Formula $t$
+\end_inset
+
+).
+ Pour plus de détail voir 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gourieroux-montfort-1997"
+literal "true"
+
+\end_inset
+
+ (ces questions sont développées au chapitre 5 de l'édition en anglais de
+ ce livre).
+\end_layout
+
+\begin_layout Section
+Les processus mixtes ARMA(p,q).
+ 
+\end_layout
+
+\begin_layout Definition
+Un processus auto-régressif en moyenne mobile
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Processus auto-régressif en moyenne mobile
+\end_layout
+
+\end_inset
+
+ d'ordres 
+\begin_inset Formula $p$
+\end_inset
+
+, 
+\begin_inset Formula $q$
+\end_inset
+
+ (tels que 
+\begin_inset Formula $p\times q\neq0$
+\end_inset
+
+) est un processus qui peut s'écrire 
+\begin_inset Formula 
+\begin{equation}
+X_{t}=\sum_{k=1}^{p}a_{k}X_{t-k}+\sum_{j=0}^{q}b_{j}\epsilon_{t-j}\,,\,\mbox{pour tout }t\geq0\,,\label{eq:def-ARMA}
+\end{equation}
+
+\end_inset
+
+où les 
+\begin_inset Formula $(\epsilon_{j})$
+\end_inset
+
+ sont des bruits blancs centrés de variance 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+.
+ Par convention
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula $X_{-k}=\epsilon_{-k}$
+\end_inset
+
+ pour tout 
+\begin_inset Formula $k$
+\end_inset
+
+ dans 
+\begin_inset Formula $\N^{*}$
+\end_inset
+
+.
+ On dira aussi que 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+ est un processus 
+\begin_inset Formula $ARMA(p,q)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition
+On peut toujours écrire 
+\begin_inset Formula 
+\[
+X_{t}-a_{1}X_{t-1}-\dots-a_{p}X_{t-p}=\epsilon_{t}+b_{1}\epsilon_{t-1}+\dots+b_{q}\epsilon_{t-q}\,,
+\]
+
+\end_inset
+
+d'où la relation 
+\begin_inset Formula 
+\begin{eqnarray*}
+\cov(X_{t+h}-a_{1}X_{t+h-1}-\dots-a_{p}X_{t+h-p},X_{t}) & = & \sigma(h)-a_{1}\sigma(h-1)-\dots-a_{p}\sigma(h-p)\\
+ & = & \cov(\epsilon_{t+h}+b_{1}\epsilon_{t+h-1}+\dots+b_{q}\epsilon_{t+h-q},X_{t})\,.
+\end{eqnarray*}
+
+\end_inset
+
+Cette dernière quantité est nulle dès que 
+\begin_inset Formula $h>q$
+\end_inset
+
+.
+ Les auto-covariances d'un processus 
+\begin_inset Formula $ARMA(p,q)$
+\end_inset
+
+ vérifie donc la même relation de récurrence que celles d'un processus 
+\begin_inset Formula $AR(p)$
+\end_inset
+
+ à partir d'un certain rang.
+ Donc ces auto-covariances (ainsi que les auto-corrélations correspondantes)
+ convergent exponentiellement vite vers 
+\begin_inset Formula $0$
+\end_inset
+
+ à l'infini.
+ 
+\end_layout
+
+\begin_layout Proposition
+\begin_inset CommandInset label
+LatexCommand label
+name "prop:racines-communes"
+
+\end_inset
+
+On s'intéresse à la relation de récurrence (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:def-ARMA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) ci-dessus.
+ On définit les polynômes 
+\begin_inset Formula 
+\[
+A(X)=1-a_{1}X-\dots-a_{p}X^{p}\,,\,B(X)=1+b_{1}X+\dots+b_{q}X^{q}\,.
+\]
+
+\end_inset
+
+Si les racines de 
+\begin_inset Formula $A$
+\end_inset
+
+ et 
+\begin_inset Formula $B$
+\end_inset
+
+ sont de modules 
+\begin_inset Formula $>1$
+\end_inset
+
+, alors il existe un processus stationnaire vérifiant la relation (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:def-ARMA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) et tel que 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ est le bruit d'innovation pour ce processus.
+\end_layout
+
+\begin_layout Proposition
+Si les racines de 
+\begin_inset Formula $A$
+\end_inset
+
+ et 
+\begin_inset Formula $B$
+\end_inset
+
+ sont de module 
+\begin_inset Formula $>1$
+\end_inset
+
+ alors : " 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+ ne vérifie pas de relation de récurrence plus courte que (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:def-ARMA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+) " implique " 
+\begin_inset Formula $A$
+\end_inset
+
+ et 
+\begin_inset Formula $B$
+\end_inset
+
+ n'ont pas de racine commune ".
+ Si on suppose, de plus, que les 
+\begin_inset Formula $(\epsilon_{t})$
+\end_inset
+
+ on des densités par rapport à la mesure de Lebesgue, alors les deux proposition
+s sont équivalentes.
+ 
+\end_layout
+
+\begin_layout Remark
+Pour plus de détail voir 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "gourieroux-montfort-1997"
+literal "true"
+
+\end_inset
+
+ (ces questions sont développées au chapitre 5 de l'édition en anglais de
+ ce livre).
+ 
+\end_layout
+
+\begin_layout Proof
+[Démonstration partielle de la proposition 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "prop:racines-communes"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+]Supposons que 
+\begin_inset Formula $A$
+\end_inset
+
+ et 
+\begin_inset Formula $B$
+\end_inset
+
+ n’ont que des racines de module 
+\begin_inset Formula $>1$
+\end_inset
+
+.
+ Supposons, de plus, que 
+\begin_inset Formula $A$
+\end_inset
+
+ et 
+\begin_inset Formula $B$
+\end_inset
+
+ ont une racine commune, nous allons montrer que 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+ et 
+\begin_inset Formula $(\epsilon_{t})$
+\end_inset
+
+ vérifie une relation plus courte que (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:def-ARMA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).
+ Notons 
+\begin_inset Formula $1/\lambda$
+\end_inset
+
+ une racine commune à 
+\begin_inset Formula $A$
+\end_inset
+
+ et 
+\begin_inset Formula $B$
+\end_inset
+
+.
+ Nous avons donc 
+\begin_inset Formula $p\geq1$
+\end_inset
+
+ et 
+\begin_inset Formula $q\geq1$
+\end_inset
+
+.
+ Nous pouvons écrire 
+\begin_inset Formula 
+\[
+A(X)=(1-\lambda X)A_{1}(X)\,,\,B(X)=(1-\lambda X)B_{1}(X)
+\]
+
+\end_inset
+
+avec 
+\begin_inset Formula $A_{1}$
+\end_inset
+
+ polynôme de degré 
+\begin_inset Formula $p-1$
+\end_inset
+
+ et 
+\begin_inset Formula $B_{1}$
+\end_inset
+
+ polynôme de degré 
+\begin_inset Formula $q-1$
+\end_inset
+
+.
+ Nous avons 
+\begin_inset Formula 
+\begin{eqnarray*}
+A(L)X & = & B(L)\epsilon\\
+(1-\lambda L)A_{1}(L)X & = & (1-\lambda L)B_{1}(L)\epsilon\\
+(1-\lambda L)^{-1}(1-\lambda L)A_{1}(L)X & = & (1-\lambda L)^{-1}(1-\lambda L)B_{1}(L)\epsilon\\
+A_{1}(L)(X) & = & B_{1}(L)\epsilon\,.
+\end{eqnarray*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Soient 
+\begin_inset Formula 
+\[
+A(X)=\left(1-\frac{X}{2}\right)\left(1-\frac{X}{3}\right)\,,\,B(X)=\left(1-\frac{X}{2}\right)\left(1+\frac{X}{4}\right)\,.
+\]
+
+\end_inset
+
+Nous avons 
+\begin_inset Formula 
+\begin{eqnarray*}
+A(X) & = & 1-\frac{5}{6}X+\frac{X^{2}}{6}\,,\\
+B(X) & = & 1-\frac{X}{4}-\frac{X^{2}}{8}\,.
+\end{eqnarray*}
+
+\end_inset
+
+On s’intéresse au processus 
+\begin_inset Formula $ARMA(2,2)$
+\end_inset
+
+ (stationnaire) vérifiant la relation de récurrence
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{equation}
+X_{t}-\frac{5}{6}X_{t-1}+\frac{1}{6}X_{t-2}=\epsilon_{t}-\frac{1}{4}\epsilon_{t-1}-\frac{1}{8}\epsilon_{t-2}\,.\label{eq:rec-01}
+\end{equation}
+
+\end_inset
+
+Les polynômes caractéristiques de cette relation sont les 
+\begin_inset Formula $A$
+\end_inset
+
+, 
+\begin_inset Formula $B$
+\end_inset
+
+ ci-dessus.
+ Ils ont une racine commune (
+\begin_inset Formula $2$
+\end_inset
+
+).
+ Nous allons montrer que 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+, 
+\begin_inset Formula $(\epsilon_{t})$
+\end_inset
+
+ vérifient une relation de récurrence plus courte que (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:rec-01"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+).Soit la suite 
+\begin_inset Formula 
+\begin{eqnarray*}
+(Y_{0},Y_{1},Y_{2,}\dots,Y_{t},\dots) & = & (X_{0},X_{1}-\frac{5}{6}X_{0},X_{2}-\frac{5}{6}X_{1}+\frac{1}{6}X_{0},\dots,X_{t}-\frac{5}{6}X_{t-1}+\frac{1}{6}X_{t-2},\dots)\\
+ & = & (\epsilon_{0},\epsilon_{1}-\frac{1}{4}\epsilon_{0},\epsilon_{2}-\frac{1}{4}\epsilon_{1}-\frac{1}{8}\epsilon_{0},\dots,\epsilon_{t}-\frac{1}{4}\epsilon_{t-1}-\frac{1}{8}\epsilon_{t-2},\dots)\,.
+\end{eqnarray*}
+
+\end_inset
+
+Par convention, 
+\begin_inset Formula $X_{-k}=\epsilon_{-k}=0$
+\end_inset
+
+ pour tout 
+\begin_inset Formula $k$
+\end_inset
+
+ dans 
+\begin_inset Formula $\N^{*}$
+\end_inset
+
+.
+ Et donc
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+X_{0}=X_{0}-\frac{5}{6}X_{-1}+\frac{1}{6}X_{-2}\,,\,X_{1}=X_{1}-\frac{5}{6}X_{0}+\frac{1}{6}X_{-1}\,.
+\]
+
+\end_inset
+
+Calculons maintenant 
+\begin_inset Formula 
+\[
+(Y_{0},Y_{1}+\frac{1}{2}Y_{0},Y_{2}+\frac{1}{2}Y_{1}+\frac{1}{2^{2}}Y_{2},\dots,Y_{t}+\frac{1}{2}Y_{t-1}+\dots+\frac{1}{2^{t}}Y_{0},\dots)\,.
+\]
+
+\end_inset
+
+Le terme général de cette suite est 
+\begin_inset Formula 
+\[
+Y_{t}+\frac{1}{2}Y_{t-1}-\dots+\frac{1}{2^{t}}Y_{0}=\sum_{k=0}^{+\infty}\frac{1}{2^{k}}Y_{t-k}\,,
+\]
+
+\end_inset
+
+puisque les termes de la somme sont nuls à parti d’un certain rang.
+ Donc, pour tout 
+\begin_inset Formula $t\geq0$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{eqnarray*}
+Y_{t}+\frac{1}{2}Y_{t-1}-\dots+\frac{1}{2^{t}}Y_{0} & = & \sum_{k=0}^{+\infty}\frac{1}{2^{k}}\left(X_{t-k}-\frac{5}{6}X_{t-k-1}+\frac{1}{6}X_{t-k-2}\right)\\
+ & = & X_{t}+\left(-\frac{5}{6}X_{t-1}+\frac{1}{2}X_{t-1}\right)+\sum_{j=2}^{+\infty}X_{t-j}\left(\frac{1}{2^{j}}-\frac{1}{2^{j-1}}\frac{5}{6}+\frac{1}{2^{j-2}}\frac{1}{6}\right)\\
+ & = & X_{t}-\frac{1}{3}X_{t-1}+\sum_{j=2}^{+\infty}X_{t-j}\frac{1}{2^{j}}A(2)\\
+ & = & X_{t}-\frac{1}{3}X_{t-1}\,.
+\end{eqnarray*}
+
+\end_inset
+
+De même
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{eqnarray*}
+Y_{t}+\frac{1}{2}Y_{t-1}-\dots+\frac{1}{2^{t}}Y_{0} & = & \sum_{k=0}^{+\infty}\frac{1}{2^{k}}\left(\epsilon_{t-k}-\frac{1}{4}\epsilon_{t-k-1}-\frac{1}{8}\epsilon_{t-k-2}\right)\\
+ & = & \epsilon_{t}+\left(-\frac{1}{4}\epsilon_{t-1}+\frac{1}{2}\epsilon_{t-1}\right)+\sum_{j=2}^{+\infty}\epsilon_{t-j}\left(\frac{1}{2^{j}}-\frac{1}{2^{j-1}}\frac{1}{4}-\frac{1}{2^{j-2}}\frac{1}{8}\right)\\
+ & = & \epsilon_{t}+\frac{1}{4}\epsilon_{t-1}+\sum_{j=2}^{+\infty}\epsilon_{t-j}\frac{1}{2^{j}}B(2)\\
+ & = & \epsilon_{t}+\frac{1}{4}\epsilon_{t-1}\,.
+\end{eqnarray*}
+
+\end_inset
+
+Nous avons donc la relation
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+X_{t}-\frac{1}{3}X_{t-1}=\epsilon_{t}+\frac{1}{4}\epsilon_{t-1}\,,\,\mbox{pour tout }t\in\N^{*}\,.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Tableau des propriétés
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Modèle 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $MA(q)$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $AR(p)$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $ARMA(p,q)$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+auto-corrélation 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\rho(h)=0$
+\end_inset
+
+ si 
+\begin_inset Formula $h>q$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\rho(h)\underset{h\rightarrow+\infty}{\longrightarrow}0$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\rho(h)\underset{h\rightarrow+\infty}{\longrightarrow}0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+auto-corrélation partielle 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $r(h)\underset{h\rightarrow+\infty}{\longrightarrow}0$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $r(h)=0$
+\end_inset
+
+ si 
+\begin_inset Formula $h>p$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $r(h)\underset{h\rightarrow+\infty}{\longrightarrow}0$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Tableau des propriétés
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Voir à la fin du chapitre pour des illustrations de ce tableau (pages tirées
+ du polycopié 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "jacques"
+literal "true"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Ces propriétés servent à identifier la nature des séries temporelles.
+ Sous 
+\family typewriter
+R
+\family default
+, on utilisera les fonctions 
+\family typewriter
+acf
+\family default
+, 
+\family typewriter
+pacf 
+\family default
+qui tracent, respectivement, les 
+\begin_inset Formula $\widehat{\rho}(h)$
+\end_inset
+
+ et les 
+\begin_inset Formula $\widehat{r}(h)$
+\end_inset
+
+ (les auto-corrélations empiriques et les auto-corrélations partielles empirique
+s).
+ Le logiciel trace en plus un niveau bleu horizontal en 
+\begin_inset Formula $y=m_{\alpha}$
+\end_inset
+
+ tel que pour tout 
+\begin_inset Formula $h$
+\end_inset
+
+, 
+\begin_inset Formula $\p(|\widehat{\rho}(h)|\geq m_{\alpha}|\rho(h)=0)=\alpha$
+\end_inset
+
+ (en général, le niveau 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ est fixé à 
+\begin_inset Formula $0,05$
+\end_inset
+
+) (la situation est la même pour les auto-corrélations partielles empiriques).
+ On peut fixer 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ en ajoutant l’option : 
+\family typewriter
+acf(…,ci=alpha)
+\family default
+.
+ Un 
+\begin_inset Formula $\widehat{\rho}(h)$
+\end_inset
+
+ sous la courbe bleue est donc non significatif (au niveau 
+\begin_inset Formula $\alpha$
+\end_inset
+
+).
+ Le raisonnement est le suivant : on suppose 
+\begin_inset Formula $\rho(h)=0$
+\end_inset
+
+, si 
+\begin_inset Formula $|\widehat{\rho}(h)|<m_{\alpha}$
+\end_inset
+
+, on considère qu’il n’est pas nécessaire de revenir sur cette hypothèse
+ de départ.
+ La probabilité de rejeter à tort l’hypothèse " nulle " (
+\begin_inset Formula $\rho(h)=0$
+\end_inset
+
+) est 
+\begin_inset Formula $\alpha$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Mais quand on veut utiliser le tableau ci-dessus, on cherche à savoir à
+ partir de quel indice les 
+\begin_inset Formula $\rho(h)$
+\end_inset
+
+ sont nuls (par exemple), pas si l’un d’eux est nul
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Voir 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://xkcd.com/882/
+\end_layout
+
+\end_inset
+
+ sur le problème des tests multiples.
+\end_layout
+
+\end_inset
+
+.
+ Si on s’intéresse à la nullité de 
+\begin_inset Formula $(\rho(n),\rho(n+1),\dots,\rho(n+l-1))$
+\end_inset
+
+, on pourrait vouloir trouver 
+\begin_inset Formula $\beta$
+\end_inset
+
+ tel que 
+\begin_inset Formula 
+\[
+\p(\exists h\in\{n,n+1,\dots,n+l-1\}\mbox{ , }\widehat{\rho}(h)\geq m_{\beta}|(\rho(n),\dots,\rho(n+l-1))=(0,\dots,0))\leq\alpha\mbox{ .}
+\]
+
+\end_inset
+
+Les 
+\begin_inset Formula $\widehat{\rho}(h)$
+\end_inset
+
+ sont supposés indépendants donc la probabilité ci-dessus est 
+\begin_inset Formula 
+\begin{eqnarray*}
+1-\p(\forall h,|\widehat{\rho}(h)|<m_{\beta}|\dots) & = & 1-(1-\beta)^{l}\\
+ & = & l\beta+o(\beta)
+\end{eqnarray*}
+
+\end_inset
+
+(quand 
+\begin_inset Formula $\beta$
+\end_inset
+
+ est petit).
+ Donc on prend, en général, 
+\begin_inset Formula $\beta=\alpha/l$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Si on appelle les fonctions 
+\family typewriter
+acf
+\family default
+ ou 
+\family typewriter
+pacf
+\family default
+ sans préciser le 
+\family typewriter
+lag.max
+\family default
+, le logiciel le fixe par défaut à 
+\begin_inset Formula $10\log_{10}(n)$
+\end_inset
+
+ (où 
+\begin_inset Formula $n$
+\end_inset
+
+ est la longueur de la série).
+ La raison est que l’on ne veut pas prendre le 
+\family typewriter
+lag.max 
+\family default
+trop grand parce que les moyennes empiriques ne convergent pas bien pour
+ 
+\begin_inset Formula $h$
+\end_inset
+
+ grand.
+ On conseille en général de prendre 
+\begin_inset Formula $n\geq50$
+\end_inset
+
+ et 
+\begin_inset Formula $h\leq n/4$
+\end_inset
+
+ (voir 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "brockwell-davis-2002"
+literal "true"
+
+\end_inset
+
+, p.
+ 60 et 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "box-jenkins-reinsel-2008"
+literal "true"
+
+\end_inset
+
+, p.
+ 32).
+\end_layout
+
+\begin_layout Section
+Les modèles des séries non-stationnaires
+\end_layout
+
+\begin_layout Standard
+N’importe quand une série n’a pas moyenne constant, elle est non-stationnaire.
+ Pour une série d’être stationnaire il faut que son moyen et sa covariance
+ ne dépend pas au temps 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Nous commençons par quelques examples des processus non-stationaires.
+ Dans toutes les examples essayez vous-mêmes de calculer l'espérance, covariance
+ etc pour devenir à l'aise avec les sommes infinies et calculs.
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "Example 1"
+
+\end_inset
+
+ Soit un processus 
+\begin_inset Formula $X_{t},\E[X_{t}]=0$
+\end_inset
+
+ et une fonction de moyenne non-constant 
+\begin_inset Formula $\mu_{t},\E[\mu_{t}]=c(t)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+Y_{t}=\mu_{t}+X_{t}
+\]
+
+\end_inset
+
+est une série non-stationnaire.
+ On peut aller plus loin dans cette “catégorie” des modèles non-stationnaires
+ en écrivant l’example à la forme 
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=a+\delta t+\psi(L)e_{t}\label{eq: lin trend}
+\end{equation}
+
+\end_inset
+
+
+\begin_inset Formula $\psi(L)$
+\end_inset
+
+ comme à 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "psiL"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ , une partie de la série a une tendance linaire et l’autre est stationnaire.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\series bold
+Devoir 1 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+ Calculer : l’espérance, la variance, covariance et la correlation de la
+ processus 
+\begin_inset Formula 
+\[
+Y_{t}=a+\delta t+e_{t}
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Soit un processus pour lequel le condition de la stationnarité est violé.
+ 
+\begin_inset Formula 
+\[
+Y_{t}=3Y_{t-1}+e_{t}
+\]
+
+\end_inset
+
+En transformant la série en fonction des bruits précédents 
+\begin_inset Formula 
+\[
+Y_{t}=e_{t}+3e_{t-1}+3^{2}e_{t-2}+\cdots+3^{k-1}e_{1}+3^{k}Y_{0}
+\]
+
+\end_inset
+
+On remarque que les coefficients ne se tend pas vers zéro.
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\end_inset
+
+Marche Aléatoire avec derive
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset CommandInset label
+LatexCommand label
+name "Marche Aléatoire "
+
+\end_inset
+
+ 
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=Y_{t-1}+\delta+e_{t}
+\end{equation}
+
+\end_inset
+
+Ici, 
+\begin_inset Formula $\delta\in\R$
+\end_inset
+
+ est la dérive, si 
+\begin_inset Formula $\delta=0$
+\end_inset
+
+ on reviens à la cas classique d’une marche aléatoire.
+ 
+\begin_inset Newline newline
+\end_inset
+
+ 
+\series bold
+Devoir 2 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+ Calculer : l’espérance, la variance, la covariance et la correlation du
+ marche aléatoire avec dérive.
+ Verifier qu’il s’agit d’un processus non-stationnaire.
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Toutes les examples montrent différents cas de non-stationnarité et toujours
+ ) En gross, on pourrais identifier deux categories de pathologie: soit
+ que il y a En général, dans une série non-stationnaire, l’influence des
+ valeurs precedents augmente.
+ On peut appeler cette comportement explosif.
+\end_layout
+
+\begin_layout Subsection
+Les processus ARIMA
+\end_layout
+
+\begin_layout Standard
+Dans cette section nous nous occupons avec les cas ou la source de la non-statio
+nnarité est la violation des conditions du polynôme characteristic comme
+ il était montré par les examples précédents.
+ Pour un processus 
+\begin_inset Formula $AR(1)$
+\end_inset
+
+ il faut que la racine du polynôme soit entre 
+\begin_inset Formula $1,-1$
+\end_inset
+
+ strictement.
+ On peut écrire l’example 3 en utilisant l’opérateur de décalage du temps
+ (lag) comme 
+\begin_inset Formula 
+\[
+(1-L)Y_{t}=\delta+e_{t}
+\]
+
+\end_inset
+
+Ici, il est clair qu’il s'agit d' une racine unitaire, et alors ce n’est
+ pas possible de tourner le modèle en forme rétroactif convergante.
+ Mais si on prendre les premières difference on voit que 
+\begin_inset Formula 
+\begin{equation}
+\Delta Y_{t}=Y_{t}-Y_{t-1}=\delta+e_{t}
+\end{equation}
+
+\end_inset
+
+qui donne une série stationnaire.
+ Le même argument s’applique aussi à la cas générale de la forme 
+\begin_inset Formula 
+\begin{equation}
+(1-L)Y_{t}=\delta+\psi(L)e_{t}\label{eq: genMA unit root}
+\end{equation}
+
+\end_inset
+
+et on appelle cette catégorie des processus non-stationnaires, 
+\shape italic
+processus de racine unitaire (unit root processes) 
+\shape default
+ et le processus qui sort des differences, 
+\shape italic
+processus intégré d’ordre 1
+\shape default
+, I(1)
+\end_layout
+
+\begin_layout Standard
+On peut aussi imaginer un processus ARMA qui contient les racines unitaires
+ en multiple fois.
+ 
+\begin_inset Formula 
+\begin{equation}
+(1-L)^{k}(1-R_{1}L)(1-R_{2}L)\cdots(1-R_{p-k}L)Y_{t}=\psi(L)e_{t}\label{eq: ARMA Unit Root}
+\end{equation}
+
+\end_inset
+
+ou 
+\begin_inset Formula $R_{1},\cdots R_{p-k}$
+\end_inset
+
+ sont les reciprocals des racines différents, et la multitude de racine
+ unitaire est 
+\begin_inset Formula $k$
+\end_inset
+
+.
+ On s’appelle alors 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: ARMA Unit Root"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ un processus 
+\begin_inset Formula $ARIMA(p,d,q)$
+\end_inset
+
+ avec 
+\begin_inset Formula $d=k$
+\end_inset
+
+ et 
+\begin_inset Formula $q$
+\end_inset
+
+ dépendant à la représentation du 
+\begin_inset Formula $\psi(L)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Une autre catégorie de pathologie qui peut rendre une série non-stationnaire
+ est la tendance linéaire, comme à l'example 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "Example 1"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ et l'equation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: lin trend"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Pour soulager la non-stationnarité on prend les différences en applicant
+ l'opérateur des difference 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ autant des fois il est nécessaire pour rendre la série stationnaire.
+ Il faut prêter attention d'être économe en applicant l'opérateur car trop
+ des differences créent des problèmes au partie MA, la raison précis est
+ hors du sujet de ces notes Pour la même raison, si on soupçonne une tendance
+ linaire, il est conseillé d'essayer l'enlever avant prendre les premiers
+ différences.
+\end_layout
+
+\begin_layout Subsection
+ IMA(1,1) 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=Y_{t-1}+e_{t}-\theta e_{t-1}\label{eq: IMA}
+\end{equation}
+
+\end_inset
+
+Ici, c’est un modèle avec une racine unitaire et un lag au bruit, alors
+ 
+\begin_inset Formula $ARIMA(0,1,1)$
+\end_inset
+
+ Pour le rendre stationnaire nous prenons les premières differences 
+\begin_inset Formula 
+\[
+W_{t}=\Delta Y_{t}=e_{t}-\theta e_{t-1}
+\]
+
+\end_inset
+
+Maintenant, 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ est un processus 
+\begin_inset Formula $MA(1)$
+\end_inset
+
+ que nous avons déjà étudié
+\end_layout
+
+\begin_layout Standard
+Équation 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: IMA"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ pourrait être transformé en forme rétroactif 
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=e_{t}+(1-\theta)e_{t-1}+\cdots+(1-\theta)e_{t-k+1}+\theta e_{t-k}\label{eq: IMA retro}
+\end{equation}
+
+\end_inset
+
+
+\series bold
+Devoir
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+ Avec l’aide de 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: IMA retro"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ montrez 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\E[Y_{t}]=0$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Var(Y_{t})=[1+\theta^{2}+(1-\theta)^{2}(t+k)]\sigma_{e}^{2}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Cov(Y_{t},Y_{t-h})=1+\theta^{2}+(1-\theta)^{2}(t+k-h)$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsection
+ ARI(1,1)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=(1-\phi)Y_{t-1}-\phi Y_{t-2}+e_{t}\label{eq: ARI}
+\end{equation}
+
+\end_inset
+
+ou 
+\begin_inset Formula 
+\[
+W_{t}=\Delta Y_{t}=\phi W_{t-1}+e_{t}
+\]
+
+\end_inset
+
+Maintenant, 
+\begin_inset Formula $W_{t}$
+\end_inset
+
+ est un processus 
+\begin_inset Formula $AR(1)$
+\end_inset
+
+ comme aux chapitres précédents.
+ Si nous voulons écrire le polynôme characteristic pour cette processus,
+ nous arrivons à la formule 
+\begin_inset Formula 
+\[
+\frac{1}{(1-z)(1-\phi z)}=1+\psi_{1}z+\psi_{2}z^{2}+\cdots
+\]
+
+\end_inset
+
+ou 
+\begin_inset Formula 
+\begin{equation}
+(1-(1+\phi)z+\phi z^{2})(1+\psi_{1}z+\psi_{2}z^{2}+\cdots)=1\label{eq: inversion ARI}
+\end{equation}
+
+\end_inset
+
+pour définir les 
+\begin_inset Formula $\psi_{i}$
+\end_inset
+
+ nous arrivons au system 
+\begin_inset Formula 
+\begin{align*}
+ & -(1+\phi)+\psi_{1}=0\\
+ & \phi-(1+\phi)\psi_{1}+\psi_{2}=0
+\end{align*}
+
+\end_inset
+
+et 
+\begin_inset Formula 
+\begin{equation}
+\psi_{k}=(1+\phi)\psi_{k-1}-\phi\psi_{k-2},\quad\psi_{0}=1\label{ARI coef}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Devoir
+\series default
+ Calculer la variance, la covariance et la correlation du processus ARI(1,1)
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq: ARI"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Specification du Modèle, la méthodologie Box-Jenkins
+\end_layout
+
+\begin_layout Standard
+Après l’étude théorique des modèles ARMA et ARIMA maintenant nous nous occupons
+ avec les questions pratiques.
+ 
+\end_layout
+
+\begin_layout Itemize
+Comment modéliser les donnes comme un processus 
+\begin_inset Formula $ARIMA(p,d,q)$
+\end_inset
+
+? 
+\end_layout
+
+\begin_layout Itemize
+Est-ce que la série est stationnaire? 
+\end_layout
+
+\begin_layout Itemize
+Comment choisir 
+\begin_inset Formula $p,d,q$
+\end_inset
+
+? 
+\end_layout
+
+\begin_layout Standard
+Pour répondre à ces questions à la manière pratique et pragmatique, Box
+ et Jenkins
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+G.
+ Box, G.
+ Jenkins, 
+\shape italic
+Time Series Analysis: forecasting and control
+\shape default
+, 1970 
+\end_layout
+
+\end_inset
+
+ ont développé une methodology en 4 étapes: 
+\end_layout
+
+\begin_layout Enumerate
+Identification 
+\end_layout
+
+\begin_layout Enumerate
+Estimation 
+\end_layout
+
+\begin_layout Enumerate
+Diagnostique 
+\end_layout
+
+\begin_layout Enumerate
+Prévision 
+\end_layout
+
+\begin_layout Subsection
+ Identification
+\end_layout
+
+\begin_layout Standard
+En cet étape on s’occupe de determiner l’ordre du modèle, et le comportement
+ stationnaire (ou non) et saisonnier (ou non).
+ Il y a deux approches pour traiter cette partie 
+\end_layout
+
+\begin_layout Itemize
+L’approche graphique: On plot la série, les ACF, PACF en cas que ACF tend
+ ver zéro très lentement ou pas du tout on soupçonne nonstationnarité.
+ Box et Jenkins conseillent à prendre les premières differences et refaire
+ les graphs en cas qu’ils indiquent stationnarité.Sinon, on reprendre les
+ différences jusqu’à le graphe a l’air stationnaire.
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Pour determiner l’order du modèle 
+\begin_inset Formula $p,q$
+\end_inset
+
+ il y a quelque règles empiriques à partir de graph de ACF 
+\end_layout
+
+\begin_layout Enumerate
+Décroissance exponentielle vers zéro : Modèle AR (PACF indique l’ordre p)
+ 
+\end_layout
+
+\begin_layout Enumerate
+Oscillations amortis décroissants rapidement vers zéro: AR (PACF indique
+ l’ordre p) 
+\end_layout
+
+\begin_layout Enumerate
+Quelque peu pics, le reste nulle: MA (l’ordre est le nombre des pics) 
+\end_layout
+
+\begin_layout Enumerate
+Décroissance exponentielle après quelque pas de temps (lags) 
+\end_layout
+
+\begin_layout Enumerate
+pattern régulière en écarts de temps : saisonnalité 
+\end_layout
+
+\begin_layout Standard
+Un remarque général, ACF nous aide à determiner l’order MA du modèle et
+ PACF l’ordre AR.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+L'approche statistique.
+ Il y a quelque test statistiques que on peut essayer pour reconnaitre la
+ stationnarité ou non de notre modèle, voire la prochaine section.
+ Une fois que la question de stationnarité serais répondu on tourne sur
+ la determination d'ordre AR ou MA par la vois statistique.
+ On choisit entre plusieurs modèles en regardant
+\begin_inset space ~
+\end_inset
+
+: 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+l’ajustement à la série de données, 
+\end_layout
+
+\begin_layout Itemize
+la complexité du modèle (il est plus facile d’estimer un nombre réduit de
+ paramètres).
+ 
+\end_layout
+
+\begin_layout Standard
+Pour concilier ces deux critères, on minimise une des deux quantités
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+AIC
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+BIC
+\end_layout
+
+\end_inset
+
+ suivantes 
+\begin_inset Formula 
+\begin{eqnarray*}
+AIC & = & -2\log(L(\theta))+2\nu\,,\\
+BIC & = & -2\log(L(\theta))+n\log(\nu)\,,
+\end{eqnarray*}
+
+\end_inset
+
+où 
+\begin_inset Formula $\nu$
+\end_inset
+
+ est le nombre de paramètres (
+\begin_inset Formula $n=p+q$
+\end_inset
+
+ si'l s'agit d'un ARMA sans constant ou 
+\begin_inset Formula $n=p+q+1$
+\end_inset
+
+), 
+\begin_inset Formula $\theta$
+\end_inset
+
+ est un vecteur contenant les paramètres, 
+\begin_inset Formula $n$
+\end_inset
+
+ est le nombre d’observations, 
+\begin_inset Formula $L$
+\end_inset
+
+ est la vraisemblance (dans laquelle on a omis les observations).
+\end_layout
+
+\begin_layout Standard
+AIC (Akaike's Information Criterion) est un estimateur d'espérance de la
+ divergence de Kullback-Leibler entre le modèle estimé et le vrai modèle.
+ Soit 
+\begin_inset Formula $p(y_{1},...,y_{n})$
+\end_inset
+
+ la vrai densité de probabilité de 
+\begin_inset Formula $Y_{1},...,Y_{n}$
+\end_inset
+
+ et soit 
+\begin_inset Formula $q_{\theta}(y_{1},...,y_{n})$
+\end_inset
+
+ la densité sous le modèle de paramètre 
+\begin_inset Formula $\theta$
+\end_inset
+
+ la divergence Kullback-Leibler de 
+\begin_inset Formula $q_{\theta}$
+\end_inset
+
+ à 
+\begin_inset Formula $p$
+\end_inset
+
+ est donner par la formule suivante 
+\begin_inset Formula 
+\[
+D(p,q_{\theta})=\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}....\int_{-\infty}^{\infty}p(y_{1},...,y_{n})\log\biggl(\frac{p(y_{1},...,y_{n})}{q_{\theta}(y_{1},...,y_{n})}\biggr)dy_{1}...dy_{n}
+\]
+
+\end_inset
+
+On veut estimer l'espérance 
+\begin_inset Formula $\E[D(p,q_{\hat{\theta}})]$
+\end_inset
+
+ ou 
+\begin_inset Formula $\hat{\theta}$
+\end_inset
+
+ est l'estimateur du vecteur des paramètres, qui sort la formule du debut.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{example}
+\end_layout
+
+\end_inset
+
+ Le calcul des quantités 
+\begin_inset Formula $AIC$
+\end_inset
+
+ et 
+\begin_inset Formula $BIC$
+\end_inset
+
+ se fait facilement en 
+\family typewriter
+R
+\family default
+.
+ Calculons une vraisemblance dans un cas simple.
+\end_layout
+
+\begin_layout Standard
+On suppose 
+\begin_inset Formula $X_{t}=at+b+\epsilon_{t}$
+\end_inset
+
+ avec des 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ i.i.d.
+ de loi 
+\begin_inset Formula $\mathcal{N}(0;1)$
+\end_inset
+
+.
+ Les paramètres du modèle sont 
+\begin_inset Formula $a$
+\end_inset
+
+ et 
+\begin_inset Formula $b$
+\end_inset
+
+.
+ On dispose d’observations 
+\begin_inset Formula $x_{1},\dots,x_{n}$
+\end_inset
+
+.
+ La densité de 
+\begin_inset Formula $(X_{1},\dots,X_{n})$
+\end_inset
+
+ est la fonction 
+\begin_inset Formula 
+\[
+(u_{1},\dots,u_{n})\mapsto\prod_{t=1}^{n}\left\{ \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{1}{2}(u_{t}-at-b)^{2}\right)\right\} \,.
+\]
+
+\end_inset
+
+La vraisemblance est donc 
+\begin_inset Formula 
+\[
+(a’,b’)\mapsto L(a’,b’)=L((a’,b’);(x_{1},\dots,x_{n}))=\prod_{t=1}^{n}\left\{ \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{1}{2}(x_{t}-a’t-b’)^{2}\right)\right\} \,.
+\]
+
+\end_inset
+
+Si on veur estimer 
+\begin_inset Formula $(a,b)$
+\end_inset
+
+ à partir de 
+\begin_inset Formula $(x_{1},\dots,x_{n})$
+\end_inset
+
+, l’estimateur du maximum de vraisemblance
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Maximum de vraisemblance
+\end_layout
+
+\end_inset
+
+ est 
+\begin_inset Formula 
+\[
+(\widehat{a},\widehat{b})=\argmax_{a’,b’}L(a’,b’)\,.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{example}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Pour la saisonnalité, nous allons apprendre plus au chapitre 5 
+\end_layout
+
+\begin_layout Subsection
+ Estimation du modèle
+\end_layout
+
+\begin_layout Standard
+On suppose que 
+\begin_inset Formula $X_{t}=a_{1}X_{t-1}+a_{2}X_{t-1}+\epsilon_{t}$
+\end_inset
+
+ (avec des 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ bruits blancs centrés, de variance 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+) et que 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+ est stationnaire.
+ On calcule les auto-covariances
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\[
+\sigma(1)=\frac{a_{1}}{1-a_{2}}\sigma(0)\,,\,\sigma(2)=a_{1}\sigma(1)+a_{2}\sigma(0)\,.
+\]
+
+\end_inset
+
+D’où 
+\begin_inset Formula 
+\begin{eqnarray*}
+a_{1} & = & \frac{\sigma(1)}{\sigma(0)}\times\frac{\sigma(0)^{2}-\sigma(0)\sigma(1)}{\sigma(0)^{2}-\sigma(1)^{2}}\,,\\
+a_{2} & = & \frac{\sigma(0)\sigma(2)-\sigma(1)^{2}}{\sigma(0)^{2}-\sigma(1)^{2}}\,.
+\end{eqnarray*}
+
+\end_inset
+
+On peut donc estimer 
+\begin_inset Formula $a_{1}$
+\end_inset
+
+, 
+\begin_inset Formula $a_{2}$
+\end_inset
+
+ en remplaçant 
+\begin_inset Formula $\sigma(0)$
+\end_inset
+
+, 
+\begin_inset Formula $\sigma(1)$
+\end_inset
+
+, 
+\begin_inset Formula $\sigma(2)$
+\end_inset
+
+ par leurs estimateurs empiriques dans les formules ci-dessus.
+ Puisque 
+\begin_inset Formula $\sigma(0)=\sigma^{2}+a_{1}\sigma(1)+a_{2}\sigma(2)$
+\end_inset
+
+, on peut aussi estimer 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Dans le cas général, on estimer par maximum de vraisemblance (voir cours
+ de statistiques et l’exemple ci-dessous).
+\end_layout
+
+\begin_layout Subsection
+Diagnostique du modèle
+\end_layout
+
+\begin_layout Standard
+.
+ Ici, nous nous intéressons principalement au comportement des résidus du
+ modèle.
+ Quels sont le propriétés statistiques des résidus? Hypothèse de normalité,
+ bruit blanc etc.
+ Box-Pierce ou Ljung-Box sont les utiles principales ici.
+ Deux remarques importants 
+\end_layout
+
+\begin_layout Enumerate
+En testant la correlation des résidus, il n’est possible que de dévoiler
+ un modèle sousparametrisé.
+ Il y a rien à dire pour un modèle surparametrisé.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Autocorrelation des résidus est possible de faire les autres test statistiques
+ donner les faux résultats.
+ 
+\end_layout
+
+\begin_layout Subsection
+Prévision 
+\end_layout
+
+\begin_layout Standard
+Si le modèle est un processus 
+\begin_inset Formula $ARMA$
+\end_inset
+
+, la prédiction pour 
+\begin_inset Formula $X_{n+h}$
+\end_inset
+
+, sachant 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ est 
+\begin_inset Formula 
+\[
+\widehat{X}_{n,h}=c_{1}X_{1}+\dots+c_{n}X_{n}\,,
+\]
+
+\end_inset
+
+où les coefficients sont choisis de manière à minimiser l’erreur quadratique
+ 
+\begin_inset Formula 
+\[
+\E((X_{n+h}-c_{1}X_{1}-\dots-c_{n}X_{n})^{2})\,.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ Ce choix de 
+\begin_inset Formula $\widehat{X}_{n,h}$
+\end_inset
+
+ entraîne l’égalité 
+\begin_inset Formula 
+\[
+\widehat{X}_{n,h}=\E(X_{n+h}|X_{1},\dots,X_{n})\,.
+\]
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+ Ce qui n’est pas surprenant si on se rappelle que l’espérance conditionnelle
+ de 
+\begin_inset Formula $X_{n+h}$
+\end_inset
+
+ sachant 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+ est la projection orthogonale de 
+\begin_inset Formula $X_{n+h}$
+\end_inset
+
+ sur 
+\begin_inset Formula $\sigma(X_{1},\dots,X_{n})$
+\end_inset
+
+ dans l’espace des variables 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+ (muni de la norme 
+\begin_inset Formula $L^{2}$
+\end_inset
+
+).
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{prop}
+\end_layout
+
+\end_inset
+
+ L’erreur de prévision à l’horizon 
+\begin_inset Formula $1$
+\end_inset
+
+ (
+\begin_inset Formula $X_{n+1}-\widehat{X}_{n,1}$
+\end_inset
+
+) est le bruit d’innovation 
+\begin_inset Formula $\epsilon_{n+1}$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+ La variance de l’erreur de prévision (
+\begin_inset Formula $\E((X_{n+h}-\widehat{X}_{n,h})^{2})$
+\end_inset
+
+) est croissante avec 
+\begin_inset Formula $h$
+\end_inset
+
+ et tend vers 
+\begin_inset Formula $\var(X_{1})$
+\end_inset
+
+ quand 
+\begin_inset Formula $h\rightarrow+\infty$
+\end_inset
+
+ (on rappelle que le procesus 
+\begin_inset Formula $(X_{t})$
+\end_inset
+
+ est supposé stationnaire).
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{prop}
+\end_layout
+
+\end_inset
+
+ Puisque les 
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ sont gaussiens, les 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+, 
+\begin_inset Formula $\widehat{X}_{n,h}$
+\end_inset
+
+ et 
+\begin_inset Formula $\widehat{X}_{n,h}-X_{n+h}$
+\end_inset
+
+ sont aussi gaussiens (nous sautons une petite démonstration).
+ Ceci permet de construire facilement des intervalles de confiance
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+Intervalle de confiance
+\end_layout
+
+\end_inset
+
+ (c’est inclus dans 
+\family typewriter
+R
+\family default
+).
+ Nous faisons ici un rappel dans un cas simple.
+ Supposons 
+\begin_inset Formula $\widehat{X}_{n,h}-X_{n+h}\sim\mathcal{N}(0;\sigma^{2})$
+\end_inset
+
+.
+ Soit 
+\begin_inset Formula $\alpha=0,01$
+\end_inset
+
+.
+ Nous cherchons 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ tel que 
+\begin_inset Formula 
+\[
+\p(X_{n+h}\in[\widehat{X}_{n,h}-\Delta;\widehat{X}_{n,h}+\Delta])\geq1-\alpha
+\]
+
+\end_inset
+
+(ici, toutes les probabilités sont conditionnelles à 
+\begin_inset Formula $X_{1},\dots,X_{n}$
+\end_inset
+
+).
+ Nous calculons 
+\begin_inset Formula 
+\begin{eqnarray*}
+\p(X_{n+h}\in[\widehat{X}_{n,h}-\Delta;\widehat{X}_{n,h}+\Delta]) & = & \p(|X_{n+h}-\widehat{X}_{n,h}|\leq\Delta)\\
+ & = & \p\left(\frac{|X_{n+h}-\widehat{X}_{n,h}|}{\sigma}\leq\frac{\Delta}{\sigma}\right)\\
+\mbox{(en utilisant les symétries de la gaussienne)} & = & 1-2\p\left(\frac{X_{n+h}-\widehat{X}_{n,h}}{\sigma}\geq\frac{\Delta}{\sigma}\right)\,.
+\end{eqnarray*}
+
+\end_inset
+
+Nous voulons donc 
+\begin_inset Formula $\Delta$
+\end_inset
+
+ tel que 
+\begin_inset Formula 
+\[
+\p\left(\frac{X_{n+h}-\widehat{X}_{n,h}}{\sigma}\geq\frac{\Delta}{\sigma}\right)\leq\frac{\alpha}{2}=0,005\,.
+\]
+
+\end_inset
+
+Puisque 
+\begin_inset Formula $(X_{n,h}-\widehat{X}_{n,h})/\sigma$
+\end_inset
+
+ est de loi 
+\begin_inset Formula $\mathcal{N}(0;1)$
+\end_inset
+
+, on lit dans une table de la loi normale qu’il suffit de prendre 
+\begin_inset Formula $\Delta/\sigma=2,58$
+\end_inset
+
+ pour que l’inégalité ci-dessus soit vérifiée.
+\end_layout
+
+\begin_layout Subsection
+Tests statistiques pour la stationnarité
+\end_layout
+
+\begin_layout Standard
+Comme nous avons vu si le polynôme d’une série contient une racine unitaire,
+ la série n’est pas stationnaire.
+ Dès premières étapes de la méthodologie Box-Jenkins on peut soupçonner
+ la non-stationnarité par les graphes mais ici notre but c’est de developer
+ des tests statistiques pour tester rigoureusement les séries.
+ Souvent il y a deux cas de non-stationnarité et ce n'est pas toujours facile
+ à les distinguer, trend-stationnaire (c’est-à-dire la série n’est pas stationna
+ire par rapporte de definition mais elle est stationnaire autour une tendance
+ deterministic) et racine unitaire non-stationnaire.
+ Les tests qui suivent sont développés pour la deuxième catégorie.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+
+\emph on
+Augumented Dickey-Fuller test de racine unitaire
+\end_layout
+
+\begin_layout Description
+Dickey-Fuller test
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=aY_{t-1}+e_{t}
+\end{equation}
+
+\end_inset
+
+Avec les hypothèse: 
+\begin_inset Formula 
+\begin{align*}
+ & H_{0}:a=1\\
+ & H_{1}:a<1
+\end{align*}
+
+\end_inset
+
+sous l’hypothèse 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ nous avons un marche aléatoire.
+ DF-test est le t-test de 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ et on construit la statistique pour l’estimateur 
+\begin_inset Formula $\hat{a}$
+\end_inset
+
+ de 
+\begin_inset Formula $a$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\hat{\tau}=\frac{\hat{a}-1}{se(\hat{a})}
+\]
+
+\end_inset
+
+
+\begin_inset Formula $\hat{\tau}$
+\end_inset
+
+ ne suis pas Gaussian et la distribution analytic pourrait être rétablie
+ par Hamilton p489 et table B6 
+\end_layout
+
+\begin_layout Remark
+\begin_inset space ~
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+\begin_inset Formula $e_{t}$
+\end_inset
+
+ doit être bruit blanc 
+\end_layout
+
+\begin_layout Enumerate
+La distribution de 
+\begin_inset Formula $\hat{\tau}$
+\end_inset
+
+ reste la même aussi pour un modèle ARMA 
+\end_layout
+
+\end_deeper
+\begin_layout Remark
+
+\end_layout
+
+\begin_layout Description
+Augmented Dickey-Fuller test
+\begin_inset Formula 
+\begin{equation}
+\begin{split} & Y_{t}=aY_{t-1}+X_{t}\\
+ & X_{t}=\phi_{1}X_{t-1}+\phi_{2}X_{t-2}+\cdots+\phi_{k}X_{t-k}+e_{t}
+\end{split}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Avec les hypothèses
+\begin_inset space ~
+\end_inset
+
+:
+\begin_inset Formula 
+\begin{align*}
+ & H_{0}:a=1\\
+ & H_{1}:a<1
+\end{align*}
+
+\end_inset
+
+Sous 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ nous avons 
+\begin_inset Formula $\Delta Y_{t}$
+\end_inset
+
+ d’être un processus stationnaire 
+\begin_inset Formula $AR(k)$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+Y_{t}-Y_{t-1}=X_{t}
+\]
+
+\end_inset
+
+et 
+\begin_inset Formula $Y_{t}$
+\end_inset
+
+ un 
+\begin_inset Formula $AR(k+1)$
+\end_inset
+
+ avec polynôme caractéristique 
+\begin_inset Formula 
+\[
+(1-az)(1-\phi_{1}z-\cdots\phi_{k}z^{k})=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Augmented Dickey-Fuller avec contant et dérive
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{split} & Y_{t}=\mu+\delta t+aY_{t-1}+X_{t}\\
+ & X_{t}=\phi_{1}X_{t-1}+\phi_{2}X_{t-2}+\cdots+\phi_{k}X_{t-k}+e_{t}
+\end{split}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Avec les hypothèse: 
+\begin_inset Formula 
+\begin{align*}
+ & H_{0}:a=1\\
+ & H_{1}:a<1
+\end{align*}
+
+\end_inset
+
+Sous 
+\begin_inset Formula $H_{0}$
+\end_inset
+
+ 
+\begin_inset Formula 
+\[
+\Delta Y_{t}=X_{t}+\delta
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+\shape italic
+Remarques
+\end_layout
+
+\begin_layout Enumerate
+C’est ADF avec dérive et constant que 
+\begin_inset Formula $R$
+\end_inset
+
+ utilise comme method standard pour la command 
+\family typewriter
+adf.test()
+\family default
+ dans la librairie 
+\family typewriter
+tseries
+\family default
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula $k$
+\end_inset
+
+ paramètre en 
+\begin_inset Formula $R$
+\end_inset
+
+ est précisément l’ordre du modèle AR pour 
+\begin_inset Formula $X_{t}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Si on met 
+\begin_inset Formula $k=0$
+\end_inset
+
+ en 
+\begin_inset Formula $R$
+\end_inset
+
+ elle comptera le test DF 
+\end_layout
+
+\begin_layout Enumerate
+La distribution pour la statistique 
+\begin_inset Formula $\hat{\tau}$
+\end_inset
+
+ de chaque modèle change mais il sont disponibles analytiquement à Hamilton
+ p.502 et p.528-529 
+\end_layout
+
+\begin_layout Standard
+Il y a encore les tests Philips-Perron et KPSS qui pourront être utilisés
+ en complement de ADF pour verifier la stationnarité ou non d’une série.
+\end_layout
+
+\begin_layout Example
+
+\series bold
+Un bruit blanc
+\end_layout
+
+\begin_layout Example
+On fait la simulation de 1000 bruit blanc comme représenté à l'image
+\end_layout
+
+\begin_layout Example
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fig-thanos-final/White.jpeg
+	width 40line%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bruit Blanc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+Pour tester notre série pour une racine unitaire on frappe
+\end_layout
+
+\begin_layout Example
+Qui donne 
+\series bold
+p-value <0.01
+\series default
+ pour un nombre des lags 7 et alors on rejette l'hypothèse zero de non-stationna
+rité
+\end_layout
+
+\begin_layout Example
+Par contre pour une série dérivée par un bruit blanc qui est donne par la
+ commende 
+\begin_inset Formula $R$
+\end_inset
+
+ 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fig-thanos-final/Diffinv_WN.jpeg
+	width 40line%
+
+\end_inset
+
+ 
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+L'inverse des premiers differences
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Example
+le test ADF donne 
+\series bold
+p-value =0.7258
+\series default
+ pour un nombre des lags 9 et alors on ne peut pas rejeter l'hypothèse zéro
+ de la non-stationnarité.
+\begin_inset Newline newline
+\end_inset
+
+ Codes: 	
+\end_layout
+
+\begin_layout Example
+x <- rnorm(1000)
+\end_layout
+
+\begin_layout Example
+	plot(x)
+\end_layout
+
+\begin_layout Example
+	adf.test(x)
+\end_layout
+
+\begin_layout Example
+
+	 
+\end_layout
+
+\begin_layout Example
+
+et
+\end_layout
+
+\begin_layout Example
+
+ 
+\end_layout
+
+\begin_layout Example
+
+	y <- diffinv(x) 
+\end_layout
+
+\begin_layout Example
+
+	plot(y)
+\end_layout
+
+\begin_layout Example
+
+	adf.test(y)
+\end_layout
+
+\begin_layout Example
+
+	 
+\end_layout
+
+\begin_layout Subsection
+Deux examples détaillés
+\end_layout
+
+\begin_layout Description
+Deere Le fichier de données nommé « deere3 » contient 57 mesures consécutives
+ enregistrées à partir d'une machine-outil complexe chez Deere & Co.
+ Les valeurs données sont des écarts par rapport à une valeur cible en unités
+ de dix millionièmes de pouce.
+ Le processus utilise un mécanisme de contrôle qui réinitialise certains
+ des paramètres de la machine-outil en fonction de l'ampleur de l'écart
+ par rapport à la cible du dernier article produit
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Pour étudier cette série nous suivons les pas de la méthodologie Box-Jenkins.
+ 
+\end_layout
+
+\begin_layout Description
+Identification 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+
+\series bold
+Stationnarité
+\series default
+ On voit le graph et aussi les fonctions ACF et PACF 
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fig-thanos-final/deere3_plot.jpeg
+	width 40line%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fig-thanos-final/acf_deere3.jpeg
+	width 40line%
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig-thanos-final/pacf_deere3.jpeg
+	width 40line%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Graphiquement, la série a l'air stationnaire, les autocorrelations tendent
+ vers zéro rapidement et seulement le premier lag est important des autocorrelat
+ions partielles (c'est qui indique un modèle AR1).
+ Pour le vérifier on utilise encore le test ADF qui nous donne 
+\begin_inset Formula $\textbf{p-value}<0.01$
+\end_inset
+
+ au niveau 3-lags et alors nous pouvons verifier la stationnarité de la
+ série.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+
+\series bold
+ Determiner l'ordre AR et ou MA
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Pour choisir le modèle ARMA, on voit les ACF, PACF et on teste progressivement
+ de AR1, jusqu'à AR4 et les combinaisons avec MA1, ..
+ pour trouver que celui qui maximise le critère AIC, c'est ARMA(2,1)
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Standard
+
+\series bold
+Pour resumer cette analyse, la série initial deere3 pourrait être décrit
+ comme un modèle ARMA(2,1)
+\series default
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Wages 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+Le fichier de données nommé "wages" contient mensuel valeurs de moyenne
+ salaire par heure pour les travailleurs aux Etats-Unis dans l'industrie
+ textile de juillet 1981 jusqu'a juin 1987
+\end_layout
+
+\begin_layout Description
+Identification On commence par une plot de la série
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fig-thanos-final/wages_plot.jpeg
+	width 40line%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Par le graph on peut soupçonner une tendance linéaire avec le temps, on
+ essaie de l'enlever et afficher les résidus de la regression.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fig-thanos-final/reg_resids.jpeg
+	width 40line%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+les résidus semblent un peu pathologiques et on affiche aussi le ACF pour
+ prendre plus d'informations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fig-thanos-final/acf_reg_resids.jpeg
+	width 40line%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On soupçonne une non-stationnarité persistent et on prendre le premieres
+ difference pour rendre les résidus stationnaires.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename fig-thanos-final/diff_reg_resids.jpeg
+	width 40line%
+
+\end_inset
+
+ 
+\begin_inset Graphics
+	filename fig-thanos-final/acf_diff_reg_resids.jpeg
+	width 40line%
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+maintenant ils ont l'air stationnaire.
+ On peut verifier les résultats par la voie statistique en faisant à chaque
+ étape un test Box-Pierce sur les résidus.
+ Pour le premier après la regression on rejet l'hypothèse zero d'être bruit
+ blanc et on peut verifier l'existence de non stationnarité par un test
+ ADF avent prendre le premiers difference.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+Ordre du model AR, MA 
+\end_layout
+
+\end_inset
+
+ on voit sur le dernier plot de la série stationnaire un seul lag statistiquemen
+t significative et alors on decide de commencer avec un model AR1
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Pour resumer cette analyse, la série initial wage pourrait être modélisé
+ comme un processus ARIMA(1,1,0) avec tendance linaire.
+\end_layout
+
+\end_deeper
+\begin_layout Description
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+ Codes 
+\end_layout
+
+\end_inset
+
+ Pour cette code on a besoin de la librairie 
+\series bold
+tseries
+\series default
+.
+\end_layout
+
+\begin_deeper
+\begin_layout Verbatim
+
+data = read.csv("deere3.csv", col.names ='x' )
+\end_layout
+
+\begin_layout Verbatim
+
+\end_layout
+
+\begin_layout Verbatim
+
+deere3= ts(data)
+\end_layout
+
+\begin_layout Verbatim
+
+plot(deere3)
+\end_layout
+
+\begin_layout Verbatim
+
+acf(deere3)
+\end_layout
+
+\begin_layout Verbatim
+
+pacf(deere3)
+\end_layout
+
+\begin_layout Verbatim
+
+library(tseries)
+\end_layout
+
+\begin_layout Verbatim
+
+adf.test(deere3)
+\end_layout
+
+\begin_layout Verbatim
+
+outAR1 = arima(deere3, order = c(1,0,0)) 
+\end_layout
+
+\begin_layout Verbatim
+
+outAR2 = arima(deere3, order = c(2,0,0))
+\end_layout
+
+\begin_layout Verbatim
+
+outAR3 = arima(deere3, order = c(3,0,0))
+\end_layout
+
+\begin_layout Verbatim
+
+outAR4 = arima(deere3, order = c(4,0,0))
+\end_layout
+
+\begin_layout Verbatim
+
+outARMA21 = arima(deere3, order = c(2,0,1))
+\end_layout
+
+\begin_layout Verbatim
+
+Box.test(outAR1$resid,lag=1)
+\end_layout
+
+\begin_layout Verbatim
+
+Box.test(outAR2$resid,lag=2)
+\end_layout
+
+\begin_layout Verbatim
+
+Box.test(outAR3$resid,lag=3)
+\end_layout
+
+\begin_layout Verbatim
+
+Box.test(outAR4$resid,lag=4)
+\end_layout
+
+\begin_layout Verbatim
+
+prediction = predict(outAR1, n.ahead=5)
+\end_layout
+
+\begin_layout Verbatim
+
+plot(deere3)
+\end_layout
+
+\begin_layout Verbatim
+
+points( prediction$pred, type = "l", col = 2 )
+\end_layout
+
+\begin_layout Verbatim
+
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+
+et
+\end_layout
+
+\begin_layout Section
+Processus non stationnaires
+\begin_inset space ~
+\end_inset
+
+: ARIMA et SARIMA 
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+ARIMA
+\end_layout
+
+\end_inset
+
+
+\begin_inset Index idx
+status collapsed
+
+\begin_layout Plain Layout
+SARIMA
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On veut revenir à la série d’origine une fois que l’on a étudié la partie
+ stationnaire 
+\end_layout
+
+\begin_layout Example
+Nous disposons d’une série temporelle 
+\begin_inset Formula $(x_{1},\dots,x_{n})$
+\end_inset
+
+ qui a une saisonnalité de période 
+\begin_inset Formula $12$
+\end_inset
+
+.
+ On étudie 
+\begin_inset Formula $y_{t}=x_{t}-x_{t-12}$
+\end_inset
+
+ (pour supprimer la saisonnalité).
+ L’ajustement d’un modèle 
+\begin_inset Formula $ARMA$
+\end_inset
+
+ et les prévisions sont réalisées sur la série 
+\begin_inset Formula $(y_{t})$
+\end_inset
+
+.
+ On écrit ensuite les 
+\begin_inset Formula $(x_{t})$
+\end_inset
+
+ en fonction des 
+\begin_inset Formula $(y_{t})$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+: 
+\begin_inset Formula 
+\begin{eqnarray*}
+x_{t} & = & y_{t}+x_{t-12}\\
+ & = & y_{t}+y_{t-12}+x_{t-24}\\
+ & = & \dots\\
+ & = & y_{t}+y_{t-12}+\dots+y_{r+12}+x_{r}\,,
+\end{eqnarray*}
+
+\end_inset
+
+avec 
+\begin_inset Formula $r=t\mbox{ modulo }12$
+\end_inset
+
+ (le reste de la division euclidienne de 
+\begin_inset Formula $t$
+\end_inset
+
+ par 
+\begin_inset Formula $12$
+\end_inset
+
+).
+ 
+\end_layout
+
+\begin_layout Standard
+On connaît les 
+\begin_inset Formula $x_{1},\dots,x_{n}$
+\end_inset
+
+ (
+\begin_inset Formula $n$
+\end_inset
+
+ supposé plus grand que 
+\begin_inset Formula $12$
+\end_inset
+
+), et donc aussi 
+\begin_inset Formula $y_{1},\dots,y_{n}$
+\end_inset
+
+.
+ On peut calculer les prévisions 
+\begin_inset Formula $\widehat{y}_{n,h}$
+\end_inset
+
+ (
+\begin_inset Formula $h\geq1$
+\end_inset
+
+).
+ On en déduit les prévisions 
+\begin_inset Formula $\widehat{x}_{n,h}$
+\end_inset
+
+.
+ Par exemple, si 
+\begin_inset Formula $h\in\{1,2,\dots,11\}$
+\end_inset
+
+, nous utilisons l’égalité ci-dessus avec 
+\begin_inset Formula $t=n+h$
+\end_inset
+
+ pour calculer la prévision 
+\begin_inset Formula 
+\[
+\widehat{x}_{n,h}=\widehat{y}_{n,h}+y_{t-12}+\dots+\dots+y_{r+12}+x_{r}\,.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection*
+Les processus
+\end_layout
+
+\begin_layout Standard
+Ce sont des généralisation des processus 
+\begin_inset Formula $ARMA$
+\end_inset
+
+ aux cas non stationnaires, avec tendance polynômiale (
+\begin_inset Formula $ARIMA$
+\end_inset
+
+) ou avec une saisonnalité (
+\begin_inset Formula $SARIMA$
+\end_inset
+
+).
+ Ce sont les processus directement utilisés par 
+\family typewriter
+R
+\family default
+.
+\end_layout
+
+\begin_layout Definition
+Le processus 
+\begin_inset Formula $(X_{t})_{t\geq0}$
+\end_inset
+
+ est un processus 
+\begin_inset Formula $ARIMA(p,d,q)$
+\end_inset
+
+ si le processus 
+\begin_inset Formula $Y_{t}=\Delta_{1}^{d}X_{t}$
+\end_inset
+
+ est une processus 
+\begin_inset Formula $ARMA(p,q)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Les processus 
+\begin_inset Formula $ARIMA(p,d,q)$
+\end_inset
+
+ sont donc bien adaptés à l’étude des séries temporelles présentant une
+ tendance polynômiale de degré 
+\begin_inset Formula $d-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Definition
+Le processus 
+\begin_inset Formula $(X_{t})_{t\geq0}$
+\end_inset
+
+ est un processus 
+\begin_inset Formula $SARIMA(p,d,q,T)$
+\end_inset
+
+ si le processus 
+\begin_inset Formula $Y_{t}=\Delta_{T}\circ\Delta_{1}^{d}X_{t}$
+\end_inset
+
+ est un processus 
+\begin_inset Formula $ARMA(p,q)$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Les processus 
+\begin_inset Formula $SARIMA(p,d,q,T)$
+\end_inset
+
+ sont donc bien adaptés à l’étude des séries temporelles qui présentent
+ une saisonnalité de période 
+\begin_inset Formula $T$
+\end_inset
+
+ et qui ont une tendance polynômiale de degré 
+\begin_inset Formula $d-1$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Remark
+Attention, il existe dans la littérature des définitions de processus 
+\begin_inset Formula $SARIMA$
+\end_inset
+
+ plus complexes.
+ 
+\end_layout
+
+\begin_layout Subsection
+Exercices supplementaires 
+\end_layout
+
+\begin_layout Enumerate
+Devoir 1: Calculer la variance de la série: 
+\begin_inset Formula 
+\[
+Y_{t}=e_{t}+\psi e_{t-1}+\psi^{2}e_{t-2}+...
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\bar under
+Réponse
+\begin_inset space ~
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset Formula 
+\begin{align*}
+Var(Y_{t}) & =Var(\sum_{i=0}^{\infty}\psi^{i}e_{t-i})\\
+ & =\sum_{i=0}^{\infty}Var(\psi^{i}e_{t-i})+\sum_{\substack{j=0\\
+j\neq i
+}
+}^{\infty}Cov(\psi^{i}e_{t-i},\psi^{j}e_{t-j})\\
+ & =\sum_{i=0}^{\infty}\psi^{2i}Var(e_{t-i})=\sigma_{e}\frac{1}{1-\psi^{2}}
+\end{align*}
+
+\end_inset
+
+l'equation finale viens de la série géométrique de 
+\begin_inset Formula $\psi^{2}$
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Enumerate
+Calculer la variance de la série 
+\begin_inset Formula 
+\[
+Y_{t}=e_{t}+\psi e_{t-1}+\psi^{2}e_{t-2}+...+\psi^{k}e_{t-k}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\bar under
+Réponse
+\begin_inset space ~
+\end_inset
+
+:
+\bar default
+
+\begin_inset Formula 
+\[
+Var(Y_{t})=\sigma_{e}\sum_{i=0}^{k}\psi^{2i}=\sigma_{e}\frac{1-\psi^{2(k+1)}}{1-\psi^{2}}
+\]
+
+\end_inset
+
+Pour arriver à cette dernier equation il faut écrire 
+\begin_inset Formula 
+\[
+\sum_{i=0}^{k}\psi^{2i}=\sum_{i=0}^{\infty}\psi^{2i}-\sum_{i=k+1}^{\infty}\psi^{2i}=\frac{1}{1-\psi^{2}}-\psi^{2(k+1)}\sum_{n=0}^{\infty}\psi^{2n}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Pour le modèle suivant, calculer l' espérance, la variance, la covariance
+ et la correlation.
+ 
+\begin_inset Formula 
+\begin{equation}
+Y_{t}=-Y_{t-1}+2Y_{t-2}+e_{t}\label{ex: ARIMA}
+\end{equation}
+
+\end_inset
+
+On fait l'hypothèse que 
+\begin_inset Formula $e_{t}$
+\end_inset
+
+ est un bruit blanc centré de variance 
+\begin_inset Formula $\sigma_{e}$
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\bar under
+Réponse
+\begin_inset space ~
+\end_inset
+
+:
+\bar default
+ On va récrire le modèle à la forme des lags pour définir le polynôme characteri
+stic: 
+\begin_inset Formula 
+\[
+Y_{t}=-Y_{t-1}+2Y_{t-2}+e_{t}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+(-2L^{2}+L+1)Y_{t}=e_{t}
+\]
+
+\end_inset
+
+qui a les racines 
+\begin_inset Formula $r_{1}=1,\quad r_{2}=-\frac{1}{2}$
+\end_inset
+
+.
+ Il est clair que nous avons une racine unitaire et alors il s'agit d'un
+ modèle genre ARI(1,1,0).
+ 
+\begin_inset Formula 
+\[
+\frac{1}{(1-z)(1+2z)}=\psi_{1}z+\psi_{2}z^{2}+...
+\]
+
+\end_inset
+
+En utilisant l'equation 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "ARI coef"
+plural "false"
+caps "false"
+noprefix "false"
+
+\end_inset
+
+ on peut récrire l'equation précédant comme 
+\begin_inset Formula 
+\begin{align*}
+ & \psi_{k}=3\psi_{k-1}-2\psi_{k-2}\quad\psi_{0}=1\\
+ou\quad & \psi_{k}=\frac{1-\phi^{k+1}}{1-\phi}
+\end{align*}
+
+\end_inset
+
+Par qui on peut calculer facilement l'espérance 
+\begin_inset Formula 
+\[
+\E[Y_{t}]=0
+\]
+
+\end_inset
+
+et la variance 
+\begin_inset Formula 
+\[
+Var(Y_{t})=\sigma_{e}\big[1+2^{2}+...+(\frac{1-2^{t-k}}{-1})^{2}\big]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

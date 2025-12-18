@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Epitech — MSc Big Data & IA | Gérard Kra</title>
+  <meta name="description" content="Modules et projets de ma formation Epitech en Big Data et Intelligence Artificielle (2025-2028)" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    :root {
+      --univ-color: #00a8ff;
+      --univ-gradient: linear-gradient(135deg, #1a1a2e, #00a8ff);
+    }
+    .univ-hero {
+      background: var(--univ-gradient);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+    .univ-hero h1 {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .campus-tabs {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+    .campus-tab {
+      padding: 0.8rem 2rem;
+      background: var(--card-bg);
+      border: 2px solid var(--border-color);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+      color: var(--text-color);
+    }
+    .campus-tab:hover {
+      border-color: var(--univ-color);
+      color: var(--univ-color);
+    }
+    .campus-tab.active {
+      background: var(--univ-color);
+      color: white;
+      border-color: var(--univ-color);
+    }
+    .campus-content {
+      display: none;
+    }
+    .campus-content.active {
+      display: block;
+    }
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .module-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-top: 3px solid var(--univ-color);
+    }
+    .module-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .module-card h3 {
+      color: var(--univ-color);
+      margin-bottom: 0.8rem;
+      font-size: 1.2rem;
+    }
+    .document-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    .document-list li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .document-list li:last-child {
+      border-bottom: none;
+    }
+    .doc-link {
+      color: var(--text-color);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      font-size: 0.9rem;
+    }
+    .doc-link:hover {
+      color: var(--univ-color);
+      padding-left: 0.5rem;
+    }
+    .doc-icon {
+      font-size: 1.1rem;
+    }
+    
+    /* Styles pour Afficher Plus / Afficher Moins */
+    .extra-doc {
+      display: none;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity 0.3s ease, max-height 0.3s ease;
+    }
+    .extra-doc.visible {
+      display: block;
+      opacity: 1;
+      max-height: 500px;
+    }
+    .show-more-btn {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: var(--univ-color);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .show-more-btn:hover {
+      opacity: 0.85;
+      transform: translateY(-2px);
+    }
+    .show-more-btn:focus {
+      outline: 2px solid var(--univ-color);
+      outline-offset: 2px;
+    }
+
+    .timeline {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: var(--bg-color);
+      border-radius: var(--radius);
+      border-left: 4px solid var(--univ-color);
+    }
+    .timeline-item {
+      margin-bottom: 1.5rem;
+      padding-left: 1rem;
+    }
+    .timeline-item h4 {
+      color: var(--univ-color);
+      margin-bottom: 0.5rem;
+    }
+    .timeline-item p {
+      color: var(--text-color);
+      opacity: 0.9;
+    }
+    @media (max-width: 768px) {
+      .univ-hero h1 {
+        font-size: 1.8rem;
+      }
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../about.html">À propos</a>
+        <a href="index.html" class="active">Parcours</a>
+        <a href="../ressources/index.html">Ressources</a>
+        <a href="../professionnel/index.html">Professionnel</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a class="btn btn-outline" href="../CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle">☰</button>
+    </div>
+  </header>
+
+  <div id="google_translate_element"></div>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a> → 
+      <a href="index.html">Parcours</a> → 
+      <strong>Epitech</strong>
+    </div>
+
+    <section class="univ-hero slide-in">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">💻</div>
+      <h1>Epitech</h1>
+      <p class="subtitle"><strong>MSc Architecture Systèmes, IA & Big Data</strong></p>
+      <p style="margin-top: 0.5rem; font-size: 1rem; opacity: 0.9;">
+        📍 Nice (Sept-Déc 2025) puis Bordeaux (Jan 2026-Sept 2028) • 🎓 Alternance
+      </p>
+    </section>
+
+    <div class="stats-banner slide-in" style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; padding: 2rem; background: var(--bg-color); border-radius: var(--radius); margin: 2rem 0;">
+      <div style="text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 700; color: var(--univ-color);">3</div>
+        <div style="font-size: 0.9rem; color: var(--text-color); opacity: 0.8;">Années</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 700; color: var(--univ-color);">6+</div>
+        <div style="font-size: 0.9rem; color: var(--text-color); opacity: 0.8;">Projets (Piscine)</div>
+      </div>
+      <div style="text-align: center;">
+        <div style="font-size: 2.5rem; font-weight: 700; color: var(--univ-color);">9+</div>
+        <div style="font-size: 0.9rem; color: var(--text-color); opacity: 0.8;">Semaines intensives</div>
+      </div>
+    </div>
+
+    <section class="card slide-in">
+      <h2>📚 À propos de cette formation</h2>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        Le MSc Architecture Systèmes, IA & Big Data d'Epitech suit une <strong>pédagogie par projets</strong> unique : 
+        pas de cours magistraux ni d'examens classiques, mais un apprentissage intensif par la pratique. 
+        Après des semaines d'exercices sur une technologie, un projet final permet de consolider toutes les compétences acquises. 
+        J'ai débuté à <strong>Epitech Nice</strong> en septembre 2025 avec la piscine (15 semaines intensives), 
+        puis j'ai rejoint le campus <strong>Epitech Bordeaux</strong> en janvier 2026 pour mon alternance 
+        (4 semaines entreprise + 2 semaines école).
+      </p>
+    </section>
+
+    <div class="campus-tabs">
+      <button class="campus-tab active" data-campus="piscine">Piscine (Sept-Déc 2025)</button>
+      <button class="campus-tab" data-campus="bordeaux">Bordeaux - Alternance (2026-2028)</button>
+    </div>
+
+    <!-- ========== PISCINE CONTENT ========== -->
+    <div class="campus-content active" id="piscine">
+      <h2 class="section-title">🏊 Piscine Epitech Nice (Sept-Déc 2025)</h2>
+
+      <div class="timeline slide-in">
+        <h3 style="color: var(--univ-color); margin-bottom: 1rem;">📅 Chronologie de la piscine</h3>
+        <div class="timeline-item">
+          <h4>🐍 Semaines 1-2 : Python</h4>
+          <p>Bases de Python, structures de données, algorithmes</p>
+          <p style="color: var(--univ-color); font-weight: 600; margin-top: 0.5rem;">
+            → Projet final : Jeu du Pendu (HangMan)
+          </p>
+        </div>
+        <div class="timeline-item">
+          <h4>🐧 Semaines 3-4 : Bash & Unix/Linux</h4>
+          <p>Scripts bash, gestion système, manipulation de fichiers</p>
+          <p style="color: var(--univ-color); font-weight: 600; margin-top: 0.5rem;">
+            → Projet final : Automatisation système
+          </p>
+        </div>
+        <div class="timeline-item">
+          <h4>🌐 Semaines 5-7 : Programmation Web</h4>
+          <p>HTML, CSS, JavaScript - 3 semaines intensives</p>
+          <p style="color: var(--univ-color); font-weight: 600; margin-top: 0.5rem;">
+            → Projets finaux : CV Digital (T-WEB-500) + Job Board (T-WEB-501)
+          </p>
+        </div>
+        <div class="timeline-item">
+          <h4>☕ Semaines 8-9 : Java</h4>
+          <p>Programmation orientée objet, POO pure en Java</p>
+          <p style="color: var(--univ-color); font-weight: 600; margin-top: 0.5rem;">
+            → Projet final : Dungeon Escape - Jeu 2D (T-JAV-501)
+          </p>
+        </div>
+      </div>
+
+      <h3 style="color: var(--univ-color); margin: 2rem 0 1rem 0; font-size: 1.5rem;">🎯 Projets de la Piscine</h3>
+      
+      <div class="modules-grid">
+        <div class="module-card slide-in">
+          <h3>🐍 Python - HangMan Game</h3>
+          <p>Jeu du pendu développé après 2 semaines d'apprentissage intensif. Gestion listes, boucles, conditions, algorithmes de jeu.</p>
+          <ul class="document-list">
+            <li><a href="../cours/epitech/projets/T-PRE-500_day08.pdf" class="doc-link"><span class="doc-icon">📝</span><span>Sujet HangMan</span></a></li>
+            <li><a href="../cours/epitech/modules/Hangman.ipynb" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Code source HangMan.py</span></a></li>
+          </ul>
+        </div>
+
+        <div class="module-card slide-in">
+          <h3>🐧 Bash - Automatisation Unix/Linux</h3>
+          <p>Scripts bash pour automatisation système. Manipulation fichiers, pipes, gestion processus, scripting avancé.</p>
+          <ul class="document-list">
+            <li><a href="../cours/epitech/projets/T-WEB-500_day01.pdf" class="doc-link"><span class="doc-icon">📝</span><span>Sujet Piscine Web Jour 1</span></a></li>
+            <li><a href="../cours/epitech/projets/T-WEB-500_day02.pdf" class="doc-link"><span class="doc-icon">📝</span><span>Sujet Piscine Web Jour 2</span></a></li>
+          </ul>
+        </div>
+
+        <div class="module-card slide-in">
+          <h3>📁 T-ENT-500 - Portfolio Project</h3>
+          <p>Création d'un portfolio professionnel personnalisé et évolutif pour showcaser projets, compétences et parcours.</p>
+          <ul class="document-list">
+            <li><a href="../cours/epitech/projets/T-ENT-500_project.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Sujet Portfolio</span></a></li>
+          </ul>
+        </div>
+
+        <div class="module-card slide-in">
+          <h3>🌐 T-WEB-500 - Digital Resume</h3>
+          <p>CV numérique responsive (HTML/CSS/JS) après 3 semaines. Design moderne, animations, présentation professionnelle.</p>
+          <ul class="document-list">
+            <li><a href="../cours/epitech/projets/T-WEB-500_digitalResume.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Sujet Digital Resume</span></a></li>
+            <li><a href="https://gerardkra.github.io/DigitalResume" class="doc-link"><span class="doc-icon">🌐</span><span>CV en ligne</span></a></li>
+          </ul>
+        </div>
+
+        <div class="module-card slide-in">
+          <h3>💼 T-WEB-501 - Job Board</h3>
+          <p>Plateforme full-stack d'offres d'emploi. Base de données SQL, API RESTful (CRUD), authentification, interface admin.</p>
+          <ul class="document-list">
+            <li><a href="../cours/epitech/projets/T-WEB-501_project.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Sujet Job Board</span></a></li>
+            <li><a href="../cours/epitech/projets/Jobboard.zip" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Code source Job Board (fichier .zip)</span></a></li>
+          </ul>
+        </div>
+
+        <div class="module-card slide-in">
+          <h3>☕ T-JAV-501 - Dungeon Escape (2D Game)</h3>
+          <p>Jeu 2D en Java/JavaFX avec architecture MVC.</p>
+          <ul class="document-list">
+            <li><a href="../cours/epitech/projets/T-JAV-501_project.pdf" class="doc-link" target="_blank"><span class="doc-icon">📄</span><span>Sujet 2D Game</span></a></li>
+            <li><a href="../cours/epitech/modules/DungeonEscape_Architecture.png" class="doc-link" target="_blank"><span class="doc-icon">🎮</span><span>Architecture UML complète</span></a></li>
+            <li class="extra-doc"><a href="../cours/epitech/modules/Hangman.ipynb" class="doc-link" target="_blank"><span class="doc-icon">🤖</span><span>Code source Jeu complet</span></a></li>
+          </ul>
+          <button class="show-more-btn">▼ Afficher Plus</button>
+        </div>
+      </div>
+
+      <section class="card slide-in" style="margin-top: 2rem;">
+        <h3 style="color: var(--univ-color);">💡 Méthodologie d'apprentissage Epitech</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+          <div style="padding: 1rem; background: var(--bg-color); border-radius: var(--radius); border-left: 3px solid var(--univ-color);">
+            <h4 style="color: var(--univ-color); margin-bottom: 0.5rem;">1. Découverte</h4>
+            <p style="font-size: 0.9rem;">Apprentissage autonome d'une nouvelle technologie sans cours préalable</p>
+          </div>
+          <div style="padding: 1rem; background: var(--bg-color); border-radius: var(--radius); border-left: 3px solid var(--univ-color);">
+            <h4 style="color: var(--univ-color); margin-bottom: 0.5rem;">2. Pratique intensive</h4>
+            <p style="font-size: 0.9rem;">Exercices quotidiens pour maîtriser les concepts par la manipulation</p>
+          </div>
+          <div style="padding: 1rem; background: var(--bg-color); border-radius: var(--radius); border-left: 3px solid var(--univ-color);">
+            <h4 style="color: var(--univ-color); margin-bottom: 0.5rem;">3. Projet final</h4>
+            <p style="font-size: 0.9rem;">Application concrète mobilisant toutes les compétences acquises</p>
+          </div>
+          <div style="padding: 1rem; background: var(--bg-color); border-radius: var(--radius); border-left: 3px solid var(--univ-color);">
+            <h4 style="color: var(--univ-color); margin-bottom: 0.5rem;">4. Accompagnement</h4>
+            <p style="font-size: 0.9rem;">Intervenants pédagogiques pour guider sans donner les solutions</p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ========== BORDEAUX CONTENT ========== -->
+    <div class="campus-content" id="bordeaux">
+      <h2 class="section-title">🍷 Epitech Bordeaux — En alternance (2026-2028)</h2>
+      
+      <section class="card slide-in" style="background: linear-gradient(135deg, #1a1a2e, #00a8ff); color: white; margin-bottom: 2rem;">
+        <h3 style="color: white;">🚀 Formation en cours - Alternance</h3>
+        <p style="opacity: 0.95; margin-top: 1rem; line-height: 1.8;">
+          Depuis janvier 2026, je suis en <strong>alternance à Bordeaux</strong> (4 semaines entreprise + 2 semaines école). 
+          La formation continue sur le modèle projet-based learning avec des modules avancés en Big Data, 
+          IA et architecture systèmes. Les projets et modules seront ajoutés progressivement au fur et à mesure 
+          de ma progression.
+        </p>
+      </section>
+
+      <div class="timeline slide-in">
+        <h3 style="color: var(--univ-color); margin-bottom: 1rem;">📅 Planning d'alternance</h3>
+        <div class="timeline-item">
+          <h4>🏢 4 semaines en entreprise</h4>
+          <p>Application des compétences sur des projets réels en environnement professionnel</p>
+        </div>
+        <div class="timeline-item">
+          <h4>🎓 2 semaines à l'école</h4>
+          <p>Nouveaux modules, projets intensifs et consolidation des acquis</p>
+        </div>
+      </div>
+
+      <h3 style="color: var(--univ-color); margin: 2rem 0 1rem 0; font-size: 1.5rem;">🎯 Modules à venir (2026-2028)</h3>
+      
+      <div class="modules-grid">
+        <div class="module-card slide-in">
+          <h3>📊 Big Data Avancé</h3>
+          <p>Hadoop, Spark, écosystème Big Data distribué</p>
+          <ul class="document-list">
+            <li><a href="#" class="doc-link"><span class="doc-icon">📄</span><span>Projets à venir...</span></a></li>
+          </ul>
+        </div>
+
+        <div class="module-card slide-in">
+          <h3>🤖 Deep Learning & IA</h3>
+          <p>Réseaux de neurones, NLP, Computer Vision</p>
+          <ul class="document-list">
+            <li><a href="#" class="doc-link"><span class="doc-icon">📄</span><span>Projets à venir...</span></a></li>
+          </ul>
+        </div>
+
+        <div class="module-card slide-in">
+          <h3>🏗️ Architecture Systèmes Distribués</h3>
+          <p>Microservices, Kubernetes, scalabilité</p>
+          <ul class="document-list">
+            <li><a href="#" class="doc-link"><span class="doc-icon">📄</span><span>Projets à venir...</span></a></li>
+          </ul>
+        </div>
+
+        <div class="module-card slide-in">
+          <h3>🐳 DevOps & CI/CD</h3>
+          <p>Docker, Jenkins, automatisation des déploiements</p>
+          <ul class="document-list">
+            <li><a href="#" class="doc-link"><span class="doc-icon">📄</span><span>Projets à venir...</span></a></li>
+          </ul>
+        </div>
+
+        <div class="module-card slide-in">
+          <h3>📡 Streaming & Temps Réel</h3>
+          <p>Kafka, Flink, traitement de flux de données</p>
+          <ul class="document-list">
+            <li><a href="#" class="doc-link"><span class="doc-icon">📄</span><span>Projets à venir...</span></a></li>
+          </ul>
+        </div>
+
+        <div class="module-card slide-in">
+          <h3>🧪 MLOps</h3>
+          <p>Déploiement de modèles ML en production</p>
+          <ul class="document-list">
+            <li><a href="#" class="doc-link"><span class="doc-icon">📄</span><span>Projets à venir...</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- <section class="card slide-in">
+      <h2>🛠️ Compétences développées/Consolidées</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem;">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🐍</div>
+          <h4 style="color: var(--univ-color);">Python</h4>
+          <p style="color: #888; font-size: 0.9rem;">HangMan, Algorithmes</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🐧</div>
+          <h4 style="color: var(--univ-color);">Unix/Linux</h4>
+          <p style="color: #888; font-size: 0.9rem;">Bash, Automatisation</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🌐</div>
+          <h4 style="color: var(--univ-color);">Web Dev</h4>
+          <p style="color: #888; font-size: 0.9rem;">HTML, CSS, JavaScript</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">☕</div>
+          <h4 style="color: var(--univ-color);">Java</h4>
+          <p style="color: #888; font-size: 0.9rem;">POO, JavaFX, Design Patterns</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🗄️</div>
+          <h4 style="color: var(--univ-color);">Databases</h4>
+          <p style="color: #888; font-size: 0.9rem;">SQL, API REST</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">📊</div>
+          <h4 style="color: var(--univ-color);">Big Data</h4>
+          <p style="color: #888; font-size: 0.9rem;">Spark, Hadoop (à venir)</p>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- CTA -->
+    <section class="card slide-in" style="text-align: center; background: var(--univ-gradient); color: white; margin-top: 3rem;">
+      <h2 style="color: white;">📥 Documents manquants ?</h2>
+      <p style="margin: 1rem 0; opacity: 0.95;">
+        Je mets régulièrement à jour cette page avec de nouveaux documents. Si vous recherchez un cours spécifique, n'hésitez pas à me contacter !
+      </p>
+      <a href="../contact.html" class="btn" style="background: white; color: #00a8ff; margin-top: 1rem;">
+        Me contacter
+      </a>
+    </section>
+
+    <!-- Navigation vers autres universités -->
+    <section style="margin-top: 3rem;">
+      <h2 class="section-title">🎓 Explorer d'autres formations</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <a href="universite-lagunes.html" class="card" style="text-decoration: none; text-align: center; border-top: 3px solid #0066cc;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🎓</div>
+          <h3 style="color: #0066cc;">Université des Lagunes</h3>
+          <p>Licence Mathématiques</p>
+        </a>
+        <a href="universite-cote-azur.html" class="card" style="text-decoration: none; text-align: center; border-top: 3px solid #e4032e;">
+          <div style="font-size: 3rem; margin-bottom: 0.5rem;">🏛️</div>
+          <h3 style="color: #e4032e;">Université Côte d'Azur</h3>
+          <p>Master Ingénierie Mathématique</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/translation.js"></script>
+  
+  <script>
+    // Campus tabs
+    document.querySelectorAll('.campus-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.campus-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.campus-content').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        document.getElementById(this.getAttribute('data-campus')).classList.add('active');
+      });
+    });
+
+    // Show more/less buttons
+    document.querySelectorAll('.show-more-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const card = this.closest('.module-card');
+        const extraDocs = card.querySelectorAll('.extra-doc');
+        
+        extraDocs.forEach(doc => doc.classList.toggle('visible'));
+        
+        const isVisible = extraDocs[0]?.classList.contains('visible');
+        this.textContent = isVisible ? '▲ Afficher Moins' : '▼ Afficher Plus';
+      });
+    });
+
+    // Animation on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.slide-in').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

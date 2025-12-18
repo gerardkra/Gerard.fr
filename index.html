@@ -1,144 +1,230 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Gérard Kra — Data Scientist & AI Engineer</title>
-  <meta name="description" content="Portfolio of Gérard Kra — Data Science, AI, Big Data, Full Stack Development. Showcasing skills, projects, and achievements." />
+  <title>Gérard Kra — Portfolio Éducatif</title>
+  <meta name="description" content="Portfolio éducatif de Gérard Kra - Partage de cours, ressources et parcours académique en mathématiques, data science et informatique" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </head>
 <body>
   <header class="site-header">
     <div class="nav-inner container">
       <a class="brand" href="index.html">Gérard Kra</a>
       <nav class="main-nav">
-        <a href="index.html" class="active">Home</a>
-        <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
+        <a href="index.html" class="active" data-i18n="nav.home">Accueil</a>
+        <a href="about.html" data-i18n="nav.about">À propos</a>
+        <a href="parcours/index.html" data-i18n="nav.parcours">Parcours</a>
+        <a href="ressources/index.html" data-i18n="nav.resources">Ressources</a>
+        <a href="professionnel/index.html" data-i18n="nav.pro">Professionnel</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
       </nav>
       <div class="header-actions">
         <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
-        <a class="btn btn-outline" href="CV_KRA_Gerard.pdf" target="_blank" rel="noopener">Download CV</a>
+        <a class="btn btn-outline" href="CV_KRA_Gerard.pdf" target="_blank" rel="noopener" data-i18n="nav.cv">Télécharger CV</a>
       </div>
       <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
     </div>
   </header>
+
+  <!-- Google Translate Widget -->
+  <div id="google_translate_element"></div>
+
 
   <!-- Hero Section -->
   <section class="hero container">
     <div class="hero-left">
       <img src="assets/photo.jpg" alt="Gérard Kra" class="profile-pic">
       <h1>Gérard Kra</h1>
-      <p class="subtitle">Data Scientist & AI Engineer — Python • TensorFlow • Node.js • DevOps • Big Data</p>
+      <p class="subtitle">Data Analyst & AI Engineer</p>
       <div class="hero-ctas">
-        <a class="btn" href="projects.html#jobboard">View Job Board</a>
-        <a class="btn btn-ghost" href="projects.html">See Projects</a>
+        <a class="btn" href="parcours/index.html" data-i18n="cta.parcours">Voir mon parcours</a>
+        <a class="btn btn-ghost" href="ressources/index.html" data-i18n="cta.resources">Ressources</a>
       </div>
       <ul class="quick-info">
-        <li><strong>Availability:</strong> Jan 2026 – Sep 2028</li>
-        <li><strong>Location:</strong> France (remote-friendly)</li>
-        <li><strong>Email:</strong> <a href="mailto:gerard.kra@epitech.eu">gerard.kra@epitech.eu</a></li>
-        <li><strong>GitHub:</strong> <a href="https://www.linkedin.com/in/g%C3%A9rardkra-data-engineer-devops-nlp-data-science-telecom" target="_blank">github.com/gerardkra</a></li>
+        <li><strong>Localisation :</strong> Bordeaux, France</li>
+        <li><strong>Email :</strong> <a href="mailto:gerard.kra@epitech.eu">gerard.kra@epitech.eu</a></li>
+        <li><strong>GitHub :</strong> <a href="https://github.com/gerardkra" target="_blank">github.com/gerardkra</a></li>
       </ul>
     </div>
 
     <div class="hero-right">
       <div class="card highlight slide-in">
-        <h3>Professional Snapshot</h3>
-        <p>I combine rigorous mathematical training with hands-on AI, data engineering, and full-stack development skills. I design end-to-end solutions: data pipelines, ML models, web interfaces, and deployment workflows.</p>
+        <h3 data-i18n="hero.title">Bienvenue sur mon espace académique</h3>
+        <p data-i18n="hero.subtitle">Je partage mon parcours universitaire et mes ressources d'apprentissage pour aider les étudiants en mathématiques, data science et informatique.</p>
       </div>
 
       <div class="card slide-in">
-        <h3>Key Skills</h3>
-
-    
-      
+        <h3>Compétences Clés</h3>
 
         <div class="skills-grid" id="skills-grid">
-          <!-- Top 3 skills (always visible) -->
+          <!-- Top 3 skills (toujours visibles) -->
+           <!-- Python -->
           <div class="skill">
             <i class="devicon-python-plain colored"></i>
             <p>Python</p>
             <div class="skill-level"><div style="width: 90%;"></div></div>
           </div>
 
+          <!-- Tensorflow -->
           <div class="skill">
             <i class="devicon-tensorflow-original colored"></i>
             <p>TensorFlow</p>
             <div class="skill-level"><div style="width: 90%;"></div></div>
           </div>
 
+          <!-- Spark -->
           <div class="skill">
             <img src="images/spark.svg" alt="Apache Spark logo">
             <p>Spark</p>
             <div class="skill-level"><div style="width: 80%;"></div></div>
           </div>
 
-          <!-- Hidden skills (extra skills) -->
+          <!-- Skills cachées (extra-skill) -->
+          <!-- R -->
           <div class="skill extra-skill">
             <i class="devicon-r-original colored"></i>
             <p>R</p>
             <div class="skill-level"><div style="width: 80%;"></div></div>
           </div>
 
+          <!-- SAS -->
+          <div class="skill extra-skill">
+            <img src="images/sas.png" alt="SAS logo">
+            <p>SAS</p>
+            <div class="skill-level"><div style="width: 45%;"></div></div>
+          </div>
+
+          <!-- Julia -->
           <div class="skill extra-skill">
             <i class="devicon-julia-plain colored"></i>
             <p>Julia</p>
             <div class="skill-level"><div style="width: 60%;"></div></div>
           </div>
 
+          <!-- SQL -->
           <div class="skill extra-skill">
             <i class="devicon-mysql-plain-wordmark colored"></i>
             <p>SQL</p>
-            <div class="skill-level"><div style="width: 80%;"></div></div>
+            <div class="skill-level"><div style="width: 70%;"></div></div>
           </div>
 
+          <!-- Hadoop -->
           <div class="skill extra-skill">
             <img src="images/hadoop.svg" alt="Hadoop logo">
             <p>Hadoop</p>
             <div class="skill-level"><div style="width: 65%;"></div></div>
           </div>
 
+          <!-- Optimisation & Stats -->
           <div class="skill extra-skill">
             <img src="images/Opti&stats.png" alt="Optimisation & Statistiques">
-            <p>Optimisation & Statistiques</p>
+            <p>Optimisation & Stats</p>
             <div class="skill-level"><div style="width: 85%;"></div></div>
           </div>
-
+          <!-- Data Analysis -->
           <div class="skill extra-skill">
             <img src="images/Datanalysis.png" alt="Analyse de données">
-            <p>Analyse de données</p>
-            <div class="skill-level"><div style="width: 80%;"></div></div>
+            <p>Data Analysis</p>
+            <div class="skill-level"><div style="width: 70%;"></div></div>
           </div>
 
+          <!-- Power BI -->
           <div class="skill extra-skill">
             <img src="images/powerbi.svg" alt="Power BI logo">
             <p>Power BI</p>
-            <div class="skill-level"><div style="width: 75%;"></div></div>
+            <div class="skill-level"><div style="width: 60%;"></div></div>
           </div>
 
+          <!-- Git/Github -->
           <div class="skill extra-skill">
             <i class="devicon-git-plain colored"></i>
             <p>Git/GitHub</p>
-            <div class="skill-level"><div style="width: 80%;"></div></div>
+            <div class="skill-level"><div style="width: 70%;"></div></div>
           </div>
 
+          <!-- Docker -->
           <div class="skill extra-skill">
             <i class="devicon-docker-plain colored"></i>
             <p>Docker</p>
-            <div class="skill-level"><div style="width: 80%;"></div></div>
+            <div class="skill-level"><div style="width: 60%;"></div></div>
+          </div>
+
+          <!-- HTML -->
+          <div class="skill extra-skill">
+            <i class="devicon-html5-plain colored"></i>
+            <p>HTML5</p>
+            <div class="skill-level"><div style="width: 65%;"></div></div>
+          </div>
+
+          <!-- CSS -->
+          <div class="skill extra-skill">
+            <i class="devicon-css3-plain colored"></i>
+            <p>CSS3</p>
+            <div class="skill-level"><div style="width: 50%;"></div></div>
+          </div>
+
+          <!-- JavaScript -->
+          <div class="skill extra-skill">
+            <i class="devicon-javascript-plain colored"></i>
+            <p>JavaScript</p>
+            <div class="skill-level"><div style="width: 45%;"></div></div>
+          </div>
+
+          <!-- PHP -->
+          <div class="skill extra-skill">
+            <i class="devicon-php-plain colored"></i>
+            <p>PHP</p>
+            <div class="skill-level"><div style="width: 40%;"></div></div>
+          </div>
+
+          <!-- Java -->
+          <div class="skill extra-skill">
+            <i class="devicon-java-plain colored"></i>
+            <p>Java</p>
+            <div class="skill-level"><div style="width: 60%;"></div></div>
+          </div>
+
+          <!-- Node.js -->
+          <div class="skill extra-skill">
+            <i class="devicon-nodejs-plain colored"></i>
+            <p>Node.js</p>
+            <div class="skill-level"><div style="width: 35%;"></div></div>
+          </div>
+
+          <!-- Jupyter Notebook -->
+          <div class="skill extra-skill">
+            <i class="devicon-jupyter-plain colored"></i>
+            <p>Jupyter Notebook</p>
+            <div class="skill-level"><div style="width: 90%;"></div></div>
+          </div>
+
+          <!-- LaTeX -->
+          <div class="skill extra-skill">
+            <i class="devicon-latex-original colored"></i>
+            <p>LaTeX</p>
+            <div class="skill-level"><div style="width: 90%;"></div></div>
           </div>
         </div>
-      </div>
 
-  <!-- Show More / Show Less button -->
-  <div style="text-align: center; margin-top: 1rem;">
-    <button class="btn btn-outline" id="show-more-skills">Show More</button>
-  </div>
-</div>
+        <!-- Show More / Show Less button -->
+        <div style="text-align: center; margin-top: 1rem;">
+          <button class="btn btn-outline" id="show-more-skills">Afficher Plus</button>
+        </div>
+      </div>
 
       <div class="card contact-card slide-in">
         <h3>Contact</h3>
@@ -150,22 +236,49 @@
   </section>
 
   <main class="container">
+    <!-- Stats Section -->
+    <section class="slide-in" style="background: var(--card-bg); border-radius: var(--radius); padding: 2rem; margin: 2rem 0; box-shadow: var(--shadow);">
+      <h2 style="text-align: center; margin-bottom: 2rem;" data-i18n="parcours.title">📚 Mon parcours académique</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 2rem; text-align: center;">
+        <div>
+          <div style="font-size: 3rem; font-weight: 700; color: var(--accent-color);">3</div>
+          <div style="color: #888;" data-i18n="stats.universities">Universités</div>
+        </div>
+        <div>
+          <div style="font-size: 3rem; font-weight: 700; color: var(--accent-color);">5+</div>
+          <div style="color: #888;" data-i18n="stats.years">Années d'études</div>
+        </div>
+        <div>
+          <div style="font-size: 3rem; font-weight: 700; color: var(--accent-color);">100+</div>
+          <div style="color: #888;" data-i18n="stats.documents">Documents partagés</div>
+        </div>
+        <div>
+          <div style="font-size: 3rem; font-weight: 700; color: var(--accent-color);">∞</div>
+          <div style="color: #888;" data-i18n="stats.resources">Ressources gratuites</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experiences -->
     <section id="achievements" class="achievements grid">
       <div class="card highlight slide-in">
-        <h2>Experiences</h2>
+        <h2>Expériences</h2>
 
         <div class="card slide-in">
           <h3>Data Engineer — BNI (2025)</h3>
-          <p>Automated reporting pipelines using SQL & Power BI. Built a hybrid recommender achieving >75% similarity metric for product suggestions.</p>
+          <p>Au cours de mon stage de fin d’études à la Banque Nationale d’Investissement (BNI) de Côte d’Ivoire, j’ai conçu et automatisé des reportings à l’aide de requêtes SQL et de Power BI. Ces travaux ont permis d’améliorer significativement l’efficacité du suivi quotidien des opérations bancaires.
+            <br>
+            J’ai également développé un système de recommandation de produits bancaires basé sur une approche hybride d’apprentissage automatique, atteignant un score de similarité supérieur à 75 %. Ce modèle de recommandation a été implémenté en Python.</p>
         </div>
 
         <div class="card slide-in">
-          <h3>PFE — Microbial Species Modeling (2025)</h3>
-          <p>Modeled microbial species selection with Julia. Emphasis on reproducibility, parameter optimization, and model validation.</p>
+          <h3>PFE — Modélisation d'Espèces Microbiennes (2025)</h3>
+          <p>Ce projet a porté sur la modélisation et la sélection optimale d’espèces microbiennes en compétition dans un chémostat. Nous y avons développé et implémenté plusieurs modèles biologiques (Monod, Droop, photosensibilité et photoacclimatation) appliqués à deux espèces microbiennes. L’ensemble du travail a été réalisé en Julia.</p>
         </div>
+
         <div class="card slide-in">
-          <h3>NLP Project (2024)</h3>
-          <p>Implemented robust pre-processing pipeline in Python. Controlled vocabulary suppression improved F1 scores on small-domain datasets.</p>
+          <h3>Projet NLP (2024)</h3>
+          <p>Ce projet a consisté en une analyse exploratoire de différentes techniques en Natural Language Processing. Nous y avons développé et évalué trois méthodes de suppression terminologique : l’annotation POS, le remplacement par des espaces blancs et la substitution par des tokens sémantiquement vides. L’ensemble du travail a été réalisé en Python.</p>
         </div>
       </div>
     </section>
@@ -173,15 +286,22 @@
 
   <footer class="site-footer">
     <div class="container">
-      <p>© 2025 Gérard Kra — Data Science & AI</p>
-      <nav class="footer-links">
-        <a href="about.html">About</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+      <nav class="footer-links" style="margin-top: 1rem;">
+        <a href="about.html" data-i18n="nav.about">À propos</a>
+        <a href="parcours/index.html" data-i18n="nav.parcours">Parcours</a>
+        <a href="ressources/index.html" data-i18n="nav.resources">Ressources</a>
+        <a href="contact.html" data-i18n="nav.contact">Contact</a>
       </nav>
     </div>
   </footer>
 
   <script src="main.js"></script>
+  <script src="js/translation.js"></script>
 </body>
 </html>

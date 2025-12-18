@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mon Parcours Professionnel | Gérard Kra</title>
+  <meta name="description" content="Suivez mon parcours professionnel sur LinkedIn et GitHub" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .pro-hero {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+
+    .pro-hero h1 {
+      color: white;
+      font-size: 2.5rem;
+    }
+
+    .pro-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .pro-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      text-decoration: none;
+      color: var(--text-color);
+      border-top: 4px solid;
+    }
+
+    .pro-card.linkedin { border-top-color: #0077b5; }
+    .pro-card.github { border-top-color: #333; }
+
+    .pro-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(0,0,0,0.2);
+    }
+
+    .pro-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .linkedin-color { color: #0077b5; }
+    .github-color { color: #333; }
+
+    .light-mode .github-color { color: #24292e; }
+
+    @media (max-width: 768px) {
+      .pro-hero h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../about.html">À propos</a>
+        <a href="../parcours/index.html">Parcours</a>
+        <a href="../ressources/index.html">Ressources</a>
+        <a href="index.html" class="active">Professionnel</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a class="btn btn-outline" href="../CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <!-- Google Translate Widget -->
+  <div id="google_translate_element"></div>
+
+  <!-- <div class="lang-switcher">
+    <button class="lang-btn active" data-lang="fr">FR</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+  </div> -->
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a> → <strong>Professionnel</strong>
+    </div>
+
+    <section class="pro-hero slide-in">
+      <div style="font-size: 4rem; margin-bottom: 1rem;">💼</div>
+      <h1>Mon Parcours Professionnel</h1>
+      <p style="font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.95;">
+        Suivez mon actualité professionnelle et découvrez mes projets
+      </p>
+    </section>
+
+    <section class="card slide-in">
+      <h2>🎯 Où me trouver en ligne</h2>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        Je partage régulièrement mon actualité professionnelle sur LinkedIn et mes projets techniques sur GitHub. 
+        Vous pouvez me suivre pour rester à jour sur mes derniers travaux.
+      </p>
+    </section>
+
+    <div class="pro-cards">
+      
+      <a href="linkedin.html" class="pro-card linkedin slide-in">
+        <div class="pro-icon">
+          <i class="devicon-linkedin-plain linkedin-color"></i>
+        </div>
+        <h3 style="color: #0077b5; font-size: 1.8rem; margin-bottom: 1rem;">LinkedIn</h3>
+        <p style="color: #888; margin: 1rem 0; line-height: 1.6;">
+          Suivez mes posts, actualités professionnelles, réflexions sur la data science, 
+          l'IA et le Big Data. Connectez-vous avec moi pour échanger !
+        </p>
+        <div style="margin: 1.5rem 0;">
+          <strong>Ce que je partage :</strong>
+          <ul style="list-style: none; padding: 0; margin-top: 0.8rem; text-align: left;">
+            <li style="padding: 0.4rem 0;">✓ Actualités tech & data science</li>
+            <li style="padding: 0.4rem 0;">✓ Retours d'expérience projets</li>
+            <li style="padding: 0.4rem 0;">✓ Conseils pour étudiants</li>
+            <li style="padding: 0.4rem 0;">✓ Opportunités d'alternance ou de stage</li>
+          </ul>
+        </div>
+        <div style="margin-top: 2rem;">
+          <span class="btn">Voir mon LinkedIn →</span>
+        </div>
+      </a>
+
+      <a href="github.html" class="pro-card github slide-in">
+        <div class="pro-icon">
+          <i class="devicon-github-original github-color"></i>
+        </div>
+        <h3 style="color: #333; font-size: 1.8rem; margin-bottom: 1rem;">GitHub</h3>
+        <p style="color: #888; margin: 1rem 0; line-height: 1.6;">
+          Explorez mes projets open-source et repositories. 
+          Code propre, documenté et prêt à être réutilisé.
+        </p>
+        <div style="margin: 1.5rem 0;">
+          <strong>Types de projets :</strong>
+          <ul style="list-style: none; padding: 0; margin-top: 0.8rem; text-align: left;">
+            <li style="padding: 0.4rem 0;">✓ Machine Learning & NLP</li>
+            <li style="padding: 0.4rem 0;">✓ Data Engineering & Pipelines</li>
+            <li style="padding: 0.4rem 0;">✓ Web Development (Full-Stack)</li>
+            <li style="padding: 0.4rem 0;">✓ DevOps & Automatisation</li>
+          </ul>
+        </div>
+        <div style="margin-top: 2rem;">
+          <span class="btn">Voir mes projets →</span>
+        </div>
+      </a>
+
+    </div>
+
+    <section class="card slide-in" style="background: linear-gradient(135deg, #4facfe, #00f2fe); color: white; text-align: center;">
+      <h2 style="color: white;">💡 Intéressé par une collaboration ?</h2>
+      <p style="opacity: 0.95; margin: 1rem 0;">
+        Je suis ouvert aux opportunités d'alternance, stages, projets collaboratifs et mentorat.
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+        <a href="../contact.html" class="btn" style="background: white; color: #4facfe;">
+          📧 Me contacter
+        </a>
+        <a href="../CV_KRA_Gerard.pdf" target="_blank" class="btn btn-outline" style="border-color: white; color: white;">
+          📄 Télécharger mon CV
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/translation.js"></script>
+</body>

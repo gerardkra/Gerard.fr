@@ -1,0 +1,311 @@
+---
+title: "EXAMEN CLASSIFICATION NON SUPERVISEE"
+output:
+  html_document:
+    df_print: paged
+---
+
+$\underline{EXERCICE}$ $1$
+
+# 1) Chargement du jeu de donnée
+
+```{r}
+library(dplyr)
+data("iris", package = "datasets")
+
+Data_iris = iris
+
+sample_n(Data_iris,10)
+```
+
+# 2) Visualisation des données manquantes
+
+```{r}
+naniar::vis_miss(Data_iris)
+```
+
+Le jeu de données "iris" ne compte aucune données manquantes.
+
+# 3) Visualisation des corrélation
+
+## Visualisation de la nature des variables de notre jeu de donnée
+
+Avant de nous lancer dans une ACP, nous devons décrire les données, repérer les variables quantitatives d\'intérêt, et synthétiser les corrélations linéaires (coefficients de corrélation de Pearson) entre ces variables.
+
+```{r}
+skimr::skim(Data_iris)
+```
+
+Nous avons une variable facteur diabetes à exclure de l\'analyse. Il s'agit notament de la variable ''species".
+
+La fonction `correlation()` du package `SciViews` nous permet d\'inspecter les corrélations entre les variables choisies (donc toutes à l\'exception de species qui n'est pas quantitative continues) :
+
+```{r}
+library(SciViews)
+iris_cor <- correlation(Data_iris[, 1:4])
+
+knitr::kable(iris_cor, digits = 2)
+
+```
+
+```{r}
+plot(iris_cor)
+```
+
+Quelques corrélations positives d\'intensités forte se dégagent ici, notamment entre "Sepal.length","Petal.length"et"Petal.width",, ainsi qu\'entre Petal.width et Petal.length. Par contre, Sepal.width semble peu corrélés avec les autres variables.
+
+# 4) Mise en place de l'ACP
+
+Nous utiliserons la fonction `pca()` qui prend un argument `data =` et une formule du type `~ var1 + var2 + .... + varn`, ou plus simplement, directement un tableau contenant uniquement les variables à analyser comme argument unique. Comme les différentes variables sont mesurées dans des unités différentes, nous devons les standardiser (écart type ramené à un pour toutes). Ceci est réalisé par la fonction `pca()` en lui indiquant `scale = TRUE`. Donc :
+
+```{r}
+library(FactoMineR)
+
+iris_pca = PCA(Data_iris[,1:4],scale.unit = TRUE,
+
+                graph = F)
+```
+
+# 5) Calcul de la part de Variance
+
+```{r}
+library(factoextra)
+eig.val = get_eigenvalue(iris_pca)
+
+eig.val
+
+
+var = get_pca_var(iris_pca)
+
+var$coord
+
+```
+
+Les deux premiers axes de l\'ACP capturent ici 96% de la variance totale. Nous pouvons restreindre notre analyse à ces deux axes-là.
+
+# 6) Le graphe des éboulies
+
+Le **graphique des éboulis** sert à visualiser la \"chute\" de la variance d\'un axe principal à l\'autre, et aide à choisir le nombre d\'axes à conserver (espace à dimensions réduites avec perte minimale d\'information). Deux variantes en diagramme en barres verticales chart screeplot() ou chart scree() ou sous forme d\'une ligne brisée chart\$altscree() sont disponibles :
+
+```{r}
+fviz_eig(iris_pca, addlabels = TRUE, ylim = c(0, 90))
+```
+
+La diminution est importante entre le premier et le second axe, mais plus progressive ensuite. Nous pouvons visualiser le **premier plan principal** constitué par PC1 et PC2, tout en gardant à l\'esprit que 96% de la variance totale y est capturée. Donc, nous pouvons nous attendre à des pertes d\'information négligeables dans ce plan. Cela signifie que nous pouvons laisser certains aspects du jeu de donnée. Nous verrons qu\'il est porteur, toutefois, d\'information utile.
+
+# 7) Graphe des individus et de variables sur les deux premiers axes
+
+-   Graphe des variables
+
+```{r}
+plot.PCA(iris_pca, axes = c(1,2), 
+
+         choix = 'var',
+
+         title = "Graphe des variables")
+```
+
+-   Graphe des individus
+
+    ```{r}
+    plot.PCA(iris_pca, axes = c(1,2), choix = 'ind',)
+    ```
+
+# 8) Interprétation avec FactoInvestigate
+
+```{r}
+library(FactoInvestigate)
+Investigate(iris_pca)
+```
+
+$\underline{EXERCICE}$ $2$
+
+# 1) Explication du CAH
+
+Le principe du Clustering Hiérarchique Agglomératif (CAH) peut être résumé suit :
+
+-    Le CAH est un algorithme de classification non supervisée qui regroupe les données en construisant de manière progressive une hiérarchie de clusters.
+
+-   Au début, chaque point de données est considéré comme un cluster individuel. On mesure ensuite les distances entre les points ou clusters en utilisant une mesure de similarité (par exemple, la distance euclidienne).
+
+-    Les deux clusters les plus proches sont ensuite fusionnés pour former un nouveau cluster, agrégeant les points qui leur appartiennent respectivement.
+
+-   La distance entre les nouveaux clusters est recalculée en fonction de la méthode d'agrégation utilisée (méthode de liaison, comme la liaison simple, complète ou moyenne).
+
+-    Le processus de fusion et de recalcul de distance est répété jusqu'à ce que tous les points de données appartiennent à un seul et unique cluster global.
+
+-    La hiérarchie de clusters est généralement représentée sous forme d'un dendrogramme, un diagramme arborescent où chaque nœud représente un cluster et les feuilles correspondent aux points de données individuels.
+
+-   Plus les nœuds du dendrogramme sont situés en bas de l'arbre, plus les clusters sont petits et spécifiques. Plus ils remontent vers la racine, plus les clusters sont grands et englobent davantage de données.
+
+-   En coupant le dendrogramme à une certaine hauteur, on obtient un nombre souhaité de clusters. Cela permet de choisir le niveau de granularité approprié pour l'analyse.
+
+-    Le CAH est utile pour identifier des sous-groupes à l'intérieur des données et pour observer comment les clusters s'agrègent progressivement.
+
+```{=html}
+<!-- -->
+```
+-   Le CAH est sensible aux distances et peut être influencé par les valeurs aberrantes. Il est donc important de prétraiter les données et de choisir la méthode de liaison appropriée en fonction des caractéristiques du jeu de données.
+
+En somme, le CAH est un moyen puissant de découvrir la structure intrinsèque des données en les organisant hiérarchiquement selon leur similarité.
+
+# 2) Chargement du jeu de données
+
+```{r}
+library(dplyr)
+data("iris", package = "datasets")
+
+df = iris
+
+sample_n(df,10)
+```
+
+# 3) Determination de la méthode de linkage qui corespond à notre analyse
+
+```{r}
+library(cluster)
+#definition de la methde de linkage
+m = c( "average", "single", "complete", "ward")
+
+names(m) = c( "average", "single", "complete", "ward")
+#fonction agglomérative
+ac = function(x) {
+
+  agnes(df[, 1:4], method = x)$ac
+
+}
+#Identification de la méthode de linkage method
+
+sapply(m, ac)
+```
+
+Nous pouvons facilement voir que la méthode de linkage qui produit le coefficient agglomératif maximal est "$Ward$".
+
+# 4) Réalisation du classifieur CAH
+
+```{r}
+library(cluster)
+clust = agnes(df[, 1:4], method = "ward")
+
+```
+
+# 5) Détermination du nombre de cluster optimal
+
+```{r}
+#Calcul gap statistique pour chaque nombre de cluster
+
+gap_stat = clusGap(df[, 1:4], FUN = hcut, nstart = 25, K.max = 10, B = 50)
+```
+
+```{r}
+#Visualisation du gap statistic
+
+fviz_gap_stat(gap_stat)
+```
+
+D' après le graphe du gap statistique, il ressort que le nombre optimal de cluster est k = 6.
+
+# 6) Mise en place du HCPC
+
+```{r}
+# 1. ACP 
+
+res.pca = PCA(df[, 1:4], ncp = 3,graph = FALSE)
+
+# 2. HCPC
+
+res.hcpc = HCPC(res.pca,
+
+                 nb.clust = 6,
+
+                 metric = "euclidean", 
+
+                 method = "ward",
+
+                 graph = FALSE)
+```
+
+# 7) Affichage du dendogramme
+
+```{r}
+#dendogramme
+library(dendextend)
+library(igraph)
+library(tidyverse)
+library(factoextra)
+fviz_dend(res.hcpc, 
+          cex = 0.7,                     # Taille du text
+          palette = "jco",               # Palette de couleur ?ggpubr::ggpar
+          rect = TRUE, rect_fill = TRUE, # Rectangle autour des groupes
+          rect_border = "jco",           # Couleur du rectangle
+          labels_track_height = 0.8      # Augment l'espace pour le texte
+          )
+```
+
+# 8) Réalisation d'un "Map Factor"
+
+```{r}
+library(igraph)
+library(tidyverse)
+library(factoextra)
+fviz_cluster(res.hcpc,
+
+             repel = TRUE,            # Evite le chevauchement des textes
+
+             show.clust.cent = TRUE, # Montre le centre des clusters
+
+             palette = "jco",         # Palette de couleurs, voir ?ggpubr::ggpar
+
+             ggtheme = theme_minimal(),
+
+             main = "Factor map"
+
+             )
+```
+
+# 9) Interpétation avec FactoInvestigate
+
+```{r}
+library(FactoInvestigate)
+Investigate(res.hcpc)
+```
+
+$\underline{EXERCICE}$ $3$
+
+# Mise en place de la méthode SOM
+
+## 1) Classification à 04 classes de type SOM
+
+```{r}
+# Chargement de donnée
+library(dplyr)
+data("iris", package = "datasets")
+
+df = iris
+
+sample_n(df,10)
+```
+
+```{r}
+# Charge le package kohonen
+library(kohonen) 
+#Paramètrage
+set.seed(100)
+carte = som(as.matrix(df[, 1:4]), grid = somgrid(xdim=7, ydim=7, topo = c("hexagonal")))
+#Résumé de la carte
+summary(carte)
+```
+
+## 2) Caractérisation des différents individus
+
+```{r}
+carte2 = som(as.matrix(df[, 1:4]), grid = somgrid(7,7 , topo = "hexagonal"), rlen = 300)
+nb = table(carte2$unit.classif)
+plot(carte2,type="dist.neighbours")
+```
+
+```{r}
+plot(carte2, type = "codes", codeRendering = "segments")
+```
+
+## 3) Comparons ce résultat à celui du CAH

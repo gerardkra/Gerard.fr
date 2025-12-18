@@ -1,0 +1,193 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{lmodern}
+\usepackage{array}
+\author{Kra Kouamé Gérard}
+\title{DEVOIR DE MAISON FINANCE}
+\begin{document}
+\maketitle
+\underline{EXERCICE}
+\begin{enumerate}
+\item \underline{\textbf{Le marché obligataire (annexe 2)}}
+\begin{enumerate}
+\item[1.1] Définition de la duration et la sensibilité.\\
+\begin{enumerate}
+
+\item[•] \textbf{Duration}: La "duration" d'une obligation mesure la sensibilité de son prix aux variations des taux d'intérêt ; c'est une mesure du temps moyen nécessaire pour récupérer le prix initial de l'obligation par le biais des paiements de coupons et du remboursement du principal. 
+\item[•] \textbf{Sensibilité}: La "sensibilité" d'une obligation représente le pourcentage de variation du prix de l'obligation suite à une variation de $1\%$ des taux d'intérêt.
+\end{enumerate}
+
+\item[1.2] Comment évolue le cours d’une obligation en fonction du taux ?\\
+
+Le cours de l’obligation évolue en sens inverse du taux 
+d’intérêt. Ainsi, si le taux d’intérêt augmente (ou diminue), la valeur de l’obligation diminue (ou 
+augmente).
+La société décide finalement de recourir à l’emprunt obligataire ADAK sur les conseils du directeur 
+financier du groupe.
+
+\item[1.3] Retrouver le prix d’émission de l’emprunt obligataire ADAK.\\
+
+Soit $P_R$ le prix de remboursement et $VAC$ la valeur actualisée du coupon, on a:\\
+
+$P_R=\frac{F}{(1+r)^n}$ et $VAC=\frac{C(1-\frac{1}{(1+r)^n})}{r}$
+où $F$ est la valeur nominale, $r$ le taux d'actualisation, $n$ le nombre de périodes jusqu'à l'échéance du titre et $C$ le montant du coupon.\\
+Ainsi,
+
+\begin{equation}
+\begin{split}
+P_R
+& = \frac{500}{(1+0.043)^{10}} \\
+P_R& =328.1911911\\
+VAC & = \frac{(500\time 0.042)(1-\frac{1}{(1+0.043)^{10}})}{0.043} \\
+VAC & =167.8132552
+\end{split}
+\end{equation}\\
+Par conséquent, Prix d'émission =$VAC+P_R$.
+Donc,\\
+ Prix d'émission =$328.1911911+167.8132552=496.0044463$.\\
+On en déduit que le prix d'émission de l'emprunt est de $\text{\EUR{496}}$.\\
+
+\item[1.4] Pourquoi le taux de rendement actuariel brut est-il supérieur au taux nominal ? \\
+
+Le taux de rendement actuariel de $4,3\%$ est supérieur au taux nominal de $4,2\%$ car nous sommes en 
+présence d’une prime d’émission. En effet, la valeur nominale de l’obligation est de $\text{\EUR{500}}$  tandis que 
+le prix d’émission est de $\text{\EUR{496}}$.\\
+Il en résulte une prime d’émission de $\text{\EUR{4}}=(500-496)$.\\
+\item[1.5] Calculer le montant du coupon couru au $25/09/2022$, date de la vente de l’obligation en Bourse.\\
+
+Soit $C_{couru}$ coupon couru, $ T_{C_{annuel}} $ taux de coupon annuel, $ J $ jours écoulés depuis le dernier paiement de coupon et $J_{P_{r}}$ jours dans la période de référence.\\
+
+Ainsi, On a:\\
+
+$ C_{couru}=\frac{T_{C_{annuel}}\times{J}}{J_{P_{r}}}$.\\
+
+Donc, $C_{couru}=\frac{(500\times{0.042})\times{201}}{365}=11.56438356$.\\
+Soit, $\text{\EUR{11.56}}$ ce qui représente $2.31\%$ .\\
+
+
+\item[1.6] Déterminer la valeur de revente de l’obligation au $25/09/2022$ si à cette date le cours est de 
+$98,75\% $ .\\
+
+On a:\\
+Valeur de revente de l'obligation $=$ (Somme des valeurs actuelles des flux de trésorerie futurs) $+$ Valeur actuelle du paiement final.\\
+Ainsi,\\
+Valeur de revente de l'obligation $=(0.9875)\times{500} + (0.0231)\times{500} = 505,3$.\\
+Soit, $\text{\EUR{505,3}}$.\\
+
+
+
+\item[1.7] Ce mode de financement est-il possible ? De quoi s’agit-il ? \\
+
+Ce mode de financement est possible. En effet, le financement participatif permet de collecter des fonds auprès du public. Ce système permet de collecter des fonds pour la réalisation d’un projet sur une plateforme en ligne. Il s’agit le plus souvent d’un projet fédérateur ayant pour objet de rassembler le plus grand nombre de personnes autour.\\
+
+
+\item[1.8] Quels sont les avantages et les inconvénients de ce type de financement ? Citer trois avantages et trois limites.\\
+\begin{description}
+\item[•] \textbf{Avantage}:\\
+\item[-] Ce mode de financement participatif est en principe moins coûteux d’un emprunt bancaire classique.
+\item[-] Il est possible pendant la campagne de se faire assister par des professionnels et de bénéficier d’un suivi.
+\item[-] Les formalités administratives liées à ce mode de financement sont quasi-inexistantes pour le donateur. 
+\item[•] \textbf{Limites}:\\
+\item[-] Les plateformes sont nombreuses et pas toutes de la même qualité.
+\item[-] Ce mode de financement est encore trop orienté vers les jeunes entreprises de type start-up.
+\item[-] L’utilisation de la plateforme peut être coûteuse à terme.\\
+\end{description}
+\end{enumerate}
+
+\item \underline{\textbf{Gestion du risque de taux (annexe 3) }}\\
+\begin{enumerate}
+
+\item[2.1] Définir la notion de Collar, expliquer en quoi un Collar permet de se couvrir efficacement contre la variation des taux d'intérét ?\\
+
+Un "collar" est une stratégie de couverture financière utilisée pour se protéger contre la variation des taux d'intérêt. Il consiste à combiner un contrat d'options de taux d'intérêt, généralement un cap et un floor, pour limiter le risque de taux d'intérêt. Le cap fixe un taux maximum auquel un emprunteur paiera les intérêts, tandis que le floor fixe un taux minimum qu'il recevra. En utilisant un collar, l'emprunteur peut se couvrir contre une hausse des taux d'intérêt en payant des primes pour les options, tout en conservant une certaine flexibilité si les taux baissent, puisque le floor lui offre une protection en limitant ses paiements d'intérêts.\\
+
+
+
+
+\item[2.2] Calculer les différentiels d’intérêts et de prime en fonction des trois hypothèses présentées en annexe.\\
+
+Emprunt : $\text{\EUR{100 000 000}}$.\\
+Achat du Cap : taux de $6\%$ et prime à payer de $0,80\%$.\\
+Vente du Floor : taux de $4,5\%$ et prime à percevoir de $0,60\%$.\\
+
+On résume tous nos calculs dans le tableau ci-dessous:\\
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{|*{4}{>{\centering\arraybackslash}p{3cm}|}} 
+\hline
+Hypothèse & Hypothèse 1 & Hypothèse 2 & Hypothèse 3 \\
+\hline
+Taux d’intérêt & $7\%$ & $3\%$ & $5\%$ \\
+\hline
+Différentiel d’intérêt & $(0.07-0.06)\times(\text{\EUR{100 000 000}})=\text{\EUR{100 000}}$ reçu de la banque & $(0.045-0.03)\times(\text{\EUR{100 000 000}})=\text{\EUR{150 000}}$ à verser par l’emprunteur à la banque & L'emprunteur gagne en exécutant l'option. \\
+\hline
+Prime à payer & Paiement de la prime du Cap de $0,80\%$  car l’emprunteur exerce l’option d’achat du Cap & Paiement de la prime du Cap de $0,80\%$  car l’emprunteur exerce l’option d’achat du Cap & L'emprunteur ne fais rien\\
+\hline
+Prime à percevoir & Perception de la prime du Floor de $0,60\%$ liée à sa vente & Perception de la prime du Floor de $0,60\%$ liée à sa vente & L'emprunteur ne fais rien \\
+\hline
+Différentiel de prime & Prime Floor - Prime Cap, soit:$ 0,60\% - 0,80\%= - 0,20\%$, soit $20\%\times(\text{\EUR{100000}})=\text{\EUR{20 000}}$ à payer. & Prime Floor - Prime Cap, soit:$ 0,60\% - 0,80\% = - 0,20\%$, soit $20\%\times(\text{\EUR{150000}})=\text{\EUR{30 000}}$ à payer. & L'emprunteur ne fais rien \\
+\hline
+\end{tabular}
+
+\end{center}
+\end{enumerate}
+
+\end{enumerate}.\\ 
+
+
+
+
+
+
+$\[ g(x, y) = \frac{1}{x} \int_{x}^{xy} f(t) dt \]$
+
+Pour que g(x, y) ne dépende que de y, nous devons avoir :
+
+$\[ \frac{\partial g}{\partial x}(x, y) = 0 \]$
+
+C'est-à-dire que la dérivée partielle de g par rapport à x doit être égale à zéro pour tout (x, y) ∈ (R^*) × R.
+
+Calculons cette dérivée partielle :
+
+$\[ \frac{\partial g}{\partial x}(x, y) = \frac{\partial}{\partial x}$ $\left(\frac{1}{x} \int_{x}^{xy} f(t) dt \right) \]$
+
+En utilisant la règle de Leibniz pour dériver l'intégrale, nous avons :
+
+$\[ \frac{\partial g}{\partial x}(x, y) = \frac{1}{x} \left(\frac{\partial}{\partial x} \int_{x}^{xy} f(t) dt \right) - \frac{1}{x^2} \int_{x}^{xy} f(t) dt \]$
+
+Maintenant, nous dérivons la borne supérieure de l'intégrale par rapport à x :
+
+$\[ \frac{\partial g}{\partial x}(x, y) = \frac{1}{x} \left( yf(xy) - f(x) \right) - \frac{1}{x^2} \int_{x}^{xy} f(t) dt \]$
+
+Pour que $\(\frac{\partial g}{\partial x}(x, y) = 0\)$ pour tout $(x, y) ∈ (R^*) × R, nous devons avoir :
+
+$\[ \frac{1}{x} \left( yf(xy) - f(x) \right) - \frac{1}{x^2} \int_{x}^{xy} f(t) dt = 0 \]$
+
+Simplifions cette équation en multipliant par $x^2$ :
+
+$\[ x\left( yf(xy) - f(x) \right) - \int_{x}^{xy} f(t) dt = 0 \]$
+
+Maintenant, prenons la limite lorsque x tend vers 0 :
+
+$\[ \lim_{x \to 0} \left( x\left( yf(xy) - f(x) \right) - \int_{x}^{xy} f(t) dt \right) = 0 \]$
+
+$\[ \lim_{x \to 0} x\left( yf(xy) - f(x) \right) - \lim_{x \to 0} \int_{x}^{xy} f(t) dt = 0 \]$
+
+La première limite est nulle puisque y est une constante, et la deuxième limite tend vers 0 car f est continue sur R. Nous avons donc :
+
+$\[ y\lim_{x \to 0} xf(xy) - \lim_{x \to 0} \int_{x}^{xy} f(t) dt = 0 \]$
+
+Pour que cette équation soit vérifiée pour tout y, la première limite doit être nulle :
+
+$\[ \lim_{x \to 0} xf(xy) = 0 \]$
+
+Maintenant, nous pouvons identifier la condition nécessaire et suffisante pour que la fonction g(x, y) puisse s'écrire sous la forme g(x, y) = ϕ(y) pour tout (x, y) ∈ (R^*) × R :
+
+$\[ \boxed{\text{Condition nécessaire et suffisante : } \lim_{x \to 0} xf(xy) = 0 \text{ pour tout } y \in \mathbb{R}} \]
+
+Si cette condition est satisfaite, alors il existe une fonction ϕ : R → R telle que g(x, y) = ϕ(y) pour tout (x, y) ∈ (R^*) × R.
+
+\end{document}

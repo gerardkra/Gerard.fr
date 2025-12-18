@@ -1,0 +1,126 @@
+import numpy as np
+import numpy.linalg as la
+import matplotlib.pyplot as plt
+np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
+
+##### EXO 2 ####
+print("EXO 2")
+#################################################################################
+##### QUESTION 1
+#################################################################################
+print( "  Question 1" )
+
+def gradient_pas_optimal(u0, A, b, nitmax, eps):
+    nit = 0
+    gu0 = 0.5 * (A + A.T) @ u0 - b
+    u = np.array(u0)
+    gu = np.array(gu0)
+    while( (la.norm(gu)/la.norm(gu0) > eps) and (nit < nitmax) ):
+        res = A @ u - b
+        rho = np.dot(res,res) / np.dot(res, A@res)
+        u = u - rho * gu
+        gu = 0.5 * (A + A.T) @ u - b
+        nit += 1
+    return u, gu, nit
+
+# Reprenons le dernier exemple de l'exo 1
+n = 5
+A = np.diag(np.arange(1, n+1))
+b = np.zeros(n)
+u0 = np.ones_like(b)
+nitmax = 10000
+eps = 1e-8
+u, dfu, nit = gradient_pas_optimal(u0, A, b, nitmax, eps)
+print( "    Exo 2, question 1, gradient pas optimal, le minimum est atteint en", u, "en", nit,"iterations.")
+
+# Plaçons les itérations sur le graphique
+n = 2
+A = np.diag(np.arange(1, n+1))
+b = np.zeros(n)
+u0 = 2 * np.ones_like(b)
+nitmax = 10000
+eps = 1e-4
+x = np.linspace(-2, 2)
+y = np.linspace(-2, 2)
+xx, yy = np.meshgrid(x, y)
+zz = xx**2 + 2 * yy**2
+plt.figure()
+plt.title('Exo 2, question 1, x^2+2*y^2 avec les itérées du gradient à pas optimal')
+plt.contour(x, y, zz, 80)
+nit = 0
+gu0 = 0.5 * (A + A.T) @ u0 - b
+u = np.array(u0)
+gu = np.array(gu0)
+plt.plot(u[0], u[1], 'rx')
+while( (la.norm(gu) / la.norm(gu0) > eps) and (nit < nitmax) ):
+    res = A @ u - b
+    rho = np.dot(res,res) / np.dot(res,A @ res)
+    u = u - rho * gu
+    gu = 0.5 * (A + A.T) @ u - b
+    nit += 1
+    plt.plot(u[0], u[1], 'rx')
+
+#################################################################################
+##### QUESTION 2
+#################################################################################
+print( "  Question 2" )
+    
+def gradient_conjugue(u0, A, b, nitmax, eps):
+    nit = 0
+    res0 = b - A @ u0
+    u = np.array(u0)
+    res = np.array(res0)
+    des = np.array(res0)
+    while( (la.norm(res) / la.norm(res0) > eps) and (nit < nitmax) ):
+        rho = np.dot(res,des) / np.dot(des,A@des)
+        u = u + rho * des
+        res = b - A @ u
+        ll = - np.dot(res,A@des) / np.dot(des,A @ des)
+        des = res + ll * des
+        nit += 1
+    return u, nit
+
+# Reprenons le dernier exemple de l'exo 1
+n = 5
+A = np.diag(np.arange(1, n+1))
+b = np.zeros(n)
+u0 = np.ones_like(b)
+nitmax = 10000
+eps = 1e-8
+u, nit = gradient_conjugue(u0, A, b, nitmax, eps)
+print("    Exo 2, question 2, gradient conjugué, le minimum est atteint en", u, "en", nit, "iterations")
+
+# Plaçons les itérations sur le graphique
+n = 2
+A = np.diag(np.arange(1, n+1))
+b = np.zeros(n)
+u0 = 2 * np.ones_like(b)
+nitmax = 10000
+eps = 1e-4
+x = np.linspace(-2, 2)
+y = np.linspace(-2, 2)
+xx, yy = np.meshgrid(x, y)
+zz = xx**2 + 2 * yy**2
+plt.figure()
+plt.title('Exo 2, question 2, x^2+2*y^2 avec les itérées du gradient conjugué')
+plt.contour(x, y, zz, 80)
+nit = 0
+res0 = b - A @ u0
+u = np.array(u0)
+res = np.array(res0)
+des = np.array(res0)
+plt.plot(u[0], u[1], 'rx')
+while( (la.norm(res) / la.norm(res0) > eps) and (nit < nitmax) ):
+    rho = np.dot(res,des) / np.dot(des,A @ des)
+    u = u + rho * des
+    res = b - A @ u
+    ll = - np.dot(res,A@des) / np.dot(des,A@des)
+    des = res + ll * des
+    nit += 1
+    plt.plot(u[0], u[1], 'rx')
+
+#################################################################################
+##### QUESTION 3
+#################################################################################
+print( "  Question 3" )
+print( "    Le gradient conjugue converge en au plus n iterations." )

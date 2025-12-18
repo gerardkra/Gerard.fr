@@ -1,0 +1,3467 @@
+﻿{
+  "paragraphs": [
+    {
+      "title": "Import needed packages",
+      "text": "import org.apache.spark._\nimport org.apache.spark.sql.SparkSession\nimport org.apache.spark.sql.functions._\nimport org.apache.spark.sql.types._\nimport org.apache.spark.sql._\nimport org.apache.spark.sql.Dataset\nimport org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.classification.DecisionTreeClassifier\nimport org.apache.spark.ml.classification.DecisionTreeClassificationModel\nimport org.apache.spark.mllib.evaluation.BinaryClassificationMetrics\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\nimport org.apache.spark.ml.feature.StringIndexer\nimport org.apache.spark.ml.tuning.ParamGridBuilder\nimport org.apache.spark.ml.tuning.CrossValidator\nimport org.apache.spark.ml.feature.VectorAssembler",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:42:33+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark._\nimport org.apache.spark.sql.SparkSession\nimport org.apache.spark.sql.functions._\nimport org.apache.spark.sql.types._\nimport org.apache.spark.sql._\nimport org.apache.spark.sql.Dataset\nimport org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.classification.DecisionTreeClassifier\nimport org.apache.spark.ml.classification.DecisionTreeClassificationModel\nimport org.apache.spark.mllib.evaluation.BinaryClassificationMetrics\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\nimport org.apache.spark.ml.feature.StringIndexer\nimport org.apache.spark.ml.tuning.ParamGridBuilder\nimport org.apache.spark.ml.tuning.CrossValidator\nimport org.apache.spark.ml.feature.VectorAssembler\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249988_959684695",
+      "id": "20170508-144514_403247535",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "focus": true,
+      "$$hashKey": "object:19535",
+      "dateFinished": "2022-11-06T11:45:23+0100",
+      "dateStarted": "2022-11-06T11:42:33+0100"
+    },
+    {
+      "text": "%md \n\nCustomer Relationship Management (CRM) is a key element of modern marketing strategies.\nThe French Telecom company Orange offered a large marketing database to predict the propensity of customers to switch provider (churn).\n\nOrange made available a large dataset of customer data consisting of:\n- Training : 50,000 instances including 15,000 inputs variables, and the target value.\n- Test : 50,000 instances including 15,000 inputs variables.\n\nSee details on https://www.kdd.org/kdd-cup/view/kdd-cup-2009/Intro\n\nThe Orange Telecom Churn Dataset used in this labs consists of cleaned customer activity data (features), along with a churn label specifying whether the customer canceled their subscription or not. \nThe used dataset is smaller than the original one.\nThe input csv file has the following format: \nKS,128,415,No,Yes,25,265.1,110,45.07,197.4,99,16.78,244.7,91,11.01,10.0,3,2.7,1,False\nThe name of the variables are given in the header of the data files.\n\nWe use a Scala case class and Structype to define the schema, corresponding to a line in the csv data file.",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:45:23+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>Customer Relationship Management (CRM) is a key element of modern marketing strategies.<br />\nThe French Telecom company Orange offered a large marketing database to predict the propensity of customers to switch provider (churn).</p>\n<p>Orange made available a large dataset of customer data consisting of:</p>\n<ul>\n<li>Training : 50,000 instances including 15,000 inputs variables, and the target value.</li>\n<li>Test : 50,000 instances including 15,000 inputs variables.</li>\n</ul>\n<p>See details on <a href=\"https://www.kdd.org/kdd-cup/view/kdd-cup-2009/Intro\">https://www.kdd.org/kdd-cup/view/kdd-cup-2009/Intro</a></p>\n<p>The Orange Telecom Churn Dataset used in this labs consists of cleaned customer activity data (features), along with a churn label specifying whether the customer canceled their subscription or not.<br />\nThe used dataset is smaller than the original one.<br />\nThe input csv file has the following format:<br />\nKS,128,415,No,Yes,25,265.1,110,45.07,197.4,99,16.78,244.7,91,11.01,10.0,3,2.7,1,False<br />\nThe name of the variables are given in the header of the data files.</p>\n<p>We use a Scala case class and Structype to define the schema, corresponding to a line in the csv data file.</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249992_1343549161",
+      "id": "20170530-122945_1594214131",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19536",
+      "dateFinished": "2022-11-06T11:45:34+0100",
+      "dateStarted": "2022-11-06T11:45:23+0100"
+    },
+    {
+      "title": "Define Schema for csv file data",
+      "text": "%spark\n\ncase class Account(state: String, len: Integer, acode: String,\n    intlplan: String, vplan: String, numvmail: Double,\n    tdmins: Double, tdcalls: Double, tdcharge: Double,\n    temins: Double, tecalls: Double, techarge: Double,\n    tnmins: Double, tncalls: Double, tncharge: Double,\n    timins: Double, ticalls: Double, ticharge: Double,\n    numcs: Double, churn: String)\n    \n    \n// StructType objects define the schema of Spark DataFrames. \n// StructType objects contain a list of StructField objects that define the name, type, and nullable flag for each column in a DataFrame.    \n// A nullable flag switched to true means that the corresponding column could have null values.\nval schema = StructType(Array(\n    StructField(\"state\", StringType, true),\n    StructField(\"len\", IntegerType, true),\n    StructField(\"acode\", StringType, true),\n    StructField(\"intlplan\", StringType, true),\n    StructField(\"vplan\", StringType, true),\n    StructField(\"numvmail\", DoubleType, true),\n    StructField(\"tdmins\", DoubleType, true),\n    StructField(\"tdcalls\", DoubleType, true),\n    StructField(\"tdcharge\", DoubleType, true),\n    StructField(\"temins\", DoubleType, true),\n    StructField(\"tecalls\", DoubleType, true),\n    StructField(\"techarge\", DoubleType, true),\n    StructField(\"tnmins\", DoubleType, true),\n    StructField(\"tncalls\", DoubleType, true),\n    StructField(\"tncharge\", DoubleType, true),\n    StructField(\"timins\", DoubleType, true),\n    StructField(\"ticalls\", DoubleType, true),\n    StructField(\"ticharge\", DoubleType, true),\n    StructField(\"numcs\", DoubleType, true),\n    StructField(\"churn\", StringType, true)\n  ))",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:45:34+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "defined class Account\n\u001b[1m\u001b[34mschema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m = StructType(StructField(state,StringType,true), StructField(len,IntegerType,true), StructField(acode,StringType,true), StructField(intlplan,StringType,true), StructField(vplan,StringType,true), StructField(numvmail,DoubleType,true), StructField(tdmins,DoubleType,true), StructField(tdcalls,DoubleType,true), StructField(tdcharge,DoubleType,true), StructField(temins,DoubleType,true), StructField(tecalls,DoubleType,true), StructField(techarge,DoubleType,true), StructField(tnmins,DoubleType,true), StructField(tncalls,DoubleType,true), StructField(tncharge,DoubleType,true), StructField(timins,DoubleType,true), StructField(ticalls,DoubleType,true), StructField(ticharge,DoubleType,true), StructField(n...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249992_1336503466",
+      "id": "20170508-150032_326029627",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19537",
+      "dateFinished": "2022-11-06T11:45:48+0100",
+      "dateStarted": "2022-11-06T11:45:34+0100"
+    },
+    {
+      "text": "%spark\n\nval trainDf = spark.read.option(\"header\", \"true\").csv(\"/lab7/churn-train-header.csv\")\ntrainDf.count()\ntrainDf.first()\ntrainDf.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:45:48+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- State: string (nullable = true)\n |-- Account length: string (nullable = true)\n |-- Area code: string (nullable = true)\n |-- International plan: string (nullable = true)\n |-- Voice mail plan: string (nullable = true)\n |-- Number vmail messages: string (nullable = true)\n |-- Total day minutes: string (nullable = true)\n |-- Total day calls: string (nullable = true)\n |-- Total day charge: string (nullable = true)\n |-- Total eve minutes: string (nullable = true)\n |-- Total eve calls: string (nullable = true)\n |-- Total eve charge: string (nullable = true)\n |-- Total night minutes: string (nullable = true)\n |-- Total night calls: string (nullable = true)\n |-- Total night charge: string (nullable = true)\n |-- Total intl minutes: string (nullable = true)\n |-- Total intl calls: string (nullable = true)\n |-- Total intl charge: string (nullable = true)\n |-- Customer service calls: string (nullable = true)\n |-- Churn: string (nullable = true)\n\n\u001b[1m\u001b[34mtrainDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [State: string, Account length: string ... 18 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=0",
+              "$$hashKey": "object:24903"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=1",
+              "$$hashKey": "object:24904"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=2",
+              "$$hashKey": "object:24905"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249997_50980029",
+      "id": "20181102-175053_704133435",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19538",
+      "dateFinished": "2022-11-06T11:46:22+0100",
+      "dateStarted": "2022-11-06T11:45:48+0100"
+    },
+    {
+      "title": "Read the data from CSV file into a Dataset of Account type",
+      "text": "%spark\n\nimport spark.implicits._\nval train: Dataset[Account] = spark.read.option(\"header\", \"true\").option(\"inferSchema\", \"false\")\n      .schema(schema).csv(\"/lab7/churn-train-header.csv\").as[Account]\ntrain.count()  \ntrain.cache()\ntrain.first()\ntrain.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:46:22+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- state: string (nullable = true)\n |-- len: integer (nullable = true)\n |-- acode: string (nullable = true)\n |-- intlplan: string (nullable = true)\n |-- vplan: string (nullable = true)\n |-- numvmail: double (nullable = true)\n |-- tdmins: double (nullable = true)\n |-- tdcalls: double (nullable = true)\n |-- tdcharge: double (nullable = true)\n |-- temins: double (nullable = true)\n |-- tecalls: double (nullable = true)\n |-- techarge: double (nullable = true)\n |-- tnmins: double (nullable = true)\n |-- tncalls: double (nullable = true)\n |-- tncharge: double (nullable = true)\n |-- timins: double (nullable = true)\n |-- ticalls: double (nullable = true)\n |-- ticharge: double (nullable = true)\n |-- numcs: double (nullable = true)\n |-- churn: string (nullable = true)\n\nimport spark.implicits._\n\u001b[1m\u001b[34mtrain\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Account]\u001b[0m = [state: string, len: int ... 18 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=3",
+              "$$hashKey": "object:24963"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=4",
+              "$$hashKey": "object:24964"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249997_320391332",
+      "id": "20170508-150131_378637203",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19539",
+      "dateFinished": "2022-11-06T11:46:54+0100",
+      "dateStarted": "2022-11-06T11:46:22+0100"
+    },
+    {
+      "text": "%md\n\n**Q1: What is the advantage to use the \"Dataset\" train instead of the \"Dataframe\" trainDf?**\n\nDataFrames outperform plain RDDs across all languages supported by Spark and provide a comfortable API when it comes to working with structured data and relational algebra. But they provide weak support when it comes to types. There are mainly two reasons:\n1- For one thing, many operations on DataFrames involve passing in a String. Either as column name or as query. This is prone to error. \n2- A DataFrame is basically a RDD[Row] where a Row is just an Array[Any].\n\nSpark 2.0 introduces Datasets to better address these points. The take away message is that instead of using type agnostic Rows, one can use Scala’s case classes or tuples to describe the contents of the rows. \nA Dataset is an extension of the DataFrame API that provides a type-safe, object-oriented programming interface.\nThe gluing is done by using as on a Dataframe. \n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:46:54+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q1: What is the advantage to use the &ldquo;Dataset&rdquo; train instead of the &ldquo;Dataframe&rdquo; trainDf?</strong></p>\n<p>DataFrames outperform plain RDDs across all languages supported by Spark and provide a comfortable API when it comes to working with structured data and relational algebra. But they provide weak support when it comes to types. There are mainly two reasons:<br />\n1- For one thing, many operations on DataFrames involve passing in a String. Either as column name or as query. This is prone to error.<br />\n2- A DataFrame is basically a RDD[Row] where a Row is just an Array[Any].</p>\n<p>Spark 2.0 introduces Datasets to better address these points. The take away message is that instead of using type agnostic Rows, one can use Scala’s case classes or tuples to describe the contents of the rows.<br />\nA Dataset is an extension of the DataFrame API that provides a type-safe, object-oriented programming interface.<br />\nThe gluing is done by using as on a Dataframe.</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249997_1517444503",
+      "id": "20181103-141647_2000726232",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19540",
+      "dateFinished": "2022-11-06T11:46:54+0100",
+      "dateStarted": "2022-11-06T11:46:54+0100"
+    },
+    {
+      "text": "%spark\n\nval test: Dataset[Account] = spark.read.option(\"header\", \"true\").option(\"inferSchema\", \"false\")\n      .schema(schema).csv(\"/lab7/churn-test-header.csv\").as[Account]\ntest.count()      \ntest.first()\ntest.printSchema()\n    ",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:46:54+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- state: string (nullable = true)\n |-- len: integer (nullable = true)\n |-- acode: string (nullable = true)\n |-- intlplan: string (nullable = true)\n |-- vplan: string (nullable = true)\n |-- numvmail: double (nullable = true)\n |-- tdmins: double (nullable = true)\n |-- tdcalls: double (nullable = true)\n |-- tdcharge: double (nullable = true)\n |-- temins: double (nullable = true)\n |-- tecalls: double (nullable = true)\n |-- techarge: double (nullable = true)\n |-- tnmins: double (nullable = true)\n |-- tncalls: double (nullable = true)\n |-- tncharge: double (nullable = true)\n |-- timins: double (nullable = true)\n |-- ticalls: double (nullable = true)\n |-- ticharge: double (nullable = true)\n |-- numcs: double (nullable = true)\n |-- churn: string (nullable = true)\n\n\u001b[1m\u001b[34mtest\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Account]\u001b[0m = [state: string, len: int ... 18 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=5",
+              "$$hashKey": "object:25039"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=6",
+              "$$hashKey": "object:25040"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249997_121115821",
+      "id": "20170508-150324_497571301",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19541",
+      "dateFinished": "2022-11-06T11:47:15+0100",
+      "dateStarted": "2022-11-06T11:46:54+0100"
+    },
+    {
+      "title": "Register Dataset as a Table , display first 20 rows ",
+      "text": "%spark\n\ntrain.createOrReplaceTempView(\"account\")\nspark.catalog.cacheTable(\"account\") // Caches the specified table in-memory.\ntrain.show",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:47:15+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": true,
+              "setting": {
+                "stackedAreaChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "churn",
+                  "index": 19,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "len",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+---+-----+--------+-----+--------+------+-------+--------+------+-------+--------+------+-------+--------+------+-------+--------+-----+-----+\n|state|len|acode|intlplan|vplan|numvmail|tdmins|tdcalls|tdcharge|temins|tecalls|techarge|tnmins|tncalls|tncharge|timins|ticalls|ticharge|numcs|churn|\n+-----+---+-----+--------+-----+--------+------+-------+--------+------+-------+--------+------+-------+--------+------+-------+--------+-----+-----+\n|   KS|128|  415|      No|  Yes|    25.0| 265.1|  110.0|   45.07| 197.4|   99.0|   16.78| 244.7|   91.0|   11.01|  10.0|    3.0|     2.7|  1.0|False|\n|   OH|107|  415|      No|  Yes|    26.0| 161.6|  123.0|   27.47| 195.5|  103.0|   16.62| 254.4|  103.0|   11.45|  13.7|    3.0|     3.7|  1.0|False|\n|   NJ|137|  415|      No|   No|     0.0| 243.4|  114.0|   41.38| 121.2|  110.0|    10.3| 162.6|  104.0|    7.32|  12.2|    5.0|    3.29|  0.0|False|\n|   OH| 84|  408|     Yes|   No|     0.0| 299.4|   71.0|    50.9|  61.9|   88.0|    5.26| 196.9|   89.0|    8.86|   6.6|    7.0|    1.78|  2.0|False|\n|   OK| 75|  415|     Yes|   No|     0.0| 166.7|  113.0|   28.34| 148.3|  122.0|   12.61| 186.9|  121.0|    8.41|  10.1|    3.0|    2.73|  3.0|False|\n|   AL|118|  510|     Yes|   No|     0.0| 223.4|   98.0|   37.98| 220.6|  101.0|   18.75| 203.9|  118.0|    9.18|   6.3|    6.0|     1.7|  0.0|False|\n|   MA|121|  510|      No|  Yes|    24.0| 218.2|   88.0|   37.09| 348.5|  108.0|   29.62| 212.6|  118.0|    9.57|   7.5|    7.0|    2.03|  3.0|False|\n|   MO|147|  415|     Yes|   No|     0.0| 157.0|   79.0|   26.69| 103.1|   94.0|    8.76| 211.8|   96.0|    9.53|   7.1|    6.0|    1.92|  0.0|False|\n|   WV|141|  415|     Yes|  Yes|    37.0| 258.6|   84.0|   43.96| 222.0|  111.0|   18.87| 326.4|   97.0|   14.69|  11.2|    5.0|    3.02|  0.0|False|\n|   RI| 74|  415|      No|   No|     0.0| 187.7|  127.0|   31.91| 163.4|  148.0|   13.89| 196.0|   94.0|    8.82|   9.1|    5.0|    2.46|  0.0|False|\n|   IA|168|  408|      No|   No|     0.0| 128.8|   96.0|    21.9| 104.9|   71.0|    8.92| 141.1|  128.0|    6.35|  11.2|    2.0|    3.02|  1.0|False|\n|   MT| 95|  510|      No|   No|     0.0| 156.6|   88.0|   26.62| 247.6|   75.0|   21.05| 192.3|  115.0|    8.65|  12.3|    5.0|    3.32|  3.0|False|\n|   IA| 62|  415|      No|   No|     0.0| 120.7|   70.0|   20.52| 307.2|   76.0|   26.11| 203.0|   99.0|    9.14|  13.1|    6.0|    3.54|  4.0|False|\n|   ID| 85|  408|      No|  Yes|    27.0| 196.4|  139.0|   33.39| 280.9|   90.0|   23.88|  89.3|   75.0|    4.02|  13.8|    4.0|    3.73|  1.0|False|\n|   VT| 93|  510|      No|   No|     0.0| 190.7|  114.0|   32.42| 218.2|  111.0|   18.55| 129.6|  121.0|    5.83|   8.1|    3.0|    2.19|  3.0|False|\n|   VA| 76|  510|      No|  Yes|    33.0| 189.7|   66.0|   32.25| 212.8|   65.0|   18.09| 165.7|  108.0|    7.46|  10.0|    5.0|     2.7|  1.0|False|\n|   TX| 73|  415|      No|   No|     0.0| 224.4|   90.0|   38.15| 159.5|   88.0|   13.56| 192.8|   74.0|    8.68|  13.0|    2.0|    3.51|  1.0|False|\n|   FL|147|  415|      No|   No|     0.0| 155.1|  117.0|   26.37| 239.7|   93.0|   20.37| 208.8|  133.0|     9.4|  10.6|    4.0|    2.86|  0.0|False|\n|   CO| 77|  408|      No|   No|     0.0|  62.4|   89.0|   10.61| 169.9|  121.0|   14.44| 209.6|   64.0|    9.43|   5.7|    6.0|    1.54|  5.0| True|\n|   AZ|130|  415|      No|   No|     0.0| 183.0|  112.0|   31.11|  72.9|   99.0|     6.2| 181.8|   78.0|    8.18|   9.5|   19.0|    2.57|  0.0|False|\n+-----+---+-----+--------+-----+--------+------+-------+--------+------+-------+--------+------+-------+--------+------+-------+--------+-----+-----+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=7",
+              "$$hashKey": "object:25080"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249997_879714889",
+      "id": "20170508-150408_505244914",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19542",
+      "dateFinished": "2022-11-06T11:47:26+0100",
+      "dateStarted": "2022-11-06T11:47:15+0100"
+    },
+    {
+      "text": "%md\nThe describe() function performs summary statistics calculations on  numeric columns ",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:47:26+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>The describe() function performs summary statistics calculations on  numeric columns</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249997_1711680294",
+      "id": "20170524-214640_973339640",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19543",
+      "dateFinished": "2022-11-06T11:47:26+0100",
+      "dateStarted": "2022-11-06T11:47:26+0100"
+    },
+    {
+      "title": "Perform summary statistics  on selected columns",
+      "text": "%spark\n\ntrain.describe(\"tdcharge\", \"techarge\",\"tncharge\", \"numcs\").show",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:47:26+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+------------------+------------------+------------------+------------------+\n|summary|          tdcharge|          techarge|          tncharge|             numcs|\n+-------+------------------+------------------+------------------+------------------+\n|  count|              2666|              2666|              2666|              2666|\n|   mean|30.512404351087813|17.033072018004518| 9.052689422355604|1.5626406601650413|\n| stddev| 9.215732907163497| 4.330864176799864|2.2851195129157564|1.3112357589949093|\n|    min|               0.0|               0.0|              1.97|               0.0|\n|    max|             59.64|             30.91|             17.77|               9.0|\n+-------+------------------+------------------+------------------+------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=8",
+              "$$hashKey": "object:25128"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249997_916924129",
+      "id": "20170524-083228_1459810795",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19544",
+      "dateFinished": "2022-11-06T11:47:33+0100",
+      "dateStarted": "2022-11-06T11:47:26+0100"
+    },
+    {
+      "text": "%md\n\n**Q2: Compute the pearson correlation between tdmins and tdcharge in the following cell**",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:47:33+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q2: Compute the pearson correlation between tdmins and tdcharge in the following cell</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249997_348533147",
+      "id": "20181103-142339_1030392158",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19545",
+      "dateFinished": "2022-11-06T11:47:34+0100",
+      "dateStarted": "2022-11-06T11:47:33+0100"
+    },
+    {
+      "title": "Calculate the correlation between Total day minutes and Total day charge",
+      "text": "%spark\n\nimport org.apache.spark.mllib.stat.Statistics\n\nval tdmins = train.select(\"tdmins\").map{row:Row => row.getAs[Double](\"tdmins\")}.rdd\nval tdcharge = train.select( \"tdcharge\").map{row:Row => row.getAs[Double](\"tdcharge\")}.rdd\n\nval correlation = Statistics.corr(tdmins, tdcharge, \"pearson\")",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:47:34+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.mllib.stat.Statistics\n\u001b[1m\u001b[34mtdmins\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[Double]\u001b[0m = MapPartitionsRDD[58] at rdd at <console>:53\n\u001b[1m\u001b[34mtdcharge\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[Double]\u001b[0m = MapPartitionsRDD[63] at rdd at <console>:54\n\u001b[1m\u001b[34mcorrelation\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m = 0.999999951796983\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=9",
+              "$$hashKey": "object:25230"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=10",
+              "$$hashKey": "object:25231"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=11",
+              "$$hashKey": "object:25232"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=12",
+              "$$hashKey": "object:25233"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249998_1250172916",
+      "id": "20170524-093152_48310549",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19546",
+      "dateFinished": "2022-11-06T11:47:52+0100",
+      "dateStarted": "2022-11-06T11:47:34+0100"
+    },
+    {
+      "text": "%md \nuse Spark SQL to explore the dataset",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:47:52+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>use Spark SQL to explore the dataset</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249998_1485480736",
+      "id": "20170603-182655_1680505289",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19547",
+      "dateFinished": "2022-11-06T11:47:53+0100",
+      "dateStarted": "2022-11-06T11:47:52+0100"
+    },
+    {
+      "text": "%md\n\n**Q3: compute the number of labels (churn or no churn) for the train dataset in the following cell. Use sparksql**",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:47:53+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q3: compute the number of labels (churn or no churn) for the train dataset in the following cell. Use sparksql</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249998_2144573636",
+      "id": "20181103-142552_1060736217",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19548",
+      "dateFinished": "2022-11-06T11:47:53+0100",
+      "dateStarted": "2022-11-06T11:47:53+0100"
+    },
+    {
+      "title": "Count number customers grouped by churn",
+      "text": "%spark\n\n// Compute the number of labels\n\ntrain.groupBy(\"churn\").count.show\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:47:53+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+-----+\n|churn|count|\n+-----+-----+\n|False| 2278|\n| True|  388|\n+-----+-----+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=13",
+              "$$hashKey": "object:25377"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=14",
+              "$$hashKey": "object:25378"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=15",
+              "$$hashKey": "object:25379"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=16",
+              "$$hashKey": "object:25380"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=17",
+              "$$hashKey": "object:25381"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249998_1431534924",
+      "id": "20170524-093402_1430077788",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19549",
+      "dateFinished": "2022-11-06T11:48:07+0100",
+      "dateStarted": "2022-11-06T11:47:53+0100"
+    },
+    {
+      "title": "Use sampleBy to reduce number of churn=false samples ",
+      "text": "%spark\n\nval fractions = Map(\"False\" -> .17, \"True\" -> 1.0)\n//Here we're keeping all instances of the Churn=True class, but downsampling the Churn=False class to a fraction of 388/2278.\nval strain = train.stat.sampleBy(\"churn\", fractions, 36L) // Returns a stratified sample without replacement based on the fraction given on each stratum.\n// Parameters:\n//    col - column that defines strata\n//    fractions - sampling fraction for each stratum. If a stratum is not specified, we treat its fraction as zero.\n//    seed - random seed\n\nstrain.groupBy(\"churn\").count.show\nstrain.createOrReplaceTempView(\"account\")\nspark.catalog.cacheTable(\"account\")\n\n// The resulting table is now balanced (\"fractions\" defines a probability to take a sample, hence the number of samples is not known in advance)",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:48:07+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+-----+\n|churn|count|\n+-----+-----+\n|False|  387|\n| True|  388|\n+-----+-----+\n\n\u001b[1m\u001b[34mfractions\u001b[0m: \u001b[1m\u001b[32mscala.collection.immutable.Map[String,Double]\u001b[0m = Map(False -> 0.17, True -> 1.0)\n\u001b[1m\u001b[34mstrain\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [state: string, len: int ... 18 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=18",
+              "$$hashKey": "object:25509"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=19",
+              "$$hashKey": "object:25510"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=20",
+              "$$hashKey": "object:25511"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=21",
+              "$$hashKey": "object:25512"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=22",
+              "$$hashKey": "object:25513"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249998_1663864355",
+      "id": "20170603-183738_564410056",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19550",
+      "dateFinished": "2022-11-06T11:48:20+0100",
+      "dateStarted": "2022-11-06T11:48:07+0100"
+    },
+    {
+      "text": "%md\n\nThe zeppelin-context is a system-wide container for common utility functions and user-specific data. \nIt implements functions for data input, data display, etc. that are often needed but are not uniformly available in all interpreters.\n\nThe zeppelin-context is available as a predefined variable z that can be used by directly invoking its methods. \n\nIn the Apache Spark interpreter, the zeppelin-context provides a show method, which, using Zeppelin's table feature, can be used to nicely display a set of data.",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:48:20+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>The zeppelin-context is a system-wide container for common utility functions and user-specific data.<br />\nIt implements functions for data input, data display, etc. that are often needed but are not uniformly available in all interpreters.</p>\n<p>The zeppelin-context is available as a predefined variable z that can be used by directly invoking its methods.</p>\n<p>In the Apache Spark interpreter, the zeppelin-context provides a show method, which, using Zeppelin&rsquo;s table feature, can be used to nicely display a set of data.</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249998_301180135",
+      "id": "20181102-220037_2010723778",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19551",
+      "dateFinished": "2022-11-06T11:48:20+0100",
+      "dateStarted": "2022-11-06T11:48:20+0100"
+    },
+    {
+      "title": "Explore Average statistics grouped by churn",
+      "text": "%spark\n\nz.show(strain.groupBy(\"churn\").avg())",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:48:20+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "churn",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "avg(tdmins)",
+                  "index": 3,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(temins)",
+                  "index": 6,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(tnmins)",
+                  "index": 9,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(timins)",
+                  "index": 12,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(len)",
+                  "index": 1,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(numcs)",
+                  "index": 15,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(tdcalls)",
+                  "index": 4,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(tecalls)",
+                  "index": 7,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(ticalls)",
+                  "index": 13,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "churn\tavg(len)\tavg(numvmail)\tavg(tdmins)\tavg(tdcalls)\tavg(tdcharge)\tavg(temins)\tavg(tecalls)\tavg(techarge)\tavg(tnmins)\tavg(tncalls)\tavg(tncharge)\tavg(timins)\tavg(ticalls)\tavg(ticharge)\tavg(numcs)\nFalse\t99.78811369509044\t8.943152454780362\t174.1638242894057\t101.0077519379845\t29.608191214470278\t198.14521963824288\t100.4108527131783\t16.842661498708022\t202.14935400516774\t99.04134366925065\t9.096770025839792\t10.297674418604652\t4.609819121447028\t2.780981912144702\t1.4521963824289406\nTrue\t102.31958762886597\t5.170103092783505\t205.1811855670104\t101.19587628865979\t34.88134020618558\t209.38530927835052\t99.94845360824742\t17.79786082474226\t205.30721649484514\t100.68298969072166\t9.23889175257732\t10.81932989690722\t4.051546391752577\t2.9217268041237117\t2.2061855670103094\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=23",
+              "$$hashKey": "object:25729"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=24",
+              "$$hashKey": "object:25730"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=25",
+              "$$hashKey": "object:25731"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=26",
+              "$$hashKey": "object:25732"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=27",
+              "$$hashKey": "object:25733"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249998_1748342582",
+      "id": "20170524-102007_926152177",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19552",
+      "dateFinished": "2022-11-06T11:48:36+0100",
+      "dateStarted": "2022-11-06T11:48:20+0100"
+    },
+    {
+      "title": "Explore average number customer service calls grouped by churn",
+      "text": "%sql\n\nSELECT churn, avg(numcs) as numcs\nFROM account \nGROUP BY churn\nORDER BY numcs",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:48:36+0100",
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "pieChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "churn",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "numcs",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "churn\tnumcs\nFalse\t1.4521963824289406\nTrue\t2.2061855670103094\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=28",
+              "$$hashKey": "object:25876"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249998_1930977362",
+      "id": "20170524-095127_757444423",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19553",
+      "dateFinished": "2022-11-06T11:48:46+0100",
+      "dateStarted": "2022-11-06T11:48:36+0100"
+    },
+    {
+      "text": "%md\n\n**Q4: Use a query \"SELECT ...\" to show the average of tdmins, temins and tnmins for each label (churn = true or churn = false) in the following cell**",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:48:46+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q4: Use a query &ldquo;SELECT &hellip;&rdquo; to show the average of tdmins, temins and tnmins for each label (churn = true or churn = false) in the following cell</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249998_164131654",
+      "id": "20181103-142923_673916357",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19554",
+      "dateFinished": "2022-11-06T11:48:46+0100",
+      "dateStarted": "2022-11-06T11:48:46+0100"
+    },
+    {
+      "title": "Explore Average statistics grouped by churn",
+      "text": "%sql\n\n-- Put your query here\n\nSELECT churn, \n  avg(tdmins) as td,\n  avg(temins) as te,\n  avg(tnmins) as tn\nFROM account \nGROUP BY churn\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:48:46+0100",
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {
+                  "stacked": false,
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "churn",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "td",
+                  "index": 1,
+                  "aggr": "avg"
+                },
+                {
+                  "name": "te",
+                  "index": 2,
+                  "aggr": "avg"
+                },
+                {
+                  "name": "tn",
+                  "index": 3,
+                  "aggr": "avg"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "churn\ttd\tte\ttn\nFalse\t174.1638242894057\t198.14521963824288\t202.14935400516774\nTrue\t205.1811855670104\t209.38530927835052\t205.30721649484514\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=29",
+              "$$hashKey": "object:26098"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=30",
+              "$$hashKey": "object:26099"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=31",
+              "$$hashKey": "object:26100"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=32",
+              "$$hashKey": "object:26101"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=33",
+              "$$hashKey": "object:26102"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249998_418948390",
+      "id": "20170524-144751_554129160",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19555",
+      "dateFinished": "2022-11-06T11:48:55+0100",
+      "dateStarted": "2022-11-06T11:48:46+0100"
+    },
+    {
+      "title": "Drop columns that we will not use for our machine learning algorithm",
+      "text": "%spark\n\nval ntrain = strain.drop(\"state\").drop(\"acode\").drop(\"vplan\").drop(\"tdcharge\").drop(\"techarge\").drop(\"ticharge\")\nprintln(ntrain.count)\nntrain.show\nntrain.cache",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:48:55+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "775\n+---+--------+--------+------+-------+------+-------+------+-------+--------+------+-------+-----+-----+\n|len|intlplan|numvmail|tdmins|tdcalls|temins|tecalls|tnmins|tncalls|tncharge|timins|ticalls|numcs|churn|\n+---+--------+--------+------+-------+------+-------+------+-------+--------+------+-------+-----+-----+\n|118|     Yes|     0.0| 223.4|   98.0| 220.6|  101.0| 203.9|  118.0|    9.18|   6.3|    6.0|  0.0|False|\n|141|     Yes|    37.0| 258.6|   84.0| 222.0|  111.0| 326.4|   97.0|   14.69|  11.2|    5.0|  0.0|False|\n| 74|      No|     0.0| 187.7|  127.0| 163.4|  148.0| 196.0|   94.0|    8.82|   9.1|    5.0|  0.0|False|\n| 77|      No|     0.0|  62.4|   89.0| 169.9|  121.0| 209.6|   64.0|    9.43|   5.7|    6.0|  5.0| True|\n| 12|      No|     0.0| 249.6|  118.0| 252.4|  119.0| 280.2|   90.0|   12.61|  11.8|    3.0|  1.0| True|\n|136|     Yes|    33.0| 203.9|  106.0| 187.6|   99.0| 101.7|  107.0|    4.58|  10.5|    6.0|  3.0|False|\n| 98|      No|     0.0| 126.3|  102.0| 166.8|   85.0| 187.8|  135.0|    8.45|   9.4|    2.0|  3.0|False|\n|135|     Yes|    41.0| 173.1|   85.0| 203.9|  107.0| 122.2|   78.0|     5.5|  14.6|   15.0|  0.0| True|\n|160|      No|     0.0|  85.8|   77.0| 165.3|  110.0| 178.5|   92.0|    8.03|   9.2|    4.0|  3.0|False|\n| 60|      No|     0.0| 220.6|   57.0| 211.1|  115.0| 249.0|  129.0|   11.21|   6.8|    3.0|  1.0|False|\n| 87|      No|     0.0| 151.0|   83.0| 219.7|  116.0| 203.9|  127.0|    9.18|   9.7|    3.0|  5.0| True|\n|121|      No|    30.0| 198.4|  129.0|  75.3|   77.0| 181.2|   77.0|    8.15|   5.8|    3.0|  3.0| True|\n|149|      No|    28.0| 180.7|   92.0| 187.8|   64.0| 265.5|   53.0|   11.95|  12.6|    3.0|  3.0|False|\n|150|      No|     0.0| 178.9|  101.0| 169.1|  110.0| 148.6|  100.0|    6.69|  13.8|    3.0|  4.0| True|\n| 50|      No|     0.0| 157.1|   90.0| 223.3|   72.0| 181.4|  111.0|    8.16|   6.1|    2.0|  1.0|False|\n| 82|      No|     0.0| 300.3|  109.0| 181.0|  100.0| 270.1|   73.0|   12.15|  11.7|    4.0|  0.0| True|\n|144|      No|     0.0|  61.6|  117.0|  77.1|   85.0| 173.0|   99.0|    7.79|   8.2|    7.0|  4.0| True|\n| 55|      No|    25.0| 165.6|  123.0| 136.1|   95.0| 175.7|   90.0|    7.91|  11.0|    2.0|  3.0|False|\n|106|      No|     0.0| 210.6|   96.0| 249.2|   85.0| 191.4|   88.0|    8.61|  12.4|    1.0|  2.0| True|\n| 94|      No|     0.0| 157.9|  105.0| 155.0|  101.0| 189.6|   84.0|    8.53|   8.0|    5.0|  4.0| True|\n+---+--------+--------+------+-------+------+-------+------+-------+--------+------+-------+-----+-----+\nonly showing top 20 rows\n\n\u001b[1m\u001b[34mntrain\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [len: int, intlplan: string ... 12 more fields]\n\u001b[1m\u001b[34mres9\u001b[0m: \u001b[1m\u001b[32mntrain.type\u001b[0m = [len: int, intlplan: string ... 12 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=34",
+              "$$hashKey": "object:26297"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=35",
+              "$$hashKey": "object:26298"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731249998_1591941660",
+      "id": "20170524-221059_1333485772",
+      "dateCreated": "2022-11-06T11:40:49+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19556",
+      "dateFinished": "2022-11-06T11:48:59+0100",
+      "dateStarted": "2022-11-06T11:48:55+0100"
+    },
+    {
+      "text": "%md\nIn order for the features to be used by a machine learning algorithm, they are transformed into numbers representing the value for each feature\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:48:59+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>In order for the features to be used by a machine learning algorithm, they are transformed into numbers representing the value for each feature</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250010_1976856271",
+      "id": "20170603-184811_78732818",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19557",
+      "dateFinished": "2022-11-06T11:48:59+0100",
+      "dateStarted": "2022-11-06T11:48:59+0100"
+    },
+    {
+      "title": "Map International Plan Yes No to Numbers",
+      "text": "%spark\n\nval ipindexer = new StringIndexer()\n      .setInputCol(\"intlplan\")\n      .setOutputCol(\"iplanIndex\")\n      \n// StringIndexer encodes a string column of labels to a column of label indices.\n// setInputCol: name of the string column of labels\n// setOutputCol: name of the column of label indices\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:48:59+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mipindexer\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.feature.StringIndexer\u001b[0m = strIdx_2ef7e62b53a7\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250015_462299602",
+      "id": "20170508-150543_958647761",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19558",
+      "dateFinished": "2022-11-06T11:49:02+0100",
+      "dateStarted": "2022-11-06T11:48:59+0100"
+    },
+    {
+      "text": "%md\n\n**Q5: Create a transformer to convert the churn value into a 0-1 label**\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:02+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q5: Create a transformer to convert the churn value into a 0-1 label</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250015_1886878949",
+      "id": "20181103-143221_330782578",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19559",
+      "dateFinished": "2022-11-06T11:49:02+0100",
+      "dateStarted": "2022-11-06T11:49:02+0100"
+    },
+    {
+      "title": "Map churn true false to  Numbers",
+      "text": "%spark\n\n// Put the transformer here\n\nval labelindexer = new StringIndexer()\n      .setInputCol(\"churn\")\n      .setOutputCol(\"label\")\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:02+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mlabelindexer\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.feature.StringIndexer\u001b[0m = strIdx_3fee08a6ded0\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250020_1001663346",
+      "id": "20170524-222135_122500289",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19560",
+      "dateFinished": "2022-11-06T11:49:04+0100",
+      "dateStarted": "2022-11-06T11:49:02+0100"
+    },
+    {
+      "text": "%md\n\n**Q6: Create a transformer to convert all the features in a single vector**\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:05+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q6: Create a transformer to convert all the features in a single vector</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250021_1194911932",
+      "id": "20181103-143346_221939635",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19561",
+      "dateFinished": "2022-11-06T11:49:05+0100",
+      "dateStarted": "2022-11-06T11:49:05+0100"
+    },
+    {
+      "title": "Use VectorAssembler, a transformer,  to put features into a feature vector column",
+      "text": "%spark\n\n// Put the transformer here\n\nval featureCols = Array(\"len\", \"iplanIndex\", \"numvmail\", \"tdmins\", \"tdcalls\", \"temins\", \"tecalls\", \"tnmins\", \"tncalls\", \"timins\", \"ticalls\", \"numcs\")\nval assembler = new VectorAssembler()\n      .setInputCols(featureCols)\n      .setOutputCol(\"features\")\n\n// VectorAssembler is a transformer that combines a given list of columns into a single vector column.",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:05+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mfeatureCols\u001b[0m: \u001b[1m\u001b[32mArray[String]\u001b[0m = Array(len, iplanIndex, numvmail, tdmins, tdcalls, temins, tecalls, tnmins, tncalls, timins, ticalls, numcs)\n\u001b[1m\u001b[34massembler\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.feature.VectorAssembler\u001b[0m = VectorAssembler: uid=vecAssembler_3cba68814219, handleInvalid=error, numInputCols=12\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250028_1359472057",
+      "id": "20170524-223310_2121058884",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19562",
+      "dateFinished": "2022-11-06T11:49:07+0100",
+      "dateStarted": "2022-11-06T11:49:05+0100"
+    },
+    {
+      "title": "Just an example of VectorAssembler",
+      "text": "%spark\n\nimport org.apache.spark.ml.feature.VectorAssembler\nimport org.apache.spark.ml.linalg.Vectors\n\nval dataset = spark.createDataFrame(\n  Seq((0, 18, 1.0, Vectors.dense(0.0, 10.0, 0.5), 1.0))\n).toDF(\"id\", \"hour\", \"mobile\", \"userFeatures\", \"clicked\")\n\nval assemblerTMP = new VectorAssembler()\n  .setInputCols(Array(\"hour\", \"mobile\", \"userFeatures\"))\n  .setOutputCol(\"features\")\n  \ndataset.show()\n \n\nval output = assemblerTMP.transform(dataset)\nprintln(\"Assembled columns 'hour', 'mobile', 'userFeatures' to vector column 'features'\")\noutput.show()",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:07+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+---+----+------+--------------+-------+\n| id|hour|mobile|  userFeatures|clicked|\n+---+----+------+--------------+-------+\n|  0|  18|   1.0|[0.0,10.0,0.5]|    1.0|\n+---+----+------+--------------+-------+\n\nAssembled columns 'hour', 'mobile', 'userFeatures' to vector column 'features'\n+---+----+------+--------------+-------+--------------------+\n| id|hour|mobile|  userFeatures|clicked|            features|\n+---+----+------+--------------+-------+--------------------+\n|  0|  18|   1.0|[0.0,10.0,0.5]|    1.0|[18.0,1.0,0.0,10....|\n+---+----+------+--------------+-------+--------------------+\n\nimport org.apache.spark.ml.feature.VectorAssembler\nimport org.apache.spark.ml.linalg.Vectors\n\u001b[1m\u001b[34mdataset\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id: int, hour: int ... 3 more fields]\n\u001b[1m\u001b[34massemblerTMP\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.feature.VectorAssembler\u001b[0m = VectorAssembler: uid=vecAssembler_7f5da284a223, handleInvalid=error, numInputCols=3\n\u001b[1m\u001b[34moutput\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [id: int, hour: int ... 4 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250029_1126084123",
+      "id": "paragraph_1635886911191_1912334951",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19563",
+      "dateFinished": "2022-11-06T11:49:12+0100",
+      "dateStarted": "2022-11-06T11:49:07+0100"
+    },
+    {
+      "title": "Decision Tree Models",
+      "text": "%md\n\nDecision trees have played a significant role in data mining and machine learning since the 1960's. \nThey generate white-box classification and regression models which can be used for feature selection and sample prediction. \nThe transparency of these models is a big advantage over black-box learners, because the models are easy to understand and interpret, and they can be readily extracted and implemented in any programming language (with nested if-else statements) for use in production environments. \nFurthermore, decision trees require almost no data preparation (ie normalization) and can handle both categorical and continuous data. \nTo remedy over-fitting and improve prediction accuracy, decision trees can also be limited to a certain depth or complexity, or bundled into ensembles of trees (ie random forests).\n\nA decision tree is a predictive model which maps observations (features) about an item to conclusions about the item's label or class. \nThe model is generated using a top-down approach, where the source dataset is split into subsets using a statistical measure, often in the form of the Gini index or information gain via Shannon entropy. \nThis process is applied recursively until a subset contains only samples with the same target class, or is halted by a predefined stopping criteria.",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:13+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>Decision trees have played a significant role in data mining and machine learning since the 1960&rsquo;s.<br />\nThey generate white-box classification and regression models which can be used for feature selection and sample prediction.<br />\nThe transparency of these models is a big advantage over black-box learners, because the models are easy to understand and interpret, and they can be readily extracted and implemented in any programming language (with nested if-else statements) for use in production environments.<br />\nFurthermore, decision trees require almost no data preparation (ie normalization) and can handle both categorical and continuous data.<br />\nTo remedy over-fitting and improve prediction accuracy, decision trees can also be limited to a certain depth or complexity, or bundled into ensembles of trees (ie random forests).</p>\n<p>A decision tree is a predictive model which maps observations (features) about an item to conclusions about the item&rsquo;s label or class.<br />\nThe model is generated using a top-down approach, where the source dataset is split into subsets using a statistical measure, often in the form of the Gini index or information gain via Shannon entropy.<br />\nThis process is applied recursively until a subset contains only samples with the same target class, or is halted by a predefined stopping criteria.</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250029_273451101",
+      "id": "20181103-144109_1955600190",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19564",
+      "dateFinished": "2022-11-06T11:49:13+0100",
+      "dateStarted": "2022-11-06T11:49:13+0100"
+    },
+    {
+      "title": "Create Decision Tree Estimator , set Label and Feature Columns ",
+      "text": "%spark\n\nval dTree = new DecisionTreeClassifier().setLabelCol(\"label\")\n      .setFeaturesCol(\"features\")\n      \n// setLabelCol and setFeaturesCol define the two inputs of a decision tree (labels and features). The features should be a vector.",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:13+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mdTree\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.classification.DecisionTreeClassifier\u001b[0m = dtc_47a5534a4c30\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250029_978363698",
+      "id": "20170603-185445_276463997",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19565",
+      "dateFinished": "2022-11-06T11:49:16+0100",
+      "dateStarted": "2022-11-06T11:49:13+0100"
+    },
+    {
+      "text": "%md\n\nSet up a pipeline to pass the data through transformers to extract the features and label and pass this to a decision tree estimator to fit the model \n\n**Q7: Create the Pipeline to train the decision tree**\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:16+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>Set up a pipeline to pass the data through transformers to extract the features and label and pass this to a decision tree estimator to fit the model</p>\n<p><strong>Q7: Create the Pipeline to train the decision tree</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250029_907178376",
+      "id": "20170601-154525_1033166149",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19566",
+      "dateFinished": "2022-11-06T11:49:16+0100",
+      "dateStarted": "2022-11-06T11:49:16+0100"
+    },
+    {
+      "title": "Set up pipeline with  feature transformers and model estimator",
+      "text": "%spark\n\n// put treeClassifier in a Pipeline here.\n val pipeline = new Pipeline()\n      .setStages(Array(ipindexer, labelindexer, assembler, dTree))\n\n// We aggregate the different MLlib components that compose the preprocessing steps (ipindexer, labelindexer, assembler) and the machine leearning step (dTree). ",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:16+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mpipeline\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.Pipeline\u001b[0m = pipeline_a051ad57e4de\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250029_1234107725",
+      "id": "20170508-151557_1422077156",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19567",
+      "dateFinished": "2022-11-06T11:49:19+0100",
+      "dateStarted": "2022-11-06T11:49:16+0100"
+    },
+    {
+      "text": "%md\r\nSpark ML supports k-fold cross validation with a transformation/estimation pipeline to try out different combinations of parameters, using a process called grid search. You set up a CrossValidator with the parameters to test, an estimator and evaluator for a model selection workflow.\r\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:19+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>Spark ML supports k-fold cross validation with a transformation/estimation pipeline to try out different combinations of parameters, using a process called grid search. You set up a CrossValidator with the parameters to test, an estimator and evaluator for a model selection workflow.</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250029_287729002",
+      "id": "20170531-154658_1298817002",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19568",
+      "dateFinished": "2022-11-06T11:49:19+0100",
+      "dateStarted": "2022-11-06T11:49:19+0100"
+    },
+    {
+      "title": "set up a CrossValidator with the parameters to test, an estimator and evaluator for a model selection",
+      "text": "%spark\n\n// set param grid to search through decision tree's maxDepth parameter for best model\n// Deeper trees are potentially more accurate, but are also more likely to overfit.\n val paramGrid = new ParamGridBuilder().addGrid(dTree.maxDepth, Array( 4, 5, 6)).build()\n \n // We use a ParamGridBuilder to construct a grid of parameters to search over.\n // \"build()\" builds and returns all combinations of parameters specified by the param grid.\n \n val evaluator = new BinaryClassificationEvaluator()\n      .setLabelCol(\"label\")\n      .setRawPredictionCol(\"prediction\")\n// Evaluator: metric to measure how well a fitted Model does on held-out test data\n// We need to precise the ground-truth column and the predicted column\n// Below, we will see that the metric is the AUC (Area Under ROC Curve)\n\n// Set up 3-fold cross validation with paramGrid\n val crossval = new CrossValidator().setCollectSubModels(true).setEstimator(pipeline)\n      .setEvaluator(evaluator)\n      .setEstimatorParamMaps(paramGrid).setNumFolds(5)\n      \n// K-fold cross validation performs model selection by splitting the dataset into a set of non-overlapping randomly partitioned folds which are used as separate training and test datasets\n// The cross validation knows the pipeline, the metric to evaluate and the parameters of the search grid.",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:19+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mparamGrid\u001b[0m: \u001b[1m\u001b[32mArray[org.apache.spark.ml.param.ParamMap]\u001b[0m =\nArray({\n\tdtc_47a5534a4c30-maxDepth: 4\n}, {\n\tdtc_47a5534a4c30-maxDepth: 5\n}, {\n\tdtc_47a5534a4c30-maxDepth: 6\n})\n\u001b[1m\u001b[34mevaluator\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.evaluation.BinaryClassificationEvaluator\u001b[0m = BinaryClassificationEvaluator: uid=binEval_e04039d16516, metricName=areaUnderROC, numBins=1000\n\u001b[1m\u001b[34mcrossval\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.tuning.CrossValidator\u001b[0m = cv_5da9badc7b8c\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250030_1500302256",
+      "id": "20170508-151903_1365343172",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19569",
+      "dateFinished": "2022-11-06T11:49:22+0100",
+      "dateStarted": "2022-11-06T11:49:19+0100"
+    },
+    {
+      "title": "Fit the model to the input data using K-fold cross validation",
+      "text": "%spark\n\nval cvModel = crossval.fit(ntrain) // Model from k-fold cross validation",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:49:22+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mcvModel\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.tuning.CrossValidatorModel\u001b[0m = CrossValidatorModel: uid=cv_5da9badc7b8c, bestModel=pipeline_a051ad57e4de, numFolds=5\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=36",
+              "$$hashKey": "object:132297"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=37",
+              "$$hashKey": "object:132298"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=38",
+              "$$hashKey": "object:132299"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=39",
+              "$$hashKey": "object:132300"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=40",
+              "$$hashKey": "object:132301"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=41",
+              "$$hashKey": "object:132302"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=42",
+              "$$hashKey": "object:132303"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=43",
+              "$$hashKey": "object:132304"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=44",
+              "$$hashKey": "object:132305"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=45",
+              "$$hashKey": "object:132306"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=46",
+              "$$hashKey": "object:132307"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=47",
+              "$$hashKey": "object:132308"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=48",
+              "$$hashKey": "object:132309"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=49",
+              "$$hashKey": "object:132310"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=50",
+              "$$hashKey": "object:132311"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=51",
+              "$$hashKey": "object:132312"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=52",
+              "$$hashKey": "object:132313"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=53",
+              "$$hashKey": "object:132314"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=54",
+              "$$hashKey": "object:132315"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=55",
+              "$$hashKey": "object:132316"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=56",
+              "$$hashKey": "object:132317"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=57",
+              "$$hashKey": "object:132318"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=58",
+              "$$hashKey": "object:132319"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=59",
+              "$$hashKey": "object:132320"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=60",
+              "$$hashKey": "object:132321"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=61",
+              "$$hashKey": "object:132322"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=62",
+              "$$hashKey": "object:132323"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=63",
+              "$$hashKey": "object:132324"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=64",
+              "$$hashKey": "object:132325"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=65",
+              "$$hashKey": "object:132326"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=66",
+              "$$hashKey": "object:132327"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=67",
+              "$$hashKey": "object:132328"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=68",
+              "$$hashKey": "object:132329"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=69",
+              "$$hashKey": "object:132330"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=70",
+              "$$hashKey": "object:132331"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=71",
+              "$$hashKey": "object:132332"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=72",
+              "$$hashKey": "object:132333"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=73",
+              "$$hashKey": "object:132334"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=74",
+              "$$hashKey": "object:132335"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=75",
+              "$$hashKey": "object:132336"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=76",
+              "$$hashKey": "object:132337"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=77",
+              "$$hashKey": "object:132338"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=78",
+              "$$hashKey": "object:132339"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=79",
+              "$$hashKey": "object:132340"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=80",
+              "$$hashKey": "object:132341"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=81",
+              "$$hashKey": "object:132342"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=82",
+              "$$hashKey": "object:132343"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=83",
+              "$$hashKey": "object:132344"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=84",
+              "$$hashKey": "object:132345"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=85",
+              "$$hashKey": "object:132346"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=86",
+              "$$hashKey": "object:132347"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=87",
+              "$$hashKey": "object:132348"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=88",
+              "$$hashKey": "object:132349"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=89",
+              "$$hashKey": "object:132350"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=90",
+              "$$hashKey": "object:132351"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=91",
+              "$$hashKey": "object:132352"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=92",
+              "$$hashKey": "object:132353"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=93",
+              "$$hashKey": "object:132354"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=94",
+              "$$hashKey": "object:132355"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=95",
+              "$$hashKey": "object:132356"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=96",
+              "$$hashKey": "object:132357"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=97",
+              "$$hashKey": "object:132358"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=98",
+              "$$hashKey": "object:132359"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=99",
+              "$$hashKey": "object:132360"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=100",
+              "$$hashKey": "object:132361"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=101",
+              "$$hashKey": "object:132362"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=102",
+              "$$hashKey": "object:132363"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=103",
+              "$$hashKey": "object:132364"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=104",
+              "$$hashKey": "object:132365"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=105",
+              "$$hashKey": "object:132366"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=106",
+              "$$hashKey": "object:132367"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=107",
+              "$$hashKey": "object:132368"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=108",
+              "$$hashKey": "object:132369"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=109",
+              "$$hashKey": "object:132370"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=110",
+              "$$hashKey": "object:132371"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=111",
+              "$$hashKey": "object:132372"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=112",
+              "$$hashKey": "object:132373"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=113",
+              "$$hashKey": "object:132374"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=114",
+              "$$hashKey": "object:132375"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=115",
+              "$$hashKey": "object:132376"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=116",
+              "$$hashKey": "object:132377"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=117",
+              "$$hashKey": "object:132378"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=118",
+              "$$hashKey": "object:132379"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=119",
+              "$$hashKey": "object:132380"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=120",
+              "$$hashKey": "object:132381"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=121",
+              "$$hashKey": "object:132382"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=122",
+              "$$hashKey": "object:132383"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=123",
+              "$$hashKey": "object:132384"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=124",
+              "$$hashKey": "object:132385"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=125",
+              "$$hashKey": "object:132386"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=126",
+              "$$hashKey": "object:132387"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=127",
+              "$$hashKey": "object:132388"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=128",
+              "$$hashKey": "object:132389"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=129",
+              "$$hashKey": "object:132390"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=130",
+              "$$hashKey": "object:132391"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=131",
+              "$$hashKey": "object:132392"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=132",
+              "$$hashKey": "object:132393"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=133",
+              "$$hashKey": "object:132394"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=134",
+              "$$hashKey": "object:132395"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=135",
+              "$$hashKey": "object:132396"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=136",
+              "$$hashKey": "object:132397"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=137",
+              "$$hashKey": "object:132398"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=138",
+              "$$hashKey": "object:132399"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=139",
+              "$$hashKey": "object:132400"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=140",
+              "$$hashKey": "object:132401"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=141",
+              "$$hashKey": "object:132402"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=142",
+              "$$hashKey": "object:132403"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=143",
+              "$$hashKey": "object:132404"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=144",
+              "$$hashKey": "object:132405"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=145",
+              "$$hashKey": "object:132406"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=146",
+              "$$hashKey": "object:132407"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=147",
+              "$$hashKey": "object:132408"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=148",
+              "$$hashKey": "object:132409"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=149",
+              "$$hashKey": "object:132410"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=150",
+              "$$hashKey": "object:132411"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=151",
+              "$$hashKey": "object:132412"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=152",
+              "$$hashKey": "object:132413"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=153",
+              "$$hashKey": "object:132414"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=154",
+              "$$hashKey": "object:132415"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=155",
+              "$$hashKey": "object:132416"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=156",
+              "$$hashKey": "object:132417"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=157",
+              "$$hashKey": "object:132418"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=158",
+              "$$hashKey": "object:132419"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=159",
+              "$$hashKey": "object:132420"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=160",
+              "$$hashKey": "object:132421"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=161",
+              "$$hashKey": "object:132422"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=162",
+              "$$hashKey": "object:132423"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=163",
+              "$$hashKey": "object:132424"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=164",
+              "$$hashKey": "object:132425"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=165",
+              "$$hashKey": "object:132426"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=166",
+              "$$hashKey": "object:132427"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=167",
+              "$$hashKey": "object:132428"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=168",
+              "$$hashKey": "object:132429"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=169",
+              "$$hashKey": "object:132430"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=170",
+              "$$hashKey": "object:132431"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=171",
+              "$$hashKey": "object:132432"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=172",
+              "$$hashKey": "object:132433"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=173",
+              "$$hashKey": "object:132434"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=174",
+              "$$hashKey": "object:132435"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=175",
+              "$$hashKey": "object:132436"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=176",
+              "$$hashKey": "object:132437"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=177",
+              "$$hashKey": "object:132438"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=178",
+              "$$hashKey": "object:132439"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=179",
+              "$$hashKey": "object:132440"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=180",
+              "$$hashKey": "object:132441"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=181",
+              "$$hashKey": "object:132442"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=182",
+              "$$hashKey": "object:132443"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=183",
+              "$$hashKey": "object:132444"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=184",
+              "$$hashKey": "object:132445"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=185",
+              "$$hashKey": "object:132446"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=186",
+              "$$hashKey": "object:132447"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=187",
+              "$$hashKey": "object:132448"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=188",
+              "$$hashKey": "object:132449"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=189",
+              "$$hashKey": "object:132450"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=190",
+              "$$hashKey": "object:132451"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=191",
+              "$$hashKey": "object:132452"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=192",
+              "$$hashKey": "object:132453"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=193",
+              "$$hashKey": "object:132454"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=194",
+              "$$hashKey": "object:132455"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=195",
+              "$$hashKey": "object:132456"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=196",
+              "$$hashKey": "object:132457"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=197",
+              "$$hashKey": "object:132458"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=198",
+              "$$hashKey": "object:132459"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=199",
+              "$$hashKey": "object:132460"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=200",
+              "$$hashKey": "object:132461"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=201",
+              "$$hashKey": "object:132462"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=202",
+              "$$hashKey": "object:132463"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=203",
+              "$$hashKey": "object:132464"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=204",
+              "$$hashKey": "object:132465"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=205",
+              "$$hashKey": "object:132466"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=206",
+              "$$hashKey": "object:132467"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=207",
+              "$$hashKey": "object:132468"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=208",
+              "$$hashKey": "object:132469"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=209",
+              "$$hashKey": "object:132470"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=210",
+              "$$hashKey": "object:132471"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=211",
+              "$$hashKey": "object:132472"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=212",
+              "$$hashKey": "object:132473"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=213",
+              "$$hashKey": "object:132474"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=214",
+              "$$hashKey": "object:132475"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=215",
+              "$$hashKey": "object:132476"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=216",
+              "$$hashKey": "object:132477"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=217",
+              "$$hashKey": "object:132478"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=218",
+              "$$hashKey": "object:132479"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=219",
+              "$$hashKey": "object:132480"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=220",
+              "$$hashKey": "object:132481"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=221",
+              "$$hashKey": "object:132482"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=222",
+              "$$hashKey": "object:132483"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=223",
+              "$$hashKey": "object:132484"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=224",
+              "$$hashKey": "object:132485"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=225",
+              "$$hashKey": "object:132486"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=226",
+              "$$hashKey": "object:132487"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=227",
+              "$$hashKey": "object:132488"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=228",
+              "$$hashKey": "object:132489"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=229",
+              "$$hashKey": "object:132490"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=230",
+              "$$hashKey": "object:132491"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=231",
+              "$$hashKey": "object:132492"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=232",
+              "$$hashKey": "object:132493"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=233",
+              "$$hashKey": "object:132494"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=234",
+              "$$hashKey": "object:132495"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=235",
+              "$$hashKey": "object:132496"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=236",
+              "$$hashKey": "object:132497"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=237",
+              "$$hashKey": "object:132498"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=238",
+              "$$hashKey": "object:132499"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=239",
+              "$$hashKey": "object:132500"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=240",
+              "$$hashKey": "object:132501"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250030_664044695",
+      "id": "20170508-151926_10766097",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19570",
+      "dateFinished": "2022-11-06T11:51:30+0100",
+      "dateStarted": "2022-11-06T11:49:22+0100"
+    },
+    {
+      "title": "Print the list of subModels",
+      "text": "%spark\n\ncvModel.subModels.foreach{println}\n\n// Print all the learned models",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:30+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 167.25,
+              "optionOpen": false
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "[Lorg.apache.spark.ml.Model;@6733d562\n[Lorg.apache.spark.ml.Model;@2c7dc8d\n[Lorg.apache.spark.ml.Model;@3806999\n[Lorg.apache.spark.ml.Model;@1a783bd\n[Lorg.apache.spark.ml.Model;@7846ce2e\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250049_1023267295",
+      "id": "20181102-225417_1735489669",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19571",
+      "dateFinished": "2022-11-06T11:51:33+0100",
+      "dateStarted": "2022-11-06T11:51:30+0100"
+    },
+    {
+      "title": "Print the first subModel (it is composed of three pipelines)",
+      "text": "%spark\n\ncvModel.subModels(0)",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:33+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mres12\u001b[0m: \u001b[1m\u001b[32mArray[org.apache.spark.ml.Model[_]]\u001b[0m = Array(pipeline_a051ad57e4de, pipeline_a051ad57e4de, pipeline_a051ad57e4de)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250049_1541896495",
+      "id": "paragraph_1635892306728_1711088434",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19572",
+      "dateFinished": "2022-11-06T11:51:35+0100",
+      "dateStarted": "2022-11-06T11:51:33+0100"
+    },
+    {
+      "title": "Print all the stages of the best model",
+      "text": "%spark\n\nfor( stage <- cvModel.bestModel.asInstanceOf[org.apache.spark.ml.PipelineModel].stages){\n         println(stage);\n      }",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:35+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "StringIndexerModel: uid=strIdx_2ef7e62b53a7, handleInvalid=error\nStringIndexerModel: uid=strIdx_3fee08a6ded0, handleInvalid=error\nVectorAssembler: uid=vecAssembler_3cba68814219, handleInvalid=error, numInputCols=12\nDecisionTreeClassificationModel: uid=dtc_47a5534a4c30, depth=5, numNodes=43, numClasses=2, numFeatures=12\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250049_432440659",
+      "id": "paragraph_1635890647233_828215532",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19573",
+      "dateFinished": "2022-11-06T11:51:39+0100",
+      "dateStarted": "2022-11-06T11:51:35+0100"
+    },
+    {
+      "title": "Display the Best model ",
+      "text": "%spark\n\nval bestModel = cvModel.bestModel // retrieve only the best model\n\nprintln(\"The Best Model:\\n--------------------\")\n// Use Scala's asInstanceOf method to cast an instance to the desired type.\nval treeModel = bestModel.asInstanceOf[org.apache.spark.ml.PipelineModel].stages(3).asInstanceOf[DecisionTreeClassificationModel] // extract the decision tree model from the pipeline\nprintln(\"Learned classification tree model:\\n\" + treeModel.toDebugString) // print the decision tree: we can read the sequence of decision rules",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:39+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "The Best Model:\n--------------------\nLearned classification tree model:\nDecisionTreeClassificationModel: uid=dtc_47a5534a4c30, depth=5, numNodes=43, numClasses=2, numFeatures=12\n  If (feature 3 <= 235.35)\n   If (feature 11 <= 3.5)\n    If (feature 1 in {1.0})\n     If (feature 9 <= 12.45)\n      If (feature 10 <= 2.5)\n       Predict: 0.0\n      Else (feature 10 > 2.5)\n       Predict: 1.0\n     Else (feature 9 > 12.45)\n      Predict: 0.0\n    Else (feature 1 not in {1.0})\n     If (feature 3 <= 211.2)\n      Predict: 1.0\n     Else (feature 3 > 211.2)\n      If (feature 5 <= 269.6)\n       Predict: 1.0\n      Else (feature 5 > 269.6)\n       Predict: 0.0\n   Else (feature 11 > 3.5)\n    If (feature 5 <= 250.35)\n     If (feature 3 <= 203.6)\n      Predict: 0.0\n     Else (feature 3 > 203.6)\n      If (feature 5 <= 132.95)\n       Predict: 0.0\n      Else (feature 5 > 132.95)\n       Predict: 1.0\n    Else (feature 5 > 250.35)\n     If (feature 8 <= 96.5)\n      If (feature 3 <= 226.8)\n       Predict: 1.0\n      Else (feature 3 > 226.8)\n       Predict: 0.0\n     Else (feature 8 > 96.5)\n      Predict: 0.0\n  Else (feature 3 > 235.35)\n   If (feature 2 <= 4.0)\n    If (feature 5 <= 167.7)\n     If (feature 3 <= 265.75)\n      If (feature 10 <= 2.5)\n       Predict: 0.0\n      Else (feature 10 > 2.5)\n       Predict: 1.0\n     Else (feature 3 > 265.75)\n      If (feature 9 <= 14.149999999999999)\n       Predict: 0.0\n      Else (feature 9 > 14.149999999999999)\n       Predict: 1.0\n    Else (feature 5 > 167.7)\n     Predict: 0.0\n   Else (feature 2 > 4.0)\n    If (feature 1 in {1.0})\n     If (feature 2 <= 33.5)\n      If (feature 2 <= 17.5)\n       Predict: 1.0\n      Else (feature 2 > 17.5)\n       Predict: 0.0\n     Else (feature 2 > 33.5)\n      Predict: 1.0\n    Else (feature 1 not in {1.0})\n     If (feature 3 <= 299.9)\n      Predict: 1.0\n     Else (feature 3 > 299.9)\n      Predict: 0.0\n\n\u001b[1m\u001b[34mbestModel\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.Model[_]\u001b[0m = pipeline_a051ad57e4de\n\u001b[1m\u001b[34mtreeModel\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.classification.DecisionTreeClassificationModel\u001b[0m = DecisionTreeClassificationModel: uid=dtc_47a5534a4c30, depth=5, numNodes=43, numClasses=2, numFeatures=12\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250049_1096347631",
+      "id": "20170508-151947_197896730",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19574",
+      "dateFinished": "2022-11-06T11:51:41+0100",
+      "dateStarted": "2022-11-06T11:51:39+0100"
+    },
+    {
+      "text": "%md\n\n**Q8: What are the two first features used in the decision tree based classification rule? Give their name with respect to the original dataset.**\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:41+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q8: What are the two first features used in the decision tree based classification rule? Give their name with respect to the original dataset.</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250049_951499438",
+      "id": "20181103-144402_1585087913",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19575",
+      "dateFinished": "2022-11-06T11:51:41+0100",
+      "dateStarted": "2022-11-06T11:51:41+0100"
+    },
+    {
+      "title": "Fields Customer service calls and Total day minutes have high predictive power to determine a customer's likeliness to churn",
+      "text": "%spark\r\r// Put here the command to print the original names of the features.\r\r////0-11 feature columns: len, iplanIndex, numvmail, tdmins, tdcalls, temins, tecalls, tnmins, tncalls, timins, ticalls, numcs\rprintln( \"Feature 11: \" +  featureCols(11) +  \" Feature 3: \" +  featureCols(3)) // print the name of the columns which appear first in the decision tree\r",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:41+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Feature 11: numcs Feature 3: tdmins\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250049_546377082",
+      "id": "20170524-231226_52953518",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19576",
+      "dateFinished": "2022-11-06T11:51:44+0100",
+      "dateStarted": "2022-11-06T11:51:41+0100"
+    },
+    {
+      "text": "%md\r\nThe actual performance of the model can be determined using the test data set which has not been used for any training or cross-validation activities. We'll transform the test set with the model pipeline, which will map the features according to the same recipe. \r\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:44+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>The actual performance of the model can be determined using the test data set which has not been used for any training or cross-validation activities. We&rsquo;ll transform the test set with the model pipeline, which will map the features according to the same recipe.</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250049_1872798674",
+      "id": "20170602-155317_1487132664",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19577",
+      "dateFinished": "2022-11-06T11:51:44+0100",
+      "dateStarted": "2022-11-06T11:51:44+0100"
+    },
+    {
+      "text": "%md\n\n**Q9: Appy the learned transformer on the test dataset.**",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:44+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q9: Appy the learned transformer on the test dataset.</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250049_1774255352",
+      "id": "20181103-144553_531995722",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19578",
+      "dateFinished": "2022-11-06T11:51:44+0100",
+      "dateStarted": "2022-11-06T11:51:44+0100"
+    },
+    {
+      "title": "Get Predictions from Test set and Evaluate",
+      "text": "%spark\n\n// Put the command to compute the \"predictions\" hereafter.\n// The variable \"predictions\" will contrain the result of the transformer.\n\n//transform the test set with the model pipeline, which will map the features according to the same recipe\nval predictions = cvModel.transform(test)\n\ntest.printSchema()\n\npredictions.printSchema()\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:44+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- state: string (nullable = true)\n |-- len: integer (nullable = true)\n |-- acode: string (nullable = true)\n |-- intlplan: string (nullable = true)\n |-- vplan: string (nullable = true)\n |-- numvmail: double (nullable = true)\n |-- tdmins: double (nullable = true)\n |-- tdcalls: double (nullable = true)\n |-- tdcharge: double (nullable = true)\n |-- temins: double (nullable = true)\n |-- tecalls: double (nullable = true)\n |-- techarge: double (nullable = true)\n |-- tnmins: double (nullable = true)\n |-- tncalls: double (nullable = true)\n |-- tncharge: double (nullable = true)\n |-- timins: double (nullable = true)\n |-- ticalls: double (nullable = true)\n |-- ticharge: double (nullable = true)\n |-- numcs: double (nullable = true)\n |-- churn: string (nullable = true)\n\nroot\n |-- state: string (nullable = true)\n |-- len: integer (nullable = true)\n |-- acode: string (nullable = true)\n |-- intlplan: string (nullable = true)\n |-- vplan: string (nullable = true)\n |-- numvmail: double (nullable = true)\n |-- tdmins: double (nullable = true)\n |-- tdcalls: double (nullable = true)\n |-- tdcharge: double (nullable = true)\n |-- temins: double (nullable = true)\n |-- tecalls: double (nullable = true)\n |-- techarge: double (nullable = true)\n |-- tnmins: double (nullable = true)\n |-- tncalls: double (nullable = true)\n |-- tncharge: double (nullable = true)\n |-- timins: double (nullable = true)\n |-- ticalls: double (nullable = true)\n |-- ticharge: double (nullable = true)\n |-- numcs: double (nullable = true)\n |-- churn: string (nullable = true)\n |-- iplanIndex: double (nullable = false)\n |-- label: double (nullable = false)\n |-- features: vector (nullable = true)\n |-- rawPrediction: vector (nullable = true)\n |-- probability: vector (nullable = true)\n |-- prediction: double (nullable = false)\n\n\u001b[1m\u001b[34mpredictions\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [state: string, len: int ... 24 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250049_1786473076",
+      "id": "20170508-155848_1997894070",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19579",
+      "dateFinished": "2022-11-06T11:51:48+0100",
+      "dateStarted": "2022-11-06T11:51:44+0100"
+    },
+    {
+      "text": "%spark\n\npredictions.select(\"label\",\"prediction\", \"probability\").show",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:48+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+----------+--------------------+\n|label|prediction|         probability|\n+-----+----------+--------------------+\n|  1.0|       1.0|[0.12621359223300...|\n|  0.0|       0.0|[0.95744680851063...|\n|  0.0|       0.0|[0.94964028776978...|\n|  1.0|       1.0|[0.12621359223300...|\n|  1.0|       1.0|[0.12621359223300...|\n|  1.0|       1.0|[0.12621359223300...|\n|  1.0|       1.0|[0.23076923076923...|\n|  0.0|       0.0|[0.95744680851063...|\n|  1.0|       1.0|[0.12621359223300...|\n|  1.0|       1.0|[0.12621359223300...|\n|  1.0|       1.0|[0.12621359223300...|\n|  1.0|       1.0|           [0.0,1.0]|\n|  1.0|       1.0|[0.23076923076923...|\n|  1.0|       1.0|[0.12621359223300...|\n|  0.0|       1.0|[0.12621359223300...|\n|  1.0|       1.0|[0.12621359223300...|\n|  0.0|       0.0|[0.94964028776978...|\n|  1.0|       1.0|[0.12621359223300...|\n|  1.0|       1.0|[0.12621359223300...|\n|  1.0|       1.0|           [0.0,1.0]|\n+-----+----------+--------------------+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=241",
+              "$$hashKey": "object:133539"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250050_815637819",
+      "id": "20170602-160222_471240064",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19580",
+      "dateFinished": "2022-11-06T11:51:53+0100",
+      "dateStarted": "2022-11-06T11:51:48+0100"
+    },
+    {
+      "text": "%md\nAccuracy is measured by the area under the ROC curve. \nThe area measures the ability of the test to correctly classify true positives from false positives. A random predictor would have .5 accuracy. The closer the value is to 1 the better its predictions are. \n\n**Q10: Compute the area under the ROC curve in the following cell.**",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:53+0100",
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>Accuracy is measured by the area under the ROC curve.<br />\nThe area measures the ability of the test to correctly classify true positives from false positives. A random predictor would have .5 accuracy. The closer the value is to 1 the better its predictions are.</p>\n<p><strong>Q10: Compute the area under the ROC curve in the following cell.</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250050_1613453224",
+      "id": "20170602-161538_1648758337",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19581",
+      "dateFinished": "2022-11-06T11:51:53+0100",
+      "dateStarted": "2022-11-06T11:51:53+0100"
+    },
+    {
+      "text": "%spark\n\n// Put your command line to compute the variable \"accuracy\" hereafter\n\n//The evaluator will provide us with the score of the predictions by comparing the prediction to the label\nval accuracy = evaluator.evaluate(predictions)\nevaluator.explainParams()",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:53+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34maccuracy\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m = 0.8790945896209054\n\u001b[1m\u001b[34mres18\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m =\nlabelCol: label column name (default: label, current: label)\nmetricName: metric name in evaluation (areaUnderROC|areaUnderPR) (default: areaUnderROC)\nnumBins: Number of bins to down-sample the curves (ROC curve, PR curve) in area computation. If 0, no down-sampling will occur. Must be >= 0. (default: 1000)\nrawPredictionCol: raw prediction (a.k.a. confidence) column name (default: rawPrediction, current: prediction)\nweightCol: weight column name. If this is not set or empty, we treat all instance weights as 1.0 (undefined)\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=242",
+              "$$hashKey": "object:133614"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=243",
+              "$$hashKey": "object:133615"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=244",
+              "$$hashKey": "object:133616"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250050_226127718",
+      "id": "20170602-155622_1453197792",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19582",
+      "dateFinished": "2022-11-06T11:51:58+0100",
+      "dateStarted": "2022-11-06T11:51:53+0100"
+    },
+    {
+      "title": "More metrics (just for your information)",
+      "text": "%spark\n\nval lp = predictions.select(\"label\", \"prediction\")\nval counttotal = predictions.count()\nval correct = lp.filter($\"label\" === $\"prediction\").count() // comparison between columns\nval wrong = lp.filter(not($\"label\" === $\"prediction\")).count()\nval ratioWrong = wrong.toDouble / counttotal.toDouble\nval ratioCorrect = correct.toDouble / counttotal.toDouble\nval truep = lp.filter($\"prediction\" === 0.0).filter($\"label\" === $\"prediction\").count() / counttotal.toDouble\nval truen = lp.filter($\"prediction\" === 1.0).filter($\"label\" === $\"prediction\").count() / counttotal.toDouble\nval falsep = lp.filter($\"prediction\" === 1.0).filter(not($\"label\" === $\"prediction\")).count() / counttotal.toDouble\nval falsen = lp.filter($\"prediction\" === 0.0).filter(not($\"label\" === $\"prediction\")).count() / counttotal.toDouble\nprintln(\"total count : \" + counttotal)\nprintln(\"correct : \" + correct)\nprintln(\"wrong: \" + wrong)\nprintln(\"ratio correct: \" + ratioCorrect)\nprintln(\"ratio true positive : \" + truep)\nprintln(\"ratio true negative : \" + truen)\nprintln(\"ratio wrong: \" + ratioWrong)\nprintln(\"ratio false positive : \" + falsep)\nprintln(\"ratio false negative : \" + falsen)\n",
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:51:58+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "total count : 667\ncorrect : 604\nwrong: 63\nratio correct: 0.9055472263868066\nratio true positive : 0.1199400299850075\nratio true negative : 0.7856071964017991\nratio wrong: 0.0944527736131934\nratio false positive : 0.022488755622188907\nratio false negative : 0.07196401799100449\n\u001b[1m\u001b[34mlp\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [label: double, prediction: double]\n\u001b[1m\u001b[34mcounttotal\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m = 667\n\u001b[1m\u001b[34mcorrect\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m = 604\n\u001b[1m\u001b[34mwrong\u001b[0m: \u001b[1m\u001b[32mLong\u001b[0m = 63\n\u001b[1m\u001b[34mratioWrong\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m = 0.0944527736131934\n\u001b[1m\u001b[34mratioCorrect\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m = 0.9055472263868066\n\u001b[1m\u001b[34mtruep\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m = 0.1199400299850075\n\u001b[1m\u001b[34mtruen\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m = 0.7856071964017991\n\u001b[1m\u001b[34mfalsep\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m = 0.022488755622188907\n\u001b[1m\u001b[34mfalsen\u001b[0m: \u001b[1m\u001b[32mDouble\u001b[0m = 0.07196401799100449\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=245",
+              "$$hashKey": "object:133795"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=246",
+              "$$hashKey": "object:133796"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=247",
+              "$$hashKey": "object:133797"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=248",
+              "$$hashKey": "object:133798"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=249",
+              "$$hashKey": "object:133799"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=250",
+              "$$hashKey": "object:133800"
+            },
+            {
+              "jobUrl": "http://10.0.2.15:4040/jobs/job?id=251",
+              "$$hashKey": "object:133801"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250053_1518459926",
+      "id": "20170508-155935_1678385472",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19583",
+      "dateFinished": "2022-11-06T11:52:07+0100",
+      "dateStarted": "2022-11-06T11:51:58+0100"
+    },
+    {
+      "user": "anonymous",
+      "dateUpdated": "2022-11-06T11:52:07+0100",
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1667731250054_385758563",
+      "id": "20171107-113000_1427348134",
+      "dateCreated": "2022-11-06T11:40:50+0100",
+      "status": "FINISHED",
+      "$$hashKey": "object:19584"
+    }
+  ],
+  "name": "churn_prediction_2022_solution",
+  "id": "2HJT9BJ9N",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.9.0-preview2",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/churn_prediction_2022_solution"
+}

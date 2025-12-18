@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mes Projets GitHub | Gérard Kra</title>
+  <meta name="description" content="Explorez mes projets open-source sur GitHub" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .github-hero {
+      background: linear-gradient(135deg, #24292e 0%, #000000 100%);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+    }
+
+    .github-hero h1 {
+      color: white;
+      font-size: 2.5rem;
+    }
+
+    .github-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--bg-color);
+      border-radius: var(--radius);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--accent-color);
+    }
+
+    .stat-label {
+      color: #888;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .repos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .repo-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border-left: 4px solid var(--accent-color);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .repo-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .repo-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .repo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      margin-bottom: 1rem;
+    }
+
+    .repo-header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .repo-header h3 a {
+      color: var(--accent-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .repo-header h3 a:hover {
+      text-decoration: underline;
+    }
+
+    .repo-badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .repo-badge.public {
+      background: #10b981;
+      color: white;
+    }
+
+    .repo-badge.private {
+      background: #ef4444;
+      color: white;
+    }
+
+    .repo-description {
+      color: #888;
+      margin: 1rem 0;
+      line-height: 1.6;
+      min-height: 3rem;
+    }
+
+    .repo-stats {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 1rem 0;
+    }
+
+    .repo-language {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .language-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+
+    .repo-stat {
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    .repo-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .repo-updated {
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .btn-small {
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    .loading-spinner {
+      text-align: center;
+      padding: 3rem;
+      font-size: 1.2rem;
+      color: #888;
+    }
+
+    @media (max-width: 768px) {
+      .github-hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .repos-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'en,fr,es,de,it,pt,ar,zh-CN,ja,ko',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<body>
+  <header class="site-header">
+    <div class="nav-inner container">
+      <a class="brand" href="../index.html">Gérard Kra</a>
+      <nav class="main-nav">
+        <a href="../index.html">Accueil</a>
+        <a href="../about.html">À propos</a>
+        <a href="../parcours/index.html">Parcours</a>
+        <a href="../ressources/index.html">Ressources</a>
+        <a href="index.html" class="active">Professionnel</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="header-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <a class="btn btn-outline" href="../CV_KRA_Gerard.pdf" target="_blank">Télécharger CV</a>
+      </div>
+      <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
+    </div>
+  </header>
+
+  <!-- Google Translate Widget -->
+  <div id="google_translate_element"></div>
+
+  <main class="container">
+    <div class="breadcrumb">
+      <a href="../index.html">Accueil</a> → 
+      <a href="index.html">Professionnel</a> → 
+      <strong>GitHub</strong>
+    </div>
+
+    <section class="github-hero slide-in">
+      <div style="font-size: 5rem; margin-bottom: 1rem;">
+        <i class="devicon-github-original" style="color: white;"></i>
+      </div>
+      <h1>Mes Projets GitHub</h1>
+      <p style="font-size: 1.1rem; margin-top: 0.5rem; opacity: 0.95;">
+        Code open-source et projets personnels
+      </p>
+      <a href="https://github.com/gerardkra" target="_blank" class="btn" style="margin-top: 1.5rem; background: white; color: #24292e;">
+        <i class="devicon-github-original"></i> Voir mon profil complet
+      </a>
+    </section>
+
+    <!-- Stats du profil -->
+    <section class="card slide-in">
+      <h2 style="text-align: center; margin-bottom: 1.5rem;">📊 Statistiques GitHub</h2>
+      <div id="github-profile-stats">
+        <div class="loading-spinner">
+          Chargement des statistiques...
+        </div>
+      </div>
+    </section>
+
+    <!-- Introduction -->
+    <section class="card slide-in">
+      <h2>💡 À propos de mes projets</h2>
+      <p style="margin-top: 1rem; line-height: 1.8;">
+        Sur GitHub, je partage mes projets personnels et mes expérimentations. 
+        Vous y trouverez principalement des projets en <strong>Machine Learning</strong>, <strong>Data Engineering</strong>, 
+        <strong>NLP</strong> et <strong>développement web</strong>. 
+        Tout le code est documenté et prêt à être réutilisé ou adapté.
+      </p>
+    </section>
+
+    <!-- Repositories -->
+    <section>
+      <h2 class="section-title">📦 Mes repositories récents</h2>
+      
+      <div id="loading-repos" class="loading-spinner">
+        <p>⏳ Chargement des projets depuis GitHub...</p>
+      </div>
+
+      <div id="github-repos" class="repos-grid">
+        <!-- Les repos seront chargés dynamiquement via github-api.js -->
+      </div>
+    </section>
+
+    <!-- Technologies utilisées -->
+    <section class="card slide-in">
+      <h2>🛠️ Technologies que j'utilise</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-top: 2rem;">
+        <div style="text-align: center;">
+          <i class="devicon-python-plain colored" style="font-size: 3rem;"></i>
+          <p style="margin-top: 0.5rem; font-weight: 600;">Python</p>
+        </div>
+        <div style="text-align: center;">
+          <i class="devicon-javascript-plain colored" style="font-size: 3rem;"></i>
+          <p style="margin-top: 0.5rem; font-weight: 600;">JavaScript</p>
+        </div>
+        <div style="text-align: center;">
+          <i class="devicon-nodejs-plain colored" style="font-size: 3rem;"></i>
+          <p style="margin-top: 0.5rem; font-weight: 600;">Node.js</p>
+        </div>
+        <div style="text-align: center;">
+          <i class="devicon-docker-plain colored" style="font-size: 3rem;"></i>
+          <p style="margin-top: 0.5rem; font-weight: 600;">Docker</p>
+        </div>
+        <div style="text-align: center;">
+          <i class="devicon-tensorflow-original colored" style="font-size: 3rem;"></i>
+          <p style="margin-top: 0.5rem; font-weight: 600;">TensorFlow</p>
+        </div>
+        <div style="text-align: center;">
+          <i class="devicon-git-plain colored" style="font-size: 3rem;"></i>
+          <p style="margin-top: 0.5rem; font-weight: 600;">Git</p>
+        </div>
+        <div style="text-align: center;">
+          <i class="devicon-jupyter-plain colored" style="font-size: 3rem;"></i>
+          <p style="margin-top: 0.5rem; font-weight: 600;">Jupyter Notebook</p>
+        </div>
+        <div style="text-align: center;">
+          <i class="devicon-html5-plain colored" style="font-size: 3rem;"></i>
+          <p style="margin-top: 0.5rem; font-weight: 600;">HTML5</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="card slide-in" style="background: linear-gradient(135deg, #24292e, #000); color: white; text-align: center;">
+      <h2 style="color: white;">🤝 Envie de collaborer ?</h2>
+      <p style="opacity: 0.95; margin: 1rem 0;">
+        Je suis ouvert aux collaborations sur des projets open-source et aux échanges techniques !
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
+        <a href="https://github.com/gerardkra" target="_blank" class="btn" style="background: white; color: #24292e;">
+          Me suivre sur GitHub
+        </a>
+        <a href="../contact.html" class="btn btn-outline" style="border-color: white; color: white;">
+          Me contacter
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 Gérard Kra — <span data-i18n="footer.mission">Partage de connaissances pour étudiants</span></p>
+      <div style="margin-top: 1rem; display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+        <a href="https://ulagunes.com/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université des Lagunes</a>
+        <a href="https://univ-cotedazur.fr/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Université Côte d'Azur</a>
+        <a href="https://www.epitech.eu/" target="_blank" style="opacity: 0.7; font-size: 0.9rem;">🔗 Epitech</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../main.js"></script>
+  <script src="../js/translation.js"></script>
+  <script src="../js/github-api.js"></script>
+</body>
