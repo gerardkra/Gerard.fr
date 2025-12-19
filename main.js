@@ -3,7 +3,7 @@
   const toggle = document.getElementById('theme-toggle');
   const navToggle = document.getElementById('nav-toggle');
   const mainNav = document.querySelector('.main-nav');
-
+// ================ Navigation Toggle =================
   // Mobile nav toggle
   if (navToggle) navToggle.addEventListener('click', () => {
     mainNav.classList.toggle('open');
