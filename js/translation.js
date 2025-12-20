@@ -1,4 +1,6 @@
 // js/translation.js - Système de traduction FR/EN avec sauvegarde globale
+// Auteur: Gérard KRA
+// Date: 2024-06-15
 
 const translations = {
   fr: {

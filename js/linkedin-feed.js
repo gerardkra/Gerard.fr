@@ -1,4 +1,6 @@
 // js/linkedin-feed.js - Intégration LinkedIn
+// Auteur: Gérard KRA
+// Date: 2024-06-15
 
 /*
  * NOTE IMPORTANTE :

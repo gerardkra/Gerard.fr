@@ -1,4 +1,6 @@
 // js/github-api.js - Intégration GitHub API
+// Auteur: Gérard KRA
+// Date: 2024-06-15
 
 const GITHUB_USERNAME = 'gerardkra'; // Remplacer par votre username GitHub
 
