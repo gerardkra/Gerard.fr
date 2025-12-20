@@ -1,4 +1,6 @@
 {
+  // data/translations.json - Fichier de traduction FR/EN pour le site académique
+  // Auteur: Gérard KRA
   "fr": {
     "nav.home": "Accueil",
     "nav.about": "À propos",
