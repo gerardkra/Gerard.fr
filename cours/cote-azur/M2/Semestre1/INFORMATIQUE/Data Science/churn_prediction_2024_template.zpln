@@ -1,0 +1,1691 @@
+﻿{
+  "paragraphs": [
+    {
+      "text": "%md \n\nCustomer Relationship Management (CRM) is a key element of modern marketing strategies.\nThe French Telecom company Orange offered a large marketing database to predict the propensity of customers to switch provider (churn).\n\nOrange made available a large dataset of customer data consisting of:\n- Training : 50,000 instances including 15,000 inputs variables, and the target value.\n- Test : 50,000 instances including 15,000 inputs variables.\n\nSee details on https://www.kdd.org/kdd-cup/view/kdd-cup-2009/Intro\n\nThe Orange Telecom Churn Dataset used in this labs consists of cleaned customer activity data (features), along with a churn label specifying whether the customer canceled their subscription or not. \nThe used dataset is smaller than the original one.\nThe input csv file has the following format: \nKS,128,415,No,Yes,25,265.1,110,45.07,197.4,99,16.78,244.7,91,11.01,10.0,3,2.7,1,False\nThe name of the variables are given in the header of the data files.\n\nWe use a Scala case class and Structype to define the schema, corresponding to a line in the csv data file.",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": false,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383006_11666439",
+      "id": "20170530-122945_1594214131",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "focus": true,
+      "$$hashKey": "object:328"
+    },
+    {
+      "title": "Import needed packages",
+      "text": "%spark\n\nimport org.apache.spark._\nimport org.apache.spark.sql.SparkSession\nimport org.apache.spark.sql.functions._\nimport org.apache.spark.sql.types._\nimport org.apache.spark.sql._\nimport org.apache.spark.sql.Dataset\nimport org.apache.spark.ml.Pipeline\nimport org.apache.spark.ml.classification.DecisionTreeClassifier\nimport org.apache.spark.ml.classification.DecisionTreeClassificationModel\nimport org.apache.spark.mllib.evaluation.BinaryClassificationMetrics\nimport org.apache.spark.ml.evaluation.BinaryClassificationEvaluator\nimport org.apache.spark.ml.feature.StringIndexer\nimport org.apache.spark.ml.tuning.ParamGridBuilder\nimport org.apache.spark.ml.tuning.CrossValidator\nimport org.apache.spark.ml.feature.VectorAssembler",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383007_1508326515",
+      "id": "20170508-144514_403247535",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:329"
+    },
+    {
+      "title": "Define Schema for csv file data",
+      "text": "%spark\n\ncase class Account(state: String, len: Integer, acode: String,\n    intlplan: String, vplan: String, numvmail: Double,\n    tdmins: Double, tdcalls: Double, tdcharge: Double,\n    temins: Double, tecalls: Double, techarge: Double,\n    tnmins: Double, tncalls: Double, tncharge: Double,\n    timins: Double, ticalls: Double, ticharge: Double,\n    numcs: Double, churn: String)\n    \n    \n// StructType objects define the schema of Spark DataFrames. \n// StructType objects contain a list of StructField objects that define the name, type, and nullable flag for each column in a DataFrame.    \n// A nullable flag switched to true means that the corresponding column could have null values.\nval schema = StructType(Array(\n    StructField(\"state\", StringType, true),\n    StructField(\"len\", IntegerType, true),\n    StructField(\"acode\", StringType, true),\n    StructField(\"intlplan\", StringType, true),\n    StructField(\"vplan\", StringType, true),\n    StructField(\"numvmail\", DoubleType, true),\n    StructField(\"tdmins\", DoubleType, true),\n    StructField(\"tdcalls\", DoubleType, true),\n    StructField(\"tdcharge\", DoubleType, true),\n    StructField(\"temins\", DoubleType, true),\n    StructField(\"tecalls\", DoubleType, true),\n    StructField(\"techarge\", DoubleType, true),\n    StructField(\"tnmins\", DoubleType, true),\n    StructField(\"tncalls\", DoubleType, true),\n    StructField(\"tncharge\", DoubleType, true),\n    StructField(\"timins\", DoubleType, true),\n    StructField(\"ticalls\", DoubleType, true),\n    StructField(\"ticharge\", DoubleType, true),\n    StructField(\"numcs\", DoubleType, true),\n    StructField(\"churn\", StringType, true)\n  ))",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "defined class Account\n\u001b[1m\u001b[34mschema\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.types.StructType\u001b[0m = StructType(StructField(state,StringType,true),StructField(len,IntegerType,true),StructField(acode,StringType,true),StructField(intlplan,StringType,true),StructField(vplan,StringType,true),StructField(numvmail,DoubleType,true),StructField(tdmins,DoubleType,true),StructField(tdcalls,DoubleType,true),StructField(tdcharge,DoubleType,true),StructField(temins,DoubleType,true),StructField(tecalls,DoubleType,true),StructField(techarge,DoubleType,true),StructField(tnmins,DoubleType,true),StructField(tncalls,DoubleType,true),StructField(tncharge,DoubleType,true),StructField(timins,DoubleType,true),StructField(ticalls,DoubleType,true),StructField(ticharge,DoubleType,true),StructField(numcs,DoubleType,tr...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383007_1784054883",
+      "id": "20170508-150032_326029627",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:330"
+    },
+    {
+      "text": "%spark\n\nval trainDf = spark.read.option(\"header\", \"true\").csv(\"/home/user/churn-train-header.csv\")\ntrainDf.count()\ntrainDf.first()\ntrainDf.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- State: string (nullable = true)\n |-- Account length: string (nullable = true)\n |-- Area code: string (nullable = true)\n |-- International plan: string (nullable = true)\n |-- Voice mail plan: string (nullable = true)\n |-- Number vmail messages: string (nullable = true)\n |-- Total day minutes: string (nullable = true)\n |-- Total day calls: string (nullable = true)\n |-- Total day charge: string (nullable = true)\n |-- Total eve minutes: string (nullable = true)\n |-- Total eve calls: string (nullable = true)\n |-- Total eve charge: string (nullable = true)\n |-- Total night minutes: string (nullable = true)\n |-- Total night calls: string (nullable = true)\n |-- Total night charge: string (nullable = true)\n |-- Total intl minutes: string (nullable = true)\n |-- Total intl calls: string (nullable = true)\n |-- Total intl charge: string (nullable = true)\n |-- Customer service calls: string (nullable = true)\n |-- Churn: string (nullable = true)\n\n\u001b[1m\u001b[34mtrainDf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [State: string, Account length: string ... 18 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383007_157752878",
+      "id": "20181102-175053_704133435",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:331"
+    },
+    {
+      "title": "Read the data from CSV file into a Dataset of Account type",
+      "text": "%spark\n\nimport spark.implicits._\nval train: Dataset[Account] = spark.read.option(\"header\", \"true\").option(\"inferSchema\", \"false\")\n      .schema(schema).csv(\"/home/user/churn-train-header.csv\").as[Account]\ntrain.count()  \ntrain.cache()\ntrain.first()\ntrain.printSchema()",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- state: string (nullable = true)\n |-- len: integer (nullable = true)\n |-- acode: string (nullable = true)\n |-- intlplan: string (nullable = true)\n |-- vplan: string (nullable = true)\n |-- numvmail: double (nullable = true)\n |-- tdmins: double (nullable = true)\n |-- tdcalls: double (nullable = true)\n |-- tdcharge: double (nullable = true)\n |-- temins: double (nullable = true)\n |-- tecalls: double (nullable = true)\n |-- techarge: double (nullable = true)\n |-- tnmins: double (nullable = true)\n |-- tncalls: double (nullable = true)\n |-- tncharge: double (nullable = true)\n |-- timins: double (nullable = true)\n |-- ticalls: double (nullable = true)\n |-- ticharge: double (nullable = true)\n |-- numcs: double (nullable = true)\n |-- churn: string (nullable = true)\n\nimport spark.implicits._\n\u001b[1m\u001b[34mtrain\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Account]\u001b[0m = [state: string, len: int ... 18 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383007_1582422022",
+      "id": "20170508-150131_378637203",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:332"
+    },
+    {
+      "text": "%md\n\n**Q1: What is the advantage to use the \"Dataset\" train instead of the \"Dataframe\" trainDf?**\n\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q1: What is the advantage to use the &ldquo;Dataset&rdquo; train instead of the &ldquo;Dataframe&rdquo; trainDf?</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383007_894098916",
+      "id": "20181103-141647_2000726232",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:333"
+    },
+    {
+      "text": "%spark\n\nval test: Dataset[Account] = spark.read.option(\"header\", \"true\").option(\"inferSchema\", \"false\")\n      .schema(schema).csv(\"/home/user/churn-test-header.csv\").as[Account]\ntest.count()      \ntest.first()\ntest.printSchema()\n    ",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "root\n |-- state: string (nullable = true)\n |-- len: integer (nullable = true)\n |-- acode: string (nullable = true)\n |-- intlplan: string (nullable = true)\n |-- vplan: string (nullable = true)\n |-- numvmail: double (nullable = true)\n |-- tdmins: double (nullable = true)\n |-- tdcalls: double (nullable = true)\n |-- tdcharge: double (nullable = true)\n |-- temins: double (nullable = true)\n |-- tecalls: double (nullable = true)\n |-- techarge: double (nullable = true)\n |-- tnmins: double (nullable = true)\n |-- tncalls: double (nullable = true)\n |-- tncharge: double (nullable = true)\n |-- timins: double (nullable = true)\n |-- ticalls: double (nullable = true)\n |-- ticharge: double (nullable = true)\n |-- numcs: double (nullable = true)\n |-- churn: string (nullable = true)\n\n\u001b[1m\u001b[34mtest\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[Account]\u001b[0m = [state: string, len: int ... 18 more fields]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383007_1615165825",
+      "id": "20170508-150324_497571301",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:334"
+    },
+    {
+      "title": "Register Dataset as a Table , display first 20 rows ",
+      "text": "%spark\n\ntrain.createOrReplaceTempView(\"account\")\nspark.catalog.cacheTable(\"account\") // Caches the specified table in-memory.\ntrain.show",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 300,
+              "optionOpen": true,
+              "setting": {
+                "stackedAreaChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "churn",
+                  "index": 19,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "len",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----+---+-----+--------+-----+--------+------+-------+--------+------+-------+--------+------+-------+--------+------+-------+--------+-----+-----+\n|state|len|acode|intlplan|vplan|numvmail|tdmins|tdcalls|tdcharge|temins|tecalls|techarge|tnmins|tncalls|tncharge|timins|ticalls|ticharge|numcs|churn|\n+-----+---+-----+--------+-----+--------+------+-------+--------+------+-------+--------+------+-------+--------+------+-------+--------+-----+-----+\n|   KS|128|  415|      No|  Yes|    25.0| 265.1|  110.0|   45.07| 197.4|   99.0|   16.78| 244.7|   91.0|   11.01|  10.0|    3.0|     2.7|  1.0|False|\n|   OH|107|  415|      No|  Yes|    26.0| 161.6|  123.0|   27.47| 195.5|  103.0|   16.62| 254.4|  103.0|   11.45|  13.7|    3.0|     3.7|  1.0|False|\n|   NJ|137|  415|      No|   No|     0.0| 243.4|  114.0|   41.38| 121.2|  110.0|    10.3| 162.6|  104.0|    7.32|  12.2|    5.0|    3.29|  0.0|False|\n|   OH| 84|  408|     Yes|   No|     0.0| 299.4|   71.0|    50.9|  61.9|   88.0|    5.26| 196.9|   89.0|    8.86|   6.6|    7.0|    1.78|  2.0|False|\n|   OK| 75|  415|     Yes|   No|     0.0| 166.7|  113.0|   28.34| 148.3|  122.0|   12.61| 186.9|  121.0|    8.41|  10.1|    3.0|    2.73|  3.0|False|\n|   AL|118|  510|     Yes|   No|     0.0| 223.4|   98.0|   37.98| 220.6|  101.0|   18.75| 203.9|  118.0|    9.18|   6.3|    6.0|     1.7|  0.0|False|\n|   MA|121|  510|      No|  Yes|    24.0| 218.2|   88.0|   37.09| 348.5|  108.0|   29.62| 212.6|  118.0|    9.57|   7.5|    7.0|    2.03|  3.0|False|\n|   MO|147|  415|     Yes|   No|     0.0| 157.0|   79.0|   26.69| 103.1|   94.0|    8.76| 211.8|   96.0|    9.53|   7.1|    6.0|    1.92|  0.0|False|\n|   WV|141|  415|     Yes|  Yes|    37.0| 258.6|   84.0|   43.96| 222.0|  111.0|   18.87| 326.4|   97.0|   14.69|  11.2|    5.0|    3.02|  0.0|False|\n|   RI| 74|  415|      No|   No|     0.0| 187.7|  127.0|   31.91| 163.4|  148.0|   13.89| 196.0|   94.0|    8.82|   9.1|    5.0|    2.46|  0.0|False|\n|   IA|168|  408|      No|   No|     0.0| 128.8|   96.0|    21.9| 104.9|   71.0|    8.92| 141.1|  128.0|    6.35|  11.2|    2.0|    3.02|  1.0|False|\n|   MT| 95|  510|      No|   No|     0.0| 156.6|   88.0|   26.62| 247.6|   75.0|   21.05| 192.3|  115.0|    8.65|  12.3|    5.0|    3.32|  3.0|False|\n|   IA| 62|  415|      No|   No|     0.0| 120.7|   70.0|   20.52| 307.2|   76.0|   26.11| 203.0|   99.0|    9.14|  13.1|    6.0|    3.54|  4.0|False|\n|   ID| 85|  408|      No|  Yes|    27.0| 196.4|  139.0|   33.39| 280.9|   90.0|   23.88|  89.3|   75.0|    4.02|  13.8|    4.0|    3.73|  1.0|False|\n|   VT| 93|  510|      No|   No|     0.0| 190.7|  114.0|   32.42| 218.2|  111.0|   18.55| 129.6|  121.0|    5.83|   8.1|    3.0|    2.19|  3.0|False|\n|   VA| 76|  510|      No|  Yes|    33.0| 189.7|   66.0|   32.25| 212.8|   65.0|   18.09| 165.7|  108.0|    7.46|  10.0|    5.0|     2.7|  1.0|False|\n|   TX| 73|  415|      No|   No|     0.0| 224.4|   90.0|   38.15| 159.5|   88.0|   13.56| 192.8|   74.0|    8.68|  13.0|    2.0|    3.51|  1.0|False|\n|   FL|147|  415|      No|   No|     0.0| 155.1|  117.0|   26.37| 239.7|   93.0|   20.37| 208.8|  133.0|     9.4|  10.6|    4.0|    2.86|  0.0|False|\n|   CO| 77|  408|      No|   No|     0.0|  62.4|   89.0|   10.61| 169.9|  121.0|   14.44| 209.6|   64.0|    9.43|   5.7|    6.0|    1.54|  5.0| True|\n|   AZ|130|  415|      No|   No|     0.0| 183.0|  112.0|   31.11|  72.9|   99.0|     6.2| 181.8|   78.0|    8.18|   9.5|   19.0|    2.57|  0.0|False|\n+-----+---+-----+--------+-----+--------+------+-------+--------+------+-------+--------+------+-------+--------+------+-------+--------+-----+-----+\nonly showing top 20 rows\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383007_1214349220",
+      "id": "20170508-150408_505244914",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:335"
+    },
+    {
+      "text": "%md\nThe describe() function performs summary statistics calculations on  numeric columns ",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": false,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>The describe() function performs summary statistics calculations on  numeric columns</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383007_416422048",
+      "id": "20170524-214640_973339640",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:336"
+    },
+    {
+      "title": "Perform summary statistics  on selected columns",
+      "text": "%spark\n\ntrain.describe(\"tdcharge\", \"techarge\",\"tncharge\", \"numcs\").show",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-------+------------------+------------------+------------------+------------------+\n|summary|          tdcharge|          techarge|          tncharge|             numcs|\n+-------+------------------+------------------+------------------+------------------+\n|  count|              2666|              2666|              2666|              2666|\n|   mean|30.512404351087813|17.033072018004518| 9.052689422355604|1.5626406601650413|\n| stddev| 9.215732907163497| 4.330864176799864|2.2851195129157564|1.3112357589949093|\n|    min|               0.0|               0.0|              1.97|               0.0|\n|    max|             59.64|             30.91|             17.77|               9.0|\n+-------+------------------+------------------+------------------+------------------+\n\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383007_154115551",
+      "id": "20170524-083228_1459810795",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:337"
+    },
+    {
+      "text": "%md \nuse Spark SQL to explore the dataset",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": false,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383008_428833446",
+      "id": "20170603-182655_1680505289",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:340"
+    },
+    {
+      "text": "%md\n\n**Q2: compute the number of labels (churn or no churn) for the train dataset in the following cell. Use sparkSQL.**",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:38:48+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q2: compute the number of labels (churn or no churn) for the train dataset in the following cell. Use sparkSQL.</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383008_78358582",
+      "id": "20181103-142552_1060736217",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:341",
+      "dateFinished": "2024-08-17T14:38:48+0000",
+      "dateStarted": "2024-08-17T14:38:48+0000"
+    },
+    {
+      "title": "Count number customers grouped by churn",
+      "text": "%spark\n\n// Compute the number of labels hereafter\n\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383008_1425535592",
+      "id": "20170524-093402_1430077788",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:342"
+    },
+    {
+      "title": "Use sampleBy to reduce number of churn=false samples ",
+      "text": "%spark\n\nval fractions = Map(\"False\" -> .17, \"True\" -> 1.0)\n//Here we're keeping all instances of the Churn=True class, but downsampling the Churn=False class to a fraction of 388/2278.\nval strain = train.stat.sampleBy(\"churn\", fractions, 36L) // Returns a stratified sample without replacement based on the fraction given on each stratum.\n// Parameters:\n//    col - column that defines strata\n//    fractions - sampling fraction for each stratum. If a stratum is not specified, we treat its fraction as zero.\n//    seed - random seed\n\nstrain.groupBy(\"churn\").count.show\nstrain.createOrReplaceTempView(\"account\")\nspark.catalog.cacheTable(\"account\")\n\n// The resulting table is now balanced (\"fractions\" defines a probability to take a sample, hence the number of samples is not known in advance)",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383008_2080019181",
+      "id": "20170603-183738_564410056",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:343"
+    },
+    {
+      "text": "%md\n\nThe zeppelin-context is a system-wide container for common utility functions and user-specific data. \nIt implements functions for data input, data display, etc. that are often needed but are not uniformly available in all interpreters.\n\nThe zeppelin-context is available as a predefined variable z that can be used by directly invoking its methods. \n\nIn the Apache Spark interpreter, the zeppelin-context provides a show method, which, using Zeppelin's table feature, can be used to nicely display a set of data.",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": true,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": false,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383008_770899171",
+      "id": "20181102-220037_2010723778",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:344"
+    },
+    {
+      "title": "Explore Average statistics grouped by churn",
+      "text": "%spark2.spark\n\nz.show(strain.groupBy(\"churn\").avg())",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "text",
+          "editOnDblClick": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/text",
+        "fontSize": 9,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "multiBarChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "churn",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "avg(tdmins)",
+                  "index": 3,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(temins)",
+                  "index": 6,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(tnmins)",
+                  "index": 9,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(timins)",
+                  "index": 12,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(len)",
+                  "index": 1,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(numcs)",
+                  "index": 15,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(tdcalls)",
+                  "index": 4,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(tecalls)",
+                  "index": 7,
+                  "aggr": "sum"
+                },
+                {
+                  "name": "avg(ticalls)",
+                  "index": 13,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383008_495292171",
+      "id": "20170524-102007_926152177",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:345"
+    },
+    {
+      "title": "Explore average number customer service calls grouped by churn",
+      "text": "%sql\n\nSELECT churn, avg(numcs) as numcs\nFROM account \nGROUP BY churn\nORDER BY numcs",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "sql",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/sql",
+        "fontSize": 9,
+        "title": true,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "pieChart",
+              "height": 300,
+              "optionOpen": false,
+              "setting": {
+                "multiBarChart": {}
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "churn",
+                  "index": 0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "numcs",
+                  "index": 1,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383008_134856435",
+      "id": "20170524-095127_757444423",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:346"
+    },
+    {
+      "title": "Drop columns that we will not use for our machine learning algorithm",
+      "text": "%spark\n\nval ntrain = strain.drop(\"state\").drop(\"acode\").drop(\"vplan\").drop(\"tdcharge\").drop(\"techarge\").drop(\"ticharge\")\nprintln(ntrain.count)\nntrain.show\nntrain.cache",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_438116165",
+      "id": "20170524-221059_1333485772",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:349"
+    },
+    {
+      "text": "%md\nIn order for the features to be used by a machine learning algorithm, they are transformed into numbers representing the value for each feature\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>In order for the features to be used by a machine learning algorithm, they are transformed into numbers representing the value for each feature</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_126176726",
+      "id": "20170603-184811_78732818",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:350"
+    },
+    {
+      "title": "Map International Plan Yes No to Numbers",
+      "text": "%spark\n\nval ipindexer = new StringIndexer()\n      .setInputCol(\"intlplan\")\n      .setOutputCol(\"iplanIndex\")\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34mipindexer\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.ml.feature.StringIndexer\u001b[0m = strIdx_7bd5a59e8b3a\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_2020993479",
+      "id": "20170508-150543_958647761",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:351"
+    },
+    {
+      "text": "%md\n\n**Q3: Create a transformer to convert the churn value into a 0-1 label**\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:38:58+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q3: Create a transformer to convert the churn value into a 0-1 label</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_1042151910",
+      "id": "20181103-143221_330782578",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:352",
+      "dateFinished": "2024-08-17T14:38:58+0000",
+      "dateStarted": "2024-08-17T14:38:58+0000"
+    },
+    {
+      "title": "Map churn true false to  Numbers",
+      "text": "%spark\n\n// Put the transformer here\n\nval labelindexer = ...\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_1277875185",
+      "id": "20170524-222135_122500289",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:353"
+    },
+    {
+      "text": "%md\n\n**Q4: Create a transformer to convert all the features in a single vector**\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:39:05+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q4: Create a transformer to convert all the features in a single vector</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_199533533",
+      "id": "20181103-143346_221939635",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:354",
+      "dateFinished": "2024-08-17T14:39:05+0000",
+      "dateStarted": "2024-08-17T14:39:05+0000"
+    },
+    {
+      "title": "Use VectorAssembler, a transformer,  to put features into a feature vector column",
+      "text": "%spark\n\n// Put the transformer here\n\nval featureCols = Array(...)\nval assembler = ...\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_2031821574",
+      "id": "20170524-223310_2121058884",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:355"
+    },
+    {
+      "title": "Decision Tree Models",
+      "text": "%md\n\nDecision trees have played a significant role in data mining and machine learning since the 1960's. \nThey generate white-box classification and regression models which can be used for feature selection and sample prediction. \nThe transparency of these models is a big advantage over black-box learners, because the models are easy to understand and interpret, and they can be readily extracted and implemented in any programming language (with nested if-else statements) for use in production environments. \nFurthermore, decision trees require almost no data preparation (ie normalization) and can handle both categorical and continuous data. \nTo remedy over-fitting and improve prediction accuracy, decision trees can also be limited to a certain depth or complexity, or bundled into ensembles of trees (ie random forests).\n\nA decision tree is a predictive model which maps observations (features) about an item to conclusions about the item's label or class. \nThe model is generated using a top-down approach, where the source dataset is split into subsets using a statistical measure, often in the form of the Gini index or information gain via Shannon entropy. \nThis process is applied recursively until a subset contains only samples with the same target class, or is halted by a predefined stopping criteria.",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_1123122536",
+      "id": "20181103-144109_1955600190",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:356"
+    },
+    {
+      "title": "Create Decision Tree Estimator , set Label and Feature Columns ",
+      "text": "%spark\n\nval dTree = new DecisionTreeClassifier().setLabelCol(\"label\")\n      .setFeaturesCol(\"features\")",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_1999861852",
+      "id": "20170603-185445_276463997",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:357"
+    },
+    {
+      "text": "%md\n\nSet up a pipeline to pass the data through transformers to extract the features and label and pass this to a decision tree estimator to fit the model \n\n**Q5: Create the Pipeline to train the decision tree**\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:39:13+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>Set up a pipeline to pass the data through transformers to extract the features and label and pass this to a decision tree estimator to fit the model</p>\n<p><strong>Q5: Create the Pipeline to train the decision tree</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_2083347269",
+      "id": "20170601-154525_1033166149",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:358",
+      "dateFinished": "2024-08-17T14:39:13+0000",
+      "dateStarted": "2024-08-17T14:39:13+0000"
+    },
+    {
+      "title": "Set up pipeline with  feature transformers and model estimator",
+      "text": "%spark\n\n// put treeClassifier in a Pipeline here.\n val pipeline = ...\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_256179833",
+      "id": "20170508-151557_1422077156",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:359"
+    },
+    {
+      "text": "%md\r\nSpark ML supports k-fold cross validation with a transformation/estimation pipeline to try out different combinations of parameters, using a process called grid search. \r\nYou set up a CrossValidator with the parameters to test, an estimator and evaluator for a model selection workflow.\r\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>Spark ML supports k-fold cross validation with a transformation/estimation pipeline to try out different combinations of parameters, using a process called grid search.<br />\nYou set up a CrossValidator with the parameters to test, an estimator and evaluator for a model selection workflow.</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_904499082",
+      "id": "20170531-154658_1298817002",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:360"
+    },
+    {
+      "title": "set up a CrossValidator with the parameters to test, an estimator and evaluator for a model selection",
+      "text": "%spark\n\n// set param grid to Search through decision tree's maxDepth parameter for best model\n// Deeper trees are potentially more accurate, but are also more likely to overfit.\n val paramGrid = new ParamGridBuilder().addGrid(dTree.maxDepth, Array( 4, 5, 6)).build()\n val evaluator = new BinaryClassificationEvaluator()\n      .setLabelCol(\"label\")\n      .setRawPredictionCol(\"prediction\")\n\n// Set up 3-fold cross validation with paramGrid\n val crossval = new CrossValidator().setCollectSubModels(true).setEstimator(pipeline)\n      .setEvaluator(evaluator)\n      .setEstimatorParamMaps(paramGrid).setNumFolds(5)",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_1212610122",
+      "id": "20170508-151903_1365343172",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:361"
+    },
+    {
+      "title": "Fit the model to the input data using K-fold cross validation",
+      "text": "%spark\n\nval cvModel = crossval.fit(ntrain) // Model from k-fold cross validation",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_1216337890",
+      "id": "20170508-151926_10766097",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:362"
+    },
+    {
+      "text": "%spark\n\ncvModel.subModels.foreach{println}",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 167.25,
+              "optionOpen": false
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_931648452",
+      "id": "20181102-225417_1735489669",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:363"
+    },
+    {
+      "title": "Display the Best model ",
+      "text": "%spark\n\nval bestModel = cvModel.bestModel // retrieve only the best model\nprintln(\"The Best Model:\\n--------------------\")\n// Use Scala's asInstanceOf method to cast an instance to the desired type.\nval treeModel = bestModel.asInstanceOf[org.apache.spark.ml.PipelineModel].stages(3).asInstanceOf[DecisionTreeClassificationModel] // extract the decision tree model from the pipeline\nprintln(\"Learned classification tree model:\\n\" + treeModel.toDebugString) // print the decision tree: we can read the sequence of decision rules",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_352070732",
+      "id": "20170508-151947_197896730",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:364"
+    },
+    {
+      "text": "%md\n\n**Q6: What are the two first features used in the decision tree based classification rule? Give their name with respect to the original dataset.**\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:39:24+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q6: What are the two first features used in the decision tree based classification rule? Give their name with respect to the original dataset.</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_727715014",
+      "id": "20181103-144402_1585087913",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:365",
+      "dateFinished": "2024-08-17T14:39:24+0000",
+      "dateStarted": "2024-08-17T14:39:24+0000"
+    },
+    {
+      "title": "Fields Customer service calls and Total day minutes have high predictive power to determine a customer's likeliness to churn",
+      "text": "%spark\r\r// Put here the command to print the original names of the features.\r\rprintln(...) // print the name of the columns which appear first in the decision tree\r",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_930955781",
+      "id": "20170524-231226_52953518",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:366"
+    },
+    {
+      "text": "%md\r\nThe actual performance of the model can be determined using the test data set which has not been used for any training or cross-validation activities. \r\nWe'll transform the test set with the model pipeline, which will map the features according to the same recipe. \r\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>The actual performance of the model can be determined using the test data set which has not been used for any training or cross-validation activities.<br />\nWe&rsquo;ll transform the test set with the model pipeline, which will map the features according to the same recipe.</p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_1498012611",
+      "id": "20170602-155317_1487132664",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:367"
+    },
+    {
+      "text": "%md\n\n**Q7: Appy the learned transformer on the test dataset.**",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:39:32+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p><strong>Q7: Appy the learned transformer on the test dataset.</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_1670356049",
+      "id": "20181103-144553_531995722",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:368",
+      "dateFinished": "2024-08-17T14:39:32+0000",
+      "dateStarted": "2024-08-17T14:39:32+0000"
+    },
+    {
+      "title": "Get Predictions from Test set and Evaluate",
+      "text": "%spark\n\n// Put the command to compute the \"predictions\" hereafter.\n// The variable \"predictions\" will contrain the result of the transformer.\n\n//transform the test set with the model pipeline, which will map the features according to the same recipe\nval predictions = ...\n\ntest.printSchema()\n\npredictions.printSchema()\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_554077924",
+      "id": "20170508-155848_1997894070",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:369"
+    },
+    {
+      "text": "%spark\n\npredictions.select(\"label\",\"prediction\", \"probability\").show",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_313952920",
+      "id": "20170602-160222_471240064",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:370"
+    },
+    {
+      "text": "%md\nAccuracy is measured by the area under the ROC curve. The area measures the ability of the test to correctly classify true positives from false positives. A random predictor would have .5 accuracy. The closer the value is to 1 the better its predictions are. \n\n**Q8: Compute the area under the ROC curve in the following cell.**",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:39:40+0000",
+      "progress": 0,
+      "config": {
+        "tableHide": false,
+        "editorSetting": {
+          "language": "markdown",
+          "editOnDblClick": true,
+          "completionSupport": false
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/markdown",
+        "editorHide": true,
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "HTML",
+            "data": "<div class=\"markdown-body\">\n<p>Accuracy is measured by the area under the ROC curve. The area measures the ability of the test to correctly classify true positives from false positives. A random predictor would have .5 accuracy. The closer the value is to 1 the better its predictions are.</p>\n<p><strong>Q8: Compute the area under the ROC curve in the following cell.</strong></p>\n\n</div>"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_743292332",
+      "id": "20170602-161538_1648758337",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "FINISHED",
+      "$$hashKey": "object:371",
+      "dateFinished": "2024-08-17T14:39:40+0000",
+      "dateStarted": "2024-08-17T14:39:40+0000"
+    },
+    {
+      "text": "%spark\n\n// Put your command line to compute the variable \"accuracy\" hereafter\n\n//The evaluator will provide us with the score of the predictions by comparing the prediction to the label\nval accuracy = ...\n\nevaluator.explainParams()",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_1217558849",
+      "id": "20170602-155622_1453197792",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:372"
+    },
+    {
+      "title": "More metrics (just for your information)",
+      "text": "%spark\n\nval lp = predictions.select(\"label\", \"prediction\")\nval counttotal = predictions.count()\nval correct = lp.filter($\"label\" === $\"prediction\").count() // comparison between columns\nval wrong = lp.filter(not($\"label\" === $\"prediction\")).count()\nval ratioWrong = wrong.toDouble / counttotal.toDouble\nval ratioCorrect = correct.toDouble / counttotal.toDouble\nval truep = lp.filter($\"prediction\" === 0.0).filter($\"label\" === $\"prediction\").count() / counttotal.toDouble\nval truen = lp.filter($\"prediction\" === 1.0).filter($\"label\" === $\"prediction\").count() / counttotal.toDouble\nval falsep = lp.filter($\"prediction\" === 1.0).filter(not($\"label\" === $\"prediction\")).count() / counttotal.toDouble\nval falsen = lp.filter($\"prediction\" === 0.0).filter(not($\"label\" === $\"prediction\")).count() / counttotal.toDouble\nprintln(\"total count : \" + counttotal)\nprintln(\"correct : \" + correct)\nprintln(\"wrong: \" + wrong)\nprintln(\"ratio correct: \" + ratioCorrect)\nprintln(\"ratio true positive : \" + truep)\nprintln(\"ratio true negative : \" + truen)\nprintln(\"ratio wrong: \" + ratioWrong)\nprintln(\"ratio false positive : \" + falsep)\nprintln(\"ratio false negative : \" + falsen)\n",
+      "user": "anonymous",
+      "dateUpdated": "2024-08-17T14:36:23+0000",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9,
+        "title": true,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1723905383009_1401031028",
+      "id": "20170508-155935_1678385472",
+      "dateCreated": "2024-08-17T14:36:23+0000",
+      "status": "READY",
+      "$$hashKey": "object:373"
+    }
+  ],
+  "name": "churn_prediction_2024_template",
+  "id": "2K71H1ZBM",
+  "defaultInterpreterGroup": "spark",
+  "version": "0.11.1",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false,
+    "looknfeel": "default",
+    "personalizedMode": "false"
+  },
+  "info": {},
+  "path": "/churn_prediction_2024_template"
+}
