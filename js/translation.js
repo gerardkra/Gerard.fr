@@ -22,7 +22,7 @@ const translations = {
     'stats.resources': 'Ressources gratuites',
 
     // Parcours
-    'parcours.title': '📚 Mon parcours académique',
+    'parcours.title': 'Mon parcours académique',
     'parcours.intro': 'De l\'Université des Lagunes à Epitech, découvrez mon parcours universitaire complet',
     'univ.see_more': 'Voir les cours →',
 
