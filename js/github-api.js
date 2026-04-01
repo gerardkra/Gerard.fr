@@ -1,6 +1,6 @@
-// js/github-api.js - Intégration GitHub API
+// js/github-api.js
 
-const GITHUB_USERNAME = 'gerardkra'; // Remplacer par votre username GitHub
+const GITHUB_USERNAME = 'gerardkra';
 
 class GitHubAPI {
   constructor(username) {
@@ -8,7 +8,6 @@ class GitHubAPI {
     this.baseURL = 'https://api.github.com';
   }
 
-  // Récupérer les informations du profil
   async getUserProfile() {
     try {
       const response = await fetch(`${this.baseURL}/users/${this.username}`);
@@ -20,7 +19,6 @@ class GitHubAPI {
     }
   }
 
-  // Récupérer les repositories
   async getRepositories(sort = 'updated', perPage = 12) {
     try {
       const response = await fetch(
@@ -34,26 +32,17 @@ class GitHubAPI {
     }
   }
 
-  // Récupérer les repos épinglés (via GraphQL - nécessite un token)
-  // Pour l'instant on utilise les repos les plus récents
-  async getPinnedRepos() {
-    return await this.getRepositories('updated', 6);
-  }
-
-  // Formater la date
   formatDate(dateString) {
     const date = new Date(dateString);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return date.toLocaleDateString('fr-FR', options);
+    return date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
   }
 
-  // Créer une carte repository
   createRepoCard(repo) {
     const card = document.createElement('div');
     card.className = 'repo-card slide-in';
-    
+
     const languageColor = this.getLanguageColor(repo.language);
-    
+
     card.innerHTML = `
       <div class="repo-header">
         <h3>
@@ -61,13 +50,15 @@ class GitHubAPI {
             📦 ${repo.name}
           </a>
         </h3>
-        ${repo.private ? '<span class="repo-badge private">Privé</span>' : '<span class="repo-badge public">Public</span>'}
+        ${repo.private
+          ? '<span class="repo-badge private">Privé</span>'
+          : '<span class="repo-badge public">Public</span>'}
       </div>
-      
+
       <p class="repo-description">
         ${repo.description || 'Pas de description disponible'}
       </p>
-      
+
       <div class="repo-stats">
         ${repo.language ? `
           <span class="repo-language">
@@ -78,7 +69,7 @@ class GitHubAPI {
         <span class="repo-stat">⭐ ${repo.stargazers_count}</span>
         <span class="repo-stat">🍴 ${repo.forks_count}</span>
       </div>
-      
+
       <div class="repo-footer">
         <span class="repo-updated">Mis à jour: ${this.formatDate(repo.updated_at)}</span>
         <a href="${repo.html_url}" class="btn btn-outline btn-small" target="_blank">
@@ -86,11 +77,10 @@ class GitHubAPI {
         </a>
       </div>
     `;
-    
+
     return card;
   }
 
-  // Créer les stats du profil
   createProfileStats(profile) {
     return `
       <div class="github-stats">
@@ -110,7 +100,6 @@ class GitHubAPI {
     `;
   }
 
-  // Couleurs des langages (approximatif)
   getLanguageColor(language) {
     const colors = {
       'JavaScript': '#f1e05a',
@@ -136,51 +125,34 @@ class GitHubAPI {
   }
 }
 
-// Initialiser l'API GitHub quand le DOM est chargé
 document.addEventListener('DOMContentLoaded', async () => {
   const githubAPI = new GitHubAPI(GITHUB_USERNAME);
-  
-  // Éléments du DOM
+
   const profileStatsContainer = document.getElementById('github-profile-stats');
   const reposContainer = document.getElementById('github-repos');
   const loadingIndicator = document.getElementById('loading-repos');
 
-  if (!reposContainer) return; // Pas sur la page GitHub
+  if (!reposContainer) return;
 
   try {
-    // Afficher le loading
-    if (loadingIndicator) {
-      loadingIndicator.style.display = 'block';
-    }
+    if (loadingIndicator) loadingIndicator.style.display = 'block';
 
-    // Récupérer le profil
     const profile = await githubAPI.getUserProfile();
     if (profile && profileStatsContainer) {
       profileStatsContainer.innerHTML = githubAPI.createProfileStats(profile);
     }
 
-    // Récupérer les repos
     const repos = await githubAPI.getRepositories('updated', 12);
-    
-    // Cacher le loading
-    if (loadingIndicator) {
-      loadingIndicator.style.display = 'none';
-    }
 
-    // Afficher les repos
+    if (loadingIndicator) loadingIndicator.style.display = 'none';
+
     if (repos && repos.length > 0) {
       reposContainer.innerHTML = '';
-      repos.forEach(repo => {
-        const card = githubAPI.createRepoCard(repo);
-        reposContainer.appendChild(card);
-      });
+      repos.forEach(repo => reposContainer.appendChild(githubAPI.createRepoCard(repo)));
 
-      // Déclencher les animations
       setTimeout(() => {
         document.querySelectorAll('.repo-card').forEach((card, index) => {
-          setTimeout(() => {
-            card.classList.add('visible');
-          }, index * 100);
+          setTimeout(() => card.classList.add('visible'), index * 100);
         });
       }, 100);
 
@@ -202,13 +174,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>
       `;
     }
-    if (loadingIndicator) {
-      loadingIndicator.style.display = 'none';
-    }
+    if (loadingIndicator) loadingIndicator.style.display = 'none';
   }
 });
-
-// Exporter pour utilisation ailleurs si nécessaire
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = GitHubAPI;
-}

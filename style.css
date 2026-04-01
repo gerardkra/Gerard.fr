@@ -524,10 +524,10 @@ button[type="submit"]:hover {
 }
 
 /* ========================================
-   RESPONSIVE DESIGN - 100% OPTIMISÉ
+   RESPONSIVE DESIGN 
    ======================================== */
 
-/* TABLETTES (768px - 1024px) */
+/* TABLETS (768px - 1024px) */
 @media (max-width: 1024px) {
   .container {
     padding: 0 1.5rem;
@@ -538,7 +538,7 @@ button[type="submit"]:hover {
   }
 }
 
-/* MOBILE LARGE & TABLETTES (max-width: 968px) */
+/* LARGE MOBILE & TABLETS (max-width: 968px) */
 @media (max-width: 968px) {
   .nav-inner {
     flex-wrap: wrap;
@@ -575,7 +575,7 @@ button[type="submit"]:hover {
   }
 }
 
-/* MOBILE LARGE (max-width: 800px) */
+/* LARGE MOBILE (max-width: 800px) */
 @media (max-width: 800px) {
   .hero {
     grid-template-columns: 1fr;
@@ -591,7 +591,7 @@ button[type="submit"]:hover {
   }
 }
 
-/* MOBILE LARGE (768px) */
+/* LARGE MOBILE (768px) */
 @media (max-width: 768px) {
   /* Container */
   .container {
@@ -733,7 +733,7 @@ button[type="submit"]:hover {
     font-size: 0.85rem;
   }
 
-  /* Zones de tap plus grandes pour mobile */
+  /* Tabs zone */
   .year-tab,
   .doc-link,
   .show-more-btn {
@@ -750,7 +750,7 @@ button[type="submit"]:hover {
   }
 }
 
-/* MOBILE STANDARD (480px - 768px) */
+/*STANDARD MOBILE (480px - 768px) */
 @media (max-width: 600px) {
   .container {
     padding: 0 1rem;
@@ -767,7 +767,7 @@ button[type="submit"]:hover {
   }
 }
 
-/* MOBILE PETIT (< 480px) */
+/* SMALL MOBILE (< 480px) */
 @media (max-width: 480px) {
   /* Typography */
   body {
@@ -923,7 +923,7 @@ button[type="submit"]:hover {
     gap: 1rem;
   }
 
-  /* Navigation vers autres universités */
+  /* Navigation toward other universities */
   section[style*="grid-template-columns"] > a.card {
     padding: 1.5rem 1rem;
   }
@@ -961,7 +961,7 @@ button[type="submit"]:hover {
   }
 }
 
-/* MOBILE TRÈS PETIT (< 360px) */
+/* Very Small Mobile (< 360px) */
 @media (max-width: 360px) {
   body {
     font-size: 14px;
@@ -994,7 +994,7 @@ button[type="submit"]:hover {
   }
 }
 
-/* MODE PAYSAGE MOBILE */
+/* LANDSCAPE MOBILE MODE */
 @media (max-height: 500px) and (orientation: landscape) {
   .univ-hero {
     padding: 1rem;
@@ -1016,7 +1016,7 @@ button[type="submit"]:hover {
   }
 }
 
-/* TABLETTES EN MODE PORTRAIT */
+/* TABLETS IN PORTRAIT MODE */
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
   .subjects-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1027,7 +1027,7 @@ button[type="submit"]:hover {
   }
 }
 
-/* OPTIMISATION POUR ACCESSIBILITÉ */
+/* OPTIMIZATION FOR ACCESSIBILITY */
 @media (prefers-reduced-motion: reduce) {
   .slide-in,
   .doc-link,
