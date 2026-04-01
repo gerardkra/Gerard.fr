@@ -14,36 +14,66 @@
       align-items: center;
       justify-content: center;
       font-family: 'Poppins', sans-serif;
-      background: var(--bg, #0b1220);
-      color: var(--text, #ffffff);
+
+      
+      background: radial-gradient(circle at top, #0f1c3f, #020617);
+      color: #ffffff;
     }
 
     .container {
       text-align: center;
-      max-width: 400px;
-      padding: 2rem;
+      max-width: 420px;
+      padding: 2.5rem;
+
+      
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
     }
 
     h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
+      font-weight: 600;
       margin-bottom: 0.5rem;
     }
 
+    
+    h1::after {
+      content: "";
+      display: block;
+      width: 50px;
+      height: 3px;
+      margin: 10px auto 0;
+      background: #6366f1;
+      border-radius: 2px;
+    }
+
     p {
-      opacity: 0.7;
+      opacity: 0.65;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-top: 1rem;
       margin-bottom: 1.5rem;
     }
 
     a {
+      display: inline-block;
+      padding: 0.6rem 1.4rem;
+      border-radius: 10px;
+
+      color: #fff;
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+
       text-decoration: none;
-      border: 1px solid currentColor;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 500;
+
       transition: 0.2s;
     }
 
     a:hover {
-      background: rgba(255,255,255,0.1);
+      opacity: 0.9;
     }
   </style>
 </head>
@@ -52,7 +82,7 @@
   <div class="container">
     <h1>📄 CV indisponible</h1>
     <p>En cours de mise à jour. Il sera bientôt disponible. Merci de votre patience.</p>
-    <a href="index.html">Retour</a>
+    <a href="index.html">Retour à l'accueil</a>
   </div>
 </body>
 </html>
