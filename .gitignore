@@ -127,4 +127,4 @@ htmlcov/
 *.seed
 *.lock  # Remove if you want to commit lockfiles
 # Unused files
-.translation.js
+js/translation.js
