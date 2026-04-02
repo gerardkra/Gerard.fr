@@ -735,12 +735,18 @@ button[type="submit"]:hover {
 
   /* Tabs zone */
   .year-tab,
-  .doc-link,
   .show-more-btn {
     min-height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .doc-link {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
   
   .doc-link:hover {

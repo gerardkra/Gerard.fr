@@ -3,6 +3,7 @@
 class LinkedInIntegration {
   constructor() {
     this.profileURL = 'https://www.linkedin.com/in/gérardkra-data-engineer-devops-nlp-data-science-telecom';
+    
   }
 
   createManualPostCard(postData) {

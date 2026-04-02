@@ -1,4 +1,4 @@
-// js/translation.js - Système de traduction FR/EN avec sauvegarde globale
+// js/translation.js
 
 const translations = {
   fr: {
@@ -186,102 +186,43 @@ const translations = {
 
 class TranslationManager {
   constructor() {
-    // Récupérer la langue sauvegardée (valable pour TOUTES les pages)
     this.currentLang = localStorage.getItem('language') || 'fr';
     this.init();
   }
 
   init() {
-    // Appliquer la langue sauvegardée immédiatement au chargement
     this.applyLanguage(this.currentLang);
-
-    // Mettre à jour l'attribut lang du HTML
     document.documentElement.setAttribute('lang', this.currentLang);
 
-    // Setup des boutons de langue
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const lang = btn.getAttribute('data-lang');
-        this.changeLanguage(lang);
+        this.changeLanguage(btn.getAttribute('data-lang'));
       });
-
-      // Marquer le bouton actif selon la langue actuelle
-      if (btn.getAttribute('data-lang') === this.currentLang) {
-        btn.classList.add('active');
-      } else {
-        btn.classList.remove('active');
-      }
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === this.currentLang);
     });
-
-    console.log(`🌍 Langue actuelle: ${this.currentLang}`);
   }
 
   changeLanguage(lang) {
-    // Sauvegarder dans localStorage (persistant sur TOUTES les pages)
     this.currentLang = lang;
     localStorage.setItem('language', lang);
-    
-    console.log(`🔄 Changement de langue vers: ${lang}`);
-
-    // Mettre à jour les boutons
     document.querySelectorAll('.lang-btn').forEach(btn => {
       btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
     });
-
-    // Appliquer les traductions
     this.applyLanguage(lang);
-
-    // Mettre à jour l'attribut lang du HTML
     document.documentElement.setAttribute('lang', lang);
-
-    // Message de confirmation
-    console.log(`✅ Langue changée en ${lang.toUpperCase()}. Ce choix s'appliquera à toutes les pages !`);
   }
 
   applyLanguage(lang) {
     const trans = translations[lang];
-    
-    if (!trans) {
-      console.error(`❌ Traductions non trouvées pour la langue: ${lang}`);
-      return;
-    }
+    if (!trans) return;
 
-    // Traduire tous les éléments avec data-i18n
-    let translatedCount = 0;
     document.querySelectorAll('[data-i18n]').forEach(element => {
       const key = element.getAttribute('data-i18n');
-      if (trans[key]) {
-        element.textContent = trans[key];
-        translatedCount++;
-      } else {
-        console.warn(`⚠️ Traduction manquante pour la clé: ${key}`);
-      }
+      if (trans[key]) element.textContent = trans[key];
     });
-
-    console.log(`📝 ${translatedCount} éléments traduits en ${lang.toUpperCase()}`);
-  }
-
-  // Méthode helper pour récupérer une traduction
-  t(key) {
-    return translations[this.currentLang][key] || key;
-  }
-
-  // Méthode pour obtenir la langue actuelle
-  getCurrentLanguage() {
-    return this.currentLang;
   }
 }
 
-// Initialiser le gestionnaire de traduction dès que le DOM est prêt
 document.addEventListener('DOMContentLoaded', () => {
   window.translationManager = new TranslationManager();
-  
-  // Message dans la console pour confirmer le chargement
-  console.log('✅ Système de traduction chargé avec succès !');
-  console.log('💡 La langue sélectionnée est sauvegardée et s\'applique automatiquement sur toutes les pages.');
 });
-
-// Export pour utilisation dans d'autres scripts
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = TranslationManager;
-}
