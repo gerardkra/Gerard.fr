@@ -1,0 +1,903 @@
+ sudo apt install git-all
+
+kra231@DESKTOP-IPCC9HB:~$ git
+usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]
+           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]
+           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+           [--super-prefix=<path>] [--config-env=<name>=<envvar>]
+           <command> [<args>]
+
+These are common Git commands used in various situations:
+
+start a working area (see also: git help tutorial)
+   clone     Clone a repository into a new directory
+   init      Create an empty Git repository or reinitialize an existing one
+
+work on the current change (see also: git help everyday)
+   add       Add file contents to the index
+   mv        Move or rename a file, a directory, or a symlink
+   restore   Restore working tree files
+   rm        Remove files from the working tree and from the index
+
+examine the history and state (see also: git help revisions)
+   bisect    Use binary search to find the commit that introduced a bug
+   diff      Show changes between commits, commit and working tree, etc
+   grep      Print lines matching a pattern
+   log       Show commit logs
+   show      Show various types of objects
+   status    Show the working tree status
+
+grow, mark and tweak your common history
+   branch    List, create, or delete branches
+   commit    Record changes to the repository
+   merge     Join two or more development histories together
+   rebase    Reapply commits on top of another base tip
+   reset     Reset current HEAD to the specified state
+   switch    Switch branches
+   tag       Create, list, delete or verify a tag object signed with GPG
+
+collaborate (see also: git help workflows)
+   fetch     Download objects and refs from another repository
+   pull      Fetch from and integrate with another repository or a local branch
+   push      Update remote refs along with associated objects
+
+'git help -a' and 'git help -g' list available subcommands and some
+concept guides. See 'git help <command>' or 'git help <concept>'
+to read about a specific subcommand or concept.
+See 'git help git' for an overview of the system.
+kra231@DESKTOP-IPCC9HB:~$ ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/kra231/.ssh/id_rsa):
+Created directory '/home/kra231/.ssh'.
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
+Your identification has been saved in /home/kra231/.ssh/id_rsa
+Your public key has been saved in /home/kra231/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:yS+E96JVxFjioNWTaQjVyPYRSbH/QiS/pH5JpdakifA kra231@DESKTOP-IPCC9HB
+The key's randomart image is:
++---[RSA 3072]----+
+|    .++*=*.      |
+|     o=oX*       |
+|    .. o=o+      |
+|      .o.B  o    |
+|      .oS.*B     |
+|       oEB*o.    |
+|        =o=..    |
+|       + oo.     |
+|      . ..       |
++----[SHA256]-----+
+
+
+
+8)  mkdir planetes autres
+9) cp /mnt/
+   cp /mnt/c/Users/
+   cp /mnt/c/Users/HP/Downloads/m
+   cp /mnt/c/Users/HP/Downloads/mercure.md documents-gt
+
+
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+remote: Enumerating objects: 4, done.
+remote: Counting objects: 100% (4/4), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), 979 bytes | 61.00 KiB/s, done.
+From github.com:kk314352/documents-gt
+   3b3d190..6cc6401  main       -> origin/main
+Updating 3b3d190..6cc6401
+Fast-forward
+ .gitignore | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 .gitignore
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls
+LICENSE  README.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls -a
+.  ..  .git  .gitignore  LICENSE  README.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ mkdir etoiles, planetes,autres
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls
+etoiles,  LICENSE  planetes,autres  README.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ rmdir etoiles,/
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ rmdir planetes,autres/
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ mkdir etoiles
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ mkdir planetes autres
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls
+autres  etoiles  LICENSE  planetes  README.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git clone https://github.com/mpelleau/documents-gt
+Cloning into 'documents-gt'...
+Username for 'https://github.com': kk314352
+Password for 'https://kk314352@github.com':
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ cd ..
+kra231@DESKTOP-IPCC9HB:~$ ls
+big.txt  documents-gt  essai1  tmp.txt  tp2.txt  tp_infople
+kra231@DESKTOP-IPCC9HB:~$ cp /mnt/
+c/ d/ e/
+kra231@DESKTOP-IPCC9HB:~$ cp /mnt/c/Users/
+All Users/    Default/      Default User/ desktop.ini   HP/           Public/
+kra231@DESKTOP-IPCC9HB:~$ cp /mnt/c/Users/HP/Downloads/m
+mercure.md   mercure.png  movies/      music/
+kra231@DESKTOP-IPCC9HB:~$ cp /mnt/c/Users/HP/Downloads/mercure.md documents-gt
+kra231@DESKTOP-IPCC9HB:~$ cp /mnt/c/Users/HP/Downloads/mercure.png documents-gt
+kra231@DESKTOP-IPCC9HB:~$ ls documents-gt/
+autres  etoiles  LICENSE  mercure.md  mercure.png  planetes  README.md
+kra231@DESKTOP-IPCC9HB:~$ cd documents-gt/
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git add mercure.md mercure.png
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   mercure.md
+        new file:   mercure.png
+
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git commit -m " Ajout mercure"
+[main a0a76d8]  Ajout mercure
+ Committer: krakouame231920@gmail.com <kra231@DESKTOP-IPCC9HB.localdomain>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly:
+
+    git config --global user.name "Your Name"
+    git config --global user.email you@example.com
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 2 files changed, 17 insertions(+)
+ create mode 100755 mercure.md
+ create mode 100755 mercure.png
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git config --global user.name "kk314352"
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git config --global user.email. "kouame-gerard.kra@etu.univ-cotedazur.fr"
+error: key does not contain variable name: user.email.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git config --global user.email "kouame-gerard.kra@etu.univ-cotedazur.fr"
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git commit --amend --reset-author
+[main 8974c61]  Ajout mercure
+ 2 files changed, 17 insertions(+)
+ create mode 100755 mercure.md
+ create mode 100755 mercure.png
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git log
+commit 8974c61d476fbd4da827c2f6b8768edd985d295f (HEAD -> main)
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 16 12:08:51 2024 +0100
+
+     Ajout mercure
+
+commit 6cc640109bf1de46e1b118e53c110ad5f7624afe (origin/main, origin/HEAD)
+Author: KOUAME GERARD KRA <150908185+kk314352@users.noreply.github.com>
+Date:   Fri Feb 16 11:20:27 2024 +0100
+
+    Create .gitignore
+
+commit 3b3d190d8542cea50198b58a2e7079626aba155f
+Author: KOUAME GERARD KRA <150908185+kk314352@users.noreply.github.com>
+Date:   Fri Feb 16 11:05:16 2024 +0100
+
+    Initial commit
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 10.63 KiB | 2.13 MiB/s, done.
+Total 4 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:kk314352/documents-gt.git
+   6cc6401..8974c61  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt$
+
+----------ESSAI-----------------
+
+kra231@DESKTOP-IPCC9HB:~$ cd documents-gt/
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ touch Fichier1 Fichier2 Fichier3
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls
+autres  etoiles  Fichier1  Fichier2  Fichier3  LICENSE  mercure.md  mercure.png  planetes  README.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git add Fichier1 Fichier2 Fichier3
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git commit -a -m "Nouveau Fichiers"
+[main c89e918] Nouveau Fichiers
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 Fichier1
+ create mode 100644 Fichier2
+ create mode 100644 Fichier3
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git push
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 431 bytes | 431.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To github.com:kk314352/documents-gt.git
+   8974c61..c89e918  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git log
+commit c89e91879facee2645479fdb3655532aec749c73 (HEAD -> main, origin/main, origin/HEAD)
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Sun Feb 18 20:27:23 2024 +0100
+
+    Nouveau Fichiers
+
+commit 8974c61d476fbd4da827c2f6b8768edd985d295f
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 16 12:08:51 2024 +0100
+
+     Ajout mercure
+
+commit 6cc640109bf1de46e1b118e53c110ad5f7624afe
+Author: KOUAME GERARD KRA <150908185+kk314352@users.noreply.github.com>
+Date:   Fri Feb 16 11:20:27 2024 +0100
+
+    Create .gitignore
+
+commit 3b3d190d8542cea50198b58a2e7079626aba155f
+Author: KOUAME GERARD KRA <150908185+kk314352@users.noreply.github.com>
+Date:   Fri Feb 16 11:05:16 2024 +0100
+
+    Initial commit
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git reflog
+c89e918 (HEAD -> main, origin/main, origin/HEAD) HEAD@{0}: commit: Nouveau Fichiers
+8974c61 HEAD@{1}: commit (amend): Ajout mercure
+a0a76d8 HEAD@{2}: commit: Ajout mercure
+6cc6401 HEAD@{3}: pull: Fast-forward
+3b3d190 HEAD@{4}: clone: from github.com:kk314352/documents-gt.git
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git rm Fichier1
+rm 'Fichier1'
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls
+autres  etoiles  Fichier2  Fichier3  LICENSE  mercure.md  mercure.png  planetes  README.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git rm Fichier2
+rm 'Fichier2'
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git rm Fichier3
+rm 'Fichier3'
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls
+autres  etoiles  LICENSE  mercure.md  mercure.png  planetes  README.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ pull
+-bash: pull: command not found
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        deleted:    Fichier1
+        deleted:    Fichier2
+        deleted:    Fichier3
+
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git log
+commit c89e91879facee2645479fdb3655532aec749c73 (HEAD -> main, origin/main, origin/HEAD)
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Sun Feb 18 20:27:23 2024 +0100
+
+    Nouveau Fichiers
+
+commit 8974c61d476fbd4da827c2f6b8768edd985d295f
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 16 12:08:51 2024 +0100
+
+     Ajout mercure
+
+commit 6cc640109bf1de46e1b118e53c110ad5f7624afe
+Author: KOUAME GERARD KRA <150908185+kk314352@users.noreply.github.com>
+Date:   Fri Feb 16 11:20:27 2024 +0100
+
+    Create .gitignore
+
+commit 3b3d190d8542cea50198b58a2e7079626aba155f
+Author: KOUAME GERARD KRA <150908185+kk314352@users.noreply.github.com>
+Date:   Fri Feb 16 11:05:16 2024 +0100
+
+    Initial commit
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls
+autres  etoiles  LICENSE  mercure.md  mercure.png  planetes  README.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ cd mercure.md
+-bash: cd: mercure.md: Not a directory
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls mercure.md
+mercure.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$
+------------------------------------------------------------------------------
+
+
+-----23_02_2024---------
+
+kra231@DESKTOP-IPCC9HB:~$ cd documents-gt/
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        deleted:    Fichier1
+        deleted:    Fichier2
+        deleted:    Fichier3
+
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ dit pull
+-bash: dit: command not found
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git commit -m 'Suppression de fichier'
+[main 6d845d1] Suppression de fichier
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 Fichier1
+ delete mode 100644 Fichier2
+ delete mode 100644 Fichier3
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls
+autres  etoiles  LICENSE  mercure.md  mercure.png  planetes  README.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls
+autres  etoiles  LICENSE  planetes  README.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git commit -m 'ajout de mercur dans planet'
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    mercure.md
+        deleted:    mercure.png
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        etoiles/
+        planetes/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git add etoiles planetes
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git push
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 245 bytes | 122.00 KiB/s, done.
+Total 2 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:kk314352/documents-gt.git
+   c89e918..6d845d1  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git commit -m 'ajout de mercur dans planet'
+[main 1945bf5] ajout de mercur dans planet
+ 5 files changed, 38 insertions(+)
+ create mode 100644 etoiles/soleil.jpg
+ create mode 100644 etoiles/soleil.jpg:Zone.Identifier
+ create mode 100644 etoiles/soleil.md
+ create mode 100755 planetes/mercure.md
+ create mode 100755 planetes/mercure.png
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git add etoiles
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 21.42 KiB | 3.06 MiB/s, done.
+Total 6 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:kk314352/documents-gt.git
+   6d845d1..1945bf5  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git add etoiles
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git commit -m  'modification de sleil'
+[main 9b66750] modification de sleil
+ 2 files changed, 8 insertions(+), 15 deletions(-)
+ delete mode 100644 etoiles/soleil.jpg:Zone.Identifier
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    mercure.md
+        deleted:    mercure.png
+
+no changes added to commit (use "git add" and/or "git commit -a")
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git log
+commit 9b667508a7c879637e45f463bf8e6e401786b0db (HEAD -> main)
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 11:01:58 2024 +0100
+
+    modification de sleil
+
+commit 1945bf51520a16b46c031f8495a84e82032b5421 (origin/main, origin/HEAD)
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 10:49:04 2024 +0100
+
+    ajout de mercur dans planet
+
+commit 6d845d159a84a78f6cfdbe9fa7ad77e13aa4c174
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 10:30:00 2024 +0100
+
+    Suppression de fichier
+
+commit c89e91879facee2645479fdb3655532aec749c73
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Sun Feb 18 20:27:23 2024 +0100
+
+    Nouveau Fichiers
+
+commit 8974c61d476fbd4da827c2f6b8768edd985d295f
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 16 12:08:51 2024 +0100
+
+     Ajout mercure
+
+commit 6cc640109bf1de46e1b118e53c110ad5f7624afe
+Author: KOUAME GERARD KRA <150908185+kk314352@users.noreply.github.com>
+Date:   Fri Feb 16 11:20:27 2024 +0100
+
+    Create .gitignore
+
+commit 3b3d190d8542cea50198b58a2e7079626aba155f
+Author: KOUAME GERARD KRA <150908185+kk314352@users.noreply.github.com>
+Date:   Fri Feb 16 11:05:16 2024 +0100
+
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git HEAD origin
+git: 'HEAD' is not a git command. See 'git --help'.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git diff HEAD origin
+diff --git a/etoiles/soleil.jpg:Zone.Identifier b/etoiles/soleil.jpg:Zone.Identifier
+new file mode 100644
+index 0000000..a95b04d
+--- /dev/null
++++ b/etoiles/soleil.jpg:Zone.Identifier
+@@ -0,0 +1,4 @@
++[ZoneTransfer]^M
++ZoneId=3^M
++ReferrerUrl=https://www.google.com/^M
++HostUrl=https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Solar_prominence_from_STEREO_spacecraft_September_29%2C_2008.jpg/280px-Solar_prominence_from_STEREO_spacecraft_September_29%2C_2008.jpg^M
+diff --git a/etoiles/soleil.md b/etoiles/soleil.md
+index 4a875a7..cba0f42 100644
+--- a/etoiles/soleil.md
++++ b/etoiles/soleil.md
+@@ -1,14 +1,17 @@
+-# Soleil
++# Mercure
+
+ Mercure est la planète la plus proche du soleil.
+
+-![Icone du solei](mercure.png)
++![Icone de mercure](mercure.png)
+
+-Icone créée par [wikipedia](https://fr.wikipedia.org/wiki/Soleil) trouvée sur [wikipedia](https://fr.wikipedia.org/wiki/Soleil).
++Icone créée par [monkik](https://www.flaticon.com/authors/monkik) trouvée sur [flaticon](https://www.flaticon.com/).
+
+ ## Caractéristiques
+-- Température de surface : 5 772 K
+-- Rayon : 696 340 km
+-- Gravité : 274 m/s²
+-- Masse : 1,989 × 10^30 kg
+-- Âge : 4,603 milliards ans
++
++- Masse : 3.301 x 10<sup>23</sup> kg
++- Diamètre : 4879.4 km
++- Distance au soleil :
++  - Aphélie : 7 x 10<sup>7</sup> km
++  - Périhélie : 4.6 x 10<sup>7</sup> km
++  - Demi-grand axe : 5.8 x 10<sup>7</sup> km
++- Symbole : &#x263F;
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git log
+commit 9b667508a7c879637e45f463bf8e6e401786b0db (HEAD -> main)
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 11:01:58 2024 +0100
+
+    modification de sleil
+
+commit 1945bf51520a16b46c031f8495a84e82032b5421 (origin/main, origin/HEAD)
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 10:49:04 2024 +0100
+
+    ajout de mercur dans planet
+
+commit 6d845d159a84a78f6cfdbe9fa7ad77e13aa4c174
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 10:30:00 2024 +0100
+
+    Suppression de fichier
+
+commit c89e91879facee2645479fdb3655532aec749c73
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Sun Feb 18 20:27:23 2024 +0100
+
+    Nouveau Fichiers
+
+commit 8974c61d476fbd4da827c2f6b8768edd985d295f
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 16 12:08:51 2024 +0100
+
+     Ajout mercure
+
+commit 6cc640109bf1de46e1b118e53c110ad5f7624afe
+Author: KOUAME GERARD KRA <150908185+kk314352@users.noreply.github.com>
+Date:   Fri Feb 16 11:20:27 2024 +0100
+
+    Create .gitignore
+
+commit 3b3d190d8542cea50198b58a2e7079626aba155f
+Author: KOUAME GERARD KRA <150908185+kk314352@users.noreply.github.com>
+Date:   Fri Feb 16 11:05:16 2024 +0100
+
+    Initial commit
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 613 bytes | 153.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:kk314352/documents-gt.git
+   1945bf5..9b66750  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    mercure.md
+        deleted:    mercure.png
+
+no changes added to commit (use "git add" and/or "git commit -a")
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git add etoiles
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git commit -m 'modification dans etoile'
+[main 4f78a9a] modification dans etoile
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 393 bytes | 35.00 KiB/s, done.
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:kk314352/documents-gt.git
+   9b66750..4f78a9a  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git add etoiles
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git commit - 'modification'
+error: pathspec '-' did not match any file(s) known to git
+error: pathspec 'modification' did not match any file(s) known to git
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git commit -m  'modification'
+[main 42e2f56] modification
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ git push
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (4/4), 1.03 KiB | 175.00 KiB/s, done.
+Total 4 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:kk314352/documents-gt.git
+   4f78a9a..42e2f56  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ ls
+autres  etoiles  LICENSE  planetes  README.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt$ cd autres/
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ ls
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ touch Lune.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ ls
+Lune.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ wget "https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT1g1V8Nalm9FkR2atv7annUXbPvk5g-mWffaNxT_ItIFogl-6mC_lHNifw5Tw9-yiS"
+--2024-02-23 11:44:59--  https://t3.gstatic.com/licensed-image?q=tbn:ANd9GcT1g1V8Nalm9FkR2atv7annUXbPvk5g-mWffaNxT_ItIFogl-6mC_lHNifw5Tw9-yiS
+Resolving t3.gstatic.com (t3.gstatic.com)... 142.251.37.164, 2a00:1450:4006:811::2004
+Connecting to t3.gstatic.com (t3.gstatic.com)|142.251.37.164|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 592488 (579K) [image/jpeg]
+Saving to: ‘licensed-image?q=tbn:ANd9GcT1g1V8Nalm9FkR2atv7annUXbPvk5g-mWffaNxT_ItIFogl-6mC_lHNifw5Tw9-yiS’
+
+licensed-image?q=tbn:ANd9GcT1g1V8Nalm9FkR2 100%[========================================================================================>] 578.60K  --.-KB/s    in 0.06s
+
+2024-02-23 11:44:59 (9.44 MB/s) - ‘licensed-image?q=tbn:ANd9GcT1g1V8Nalm9FkR2atv7annUXbPvk5g-mWffaNxT_ItIFogl-6mC_lHNifw5Tw9-yiS’ saved [592488/592488]
+
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git add .
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git commit -m 'lune'
+[main 629be26] lune
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 autres/Lune.md
+ create mode 100644 autres/licensed-image?q=tbn:ANd9GcT1g1V8Nalm9FkR2atv7annUXbPvk5g-mWffaNxT_ItIFogl-6mC_lHNifw5Tw9-yiS
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git push
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (5/5), 560.75 KiB | 8.76 MiB/s, done.
+Total 5 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:kk314352/documents-gt.git
+   42e2f56..629be26  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git rm Lune.md
+rm 'autres/Lune.md'
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git add .
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git commit -m 'supression'
+[main cbea6a4] supression
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 autres/Lune.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git push
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 295 bytes | 98.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:kk314352/documents-gt.git
+   629be26..cbea6a4  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ ls
+'licensed-image?q=tbn:ANd9GcT1g1V8Nalm9FkR2atv7annUXbPvk5g-mWffaNxT_ItIFogl-6mC_lHNifw5Tw9-yiS'
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git rm licensed-image\?q\=tbn\:ANd9GcT1g1V8Nalm9FkR2atv7annUXbPvk5g-mWffaNxT_ItIFogl-6mC_lHNifw5Tw9-yiS
+rm 'autres/licensed-image?q=tbn:ANd9GcT1g1V8Nalm9FkR2atv7annUXbPvk5g-mWffaNxT_ItIFogl-6mC_lHNifw5Tw9-yiS'
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git add .
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git commit -m 'netoyage'
+[main 0518e5b] netoyage
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 autres/licensed-image?q=tbn:ANd9GcT1g1V8Nalm9FkR2atv7annUXbPvk5g-mWffaNxT_ItIFogl-6mC_lHNifw5Tw9-yiS
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git push
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 232 bytes | 116.00 KiB/s, done.
+Total 2 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:kk314352/documents-gt.git
+   cbea6a4..0518e5b  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ ls -a
+.  ..
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ touch Lune.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ ls
+Lune.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ cd Lune.md
+-bash: cd: Lune.md: Not a directory
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ wget "https://fr.wikipedia.org/wiki/Lune#/media/Fichier:FullMoon2010.jpg"
+--2024-02-23 11:55:21--  https://fr.wikipedia.org/wiki/Lune
+Resolving fr.wikipedia.org (fr.wikipedia.org)... 185.15.58.224, 2a02:ec80:600:ed1a::1
+Connecting to fr.wikipedia.org (fr.wikipedia.org)|185.15.58.224|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1309041 (1.2M) [text/html]
+Saving to: ‘Lune’
+
+Lune                                       100%[========================================================================================>]   1.25M  8.08MB/s    in 0.2s
+
+2024-02-23 11:55:22 (8.08 MB/s) - ‘Lune’ saved [1309041/1309041]
+
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git add .
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git commit -m "ajout de lune"
+[main 311efb4] ajout de lune
+ 2 files changed, 3610 insertions(+)
+ create mode 100644 autres/Lune
+ create mode 100644 autres/Lune.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git push
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 220.11 KiB | 2.86 MiB/s, done.
+Total 5 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+To github.com:kk314352/documents-gt.git
+   0518e5b..311efb4  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git add .
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git commit -m ' modification lune'
+[main 37e5ed8]  modification lune
+ 3 files changed, 6 insertions(+)
+ create mode 100644 autres/FullMoon2010.jpg
+ create mode 100644 autres/FullMoon2010.jpg:Zone.Identifier
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git pull
+Already up to date.
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git push
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 37.96 KiB | 2.92 MiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:kk314352/documents-gt.git
+   311efb4..37e5ed8  main -> main
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git add .
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git commit -m ' modification lune et issue' fixes 4
+error: pathspec 'fixes' did not match any file(s) known to git
+error: pathspec '4' did not match any file(s) known to git
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git commit -m ' modification lune et issue' fixes #4
+error: pathspec 'fixes' did not match any file(s) known to git
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git commit -m ' modification lune et issue fixes #4'
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    ../mercure.md
+        deleted:    ../mercure.png
+
+no changes added to commit (use "git add" and/or "git commit -a")
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    ../mercure.md
+        deleted:    ../mercure.png
+
+no changes added to commit (use "git add" and/or "git commit -a")
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git push
+Everything up-to-date
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ ls
+FullMoon2010.jpg  FullMoon2010.jpg:Zone.Identifier  Lune  Lune.md
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git reset --soft HEAD^
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git log
+commit 311efb49218ae8c760c6348f02e1675ba780fc35 (HEAD -> main)
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 12:01:22 2024 +0100
+
+    ajout de lune
+
+commit 0518e5bf3ba4d7ea509ec92f13449a8798c8619e
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 11:53:45 2024 +0100
+
+    netoyage
+
+commit cbea6a4228f045b4e4bb7d07a6b8ebc7344997d8
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 11:50:56 2024 +0100
+
+    supression
+
+commit 629be26fea54c7ba2e4b59c3d8400f63ffa1f80a
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 11:45:41 2024 +0100
+
+    lune
+
+commit 42e2f561febc3b251039f05bd8f3a1506341febc
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 11:17:46 2024 +0100
+
+    modification
+
+commit 4f78a9a822e5853bfddc14fc16f294a54beb21b6
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 11:11:56 2024 +0100
+
+    modification dans etoile
+
+commit 9b667508a7c879637e45f463bf8e6e401786b0db
+Author: kk314352 <kouame-gerard.kra@etu.univ-cotedazur.fr>
+Date:   Fri Feb 23 11:01:58 2024 +0100
+
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git status
+On branch main
+Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   FullMoon2010.jpg
+        new file:   FullMoon2010.jpg:Zone.Identifier
+        modified:   Lune.md
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    ../mercure.md
+        deleted:    ../mercure.png
+
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git restore --staged FullMoon2010.jpg:Zone.Identifier
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git status
+On branch main
+Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   FullMoon2010.jpg
+        modified:   Lune.md
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    ../mercure.md
+        deleted:    ../mercure.png
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        FullMoon2010.jpg:Zone.Identifier
+
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git commit -m "modification lune fixes #4"
+[main c0ab902] modification lune fixes #4
+ 2 files changed, 2 insertions(+)
+ create mode 100644 autres/FullMoon2010.jpg
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git push
+To github.com:kk314352/documents-gt.git
+ ! [rejected]        main -> main (non-fast-forward)
+error: failed to push some refs to 'github.com:kk314352/documents-gt.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. Integrate the remote changes (e.g.
+hint: 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git push --force
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 37.80 KiB | 3.44 MiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:kk314352/documents-gt.git
+ + 37e5ed8...c0ab902 main -> main (forced update)
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git reset --soft HEAD^
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git status
+On branch main
+Your branch is behind 'origin/main' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   FullMoon2010.jpg
+        modified:   Lune.md
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    ../mercure.md
+        deleted:    ../mercure.png
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        FullMoon2010.jpg:Zone.Identifier
+
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git commit -m "modification lune fixes #3"
+[main 423497f] modification lune fixes #3
+ 2 files changed, 2 insertions(+)
+ create mode 100644 autres/FullMoon2010.jpg
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$ git push --force
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (5/5), 37.80 KiB | 4.72 MiB/s, done.
+Total 5 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To github.com:kk314352/documents-gt.git
+ + c0ab902...423497f main -> main (forced update)
+kra231@DESKTOP-IPCC9HB:~/documents-gt/autres$
+-----------------------------------------------------
