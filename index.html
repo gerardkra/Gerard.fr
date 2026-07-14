@@ -11,7 +11,7 @@
   <link rel="icon" type="image/png" href="images/Icone.png"/>
   <link rel="apple-touch-icon" href="images/Icone.png"/>
           
-  <script type="text/javascript">
+  <!-- <script type="text/javascript">
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'fr',
@@ -21,7 +21,7 @@
       }, 'google_translate_element');
     }
   </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
 </head>
 <body>
   <header class="site-header">
@@ -36,9 +36,11 @@
         <a href="contact.html" data-i18n="nav.contact">Contact</a>
       </nav>
       <div class="header-actions">
-        <button id="theme-toggle" aria-label="Toggle theme">🌗</button>
+        <button id="theme-toggle" aria-label="Toggle theme">
+          <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></svg>
+        </button>
         <!-- <a class="btn btn-outline" href="CV_KRA_Gerard.pdf" target="_blank" rel="noopener" data-i18n="nav.cv">Télécharger CV</a> -->
-        <a class="btn btn-outline" href="cv.html"> Télécharger CV</a>
+        <a class="btn btn-outline" href="cv.html"> Consulter mon CV</a>
       </div>
       <button id="nav-toggle" class="nav-toggle" aria-label="Open navigation">☰</button>
     </div>
@@ -53,7 +55,7 @@
     <div class="hero-left">
       <img src="assets/photo.jpg" alt="Gérard Kra" class="profile-pic" style="border: 5px solid var(--accent-color);">
       <h1 style="color: var(--accent-color);">Gérard Kra</h1>
-      <p class="subtitle">Data Analyste & Ingénieur IA</p>
+      <p class="subtitle">Consultant Data & Ingénieur IA</p>
       <div class="hero-ctas">
         <a class="btn" href="parcours/index.html" data-i18n="cta.parcours">Voir mon parcours</a>
         <a class="btn btn-ghost" href="ressources/index.html" data-i18n="cta.resources">Ressources</a>

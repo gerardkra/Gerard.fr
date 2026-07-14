@@ -1,8 +1,30 @@
 // main.js — navigation, theme toggle, scroll-in animations, and small helpers
 (() => {
-  const toggle = document.getElementById('theme-toggle');
+  // const toggle = document.getElementById('theme-toggle');
   const navToggle = document.getElementById('nav-toggle');
   const mainNav = document.querySelector('.main-nav');
+
+  const toggle = document.getElementById('theme-toggle');
+  const icon = document.getElementById('theme-icon');
+
+  const sunPath = `<circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>`;
+
+  const moonPath = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>`;
+
+  function setIcon(isDark) {
+    icon.innerHTML = isDark ? moonPath : sunPath;
+  }
+
+  const savedTheme = localStorage.getItem('theme');
+  const isDark = savedTheme === 'dark';
+  if (isDark) document.documentElement.classList.add('dark');
+  setIcon(isDark);
+
+  toggle.addEventListener('click', () => {
+    const nowDark = document.documentElement.classList.toggle('dark');
+    setIcon(nowDark);
+    localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+  });
 // ================ Navigation Toggle =================
   // Mobile nav toggle
   if (navToggle) navToggle.addEventListener('click', () => {

@@ -171,17 +171,21 @@ body {
 }
 
 #theme-toggle {
-  background: var(--bg-color);
+  background: none;
   border: none;
-  font-size: 1.4rem;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
   border-radius: 6px;
   transition: var(--transition);
 }
 
 #theme-toggle:hover {
   transform: scale(1.1);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 /* ======== BUTTONS ======== */
