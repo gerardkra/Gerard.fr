@@ -47,7 +47,7 @@ class GitHubAPI {
       <div class="repo-header">
         <h3>
           <a href="${repo.html_url}" target="_blank" rel="noopener">
-            📦 ${repo.name}
+            ${repo.name}
           </a>
         </h3>
         ${repo.private
@@ -66,8 +66,6 @@ class GitHubAPI {
             ${repo.language}
           </span>
         ` : ''}
-        <span class="repo-stat">⭐ ${repo.stargazers_count}</span>
-        <span class="repo-stat">🍴 ${repo.forks_count}</span>
       </div>
 
       <div class="repo-footer">
