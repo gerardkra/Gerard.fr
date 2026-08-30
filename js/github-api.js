@@ -84,7 +84,7 @@ class GitHubAPI {
       <div class="github-stats">
         <div class="stat-item">
           <div class="stat-number">${profile.public_repos}</div>
-          <div class="stat-label">Dépôts</div>
+          <div class="stat-label">Projets publics</div>
         </div>
         <div class="stat-item">
           <div class="stat-number">${profile.followers}</div>
